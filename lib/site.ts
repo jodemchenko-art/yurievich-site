@@ -64,7 +64,7 @@ export const SITE = {
   ],
 
   // === Verification (fill after registering in Webmaster consoles) ===
-  yandexVerification: '', // → Яндекс.Вебмастер → подтверждение прав → метатег
+  yandexVerification: 'dbea9882d2a34dc0', // → Яндекс.Вебмастер → подтверждение прав → метатег
   googleVerification: '', // → Google Search Console → HTML tag
 
   // === Analytics (fill after creating counters) ===
