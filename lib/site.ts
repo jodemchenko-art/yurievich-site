@@ -68,7 +68,7 @@ export const SITE = {
   googleVerification: '', // → Google Search Console → HTML tag
 
   // === Analytics (fill after creating counters) ===
-  yandexMetrikaId: '', // 8-digit number from metrika.yandex.ru
+  yandexMetrikaId: '109522194', // 8-digit number from metrika.yandex.ru
   googleAnalyticsId: '', // G-XXXXXXXXXX
 } as const;
 
