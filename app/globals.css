@@ -59,3 +59,163 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* ===== Blog article typography ===== */
+.prose-yur {
+  max-width: 72ch;
+  margin-left: auto;
+  margin-right: auto;
+  color: #1f2937;
+  line-height: 1.75;
+  font-size: 17px;
+}
+
+@media (min-width: 768px) {
+  .prose-yur {
+    font-size: 18px;
+    line-height: 1.8;
+  }
+}
+
+.prose-yur h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  color: #111418;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+@media (min-width: 768px) {
+  .prose-yur h2 {
+    font-size: 2rem;
+    margin-top: 3.5rem;
+  }
+}
+
+.prose-yur h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: #111418;
+  letter-spacing: -0.005em;
+}
+
+@media (min-width: 768px) {
+  .prose-yur h3 {
+    font-size: 1.4rem;
+  }
+}
+
+.prose-yur p {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.prose-yur strong {
+  color: #111418;
+  font-weight: 700;
+}
+
+.prose-yur em {
+  color: #374151;
+}
+
+.prose-yur a {
+  color: #1B3A5C;
+  text-decoration: underline;
+  text-decoration-color: rgba(27, 58, 92, 0.4);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+  transition: text-decoration-color 0.2s;
+}
+
+.prose-yur a:hover {
+  text-decoration-color: #1B3A5C;
+}
+
+.prose-yur ul, .prose-yur ol {
+  margin-top: 1.25rem;
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.prose-yur ul { list-style: disc; }
+.prose-yur ol { list-style: decimal; }
+
+.prose-yur li {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding-left: 0.4rem;
+}
+
+.prose-yur li::marker {
+  color: #1B3A5C;
+}
+
+.prose-yur blockquote {
+  margin: 2rem 0;
+  padding: 1.25rem 1.5rem;
+  border-left: 4px solid #1B3A5C;
+  background: #F4F1EB;
+  font-style: italic;
+  color: #1f2937;
+  border-radius: 0 0.75rem 0.75rem 0;
+}
+
+.prose-yur blockquote p {
+  margin: 0;
+}
+
+.prose-yur table {
+  margin: 2rem 0;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95em;
+  overflow-x: auto;
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .prose-yur table {
+    display: table;
+    overflow: visible;
+  }
+}
+
+.prose-yur th {
+  background: #1B3A5C;
+  color: white;
+  font-weight: 700;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border: none;
+}
+
+.prose-yur td {
+  padding: 0.75rem 1rem;
+  border: 1px solid #E6E2DA;
+  vertical-align: top;
+}
+
+.prose-yur tr:nth-child(even) td {
+  background: #FAFAFA;
+}
+
+.prose-yur img {
+  margin: 2rem auto;
+  border-radius: 1rem;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.prose-yur > *:first-child {
+  margin-top: 0;
+}
+
+.prose-yur > *:last-child {
+  margin-bottom: 0;
+}

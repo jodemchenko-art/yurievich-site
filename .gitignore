@@ -6,3 +6,16 @@ out
 .env.production
 .DS_Store
 *.log
+.vercel/
+
+# Local artifacts (not for production repo)
+articles-input.json
+_pdf-gen/
+content-gen/
+
+# Beget migration leftovers (the site is on Vercel, not Beget)
+BEGET-ИНСТРУКЦИЯ.pdf
+BEGET_DEPLOY.md
+sk-yurievich-site.zip
+sk-yurievich-site.tar.gz
+public/lead.php

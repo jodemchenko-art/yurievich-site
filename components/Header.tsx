@@ -4,12 +4,13 @@ import { useState } from 'react';
 import { SITE } from '@/lib/site';
 
 const NAV = [
-  { href: '#uslugi', label: 'Услуги' },
-  { href: '#calc', label: 'Расчёт' },
-  { href: '#portfolio', label: 'Объекты' },
-  { href: '#otzyvy', label: 'Отзывы' },
-  { href: '#brothers', label: 'О братьях' },
-  { href: '#contacts', label: 'Контакты' },
+  { href: '/#uslugi', label: 'Услуги' },
+  { href: '/#calc', label: 'Расчёт' },
+  { href: '/#portfolio', label: 'Объекты' },
+  { href: '/#otzyvy', label: 'Отзывы' },
+  { href: '/blog/', label: 'Блог' },
+  { href: '/#brothers', label: 'О братьях' },
+  { href: '/#contacts', label: 'Контакты' },
 ];
 
 export default function Header() {
@@ -56,7 +57,7 @@ export default function Header() {
           >
             {SITE.phone}
           </a>
-          <a href="#calc" className="hidden sm:inline-flex btn-primary !py-2 !px-4 !text-sm">
+          <a href="/#calc" className="hidden sm:inline-flex btn-primary !py-2 !px-4 !text-sm">
             Бесплатный расчёт
           </a>
           <button
