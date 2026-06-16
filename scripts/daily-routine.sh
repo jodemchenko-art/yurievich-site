@@ -64,6 +64,17 @@ notify() {
   return 0
 }
 
+# === Heartbeat: короткое plain-text сообщение по ходу скрипта ===
+# Используется чтобы юзер видел где конкретно отвалилось если что-то не дойдёт до digest'а.
+heartbeat() {
+  local msg=$1
+  curl -sS --max-time 10 -X POST \
+    "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+    --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
+    --data-urlencode "disable_web_page_preview=true" \
+    --data-urlencode "text=${msg}" > /dev/null 2>&1 || true
+}
+
 fail_alert() {
   local stage=$1
   local detail=$2
@@ -110,6 +121,8 @@ step "Сегодня"
 TODAY=$(date -u +%Y-%m-%d)
 echo "TODAY=$TODAY"
 
+heartbeat "🟢 daily-routine.sh запущен — $(date -u +%H:%M)Z"
+
 step "Проверка наличия /tmp/daily-articles.json"
 if [ ! -f /tmp/daily-articles.json ]; then
   fail_alert "GENERATE" "Не найден /tmp/daily-articles.json — Claude в routine не сгенерировал статьи. Скорее всего session-limit Anthropic или фейл в Workflow."
@@ -121,9 +134,11 @@ if [ "$ARTICLES_COUNT" -lt 1 ]; then
 fi
 
 step "git clone репозиторий"
+heartbeat "📥 clone репо..."
 WORK=/tmp/yurievich-site
+cd /tmp
 rm -rf "$WORK"
-if ! git clone --depth 1 "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git" "$WORK" > /tmp/git-clone.log 2>&1; then
+if ! timeout 120 git clone --depth 1 "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git" "$WORK" > /tmp/git-clone.log 2>&1; then
   fail_alert "GIT_CLONE" "$(tail -10 /tmp/git-clone.log)"
 fi
 cd "$WORK"
@@ -153,6 +168,7 @@ if [ $DUPE_RC -eq 2 ]; then
 fi
 
 step "Импорт статей в .ts модули"
+heartbeat "📝 импорт + typecheck + build..."
 if ! node scripts/import-articles.js articles-input.json > /tmp/import.log 2>&1; then
   fail_alert "IMPORT" "$(tail -20 /tmp/import.log)"
 fi
@@ -228,6 +244,7 @@ if ! git commit -m "$COMMIT_MSG" > /tmp/git-commit.log 2>&1; then
   fail_alert "COMMIT" "Нечего коммитить или git commit упал: $(tail -10 /tmp/git-commit.log)"
 fi
 
+heartbeat "🚀 push в GitHub..."
 PUSH_OK=0
 for attempt in 1 2 3; do
   git pull --rebase origin main > /tmp/git-pull.log 2>&1 || true
@@ -244,24 +261,27 @@ if [ $PUSH_OK -eq 0 ]; then
 $(tail -15 /tmp/git-push.log)"
 fi
 
-step "Ждём Vercel deploy (до 5 мин, проверяем HTTP 200 каждые 10 сек)"
+step "Ждём Vercel deploy (до 10 мин, проверяем HTTP 200 на www. каждые 10 сек)"
+heartbeat "⏳ жду Vercel deploy..."
 DEPLOY_OK=0
 FIRST_SLUG=$(echo "$SLUGS" | awk '{print $1}')
-for i in $(seq 1 30); do
+for i in $(seq 1 60); do
   sleep 10
-  HTTP_CODE=$(curl -sL -o /dev/null -w '%{http_code}' --max-time 10 "https://sk-yurievich.ru/blog/${FIRST_SLUG}/" 2>/dev/null || echo "000")
+  # www. — финальный хост после редиректов, избегаем 307→308→200
+  HTTP_CODE=$(curl -sL -o /dev/null -w '%{http_code}' --max-time 10 "https://www.sk-yurievich.ru/blog/${FIRST_SLUG}/" 2>/dev/null || echo "000")
   if [ "$HTTP_CODE" = "200" ]; then
     DEPLOY_OK=1
     echo "Vercel deployed после $((i*10))s, HTTP=$HTTP_CODE"
     break
   fi
-  [ $((i % 3)) -eq 0 ] && echo "ждём... $((i*10))s, последний код=$HTTP_CODE"
+  [ $((i % 6)) -eq 0 ] && echo "ждём... $((i*10))s, последний код=$HTTP_CODE"
 done
 if [ $DEPLOY_OK -eq 0 ]; then
-  fail_alert "VERCEL_DEPLOY" "После 5 минут ожидания статья ${FIRST_SLUG} всё ещё не отвечает 200. Возможно Vercel build упал — проверь https://vercel.com/jodemchenko-art"
+  fail_alert "VERCEL_DEPLOY" "После 10 минут ожидания статья ${FIRST_SLUG} всё ещё не отвечает 200. Возможно Vercel build упал — проверь https://vercel.com/jodemchenko-art"
 fi
 
 step "Reindex: новые URL → Я.Вебмастер"
+heartbeat "📤 отправляю URL в Я.Вебмастер..."
 HOST_ENC=$(python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1],safe=''))" "$YANDEX_WEBMASTER_HOST_ID")
 SENT_OK=0
 SENT_FAIL=0
@@ -331,6 +351,7 @@ EOF
 fi
 
 step "Формируем Telegram отчёт"
+heartbeat "📨 финальный digest..."
 COUNT_PUBLISHED=$(python3 -c "import json;print(len(json.loads(open('data/published.json').read())))")
 COUNT_BACKLOG=$(python3 -c "import json;import os;p='data/seo-backlog.json';print(len(json.loads(open(p).read())) if os.path.exists(p) else 0)")
 WEEKDAY=$(date -u +%u)  # 1-7 (Mon-Sun)
