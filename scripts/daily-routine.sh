@@ -1,0 +1,403 @@
+#!/usr/bin/env bash
+# daily-routine.sh — мастер-скрипт ежедневного SEO-конвейера для СК «Юрьевич».
+#
+# Запускается из routine на claude.ai (cron). Делает ВСЁ после генерации статей:
+# import → typecheck → build → push (retry) → wait Vercel → reindex Yandex → Telegram отчёт.
+#
+# Routine САМА генерит статьи и кладёт JSON в /tmp/daily-articles.json — этот скрипт не пишет контент.
+#
+# Hardening (применено по итогам adversarial review):
+#  - flock — параллельные запуски недопустимы
+#  - duplicate-slug guard ДО импорта
+#  - npm ci (а не install) — лочим зависимости
+#  - npx tsc --noEmit ДО next build — ловим TS-ошибки раньше
+#  - git push с retry + rebase
+#  - Vercel deploy verification по HTTP 200 (не sitemap), 5 мин timeout
+#  - Y.Webmaster: alert если SENT_OK==0 (likely token expired)
+#  - Telegram getMe sanity check + резервный бот
+#  - Token expiration heartbeat (alert если до экспирации <30 дней)
+#
+# Требуемые env vars (выставляются в routine prompt):
+#   GITHUB_TOKEN, GITHUB_REPO
+#   TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
+#   YANDEX_WEBMASTER_OAUTH_TOKEN, YANDEX_WEBMASTER_USER_ID, YANDEX_WEBMASTER_HOST_ID
+#   YANDEX_TOKEN_EXPIRES_AT (ISO date, e.g. 2027-06-16)  — опционально, для предупреждений
+#   BACKUP_TELEGRAM_BOT_TOKEN, BACKUP_TELEGRAM_CHAT_ID  — опционально, fallback канал
+
+set -uo pipefail
+
+LOG=/tmp/daily-routine.log
+exec > >(tee -a "$LOG") 2>&1
+
+# === Параллельный запуск запрещён ===
+exec 200>/tmp/daily-routine.lock
+flock -n 200 || { echo "Уже запущен другой daily-routine — выходим"; exit 0; }
+
+step() { echo ""; echo "=== $* ==="; }
+
+# === Telegram notification ===
+# Проверяет ok:true, при фейле пишет в /tmp/tg-failures.log, при наличии BACKUP — дублирует.
+notify() {
+  local file=$1
+  local resp
+  resp=$(curl -sS --max-time 20 -X POST \
+    "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+    --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
+    --data-urlencode "parse_mode=HTML" \
+    --data-urlencode "disable_web_page_preview=true" \
+    --data-urlencode "text@${file}")
+  echo "$resp" > /tmp/tg-resp.json
+  if ! echo "$resp" | grep -q '"ok":true'; then
+    echo "TG_FAIL: $resp" >&2
+    echo "$(date -u +%FT%TZ) TG_FAIL: $resp" >> /tmp/tg-failures.log
+    # backup channel attempt
+    if [ -n "${BACKUP_TELEGRAM_BOT_TOKEN:-}" ] && [ -n "${BACKUP_TELEGRAM_CHAT_ID:-}" ]; then
+      curl -sS --max-time 20 -X POST \
+        "https://api.telegram.org/bot${BACKUP_TELEGRAM_BOT_TOKEN}/sendMessage" \
+        --data-urlencode "chat_id=${BACKUP_TELEGRAM_CHAT_ID}" \
+        --data-urlencode "parse_mode=HTML" \
+        --data-urlencode "disable_web_page_preview=true" \
+        --data-urlencode "text@${file}" > /dev/null
+    fi
+    return 1
+  fi
+  return 0
+}
+
+fail_alert() {
+  local stage=$1
+  local detail=$2
+  cat > /tmp/fail-msg.txt <<EOF
+🚨 <b>SEO-конвейер СК Юрьевич — СБОЙ</b>
+
+Этап: <b>${stage}</b>
+Дата: $(date -u +%Y-%m-%d\ %H:%M)\ UTC
+
+<i>Детали:</i>
+${detail}
+
+⚠️ <b>Что делать:</b> зайди в Claude и напиши «проверь автопилот». Сегодня публикация пропущена. Завтра попробует снова.
+EOF
+  notify /tmp/fail-msg.txt
+  exit 1
+}
+
+step "Проверяем env"
+for v in GITHUB_TOKEN GITHUB_REPO TELEGRAM_BOT_TOKEN TELEGRAM_CHAT_ID YANDEX_WEBMASTER_OAUTH_TOKEN YANDEX_WEBMASTER_USER_ID YANDEX_WEBMASTER_HOST_ID; do
+  if [ -z "${!v:-}" ]; then
+    echo "ERR: missing env $v"
+    exit 1
+  fi
+done
+
+# Сразу sanity-check Telegram чтобы не отгрузить статьи в никуда
+TG_ME=$(curl -sS --max-time 8 "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getMe")
+if ! echo "$TG_ME" | grep -q '"ok":true'; then
+  echo "ERR: Telegram bot unauthorized: $TG_ME"
+  # пишем себе в файл для постмортема — алерт через TG невозможен
+  echo "$(date -u +%FT%TZ) TG_BOT_DEAD: $TG_ME" >> /tmp/tg-failures.log
+  if [ -n "${BACKUP_TELEGRAM_BOT_TOKEN:-}" ]; then
+    BACKUP_ALIVE=$(curl -sS --max-time 8 "https://api.telegram.org/bot${BACKUP_TELEGRAM_BOT_TOKEN}/getMe" | grep -q '"ok":true' && echo yes || echo no)
+    if [ "$BACKUP_ALIVE" = "yes" ]; then
+      TELEGRAM_BOT_TOKEN=$BACKUP_TELEGRAM_BOT_TOKEN
+      TELEGRAM_CHAT_ID=$BACKUP_TELEGRAM_CHAT_ID
+      echo "Переключились на резервного TG бота"
+    fi
+  fi
+fi
+
+step "Сегодня"
+TODAY=$(date -u +%Y-%m-%d)
+echo "TODAY=$TODAY"
+
+step "Проверка наличия /tmp/daily-articles.json"
+if [ ! -f /tmp/daily-articles.json ]; then
+  fail_alert "GENERATE" "Не найден /tmp/daily-articles.json — Claude в routine не сгенерировал статьи. Скорее всего session-limit Anthropic или фейл в Workflow."
+fi
+ARTICLES_COUNT=$(python3 -c "import json,sys;d=json.load(open('/tmp/daily-articles.json'));print(len(d) if isinstance(d,list) else len(d.get('articles',[])))" 2>/dev/null || echo 0)
+echo "Статей в JSON: $ARTICLES_COUNT"
+if [ "$ARTICLES_COUNT" -lt 1 ]; then
+  fail_alert "GENERATE" "В /tmp/daily-articles.json нет статей (0 элементов)"
+fi
+
+step "git clone репозиторий"
+WORK=/tmp/yurievich-site
+rm -rf "$WORK"
+if ! git clone --depth 1 "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git" "$WORK" > /tmp/git-clone.log 2>&1; then
+  fail_alert "GIT_CLONE" "$(tail -10 /tmp/git-clone.log)"
+fi
+cd "$WORK"
+git config user.email "auto@sk-yurievich.ru"
+git config user.name "SK Yurievich auto-pipeline"
+
+step "Duplicate-slug guard (до импорта)"
+cp /tmp/daily-articles.json articles-input.json
+DUPE_CHECK=$(python3 << 'PY'
+import json, pathlib, sys
+arts = json.loads(pathlib.Path('articles-input.json').read_text())
+if isinstance(arts, dict): arts = arts.get('articles', [])
+existing = {p.stem for p in pathlib.Path('lib/articles').glob('*.ts') if p.stem not in ('index', '_types')}
+new_slugs = [a.get('slug') for a in arts if a.get('slug')]
+dupes_with_existing = [s for s in new_slugs if s in existing]
+dupes_within_batch = [s for s in new_slugs if new_slugs.count(s) > 1]
+if dupes_with_existing or dupes_within_batch:
+  print(f"DUPE_VS_EXISTING:{','.join(set(dupes_with_existing))}|DUPE_IN_BATCH:{','.join(set(dupes_within_batch))}")
+  sys.exit(2)
+print("OK")
+PY
+)
+DUPE_RC=$?
+echo "$DUPE_CHECK"
+if [ $DUPE_RC -eq 2 ]; then
+  fail_alert "DUPLICATE_SLUG" "Routine сгенерила дубликаты: $DUPE_CHECK — публикация отменена чтобы не перетереть старые статьи"
+fi
+
+step "Импорт статей в .ts модули"
+if ! node scripts/import-articles.js articles-input.json > /tmp/import.log 2>&1; then
+  fail_alert "IMPORT" "$(tail -20 /tmp/import.log)"
+fi
+cat /tmp/import.log
+
+step "Обновляем published.json + backlog"
+python3 << 'PY'
+import json, pathlib
+from datetime import datetime
+arts = json.loads(pathlib.Path('articles-input.json').read_text())
+if isinstance(arts, dict): arts = arts.get('articles', [])
+
+pub_path = pathlib.Path('data/published.json')
+pub_path.parent.mkdir(exist_ok=True)
+published = json.loads(pub_path.read_text()) if pub_path.exists() else []
+existing_slugs = {p['slug'] for p in published}
+today = datetime.utcnow().strftime('%Y-%m-%d')
+
+added = 0
+for a in arts:
+  slug = a.get('slug')
+  if slug and slug not in existing_slugs:
+    pq = a.get('keywords', [a.get('title','')])[0] if a.get('keywords') else a.get('title','')
+    published.append({'slug': slug, 'primary_query': pq, 'published_at': today})
+    existing_slugs.add(slug)
+    added += 1
+
+pub_path.write_text(json.dumps(published, ensure_ascii=False, indent=2))
+print(f'published.json: добавлено {added}, всего {len(published)}')
+
+back_path = pathlib.Path('data/seo-backlog.json')
+if back_path.exists():
+  backlog = json.loads(back_path.read_text())
+  pub_queries = {p['primary_query'].strip().lower() for p in published}
+  fresh = [k for k in backlog if k.get('query','').strip().lower() not in pub_queries]
+  back_path.write_text(json.dumps(fresh, ensure_ascii=False, indent=2))
+  print(f'backlog: было {len(backlog)} → стало {len(fresh)}')
+PY
+
+step "npm ci (lockfile freeze) + TypeScript typecheck + build"
+if ! npm ci --no-audit --no-fund > /tmp/npm-install.log 2>&1; then
+  fail_alert "NPM_CI" "npm ci упал — возможно package-lock / package.json рассинхрон, или ночная breaking-обновка. Лог:
+$(tail -25 /tmp/npm-install.log)"
+fi
+
+if ! npx --yes tsc --noEmit > /tmp/tsc.log 2>&1; then
+  # сохраняем артефакты на debug
+  tar czf /tmp/articles-debug-${TODAY}.tar.gz lib/articles/ data/ articles-input.json 2>/dev/null || true
+  fail_alert "TYPECHECK" "TypeScript падает. Скорее всего одна из новых статей сломала типы. Артефакт: /tmp/articles-debug-${TODAY}.tar.gz
+
+$(tail -35 /tmp/tsc.log)"
+fi
+
+if ! npm run build > /tmp/npm-build.log 2>&1; then
+  tar czf /tmp/articles-debug-${TODAY}.tar.gz lib/articles/ data/ articles-input.json 2>/dev/null || true
+  fail_alert "BUILD" "next build failed. Артефакт: /tmp/articles-debug-${TODAY}.tar.gz
+
+$(tail -50 /tmp/npm-build.log)"
+fi
+echo "build OK"
+grep -E 'Route|Size|First Load' /tmp/npm-build.log | head -20
+
+step "git add + commit + push (с retry/rebase)"
+rm -f articles-input.json  # не для репо
+git add lib/articles/ data/
+
+SLUGS=$(python3 -c "import json;d=json.load(open('/tmp/daily-articles.json'));d=d if isinstance(d,list) else d.get('articles',[]);print(' '.join(a['slug'] for a in d))")
+COMMIT_MSG="blog: daily 5 SEO articles ${TODAY}
+
+slugs: $(echo $SLUGS | tr ' ' '\n' | sed 's/^/  - /')"
+
+if ! git commit -m "$COMMIT_MSG" > /tmp/git-commit.log 2>&1; then
+  fail_alert "COMMIT" "Нечего коммитить или git commit упал: $(tail -10 /tmp/git-commit.log)"
+fi
+
+PUSH_OK=0
+for attempt in 1 2 3; do
+  git pull --rebase origin main > /tmp/git-pull.log 2>&1 || true
+  if git push origin main > /tmp/git-push.log 2>&1; then
+    echo "push ok on attempt $attempt"
+    PUSH_OK=1
+    break
+  fi
+  echo "push attempt $attempt failed: $(tail -5 /tmp/git-push.log)"
+  sleep $((attempt * 10))
+done
+if [ $PUSH_OK -eq 0 ]; then
+  fail_alert "GIT_PUSH" "3 попытки push провалились:
+$(tail -15 /tmp/git-push.log)"
+fi
+
+step "Ждём Vercel deploy (до 5 мин, проверяем HTTP 200 каждые 10 сек)"
+DEPLOY_OK=0
+FIRST_SLUG=$(echo "$SLUGS" | awk '{print $1}')
+for i in $(seq 1 30); do
+  sleep 10
+  HTTP_CODE=$(curl -sL -o /dev/null -w '%{http_code}' --max-time 10 "https://sk-yurievich.ru/blog/${FIRST_SLUG}/" 2>/dev/null || echo "000")
+  if [ "$HTTP_CODE" = "200" ]; then
+    DEPLOY_OK=1
+    echo "Vercel deployed после $((i*10))s, HTTP=$HTTP_CODE"
+    break
+  fi
+  [ $((i % 3)) -eq 0 ] && echo "ждём... $((i*10))s, последний код=$HTTP_CODE"
+done
+if [ $DEPLOY_OK -eq 0 ]; then
+  fail_alert "VERCEL_DEPLOY" "После 5 минут ожидания статья ${FIRST_SLUG} всё ещё не отвечает 200. Возможно Vercel build упал — проверь https://vercel.com/jodemchenko-art"
+fi
+
+step "Reindex: новые URL → Я.Вебмастер"
+HOST_ENC=$(python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1],safe=''))" "$YANDEX_WEBMASTER_HOST_ID")
+SENT_OK=0
+SENT_FAIL=0
+QUOTA_LEFT="?"
+LAST_RESP=""
+
+submit_url() {
+  local url=$1
+  local resp
+  resp=$(curl -sS --max-time 15 -X POST \
+    -H "Authorization: OAuth ${YANDEX_WEBMASTER_OAUTH_TOKEN}" \
+    -H "Content-Type: application/json" \
+    "https://api.webmaster.yandex.net/v4/user/${YANDEX_WEBMASTER_USER_ID}/hosts/${HOST_ENC}/recrawl/queue/" \
+    -d "{\"url\":\"$url\"}")
+  LAST_RESP="$resp"
+  if echo "$resp" | grep -q '"task_id"'; then
+    SENT_OK=$((SENT_OK+1))
+    QUOTA_LEFT=$(echo "$resp" | python3 -c "import json,sys;print(json.load(sys.stdin).get('quota_remainder','?'))" 2>/dev/null || echo '?')
+    echo "✓ $url (осталось $QUOTA_LEFT)"
+  else
+    SENT_FAIL=$((SENT_FAIL+1))
+    echo "✗ $url — $resp"
+  fi
+}
+
+for slug in $SLUGS; do
+  submit_url "https://sk-yurievich.ru/blog/${slug}/"
+done
+submit_url "https://sk-yurievich.ru/blog/"
+submit_url "https://sk-yurievich.ru/sitemap.xml"
+
+# Если все упали — крайне вероятно токен Y.Webmaster expired или revoked
+if [ $SENT_OK -eq 0 ] && [ $SENT_FAIL -gt 0 ]; then
+  fail_alert "YANDEX_AUTH" "Все ${SENT_FAIL} URL провалились. Возможно OAuth-токен Я.Вебмастера истёк или отозван.
+Последний ответ API: ${LAST_RESP}
+
+⚠️ Зайди на https://oauth.yandex.ru/ → найди приложение SK Yurievich auto-reindex → перевыпусти токен"
+fi
+
+step "Token expiration heartbeat"
+if [ -n "${YANDEX_TOKEN_EXPIRES_AT:-}" ]; then
+  DAYS_LEFT=$(python3 -c "
+from datetime import date
+try:
+  exp = date.fromisoformat('${YANDEX_TOKEN_EXPIRES_AT}')
+  print((exp - date.today()).days)
+except Exception:
+  print(9999)")
+  echo "Y.Вебмастер token expires в $DAYS_LEFT дней"
+  if [ "$DAYS_LEFT" -lt 30 ]; then
+    cat > /tmp/token-warn.txt <<EOF
+⏰ <b>Yandex Webmaster OAuth-токен скоро истечёт</b>
+
+Осталось: <b>${DAYS_LEFT} дней</b>
+Дата истечения: ${YANDEX_TOKEN_EXPIRES_AT}
+
+<b>Что делать:</b>
+1. Зайди на https://oauth.yandex.ru/
+2. Открой приложение «SK Yurievich auto-reindex»
+3. Перевыпусти токен
+4. Пришли мне новый токен → я обновлю routine
+
+Если не сделаешь — после ${YANDEX_TOKEN_EXPIRES_AT} статьи будут публиковаться, но в Яндекс на переобход не уйдут (медленная индексация).
+EOF
+    notify /tmp/token-warn.txt
+  fi
+fi
+
+step "Формируем Telegram отчёт"
+COUNT_PUBLISHED=$(python3 -c "import json;print(len(json.loads(open('data/published.json').read())))")
+COUNT_BACKLOG=$(python3 -c "import json;import os;p='data/seo-backlog.json';print(len(json.loads(open(p).read())) if os.path.exists(p) else 0)")
+WEEKDAY=$(date -u +%u)  # 1-7 (Mon-Sun)
+
+STATUS_EMOJI="✅"
+[ $SENT_FAIL -gt 0 ] && STATUS_EMOJI="⚠️"
+
+cat > /tmp/digest.txt <<EOF
+${STATUS_EMOJI} <b>SEO-конвейер · ${TODAY}</b>
+
+<b>Сегодня опубликовано:</b> ${ARTICLES_COUNT} статей
+<b>В блоге всего:</b> ${COUNT_PUBLISHED} страниц
+<b>Бэклог тем:</b> ${COUNT_BACKLOG}
+<b>Я.Вебмастер квота:</b> осталось ${QUOTA_LEFT}/150
+
+EOF
+
+if [ $SENT_FAIL -gt 0 ]; then
+  cat >> /tmp/digest.txt <<EOF
+⚠️ <b>В Я.Вебмастер не ушло ${SENT_FAIL} URL</b> — проверим завтра.
+
+EOF
+fi
+
+cat >> /tmp/digest.txt <<EOF
+📝 <b>Новые статьи:</b>
+EOF
+
+for slug in $SLUGS; do
+  TITLE=$(python3 -c "
+import json
+d=json.load(open('/tmp/daily-articles.json'))
+d=d if isinstance(d,list) else d.get('articles',[])
+for a in d:
+  if a.get('slug')=='$slug':
+    print(a.get('title','—')[:95]); break")
+  echo "• <a href=\"https://sk-yurievich.ru/blog/${slug}/\">${TITLE}</a>" >> /tmp/digest.txt
+done
+
+cat >> /tmp/digest.txt <<EOF
+
+EOF
+
+# Подсказка пользователю — что ему делать (если ничего — явно говорим)
+if [ "$COUNT_BACKLOG" -lt 10 ]; then
+  cat >> /tmp/digest.txt <<EOF
+🔁 <b>Бэклог почти пустой</b> (&lt;10 тем). Завтра routine сама регенерирует темы — ничего делать не нужно.
+
+EOF
+else
+  echo "💤 <b>От тебя ничего не нужно.</b> Завтра в 09:00 — следующие 5 статей." >> /tmp/digest.txt
+  echo "" >> /tmp/digest.txt
+fi
+
+# По воскресеньям добавляем недельный summary
+if [ "$WEEKDAY" = "7" ]; then
+  cat >> /tmp/digest.txt <<EOF
+📊 <b>Итоги недели:</b>
+За 7 дней опубликовано ~35 статей. Зайди в <a href="https://webmaster.yandex.ru/site/https:sk-yurievich.ru:443/dashboard/">Я.Вебмастер</a> → раздел «Эффективность» — посмотри показы и клики.
+
+EOF
+fi
+
+cat >> /tmp/digest.txt <<EOF
+⚙️ <a href="https://sk-yurievich.ru/blog/">/blog/</a> · <a href="https://webmaster.yandex.ru/">Я.Вебмастер</a> · <a href="https://search.google.com/search-console">Google Search Console</a>
+EOF
+
+notify /tmp/digest.txt
+echo ""
+echo "✅ Конвейер завершён успешно."
