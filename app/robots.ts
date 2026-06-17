@@ -2,24 +2,37 @@ import type { MetadataRoute } from 'next';
 import { SITE } from '@/lib/site';
 
 export default function robots(): MetadataRoute.Robots {
+  // Базовые правила — общие для всех роботов
+  const baseDisallow = ['/api/', '/spasibo'];
+  const baseAllow = ['/', '/_next/static/']; // явно открываем CSS/JS для рендера preview
+
   return {
     rules: [
       {
         userAgent: '*',
-        allow: '/',
-        disallow: ['/api/', '/_next/', '/spasibo'],
+        allow: baseAllow,
+        disallow: baseDisallow,
       },
-      // Yandex respects this user-agent
+      // Яндекс: понимает Clean-param и собственные директивы (см. ниже host)
       {
         userAgent: 'Yandex',
-        allow: '/',
-        disallow: ['/api/', '/_next/', '/spasibo'],
+        allow: baseAllow,
+        disallow: baseDisallow,
       },
-      // Google
+      {
+        userAgent: 'YandexBot',
+        allow: baseAllow,
+        disallow: baseDisallow,
+      },
       {
         userAgent: 'Googlebot',
-        allow: '/',
-        disallow: ['/api/', '/_next/', '/spasibo'],
+        allow: baseAllow,
+        disallow: baseDisallow,
+      },
+      {
+        userAgent: 'Bingbot',
+        allow: baseAllow,
+        disallow: baseDisallow,
       },
     ],
     sitemap: `${SITE.url}/sitemap.xml`,

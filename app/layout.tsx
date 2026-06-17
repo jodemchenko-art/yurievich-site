@@ -159,6 +159,56 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       'Газобетон ЛСР',
       'Зимнее бетонирование',
     ],
+    founder: { '@id': `${SITE.url}/#yuri-demchenko` },
+    employee: [
+      { '@id': `${SITE.url}/#yuri-demchenko` },
+      { '@id': `${SITE.url}/#valery-foreman` },
+      { '@id': `${SITE.url}/#evgeny-supervisor` },
+    ],
+  };
+
+  // 1b) Person — Юрий (руководитель проекта, главный автор блога)
+  const yuriJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': `${SITE.url}/#yuri-demchenko`,
+    name: 'Юрий Демченко',
+    jobTitle: 'Руководитель проекта',
+    description:
+      'Руководитель проекта в СК «Юрьевич». 239 завершённых объектов: плитные фундаменты и дома из газобетона в Санкт-Петербурге и Ленинградской области. Личный контроль каждой стройки.',
+    worksFor: { '@id': `${SITE.url}/#organization` },
+    knowsAbout: [
+      'Монолитный плитный фундамент',
+      'Дом из газобетона ЛСР под ключ',
+      'Грунты Ленинградской области',
+      'Зимнее бетонирование',
+      'Проектирование плитных фундаментов по СП 22.13330',
+    ],
+    url: SITE.url,
+    telephone: SITE.phone,
+    sameAs: [SITE.telegram, SITE.whatsapp].filter(Boolean),
+  };
+
+  // 1c) Person — Валерий (прораб)
+  const valeryJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': `${SITE.url}/#valery-foreman`,
+    name: 'Валерий Демченко',
+    jobTitle: 'Прораб · производитель работ',
+    description: 'Прораб бригады СК «Юрьевич». Личный контроль заливки, армирования, гидроизоляции на объектах СПб и Ленобласти.',
+    worksFor: { '@id': `${SITE.url}/#organization` },
+  };
+
+  // 1d) Person — Евгений (технадзор/снабжение)
+  const evgenyJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': `${SITE.url}/#evgeny-supervisor`,
+    name: 'Евгений Демченко',
+    jobTitle: 'Технический надзор · снабжение',
+    description: 'Технадзор и закупка материалов в СК «Юрьевич». Контроль качества бетона М300 W6 F150, арматуры А500С, газобетона ЛСР с заводскими паспортами.',
+    worksFor: { '@id': `${SITE.url}/#organization` },
   };
 
   // 2) Services list
@@ -212,6 +262,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(yuriJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(valeryJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(evgenyJsonLd) }}
         />
         <script
           type="application/ld+json"

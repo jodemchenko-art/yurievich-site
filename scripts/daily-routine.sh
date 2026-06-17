@@ -272,6 +272,27 @@ if [ $DEPLOY_OK -eq 0 ]; then
   fail_alert "VERCEL_DEPLOY" "После 10 минут ожидания статья ${FIRST_SLUG} всё ещё не отвечает 200. Возможно Vercel build упал — проверь https://vercel.com/jodemchenko-art"
 fi
 
+step "IndexNow ping (мгновенный пинг в Яндекс/Bing — бесплатно, неограниченно)"
+INDEXNOW_URLS=()
+for slug in $SLUGS; do
+  INDEXNOW_URLS+=("https://sk-yurievich.ru/blog/${slug}/")
+done
+INDEXNOW_URLS+=("https://sk-yurievich.ru/blog/")
+INDEXNOW_URLS+=("https://sk-yurievich.ru/sitemap.xml")
+
+INDEXNOW_PAYLOAD=$(python3 -c "
+import json, sys
+print(json.dumps({
+  'key': '${NOTIFY_PROXY_KEY}',
+  'urls': sys.argv[1:],
+}))" "${INDEXNOW_URLS[@]}")
+
+INDEXNOW_RESP=$(curl -sS --max-time 15 -X POST \
+  "https://www.sk-yurievich.ru/api/indexnow" \
+  -H "Content-Type: application/json" \
+  -d "$INDEXNOW_PAYLOAD" 2>&1)
+echo "IndexNow: $INDEXNOW_RESP"
+
 step "Reindex: новые URL → Я.Вебмастер"
 heartbeat "📤 отправляю URL в Я.Вебмастер..."
 HOST_ENC=$(python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1],safe=''))" "$YANDEX_WEBMASTER_HOST_ID")

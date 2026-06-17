@@ -86,10 +86,12 @@ export default function ArticlePage({ params }: { params: Params }) {
             : `${SITE.url}${article.cover_image}`,
         ]
       : undefined,
+    // E-E-A-T: автор-эксперт с регалиями, не Organization
     author: {
-      '@type': 'Organization',
-      '@id': `${SITE.url}/#organization`,
-      name: SITE.fullName,
+      '@type': 'Person',
+      '@id': `${SITE.url}/#yuri-demchenko`,
+      name: 'Юрий Демченко',
+      jobTitle: 'Руководитель проекта СК «Юрьевич»',
       url: SITE.url,
     },
     publisher: { '@id': `${SITE.url}/#organization` },
