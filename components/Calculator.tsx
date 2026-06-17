@@ -45,11 +45,23 @@ function fmt(n: number): string {
   return Math.round(n).toLocaleString('ru-RU').replace(/,/g, ' ');
 }
 
-export default function Calculator() {
-  const [size, setSize] = useState<SizeKey>('10x10');
+type CalculatorProps = {
+  defaultGround?: Ground;
+  defaultSize?: SizeKey;
+  defaultMaterial?: Material;
+  regionLabel?: string; // если задано — пробрасывается в submit() как контекст
+};
+
+export default function Calculator({
+  defaultGround = 'suglinok',
+  defaultSize = '10x10',
+  defaultMaterial = 'gazobeton',
+  regionLabel,
+}: CalculatorProps = {}) {
+  const [size, setSize] = useState<SizeKey>(defaultSize);
   const [storeys, setStoreys] = useState<Storeys>(2);
-  const [ground, setGround] = useState<Ground>('suglinok');
-  const [material, setMaterial] = useState<Material>('gazobeton');
+  const [ground, setGround] = useState<Ground>(defaultGround);
+  const [material, setMaterial] = useState<Material>(defaultMaterial);
 
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
@@ -99,8 +111,9 @@ export default function Calculator() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          source: 'calculator',
+          source: regionLabel ? `calculator-${regionLabel}` : 'calculator',
           answers: [
+            ...(regionLabel ? [{ q: 'Район', a: regionLabel }] : []),
             { q: 'Размер дома', a: size },
             { q: 'Этажность', a: `${storeys} этажа` },
             { q: 'Грунт', a: GROUND_LABEL[ground].name },
