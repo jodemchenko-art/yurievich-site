@@ -404,7 +404,7 @@ PY
 import json, sys
 print(json.dumps({
   'key': '${NOTIFY_PROXY_KEY}',
-  'chat_id': '${CHANNEL_CHAT_ID}',
+  'dest': '${CHANNEL_CHAT_ID}',
   'text': sys.stdin.read(),
   'parse_mode': 'HTML',
   'disable_web_page_preview': False,

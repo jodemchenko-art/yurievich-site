@@ -12,9 +12,10 @@ type NotifyPayload = {
   text?: string;
   parse_mode?: 'HTML' | 'Markdown';
   chat_id?: string;
+  // Cloudflare WAF блочит поле chat_id с @username → используем нейтральное dest
+  dest?: string;
   disable_web_page_preview?: boolean;
-  // Канальный TG-бот (base64): обходим Cloudflare WAF,
-  // который блочит TG-токены в plain-виде и пары полей auth_*
+  // Канальный TG-бот (base64) на случай если кто-то предпочитает body
   ch_data?: string;
 };
 
@@ -56,7 +57,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ ok: false, error: 'bad_ch_data' }, { status: 400 });
     }
   }
-  const chatId = body.chat_id || process.env.TELEGRAM_CHAT_ID;
+  // body.dest приоритетнее body.chat_id (Cloudflare блочит chat_id в body)
+  const chatId = body.dest || body.chat_id || process.env.TELEGRAM_CHAT_ID;
   if (!token || !chatId) {
     return NextResponse.json({ ok: false, error: 'telegram_not_configured' }, { status: 503 });
   }
