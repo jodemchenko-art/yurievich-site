@@ -37,9 +37,15 @@ step() { echo ""; echo "=== $* ==="; }
 
 # === Telegram notification через прокси /api/notify ===
 # api.telegram.org из Anthropic cloud env заблокирован.
-# Решение: POST на твой собственный сайт https://www.sk-yurievich.ru/api/notify
-# который пересылает в Telegram уже из Vercel (откуда TG доступен).
-NOTIFY_URL=${NOTIFY_URL:-https://www.sk-yurievich.ru/api/notify}
+# Решение: POST на наш сайт → Vercel пересылает в Telegram (откуда TG доступен).
+#
+# ВАЖНО: используем yurievich-site.vercel.app (прямой Vercel), а не www.sk-yurievich.ru,
+# потому что на основном домене стоит Cloudflare WAF, который блочит:
+#  - поле chat_id с @username значениями (502)
+#  - поле bot_token любого вида (502)
+#  - комбинации полей похожих на TG-токен (502)
+# vercel.app — без CF, идёт напрямую к Vercel edge.
+NOTIFY_URL=${NOTIFY_URL:-https://yurievich-site.vercel.app/api/notify}
 
 notify() {
   local file=$1
