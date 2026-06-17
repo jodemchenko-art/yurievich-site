@@ -40,18 +40,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: 'too_long' }, { status: 400 });
   }
 
-  // Поддержка двух режимов:
-  //  1) дефолтный бот (TELEGRAM_BOT_TOKEN) → в личку юзера
-  //  2) кастомный bot_token (например канальный бот @Yurastroitdoma) → в канал
-  // Если bot_token есть — он должен совпадать с CHANNEL_BOT_TOKEN env (защита от подмены)
-  let token = process.env.TELEGRAM_BOT_TOKEN;
-  if (body.bot_token) {
-    const allowedChannelToken = process.env.CHANNEL_BOT_TOKEN;
-    if (!allowedChannelToken || body.bot_token !== allowedChannelToken) {
-      return NextResponse.json({ ok: false, error: 'unknown_bot_token' }, { status: 401 });
-    }
-    token = body.bot_token;
-  }
+  // bot_token из body — доверяем (NOTIFY_PROXY_KEY уже аутентифицировал вызов).
+  // Без bot_token → используем дефолтный TELEGRAM_BOT_TOKEN (для личных уведомлений юзеру).
+  const token = body.bot_token || process.env.TELEGRAM_BOT_TOKEN;
   const chatId = body.chat_id || process.env.TELEGRAM_CHAT_ID;
   if (!token || !chatId) {
     return NextResponse.json({ ok: false, error: 'telegram_not_configured' }, { status: 503 });
