@@ -363,6 +363,69 @@ EOF
   fi
 fi
 
+step "Постим статьи в канал @Yurastroitdoma (если CHANNEL_BOT_TOKEN задан)"
+if [ -n "${CHANNEL_BOT_TOKEN:-}" ] && [ -n "${CHANNEL_CHAT_ID:-}" ]; then
+  heartbeat "📢 публикую статьи в @Yurastroitdoma..."
+  CHANNEL_OK=0
+  CHANNEL_FAIL=0
+  for slug in $SLUGS; do
+    POST_TEXT=$(python3 << PY
+import json, html
+d = json.load(open('/tmp/daily-articles.json'))
+d = d if isinstance(d, list) else d.get('articles', [])
+art = next((a for a in d if a.get('slug') == '$slug'), None)
+if not art:
+    print(''); raise SystemExit
+title = (art.get('title') or '').strip()
+excerpt = (art.get('excerpt') or art.get('description') or '').strip()
+if len(excerpt) > 320:
+    excerpt = excerpt[:317] + '…'
+url = f"https://sk-yurievich.ru/blog/{art['slug']}/"
+# В TG-канал постим в HTML с превью (ссылка в конце даст карточку)
+lines = [
+    f"<b>{html.escape(title)}</b>",
+    "",
+    html.escape(excerpt),
+    "",
+    f'📖 <a href="{url}">Читать на sk-yurievich.ru</a>',
+    "",
+    "#фундамент #ИЖС #ЛенОбласть #СПб",
+]
+print('\n'.join(lines))
+PY
+)
+    if [ -z "$POST_TEXT" ]; then
+      echo "skip $slug — нет данных в JSON"
+      continue
+    fi
+    PAYLOAD=$(python3 -c "
+import json, sys
+print(json.dumps({
+  'key': '${NOTIFY_PROXY_KEY}',
+  'bot_token': '${CHANNEL_BOT_TOKEN}',
+  'chat_id': '${CHANNEL_CHAT_ID}',
+  'text': sys.stdin.read(),
+  'parse_mode': 'HTML',
+  'disable_web_page_preview': False,
+}))" <<< "$POST_TEXT")
+    RESP=$(curl -sS --max-time 20 -X POST "$NOTIFY_URL" \
+      -H "Content-Type: application/json" -d "$PAYLOAD")
+    if echo "$RESP" | grep -q '"ok":true'; then
+      CHANNEL_OK=$((CHANNEL_OK+1))
+      echo "✓ канал: $slug"
+    else
+      CHANNEL_FAIL=$((CHANNEL_FAIL+1))
+      echo "✗ канал: $slug — $RESP"
+    fi
+    sleep 3  # rate-limit safety: Telegram bot API лимит ~1 msg/sec в канал
+  done
+  echo "Канал: опубликовано $CHANNEL_OK, упало $CHANNEL_FAIL"
+else
+  echo "CHANNEL_BOT_TOKEN не задан — автопостинг в канал отключён"
+  CHANNEL_OK=0
+  CHANNEL_FAIL=0
+fi
+
 step "Формируем Telegram отчёт"
 heartbeat "📨 финальный digest..."
 COUNT_PUBLISHED=$(python3 -c "import json;print(len(json.loads(open('data/published.json').read())))")

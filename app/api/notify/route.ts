@@ -12,6 +12,8 @@ type NotifyPayload = {
   text?: string;
   parse_mode?: 'HTML' | 'Markdown';
   chat_id?: string;
+  disable_web_page_preview?: boolean;
+  bot_token?: string;
 };
 
 export async function POST(request: Request) {
@@ -38,11 +40,24 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: 'too_long' }, { status: 400 });
   }
 
-  const token = process.env.TELEGRAM_BOT_TOKEN;
+  // Поддержка двух режимов:
+  //  1) дефолтный бот (TELEGRAM_BOT_TOKEN) → в личку юзера
+  //  2) кастомный bot_token (например канальный бот @Yurastroitdoma) → в канал
+  // Если bot_token есть — он должен совпадать с CHANNEL_BOT_TOKEN env (защита от подмены)
+  let token = process.env.TELEGRAM_BOT_TOKEN;
+  if (body.bot_token) {
+    const allowedChannelToken = process.env.CHANNEL_BOT_TOKEN;
+    if (!allowedChannelToken || body.bot_token !== allowedChannelToken) {
+      return NextResponse.json({ ok: false, error: 'unknown_bot_token' }, { status: 401 });
+    }
+    token = body.bot_token;
+  }
   const chatId = body.chat_id || process.env.TELEGRAM_CHAT_ID;
   if (!token || !chatId) {
     return NextResponse.json({ ok: false, error: 'telegram_not_configured' }, { status: 503 });
   }
+
+  const disablePreview = body.disable_web_page_preview ?? true;
 
   try {
     const tgResp = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
@@ -52,7 +67,7 @@ export async function POST(request: Request) {
         chat_id: chatId,
         text,
         parse_mode: body.parse_mode || undefined,
-        disable_web_page_preview: true,
+        disable_web_page_preview: disablePreview,
       }),
     });
     const tgJson = await tgResp.json();
