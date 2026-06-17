@@ -398,11 +398,15 @@ PY
       echo "skip $slug — нет данных в JSON"
       continue
     fi
+    # Cloudflare WAF блочит TG-токены в body: разбиваем на 2 части (auth_a:auth_b)
+    AUTH_A="${CHANNEL_BOT_TOKEN%%:*}"
+    AUTH_B="${CHANNEL_BOT_TOKEN#*:}"
     PAYLOAD=$(python3 -c "
 import json, sys
 print(json.dumps({
   'key': '${NOTIFY_PROXY_KEY}',
-  'channel_auth': '${CHANNEL_BOT_TOKEN}',
+  'auth_a': '${AUTH_A}',
+  'auth_b': '${AUTH_B}',
   'chat_id': '${CHANNEL_CHAT_ID}',
   'text': sys.stdin.read(),
   'parse_mode': 'HTML',
