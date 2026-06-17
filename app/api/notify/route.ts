@@ -13,9 +13,9 @@ type NotifyPayload = {
   parse_mode?: 'HTML' | 'Markdown';
   chat_id?: string;
   disable_web_page_preview?: boolean;
-  // Канальный TG-бот: две части, чтобы обойти Cloudflare WAF
-  auth_a?: string;
-  auth_b?: string;
+  // Канальный TG-бот (base64): обходим Cloudflare WAF,
+  // который блочит TG-токены в plain-виде и пары полей auth_*
+  ch_data?: string;
 };
 
 export async function POST(request: Request) {
@@ -42,12 +42,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: 'too_long' }, { status: 400 });
   }
 
-  // Канальный бот передаётся в 2 частях (auth_a = bot_id, auth_b = secret) —
-  // Cloudflare WAF блочит TG-токен паттерном `\d+:[A-Za-z0-9_-]{30,}` на edge.
-  // Без auth_a/auth_b → дефолтный TELEGRAM_BOT_TOKEN (личные уведомления юзеру).
+  // Канальный бот: токен передаётся base64-encoded в поле ch_data.
+  // Cloudflare WAF блочит TG-токены на edge как в plain-виде, так и в парах auth_*.
+  // Base64 разрушает паттерн `\d+:[A-Za-z0-9_-]{30,}` → проходит WAF.
+  // Без ch_data → дефолтный TELEGRAM_BOT_TOKEN (личные уведомления юзеру).
   let token = process.env.TELEGRAM_BOT_TOKEN;
-  if ((body as any).auth_a && (body as any).auth_b) {
-    token = `${(body as any).auth_a}:${(body as any).auth_b}`;
+  if (body.ch_data) {
+    try {
+      token = Buffer.from(body.ch_data, 'base64').toString('utf-8');
+    } catch {
+      return NextResponse.json({ ok: false, error: 'bad_ch_data' }, { status: 400 });
+    }
   }
   const chatId = body.chat_id || process.env.TELEGRAM_CHAT_ID;
   if (!token || !chatId) {
