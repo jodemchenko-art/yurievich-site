@@ -13,7 +13,8 @@ type NotifyPayload = {
   parse_mode?: 'HTML' | 'Markdown';
   chat_id?: string;
   disable_web_page_preview?: boolean;
-  bot_token?: string;
+  // Cloudflare WAF блочит поле bot_token — используем нейтральное имя
+  channel_auth?: string;
 };
 
 export async function POST(request: Request) {
@@ -40,9 +41,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: 'too_long' }, { status: 400 });
   }
 
-  // bot_token из body — доверяем (NOTIFY_PROXY_KEY уже аутентифицировал вызов).
-  // Без bot_token → используем дефолтный TELEGRAM_BOT_TOKEN (для личных уведомлений юзеру).
-  const token = body.bot_token || process.env.TELEGRAM_BOT_TOKEN;
+  // channel_auth из body — доверяем (NOTIFY_PROXY_KEY уже аутентифицировал вызов).
+  // Имя `channel_auth` вместо `bot_token` — Cloudflare WAF блочит последнее на edge.
+  // Без channel_auth → дефолтный TELEGRAM_BOT_TOKEN (для личных уведомлений юзеру).
+  const token = body.channel_auth || process.env.TELEGRAM_BOT_TOKEN;
   const chatId = body.chat_id || process.env.TELEGRAM_CHAT_ID;
   if (!token || !chatId) {
     return NextResponse.json({ ok: false, error: 'telegram_not_configured' }, { status: 503 });

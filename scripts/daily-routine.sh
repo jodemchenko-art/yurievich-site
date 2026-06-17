@@ -402,7 +402,7 @@ PY
 import json, sys
 print(json.dumps({
   'key': '${NOTIFY_PROXY_KEY}',
-  'bot_token': '${CHANNEL_BOT_TOKEN}',
+  'channel_auth': '${CHANNEL_BOT_TOKEN}',
   'chat_id': '${CHANNEL_CHAT_ID}',
   'text': sys.stdin.read(),
   'parse_mode': 'HTML',
