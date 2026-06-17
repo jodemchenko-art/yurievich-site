@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Calculator from '@/components/Calculator';
-import { REGIONS, getRegionBySlug, getAllRegionSlugs } from '@/lib/regions';
+import { REGIONS, getRegionBySlug, getAllRegionSlugs, buildRegionFaq } from '@/lib/regions';
 import { getArticleBySlug } from '@/lib/articles';
 import { SITE } from '@/lib/site';
 
@@ -62,6 +62,18 @@ export default function RegionPage({ params }: { params: Params }) {
     ],
   };
 
+  // FAQ под Нейро-цитирование Алисы (#27 из SEO_YANDEX_100)
+  const faq = region.faq && region.faq.length > 0 ? region.faq : buildRegionFaq(region);
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  };
+
   const serviceSchema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
@@ -91,6 +103,7 @@ export default function RegionPage({ params }: { params: Params }) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       <section className="container-x pt-10 md:pt-14 pb-6">
         <nav aria-label="Хлебные крошки" className="text-sm text-brand-mute mb-6">
@@ -171,6 +184,24 @@ export default function RegionPage({ params }: { params: Params }) {
             Получить детальный расчёт →
           </Link>
         </p>
+      </section>
+
+      <section className="container-x pb-16 max-w-4xl">
+        <h2 className="text-2xl md:text-3xl font-extrabold mb-8">Частые вопросы по {region.prepositional}</h2>
+        <div className="space-y-3">
+          {faq.map((f, i) => (
+            <details
+              key={i}
+              className="group rounded-2xl bg-white border border-brand-line p-5 md:p-6 open:border-brand-ink transition"
+            >
+              <summary className="cursor-pointer list-none flex items-start justify-between gap-4 font-bold text-lg leading-snug text-brand-ink">
+                <span>{f.q}</span>
+                <span className="flex-shrink-0 text-brand-mute group-open:rotate-180 transition-transform mt-1">▾</span>
+              </summary>
+              <p className="mt-4 text-brand-mute leading-relaxed">{f.a}</p>
+            </details>
+          ))}
+        </div>
       </section>
 
       {related.length > 0 && (

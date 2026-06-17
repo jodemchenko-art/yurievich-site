@@ -10,6 +10,7 @@ import { SITE } from '@/lib/site';
 import ArticleHeader from '@/components/blog/ArticleHeader';
 import ArticleBody from '@/components/blog/ArticleBody';
 import ArticleCta from '@/components/blog/ArticleCta';
+import ArticleFaq from '@/components/blog/ArticleFaq';
 import RelatedArticles from '@/components/blog/RelatedArticles';
 
 type Params = { slug: string };
@@ -161,6 +162,7 @@ export default function ArticlePage({ params }: { params: Params }) {
 
       <ArticleHeader article={article} />
       <ArticleBody html={article.html} />
+      <ArticleFaq items={article.faq} />
       <ArticleCta />
       <RelatedArticles articles={related} />
     </>
