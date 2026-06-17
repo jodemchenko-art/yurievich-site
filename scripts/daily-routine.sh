@@ -398,20 +398,21 @@ PY
       echo "skip $slug — нет данных в JSON"
       continue
     fi
-    # Cloudflare WAF блочит TG-токены в body — кодируем в base64
+    # Cloudflare WAF блочит TG-токены в body — передаём в HEADER X-Channel-Auth (base64)
     CH_DATA=$(echo -n "${CHANNEL_BOT_TOKEN}" | base64 -w0)
     PAYLOAD=$(python3 -c "
 import json, sys
 print(json.dumps({
   'key': '${NOTIFY_PROXY_KEY}',
-  'ch_data': '${CH_DATA}',
   'chat_id': '${CHANNEL_CHAT_ID}',
   'text': sys.stdin.read(),
   'parse_mode': 'HTML',
   'disable_web_page_preview': False,
 }))" <<< "$POST_TEXT")
     RESP=$(curl -sS --max-time 20 -X POST "$NOTIFY_URL" \
-      -H "Content-Type: application/json" -d "$PAYLOAD")
+      -H "Content-Type: application/json" \
+      -H "X-Channel-Auth: ${CH_DATA}" \
+      -d "$PAYLOAD")
     if echo "$RESP" | grep -q '"ok":true'; then
       CHANNEL_OK=$((CHANNEL_OK+1))
       echo "✓ канал: $slug"

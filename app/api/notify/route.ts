@@ -42,14 +42,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: 'too_long' }, { status: 400 });
   }
 
-  // Канальный бот: токен передаётся base64-encoded в поле ch_data.
-  // Cloudflare WAF блочит TG-токены на edge как в plain-виде, так и в парах auth_*.
-  // Base64 разрушает паттерн `\d+:[A-Za-z0-9_-]{30,}` → проходит WAF.
-  // Без ch_data → дефолтный TELEGRAM_BOT_TOKEN (личные уведомления юзеру).
+  // Канальный бот: токен в base64 передаётся через HEADER X-Channel-Auth.
+  // Body передаёт его через body.ch_data (для совместимости), но HEADER приоритетнее.
+  // Cloudflare WAF блочит body содержащий TG-токен + @username chat_id вместе.
+  // Header обходит проверки на корреляцию полей body.
   let token = process.env.TELEGRAM_BOT_TOKEN;
-  if (body.ch_data) {
+  const headerAuth = request.headers.get('x-channel-auth');
+  const rawAuth = headerAuth || body.ch_data;
+  if (rawAuth) {
     try {
-      token = Buffer.from(body.ch_data, 'base64').toString('utf-8');
+      token = Buffer.from(rawAuth, 'base64').toString('utf-8');
     } catch {
       return NextResponse.json({ ok: false, error: 'bad_ch_data' }, { status: 400 });
     }
