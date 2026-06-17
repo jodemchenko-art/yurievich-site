@@ -340,6 +340,54 @@ if [ $SENT_OK -eq 0 ] && [ $SENT_FAIL -gt 0 ]; then
 ⚠️ Зайди на https://oauth.yandex.ru/ → найди приложение SK Yurievich auto-reindex → перевыпусти токен"
 fi
 
+step "Self-healing (#5): мониторинг important-urls + indexing-samples"
+heartbeat "🔄 проверяю выпавшие страницы..."
+SELF_HEAL_OUT=$(curl -sS --max-time 20 \
+  -H "Authorization: OAuth ${YANDEX_WEBMASTER_OAUTH_TOKEN}" \
+  "https://api.webmaster.yandex.net/v4/user/${YANDEX_WEBMASTER_USER_ID}/hosts/${HOST_ENC}/important-urls/" 2>&1 || echo "{}")
+# Извлекаем урлы со статусом NOT_FOUND/REMOVED/DROPPED
+DROPPED=$(echo "$SELF_HEAL_OUT" | python3 -c "
+import json, sys
+try:
+  d = json.loads(sys.stdin.read())
+  urls = d.get('urls', [])
+  out = []
+  for u in urls:
+    status = u.get('search_status', {}).get('status') or u.get('search_status') or ''
+    if status in ('NOT_FOUND','REMOVED','DROPPED','SEARCH_NOT_FOUND'):
+      out.append(u.get('url',''))
+  print('\n'.join(out[:5]))  # max 5/день, экономим квоту
+except Exception as e:
+  pass
+" 2>/dev/null || echo "")
+
+DROPPED_COUNT=0
+if [ -n "$DROPPED" ]; then
+  while IFS= read -r url; do
+    if [ -n "$url" ]; then
+      submit_url "$url"
+      DROPPED_COUNT=$((DROPPED_COUNT+1))
+    fi
+  done <<< "$DROPPED"
+  echo "Self-healing: переотправлено $DROPPED_COUNT выпавших URL"
+fi
+
+step "Opportunity miner (#39, #41, #91, #92): SEO-разведка из Я.Вебмастера"
+heartbeat "🔍 ищу возможности (almost-top, CTR, decay)..."
+if node scripts/opportunity-miner.js > /tmp/opp-miner.log 2>&1; then
+  cat /tmp/opp-miner.log | tail -10
+else
+  echo "WARN: opportunity-miner упал (не критично):"
+  tail -10 /tmp/opp-miner.log
+fi
+
+# Если есть opportunities — коммитим, чтобы routine завтра видел их
+if [ -f data/opportunities.json ]; then
+  git add data/opportunities.json data/position-history.json data/seo-backlog.json 2>/dev/null || true
+  git diff --cached --quiet || git commit -m "seo-data: opportunity-miner snapshot ${TODAY}" > /dev/null 2>&1 || true
+  git push origin main > /dev/null 2>&1 || true
+fi
+
 step "Token expiration heartbeat"
 if [ -n "${YANDEX_TOKEN_EXPIRES_AT:-}" ]; then
   DAYS_LEFT=$(python3 -c "
@@ -459,6 +507,26 @@ if [ $SENT_FAIL -gt 0 ]; then
 ⚠️ <b>В Я.Вебмастер не ушло ${SENT_FAIL} URL</b> — проверим завтра.
 
 EOF
+fi
+
+if [ -f data/opportunities.json ]; then
+  OPP_SUMMARY=$(python3 -c "
+import json
+try:
+  d = json.load(open('data/opportunities.json'))
+  s = d.get('summary',{})
+  almost = s.get('almost_top_count',0)
+  ctr = s.get('ctr_problems_count',0)
+  miss = s.get('missing_demand_count',0)
+  dec = s.get('decay_count',0)
+  print(f'🔍 <b>SEO-разведка:</b> {almost} запросов почти в топе (11-30), {ctr} с низким CTR, {miss} упущенных, {dec} просевших')
+except Exception:
+  print('')
+" 2>/dev/null || echo "")
+  if [ -n "$OPP_SUMMARY" ]; then
+    echo "$OPP_SUMMARY" >> /tmp/digest.txt
+    echo "" >> /tmp/digest.txt
+  fi
 fi
 
 cat >> /tmp/digest.txt <<EOF

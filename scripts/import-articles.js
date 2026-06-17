@@ -250,6 +250,74 @@ function main() {
     process.exit(1);
   }
 
+  // === Quality gates (#15, #23 из SEO_YANDEX_100_AVTOPILOT.txt) ===
+  // Отбрасываем тонкие/переоптимизированные/дубль-статьи ДО публикации,
+  // чтобы не наловить Антикачество и Баден-Баден от Яндекса.
+  const stripTags = (s) => String(s || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  const wordCountOf = (html) => stripTags(html).split(/\s+/).filter(Boolean).length;
+
+  const rejected = [];
+  const accepted = [];
+  for (const a of articlesData) {
+    const issues = [];
+    const wc = wordCountOf(a.html || '');
+    // gate 1: thin content — статья короче 800 слов это спам по нашим стандартам
+    if (wc < 800) issues.push(`thin:${wc}w`);
+    // gate 2: title переоптимизация — главное ключевое слово повторяется >2 раз в title
+    const title = (a.title || '').toLowerCase();
+    const titleWords = title.split(/\s+/).filter((w) => w.length >= 4);
+    const counts = {};
+    titleWords.forEach((w) => { counts[w] = (counts[w] || 0) + 1; });
+    const overused = Object.entries(counts).find(([_, c]) => c > 2);
+    if (overused) issues.push(`title-overopt:${overused[0]}x${overused[1]}`);
+    // gate 3: keyword stuffing в body — главный ключ из title в тексте чаще 1% слов
+    const bodyText = stripTags(a.html || '').toLowerCase();
+    const mainKey = titleWords.filter((w) => w.length >= 5).slice(0, 2).join(' ');
+    if (mainKey && wc > 100) {
+      const occurrences = (bodyText.match(new RegExp(mainKey.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length;
+      const density = (occurrences * 100) / wc;
+      if (density > 1.5) issues.push(`kw-stuff:${mainKey}@${density.toFixed(2)}%`);
+    }
+    // gate 4: near-duplicate — пересечение слов с уже опубликованной статьёй >55%
+    const titleSet = new Set(titleWords);
+    const existingFromFs = readExistingModules();
+    for (const m of existingFromFs) {
+      const mTitle = m.slug.replace(/-/g, ' ').toLowerCase();
+      const mWords = mTitle.split(/\s+/).filter((w) => w.length >= 4);
+      if (mWords.length === 0) continue;
+      const overlap = mWords.filter((w) => titleSet.has(w)).length;
+      const sim = (overlap * 100) / Math.max(titleWords.length, mWords.length);
+      if (sim > 55) { issues.push(`near-dup:${m.slug}@${sim.toFixed(0)}%`); break; }
+    }
+
+    if (issues.length > 0) {
+      rejected.push({ slug: a.slug, title: a.title, issues });
+    } else {
+      accepted.push(a);
+    }
+  }
+
+  if (rejected.length > 0) {
+    console.error('⚠️  Quality-gate отбраковал', rejected.length, 'статей:');
+    for (const r of rejected) {
+      console.error(`  ✗ ${r.slug}: ${r.issues.join(', ')}`);
+    }
+    // Сохраняем отчёт для TG-алерта
+    try {
+      fs.writeFileSync('/tmp/quality-rejected.json', JSON.stringify(rejected, null, 2));
+    } catch {}
+  }
+
+  if (accepted.length === 0) {
+    console.error('FATAL: после quality-gate не осталось ни одной статьи — публикация отменена');
+    process.exit(3);
+  }
+  if (accepted.length < articlesData.length) {
+    console.log(`Quality-gate: ${accepted.length}/${articlesData.length} прошло`);
+  }
+  articlesData.length = 0;
+  articlesData.push(...accepted);
+
   // Сегодня в UTC YYYY-MM-DD — Date.now запрещён в workflow, но scripts/* запускаются вручную
   const today = new Date().toISOString().slice(0, 10);
 

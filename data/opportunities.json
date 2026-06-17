@@ -1,0 +1,15 @@
+{
+  "generated_at": "2026-06-17T22:12:04.492Z",
+  "status": "host_not_loaded_yet",
+  "almost_top": [],
+  "ctr_problems": [],
+  "missing_demand": [],
+  "decay": [],
+  "summary": {
+    "total_queries": 0,
+    "almost_top_count": 0,
+    "ctr_problems_count": 0,
+    "missing_demand_count": 0,
+    "decay_count": 0
+  }
+}
