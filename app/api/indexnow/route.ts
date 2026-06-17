@@ -35,11 +35,13 @@ export async function POST(request: Request) {
   }
 
   // Один URL — bulk-формат принимает Яндекс
+  // ВАЖНО: host, keyLocation и URL в urlList должны быть на ОДНОМ домене
+  // (канонический у нас — без www, см. sitemap)
   const payload = {
     host: 'sk-yurievich.ru',
     key: INDEXNOW_KEY,
-    keyLocation: `https://www.sk-yurievich.ru/${INDEXNOW_KEY}.txt`,
-    urlList: urls,
+    keyLocation: `https://sk-yurievich.ru/${INDEXNOW_KEY}.txt`,
+    urlList: urls.map((u) => u.replace('://www.', '://')),
   };
 
   try {
