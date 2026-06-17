@@ -5,7 +5,7 @@ import { SITE } from '@/lib/site';
 
 const NAV = [
   { href: '/#uslugi', label: 'Услуги' },
-  { href: '/#calc', label: 'Расчёт' },
+  { href: '/kalkulyator/', label: 'Калькулятор' },
   { href: '/#portfolio', label: 'Объекты' },
   { href: '/#otzyvy', label: 'Отзывы' },
   { href: '/blog/', label: 'Блог' },

@@ -92,6 +92,44 @@ function moduleNameFromSlug(slug) {
   return slug.replace(/-([a-z0-9])/g, (_, c) => c.toUpperCase());
 }
 
+function extractTitleWords(title) {
+  const words = (title || '').toLowerCase().match(/[а-яёa-z\d]+/g) || [];
+  return new Set(words.filter((w) => w.length >= 4));
+}
+
+function readExistingTitles() {
+  // Возвращает [{slug, words}] для всех уже опубликованных статей
+  return fs.readdirSync(ARTICLES_DIR)
+    .filter((f) => f.endsWith('.ts') && f !== 'index.ts' && f !== '_types.ts')
+    .map((f) => {
+      const slug = f.replace(/\.ts$/, '');
+      try {
+        const content = fs.readFileSync(path.join(ARTICLES_DIR, f), 'utf8');
+        const m = content.match(/title:\s*"([^"]+)"/);
+        return { slug, words: extractTitleWords(m ? m[1] : '') };
+      } catch {
+        return { slug, words: new Set() };
+      }
+    });
+}
+
+function computeRelatedSlugs(currentSlug, title) {
+  const currentWords = extractTitleWords(title);
+  if (currentWords.size === 0) return [];
+
+  const existing = readExistingTitles().filter((a) => a.slug !== currentSlug);
+  const scored = existing
+    .map((a) => {
+      let overlap = 0;
+      for (const w of currentWords) if (a.words.has(w)) overlap++;
+      return { slug: a.slug, overlap };
+    })
+    .filter((x) => x.overlap > 0)
+    .sort((a, b) => b.overlap - a.overlap);
+
+  return scored.slice(0, 3).map((x) => x.slug);
+}
+
 function writeArticleModule(article, today) {
   const slug = article.slug;
   if (!slug) throw new Error('article missing slug');
@@ -128,6 +166,7 @@ export const ${moduleVar}: Article = {
   keywords: ${JSON.stringify(keywords)},
   cover_image: ${JSON.stringify(cover)},
   cover_alt: ${JSON.stringify(coverAlt)},
+  related_slugs: ${JSON.stringify(computeRelatedSlugs(slug, article.title || ''))},
   faq: ${JSON.stringify(faq, null, 2)},
   html: \`${tsEscape(html)}\`,
 };
