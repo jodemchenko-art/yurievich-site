@@ -5,7 +5,8 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import StickyPhoneBar from '@/components/StickyPhoneBar';
 import FloatingChat from '@/components/FloatingChat';
-import { SITE, SERVICES_LIST } from '@/lib/site';
+import { SITE } from '@/lib/site';
+import { buildSiteEntities, buildGraph } from '@/lib/schema';
 
 export const viewport: Viewport = {
   themeColor: '#1B3A5C',
@@ -97,159 +98,10 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  // === Schema.org structured data ===
-
-  // 1) Organization / GeneralContractor (LocalBusiness subtype)
-  const organizationJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'GeneralContractor',
-    '@id': `${SITE.url}/#organization`,
-    name: SITE.legalName,
-    alternateName: SITE.name,
-    description: SITE.longDesc,
-    url: SITE.url,
-    logo: {
-      '@type': 'ImageObject',
-      url: `${SITE.url}/logo.png`,
-    },
-    image: [`${SITE.url}${SITE.defaultOgImage}`],
-    telephone: SITE.phone,
-    email: SITE.email,
-    priceRange: '₽₽',
-    foundingDate: '2010', // placeholder, не подтверждён — можно убрать
-    address: {
-      '@type': 'PostalAddress',
-      addressCountry: 'RU',
-      addressRegion: 'Ленинградская область',
-      addressLocality: `Санкт-Петербург, ${SITE.baseLocation}`,
-    },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: SITE.geo.lat,
-      longitude: SITE.geo.lng,
-    },
-    areaServed: SITE.areaServed.map((a) => ({ '@type': 'AdministrativeArea', name: a })),
-    openingHoursSpecification: [
-      {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-        opens: '09:00',
-        closes: '21:00',
-      },
-      {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: 'Sunday',
-        opens: '10:00',
-        closes: '18:00',
-      },
-    ],
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: SITE.rating,
-      reviewCount: SITE.reviewsCount,
-      bestRating: '5',
-      worstRating: '1',
-    },
-    sameAs: [SITE.telegram, SITE.telegramChannel, SITE.whatsapp].filter(Boolean),
-    knowsAbout: [
-      'Монолитный плитный фундамент',
-      'Дом из газобетона под ключ',
-      'Строительство домов',
-      'Фундаментные работы',
-      'Газобетон ЛСР',
-      'Зимнее бетонирование',
-    ],
-    founder: { '@id': `${SITE.url}/#yuri-demchenko` },
-    employee: [
-      { '@id': `${SITE.url}/#yuri-demchenko` },
-      { '@id': `${SITE.url}/#valery-foreman` },
-      { '@id': `${SITE.url}/#evgeny-supervisor` },
-    ],
-  };
-
-  // 1b) Person — Юрий (руководитель проекта, главный автор блога)
-  const yuriJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Person',
-    '@id': `${SITE.url}/#yuri-demchenko`,
-    name: 'Юрий Демченко',
-    jobTitle: 'Руководитель проекта',
-    description:
-      'Руководитель проекта в СК «Юрьевич». 239 завершённых объектов: плитные фундаменты и дома из газобетона в Санкт-Петербурге и Ленинградской области. Личный контроль каждой стройки.',
-    worksFor: { '@id': `${SITE.url}/#organization` },
-    knowsAbout: [
-      'Монолитный плитный фундамент',
-      'Дом из газобетона ЛСР под ключ',
-      'Грунты Ленинградской области',
-      'Зимнее бетонирование',
-      'Проектирование плитных фундаментов по СП 22.13330',
-    ],
-    url: SITE.url,
-    telephone: SITE.phone,
-    sameAs: [SITE.telegram, SITE.whatsapp].filter(Boolean),
-  };
-
-  // 1c) Person — Валерий (прораб)
-  const valeryJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Person',
-    '@id': `${SITE.url}/#valery-foreman`,
-    name: 'Валерий Демченко',
-    jobTitle: 'Прораб · производитель работ',
-    description: 'Прораб бригады СК «Юрьевич». Личный контроль заливки, армирования, гидроизоляции на объектах СПб и Ленобласти.',
-    worksFor: { '@id': `${SITE.url}/#organization` },
-  };
-
-  // 1d) Person — Евгений (технадзор/снабжение)
-  const evgenyJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Person',
-    '@id': `${SITE.url}/#evgeny-supervisor`,
-    name: 'Евгений Демченко',
-    jobTitle: 'Технический надзор · снабжение',
-    description: 'Технадзор и закупка материалов в СК «Юрьевич». Контроль качества бетона М300 W6 F150, арматуры А500С, газобетона ЛСР с заводскими паспортами.',
-    worksFor: { '@id': `${SITE.url}/#organization` },
-  };
-
-  // 2) Services list
-  const servicesJsonLd = SERVICES_LIST.map((s, i) => ({
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    '@id': `${SITE.url}/#service-${s.id}`,
-    name: s.name,
-    description: s.description,
-    provider: { '@id': `${SITE.url}/#organization` },
-    areaServed: SITE.areaServed,
-    category: s.category,
-    serviceType: s.shortName,
-    ...(s.price.from
-      ? {
-          offers: {
-            '@type': 'Offer',
-            price: s.price.from,
-            priceCurrency: 'RUB',
-            priceSpecification: {
-              '@type': 'UnitPriceSpecification',
-              price: s.price.from,
-              priceCurrency: 'RUB',
-              unitText: s.price.unit,
-            },
-          },
-        }
-      : {}),
-  }));
-
-  // 3) WebSite (for sitelinks searchbox)
-  const websiteJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    '@id': `${SITE.url}/#website`,
-    url: SITE.url,
-    name: SITE.name,
-    description: SITE.shortDesc,
-    publisher: { '@id': `${SITE.url}/#organization` },
-    inLanguage: 'ru-RU',
-  };
+  // === Единый @graph (#51 из SEO_YANDEX_100_AVTOPILOT) ===
+  // Все базовые сущности сайта (Org+Persons+WebSite+Services) в одной @graph.
+  // На страницах добавляются свои сущности через @id-ссылки.
+  const siteGraph = buildGraph(buildSiteEntities() as any);
 
   return (
     <html lang="ru">
@@ -259,33 +111,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
 
+        {/* Единый @graph со всеми базовыми сущностями (Org+Persons+WebSite+Services) */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteGraph) }}
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(yuriJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(valeryJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(evgenyJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
-        />
-        {servicesJsonLd.map((s, i) => (
-          <script
-            key={i}
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(s) }}
-          />
-        ))}
       </head>
       <body>
         <Header />

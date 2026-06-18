@@ -5,6 +5,7 @@ import Calculator from '@/components/Calculator';
 import { REGIONS, getRegionBySlug, getAllRegionSlugs, buildRegionFaq } from '@/lib/regions';
 import { getArticleBySlug } from '@/lib/articles';
 import { SITE } from '@/lib/site';
+import { buildRegionGraph, buildGraph } from '@/lib/schema';
 
 type Params = { region: string };
 
@@ -51,59 +52,17 @@ export default function RegionPage({ params }: { params: Params }) {
     .map((s) => getArticleBySlug(s))
     .filter(Boolean) as NonNullable<ReturnType<typeof getArticleBySlug>>[];
 
-  // Schema.org
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Главная', item: SITE.url },
-      { '@type': 'ListItem', position: 2, name: 'Фундаменты по районам', item: `${SITE.url}/fundament/` },
-      { '@type': 'ListItem', position: 3, name: `Плитный фундамент в ${region.prepositional}`, item: canonicalUrl },
-    ],
-  };
-
-  // FAQ под Нейро-цитирование Алисы (#27 из SEO_YANDEX_100)
+  // FAQ под Нейро-цитирование Алисы (#27)
   const faq = region.faq && region.faq.length > 0 ? region.faq : buildRegionFaq(region);
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faq.map((f) => ({
-      '@type': 'Question',
-      name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: f.a },
-    })),
-  };
 
-  const serviceSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    '@id': `${canonicalUrl}#service`,
-    name: `Плитный фундамент под ключ в ${region.prepositional}`,
-    description: region.groundDescription.slice(0, 240),
-    provider: { '@id': `${SITE.url}/#organization` },
-    areaServed: {
-      '@type': 'AdministrativeArea',
-      name: region.name,
-    },
-    serviceType: 'Монолитный плитный фундамент',
-    offers: {
-      '@type': 'Offer',
-      priceCurrency: 'RUB',
-      price: region.priceFrom,
-      priceSpecification: {
-        '@type': 'UnitPriceSpecification',
-        price: region.priceFrom,
-        priceCurrency: 'RUB',
-        unitText: '₽/м²',
-      },
-    },
-  };
+  // Единый @graph: Service + FAQPage + BreadcrumbList (#51)
+  const pageGraph = buildGraph(
+    buildRegionGraph(region, canonicalUrl, `/fundament/${region.slug}/`)
+  );
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(pageGraph) }} />
 
       <section className="container-x pt-10 md:pt-14 pb-6">
         <nav aria-label="Хлебные крошки" className="text-sm text-brand-mute mb-6">
