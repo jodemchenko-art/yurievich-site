@@ -66,7 +66,7 @@ export default function Quiz() {
         contact: { name, phone, contactType },
         page: typeof window !== 'undefined' ? window.location.pathname : '/',
       };
-      await fetch('/api/lead', {
+      await fetch('/api/lead/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

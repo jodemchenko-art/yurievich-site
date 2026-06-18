@@ -107,7 +107,7 @@ export default function Calculator({
     if (!name.trim() || !phone.trim()) return;
     setLoading(true);
     try {
-      await fetch('/api/lead', {
+      await fetch('/api/lead/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
