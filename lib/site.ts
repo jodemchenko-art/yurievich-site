@@ -11,7 +11,7 @@ export const SITE = {
 
   // === Domain & URLs ===
   domain: 'sk-yurievich.ru',
-  url: 'https://sk-yurievich.ru',
+  url: 'https://www.sk-yurievich.ru',
 
   // === Contact ===
   phone: '+7 911 830-01-10',
