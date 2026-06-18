@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import { SITE } from '@/lib/site';
 import { ARTICLES } from '@/lib/articles';
 import { REGIONS } from '@/lib/regions';
+import { GLOSSARY } from '@/lib/glossary';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = SITE.url;
@@ -60,5 +61,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...regionPages, ...articlePages];
+  // Глоссарий — словарь стройтерминов (метод #89 SEO_YANDEX_100)
+  const slovarIndex: MetadataRoute.Sitemap = [{
+    url: `${base}/slovar/`,
+    lastModified: now,
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }];
+  const slovarTerms: MetadataRoute.Sitemap = GLOSSARY.map((t) => ({
+    url: `${base}/slovar/${t.slug}/`,
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }));
+
+  return [...staticPages, ...regionPages, ...articlePages, ...slovarIndex, ...slovarTerms];
 }

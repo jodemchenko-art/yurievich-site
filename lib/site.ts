@@ -19,7 +19,7 @@ export const SITE = {
   email: 'info@sk-yurievich.ru', // placeholder — will be configured at Reg.ru
   whatsapp: 'https://wa.me/79118300110',
   telegram: 'https://t.me/YuraDem01',
-  telegramChannel: 'https://t.me/Yurastroitdoma',
+  telegramChannel: 'https://t.me/sk_yurievich',
 
   // === Location ===
   city: 'Санкт-Петербург',

@@ -37,6 +37,12 @@ async function yapi(url) {
   return res.json();
 }
 
+async function fetchHostStatus() {
+  // Проверка host_data_status (NOT_LOADED / LOADED) — флаг готовности данных
+  const data = await yapi(`${BASE}/`);
+  return data.host_data_status || 'UNKNOWN';
+}
+
 async function fetchSearchQueries() {
   // search-queries за последние 7 дней, топ-1000 по показам
   // Документация: /v4/user/{user-id}/hosts/{host-id}/search-queries/popular/
@@ -89,8 +95,43 @@ function saveOpportunities(opps) {
   fs.writeFileSync(p, JSON.stringify(opps, null, 2));
 }
 
+// Сохранённый last-known host_data_status (для алерта при смене состояния)
+function loadHostStatus() {
+  const p = path.join(SITE_ROOT, 'data/host-status.json');
+  if (!fs.existsSync(p)) return { status: 'UNKNOWN', changed_at: null };
+  return JSON.parse(fs.readFileSync(p, 'utf-8'));
+}
+function saveHostStatus(s) {
+  fs.writeFileSync(path.join(SITE_ROOT, 'data/host-status.json'), JSON.stringify(s, null, 2));
+}
+
 (async () => {
   console.log('=== Opportunity Miner ===');
+
+  // === Проверка host_data_status (#1 из 5 новых задач) ===
+  // Когда статус сменится с NOT_LOADED на LOADED — это значит Я.Вебмастер
+  // начал собирать данные позиций. Это сигнал юзеру что SEO «ожило».
+  try {
+    const currentStatus = await fetchHostStatus();
+    const lastKnown = loadHostStatus();
+    console.log(`Host data status: ${currentStatus} (предыдущее: ${lastKnown.status})`);
+    if (currentStatus !== lastKnown.status) {
+      saveHostStatus({ status: currentStatus, changed_at: new Date().toISOString() });
+      if (currentStatus === 'LOADED' && lastKnown.status !== 'LOADED') {
+        // Создаём alert-файл — daily-routine.sh подхватит и пошлёт в TG
+        fs.writeFileSync('/tmp/host-loaded-alert.txt',
+          `🎉 Я.Вебмастер начал собирать данные сайта!\n\n` +
+          `host_data_status: NOT_LOADED → LOADED\n\n` +
+          `Это значит:\n` +
+          `• С завтра — реальные позиции по запросам\n` +
+          `• Появится opportunity-miner: «почти топ», CTR-проблемы, упущенный спрос\n` +
+          `• Через 1-2 недели — первые показы в выдаче`);
+      }
+    }
+  } catch (e) {
+    console.warn('host_data_status не получен:', e.message.slice(0, 200));
+  }
+
   console.log('Тянем search-queries за последние 7 дней...');
   let queries = [];
   try {

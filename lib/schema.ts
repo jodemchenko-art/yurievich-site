@@ -254,7 +254,12 @@ export function buildRegionGraph(region: Region, canonicalUrl: string, breadcrum
       provider: { '@id': ID.org },
       areaServed: {
         '@type': 'AdministrativeArea',
+        '@id': `${canonicalUrl}#area`,
         name: region.name,
+        containedInPlace: {
+          '@type': 'AdministrativeArea',
+          name: 'Ленинградская область',
+        },
       },
       serviceType: 'Монолитный плитный фундамент',
       offers: {
@@ -268,6 +273,14 @@ export function buildRegionGraph(region: Region, canonicalUrl: string, breadcrum
           unitText: '₽/м²',
         },
       },
+    },
+    // Place entity для entity-based SEO (район как географическая локация)
+    {
+      '@type': 'Place',
+      '@id': `${canonicalUrl}#place`,
+      name: region.name,
+      description: region.groundDescription.slice(0, 300),
+      containedInPlace: { '@type': 'AdministrativeArea', name: 'Ленинградская область' },
     },
     buildBreadcrumb(breadcrumbPath, [
       { name: 'Главная', url: SITE.url },

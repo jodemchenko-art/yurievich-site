@@ -416,12 +416,19 @@ else
 fi
 
 step "Opportunity miner (#39, #41, #91, #92): SEO-разведка из Я.Вебмастера"
+rm -f /tmp/host-loaded-alert.txt
 heartbeat "🔍 ищу возможности (almost-top, CTR, decay)..."
 if node scripts/opportunity-miner.js > /tmp/opp-miner.log 2>&1; then
   cat /tmp/opp-miner.log | tail -10
 else
   echo "WARN: opportunity-miner упал (не критично):"
   tail -10 /tmp/opp-miner.log
+fi
+
+# Если host_data_status сменился на LOADED — посылаем алерт в TG
+if [ -f /tmp/host-loaded-alert.txt ]; then
+  notify /tmp/host-loaded-alert.txt
+  echo "→ Отправлен алерт о готовности данных Я.Вебмастера"
 fi
 
 # Если есть opportunities — коммитим, чтобы routine завтра видел их
