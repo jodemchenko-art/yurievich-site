@@ -54,8 +54,10 @@ export function buildSiteEntities() {
       address: {
         '@type': 'PostalAddress',
         addressCountry: 'RU',
-        addressRegion: 'Ленинградская область',
-        addressLocality: `Санкт-Петербург, ${SITE.baseLocation}`,
+        addressRegion: 'Санкт-Петербург',
+        addressLocality: 'Санкт-Петербург',
+        streetAddress: SITE.baseLocation,
+        postalCode: (SITE as any).postalCode || undefined,
       },
       geo: {
         '@type': 'GeoCoordinates',

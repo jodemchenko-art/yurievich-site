@@ -1,0 +1,47 @@
+{
+  "generated_at": "2026-06-18T05:22:13.685Z",
+  "period": "2026-06-11 → 2026-06-18",
+  "top_pages": [
+    {
+      "url": "https://sk-yurievich.ru/",
+      "pageviews": 7,
+      "users": 7,
+      "bounceRate": 100,
+      "avgDuration": 0
+    },
+    {
+      "url": "https://sk-yurievich.ru/blog",
+      "pageviews": 1,
+      "users": 1,
+      "bounceRate": 100,
+      "avgDuration": 1
+    }
+  ],
+  "pf_problems": [
+    {
+      "url": "https://sk-yurievich.ru/",
+      "users": 7,
+      "bounce": 100,
+      "duration": 0,
+      "issue": "высокий отказ"
+    }
+  ],
+  "internal_searches": [],
+  "traffic_sources": {
+    "Direct traffic": {
+      "visits": 4,
+      "users": 4
+    },
+    "Internal traffic": {
+      "visits": 1,
+      "users": 1
+    }
+  },
+  "search_engines": {},
+  "summary": {
+    "total_top_pages": 2,
+    "pf_problems_count": 1,
+    "internal_searches_count": 0,
+    "total_visits": 5
+  }
+}

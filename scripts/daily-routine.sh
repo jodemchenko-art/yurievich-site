@@ -372,6 +372,49 @@ if [ -n "$DROPPED" ]; then
   echo "Self-healing: переотправлено $DROPPED_COUNT выпавших URL"
 fi
 
+step "Host diagnostics (#4): FATAL/CRITICAL проблемы сайта"
+heartbeat "🏥 проверяю диагностику сайта в Я.Вебмастере..."
+DIAG=$(curl -sS --max-time 15 \
+  -H "Authorization: OAuth ${YANDEX_WEBMASTER_OAUTH_TOKEN}" \
+  "https://api.webmaster.yandex.net/v4/user/${YANDEX_WEBMASTER_USER_ID}/hosts/${HOST_ENC}/diagnostics/" 2>&1 || echo "{}")
+CRITICAL=$(echo "$DIAG" | python3 -c "
+import json, sys
+try:
+  d = json.loads(sys.stdin.read())
+  problems = d.get('problems', [])
+  crit = [p for p in problems if p.get('severity') in ('FATAL','CRITICAL')]
+  if crit:
+    print('CRITICAL:' + ';'.join(p.get('problem_type','?') + ':' + p.get('description','')[:80] for p in crit[:5]))
+  else:
+    print('OK')
+except Exception:
+  print('OK')
+" 2>/dev/null || echo "OK")
+echo "Диагностика: $CRITICAL"
+if [[ "$CRITICAL" == CRITICAL:* ]]; then
+  cat > /tmp/diag-alert.txt <<EOF
+🚨 <b>Я.Вебмастер: критическая проблема сайта</b>
+
+${CRITICAL#CRITICAL:}
+
+Зайди в <a href="https://webmaster.yandex.ru/site/https:sk-yurievich.ru:443/diagnostics/">Вебмастер → Диагностика</a> и проверь.
+EOF
+  notify /tmp/diag-alert.txt
+fi
+
+step "Metrika miner (#9, #10, #96): ПФ + внутренний поиск + источники"
+heartbeat "📊 анализирую Я.Метрику..."
+if [ -n "${YANDEX_METRIKA_OAUTH_TOKEN:-}" ] && [ -n "${YANDEX_METRIKA_COUNTER_ID:-}" ]; then
+  if node scripts/metrika-miner.js > /tmp/metrika-miner.log 2>&1; then
+    cat /tmp/metrika-miner.log | tail -10
+  else
+    echo "WARN: metrika-miner упал (не критично):"
+    tail -10 /tmp/metrika-miner.log
+  fi
+else
+  echo "YANDEX_METRIKA_* env не заданы — skipping"
+fi
+
 step "Opportunity miner (#39, #41, #91, #92): SEO-разведка из Я.Вебмастера"
 heartbeat "🔍 ищу возможности (almost-top, CTR, decay)..."
 if node scripts/opportunity-miner.js > /tmp/opp-miner.log 2>&1; then
