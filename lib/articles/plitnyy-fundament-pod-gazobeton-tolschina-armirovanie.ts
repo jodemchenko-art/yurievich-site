@@ -7,6 +7,7 @@ export const plitnyyFundamentPodGazobetonTolschinaArmirovanie: Article = {
   meta_title: "Толщина монолитной плиты под газобетон 2 этажа: 250, 300, 350 мм",
   meta_description: "Толщина монолитной плиты под газобетон 2 этажа: расчёт по СП 22.13330 и СП 63.13330, армирование, нагрузки, цены 2026 в СПб и ЛО. Проверим вашу смету бесплатно.",
   publishedAt: "2026-06-16",
+  updatedAt: "2026-06-18",
   category: "gazobeton",
   
   reading_time: 18,
@@ -55,16 +56,16 @@ export const plitnyyFundamentPodGazobetonTolschinaArmirovanie: Article = {
   related_slugs: ["svai-ili-plita-pod-gazobeton-leningradskaya-oblast", "plita-ili-lenta-pod-gazobeton", "monolitnaya-plita-ili-ushp-pod-gazobeton"],
   html: `<p><em>Обновлено: июнь 2026. Автор материала — инженерный отдел СК «Юрьевич», 239 сданных объектов в восьми районах Ленобласти, 5,0 на Авито (35 отзывов), официальный партнёр ЛСР по газобетону, гарантия 5 лет на конструктив.</em></p>
 
-<p>Вам прислали три сметы на плитный фундамент с разбросом 380–720 тыс. ₽. Подрядчик с самой дешёвой кивает: «газобетон лёгкий, 200 мм хватит, 1,5 тонны арматуры закроет». Через два года такая плита даёт кладке диагональные трещины по углам проёмов — и гарантия у бригады уже кончилась, а ремонт стоит дороже самой плиты. <strong>Толщина монолитной плиты под газобетон 2 этажа</strong> — это не «делай 300 мм для запаса», а конкретное число, которое выпадает из расчёта по СП 22.13330.2016 и СП 63.13330.2018 после геологии участка.</p>
+<p>Вам прислали три сметы на <a href="/slovar/plitnyy-fundament/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">плитный фундамент</a> с разбросом 380–720 тыс. ₽. Подрядчик с самой дешёвой кивает: «газобетон лёгкий, 200 мм хватит, 1,5 тонны арматуры закроет». Через два года такая плита даёт кладке диагональные трещины по углам проёмов — и гарантия у бригады уже кончилась, а ремонт стоит дороже самой плиты. <strong>Толщина монолитной плиты под газобетон 2 этажа</strong> — это не «делай 300 мм для запаса», а конкретное число, которое выпадает из расчёта по <a href="/slovar/sp-22-13330-2016/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">СП 22.13330.2016</a> и <a href="/slovar/sp-63-13330-2018/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">СП 63.13330.2018</a> после геологии участка.</p>
 
-<p>Газобетон D500 толщиной 375 мм на стене высотой 6 метров даёт собственный вес кладки 1,1–1,2 т/м.п., с учётом перекрытий, кровли и снега Ленобласти суммарная погонная нагрузка на плиту по контуру наружной стены доходит до 6,5–7,5 т/м.п. расчётной. За 239 завершённых объектов мы видели десятки чужих смет, где плита 200 мм под двухэтажный газобетонный дом была заложена «по уму бригады», без проекта и расчёта. В этой статье разберём, как реально считается <strong>толщина плиты под газобетонный дом в 2 этажа</strong> 8×10, 10×10 и 10×12, сколько арматуры А500С физически уходит на 100 м², чем 250 мм отличается от 350 мм по деньгам и где обычно прячется недоарм в 1,5 раза.</p>
+<p><a href="/slovar/gazobeton-d500/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">Газобетон D500</a> толщиной 375 мм на стене высотой 6 метров даёт собственный вес кладки 1,1–1,2 т/м.п., с учётом перекрытий, кровли и снега Ленобласти суммарная погонная нагрузка на плиту по контуру наружной стены доходит до 6,5–7,5 т/м.п. расчётной. За 239 завершённых объектов мы видели десятки чужих смет, где плита 200 мм под двухэтажный газобетонный дом была заложена «по уму бригады», без проекта и расчёта. В этой статье разберём, как реально считается <strong><a href="/slovar/tolshchina-plity/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">толщина плиты</a> под газобетонный дом в 2 этажа</strong> 8×10, 10×10 и 10×12, сколько арматуры <a href="/slovar/armatura-a500s/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">А500С</a> физически уходит на 100 м², чем 250 мм отличается от 350 мм по деньгам и где обычно прячется недоарм в 1,5 раза.</p>
 
 <div style="border:2px solid #c9a227;padding:16px;margin:24px 0;background:#fffbe8;">
 <strong>Пришлите свою смету в WhatsApp +7 (812) XXX-XX-XX или PDF на форму расчёта</strong> — за 24 часа инженер СК «Юрьевич» пришлёт письменное заключение по СП 63.13330.2018 с конкретными пунктами, где подрядчик «упростил» проект. Бесплатно, без обязательств подписывать договор. <a href="/#calc">Загрузить смету на проверку</a>.
 </div>
 
 <h2>Почему под газобетон плита толще, чем под каркас</h2>
-<p>Газобетонная кладка имеет крайне низкое сопротивление растяжению при изгибе — для D500 класса B2,5 расчётное Rbt ≈ 0,18–0,22 МПа. Это в 5–6 раз меньше, чем у тяжёлого бетона B22,5 стены (Rbt ≈ 1,05 МПа), и в десятки раз меньше, чем у клеёного бруса на изгиб. Газобетон отлично работает на сжатие и почти не работает на растяжение — поэтому фундамент должен исключить деформации, которые провоцируют это растяжение в кладке.</p>
+<p>Газобетонная кладка имеет крайне низкое сопротивление растяжению при изгибе — для D500 класса B2,5 расчётное Rbt ≈ 0,18–0,22 МПа. Это в 5–6 раз меньше, чем у тяжёлого бетона <a href="/slovar/klass-prochnosti/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">B22,5</a> стены (Rbt ≈ 1,05 МПа), и в десятки раз меньше, чем у клеёного бруса на изгиб. Газобетон отлично работает на сжатие и почти не работает на растяжение — поэтому фундамент должен исключить деформации, которые провоцируют это растяжение в кладке.</p>
 
 <p>Предельный прогиб изгибаемого элемента, несущего кладку из ячеистого бетона, по СП 20.13330.2016 приложение Д составляет 1/500…1/700 пролёта — это вдвое жёстче типового эстетического требования 1/200…1/250 к перекрытиям каркасника. Именно из-за требования по жёсткости плита под газобетон выходит толще, а не из-за веса. Дом 8×10 в 2 этажа D500 весит около 110–130 тонн с учётом перекрытий и кровли — это не катастрофическая нагрузка, но именно жёсткость основания определяет, дойдёт ли газобетонная кладка до 50 лет без трещин.</p>
 
@@ -78,14 +79,14 @@ export const plitnyyFundamentPodGazobetonTolschinaArmirovanie: Article = {
 </figure>
 
 <h2>Таблица: толщина плиты под дом из газобетона 8×10, 10×10 и 10×12</h2>
-<p>Это базовая матрица, которую мы используем как стартовую точку перед расчётом по конкретной геологии. Она работает для грунтов с расчётным сопротивлением R₀ от 2,0 кгс/см² (тугопластичные суглинки Колтушей, моренные супеси Сертолово, флювиогляциальные пески Сосново). Для слабых грунтов и торфяников Лесколово/Назии нужен отдельный расчёт по <a href="/#uslugi">свайно-плитной схеме</a>.</p>
+<p>Это базовая матрица, которую мы используем как стартовую точку перед расчётом по конкретной геологии. Она работает для грунтов с расчётным сопротивлением R₀ от 2,0 кгс/см² (тугопластичные суглинки Колтушей, моренные супеси Сертолово, флювиогляциальные <a href="/slovar/peski/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">пески</a> Сосново). Для слабых грунтов и торфяников Лесколово/Назии нужен отдельный расчёт по <a href="/#uslugi">свайно-плитной схеме</a>.</p>
 
 <table>
 <thead>
 <tr><th>Размер дома</th><th>Этажность</th><th>Кладка</th><th>Толщина плиты</th><th>Армирование</th><th>Бетон</th></tr>
 </thead>
 <tbody>
-<tr><td>6×8</td><td>1 этаж</td><td>D500 375 мм</td><td>250 мм</td><td>2 сетки d12 А500С шаг 200</td><td>B22,5 W6 F150</td></tr>
+<tr><td>6×8</td><td>1 этаж</td><td>D500 375 мм</td><td>250 мм</td><td>2 сетки d12 А500С шаг 200</td><td>B22,5 <a href="/slovar/vodonepronicaemost-w6/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">W6</a> <a href="/slovar/morozostojkost-f150/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">F150</a></td></tr>
 <tr><td>8×10</td><td>1 этаж</td><td>D500 375 мм</td><td>250 мм</td><td>2 сетки d12 А500С шаг 200</td><td>B22,5 W6 F150</td></tr>
 <tr><td>10×10</td><td>1 этаж + мансарда</td><td>D500 375 мм</td><td>250–300 мм</td><td>2 сетки d12 шаг 200</td><td>B22,5 W6 F150</td></tr>
 <tr><td>8×10</td><td>2 этажа</td><td>D500 375 мм</td><td>300 мм</td><td>2 сетки d12 шаг 200</td><td>B22,5 W6 F150</td></tr>
@@ -95,7 +96,7 @@ export const plitnyyFundamentPodGazobetonTolschinaArmirovanie: Article = {
 </tbody>
 </table>
 
-<p>Эта таблица — не «вот и считайте», а основание для конкретного проекта. У нас есть объект 8×10 в два этажа под Сертолово, где геология выдала R₀ = 3,2 кгс/см² (моренный суглинок), и мы сделали плиту 280 мм с экономией 60 тысяч против стандартных 300. И есть объект 8×10 в Лесколово, где под ним торф 2,5 метра — там пошли буронабивные сваи 6 метров + плита-ростверк 300 мм. Толщина одна, а конструктив радикально разный.</p>
+<p>Эта таблица — не «вот и считайте», а основание для конкретного проекта. У нас есть объект 8×10 в два этажа под Сертолово, где геология выдала R₀ = 3,2 кгс/см² (моренный <a href="/slovar/suglinok/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">суглинок</a>), и мы сделали плиту 280 мм с экономией 60 тысяч против стандартных 300. И есть объект 8×10 в Лесколово, где под ним <a href="/slovar/torf/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">торф</a> 2,5 метра — там пошли буронабивные сваи 6 метров + плита-<a href="/slovar/rostverk/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">ростверк</a> 300 мм. Толщина одна, а конструктив радикально разный.</p>
 
 <div style="border:2px solid #c9a227;padding:16px;margin:24px 0;background:#fffbe8;">
 <strong>Не знаете, какая геология на вашем участке?</strong> Ответьте на 6 вопросов в квизе — пришлём подходящую толщину плиты и предварительную смету за 24 часа. <a href="/#calc">Пройти квиз →</a>
@@ -189,7 +190,7 @@ export const plitnyyFundamentPodGazobetonTolschinaArmirovanie: Article = {
 <p>Этот вопрос задают чаще всего, поэтому распишем по позициям для дома 8×10 (плита 80 м²). Цены актуальны на июнь 2026, при заключении договора фиксируются на весь срок строительства без доплат при росте рыночных цен на металл и бетон.</p>
 
 <h3>Из чего складывается цена плиты 300 мм</h3>
-<p>В смете под ключ 7 крупных позиций: бетон, арматура, подушка, опалубка, бетононасос, работа бригады и утеплённая отмостка ЭППС. Каждая позиция чувствительна к толщине — растёт расход бетона, растёт металл, растёт высота опалубки. Подушка, отмостка и насос почти не зависят от толщины — это база.</p>
+<p>В смете под ключ 7 крупных позиций: бетон, арматура, подушка, опалубка, бетононасос, работа бригады и утеплённая отмостка <a href="/slovar/eps-utepleniye/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">ЭППС</a>. Каждая позиция чувствительна к толщине — растёт расход бетона, растёт металл, растёт высота опалубки. Подушка, отмостка и насос почти не зависят от толщины — это база.</p>
 
 <table>
 <thead>
@@ -225,7 +226,7 @@ export const plitnyyFundamentPodGazobetonTolschinaArmirovanie: Article = {
 <h3>Идеальные грунты — плита 250 мм</h3>
 <ul>
 <li><strong>Гатчина, Малые Колпаны, Тайцы:</strong> известняки Ордовикского плато под слоем суглинков, R₀ = 4,0–6,0 кгс/см². Плита 250 мм с минимальным армированием. Внимание: карстовые провалы по линии Пудость–Войсковицы, обязательное обследование</li>
-<li><strong>Сертолово, Парголово, Песочный:</strong> моренные суглинки + кембрийские глины, R₀ = 3,0–4,0 кгс/см². Плита 250 мм закрывает 90 % проектов 1 этажа и большую часть 2 этажа до 10×10</li>
+<li><strong>Сертолово, Парголово, Песочный:</strong> моренные суглинки + кембрийские <a href="/slovar/glina/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">глины</a>, R₀ = 3,0–4,0 кгс/см². Плита 250 мм закрывает 90 % проектов 1 этажа и большую часть 2 этажа до 10×10</li>
 <li><strong>Токсово, Кавголово:</strong> моренные пески, R₀ = 2,5–3,5 кгс/см². Камовый рельеф — перепады до 30 м, важна планировка</li>
 </ul>
 
@@ -238,7 +239,7 @@ export const plitnyyFundamentPodGazobetonTolschinaArmirovanie: Article = {
 
 <h3>Сложные грунты — сваи + ростверк</h3>
 <ul>
-<li><strong>Лесколово:</strong> торфяники 1–4 м поверх ленточных глин, УГВ 0,5–1,5 м. Только выторфовка + плита, либо буронабивные сваи d250 на 4–6 м + ростверк 250–300 мм</li>
+<li><strong>Лесколово:</strong> торфяники 1–4 м поверх ленточных глин, <a href="/slovar/uroven-grunto-vod/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">УГВ</a> 0,5–1,5 м. Только выторфовка + плита, либо буронабивные сваи d250 на 4–6 м + ростверк 250–300 мм</li>
 <li><strong>Назия, Мга, Войтоловка:</strong> торф 2–8 м, ниже текучепластичные суглинки. Только сваи на 6–10 м + ростверк 300 мм. Удорожание в 1,8–2,2 раза</li>
 <li><strong>Ломоносов, Большая Ижора:</strong> пески с УГВ 0,5–1,5 м, локальная засолённость. Обязателен бетон W8 + защитный слой 50 мм снизу + добавки против хлоридной коррозии</li>
 </ul>
@@ -247,7 +248,7 @@ export const plitnyyFundamentPodGazobetonTolschinaArmirovanie: Article = {
 
 <figure>
 <img src="/images/stock/pex-8134820.jpg" alt="Заливка плиты 300 мм под газобетон во Всеволожском районе ЛО" loading="lazy" />
-<figcaption>Заливка плиты 300 мм бетоном B22,5 W6 F150 миксером с насосом, Всеволожский район ЛО. Юрий, руководитель проекта, контролирует подачу и виброуплотнение.</figcaption>
+<figcaption>Заливка плиты 300 мм бетоном B22,5 W6 F150 миксером с насосом, Всеволожский район ЛО. Юрий, руководитель проекта, контролирует подачу и <a href="/slovar/vibrouplotnenie-betona/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">виброуплотнение</a>.</figcaption>
 </figure>
 
 <h2>Подушка, подбетонка, бетон: что под и в плите</h2>
@@ -256,14 +257,14 @@ export const plitnyyFundamentPodGazobetonTolschinaArmirovanie: Article = {
 <h3>Снизу вверх</h3>
 <ol>
 <li><strong>Срезка плодородного слоя</strong> до материкового грунта — обычно 30–50 см, иногда 1,5 м (Колтуши, Лесколово). Без этого любая органика даст осадку</li>
-<li><strong>Геотекстиль</strong> марка не ниже 200 г/м² — разделение песка и материнского грунта, чтобы песок не «уходил» в глину</li>
-<li><strong>Песок крупный мытый</strong> карьеры Гатчинский, Кировский — слой 200–300 мм с послойным уплотнением виброплитой по 100 мм. Куп фактический должен быть ≥ 0,95. Расход 25–35 м³ на дом 100 м²</li>
+<li><strong><a href="/slovar/geotekstil/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">Геотекстиль</a></strong> марка не ниже 200 г/м² — разделение песка и материнского грунта, чтобы песок не «уходил» в глину</li>
+<li><strong>Песок крупный мытый</strong> карьеры Гатчинский, Кировский — слой 200–300 мм с послойным уплотнением <a href="/slovar/vibroplita/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">виброплитой</a> по 100 мм. Куп фактический должен быть ≥ 0,95. Расход 25–35 м³ на дом 100 м²</li>
 <li><strong>Щебень гранитный 20–40 мм</strong> — слой 100–150 мм. Именно гранит, не известняк: морозостойкость и марка по дробимости не ниже М1000 (ГОСТ 8267-93)</li>
-<li><strong>Профилированная мембрана + ПЭ-плёнка 200 мкм</strong> — гидроизоляция от УГВ</li>
-<li><strong>ЭППС Пеноплэкс Фундамент 100 мм</strong> по периметру (УШП-схема) — отвязка от грунта, исключает промерзание</li>
+<li><strong>Профилированная мембрана + ПЭ-плёнка 200 мкм</strong> — <a href="/slovar/gidroizolyaciya/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">гидроизоляция</a> от УГВ</li>
+<li><strong>ЭППС Пеноплэкс Фундамент 100 мм</strong> по периметру (<a href="/slovar/ushp/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">УШП</a>-схема) — отвязка от грунта, исключает промерзание</li>
 <li><strong>Подбетонка В7,5 толщиной 100 мм</strong> — выравнивающая, даёт защитный слой снизу 40 мм вместо 70 мм. Экономия 1,5 т арматуры</li>
 <li><strong>Армокаркас две сетки</strong> с фиксаторами высоты и хомутами</li>
-<li><strong>Бетон B22,5 W6 F150 (М300)</strong> с подачей насосом, виброуплотнение глубинным вибратором, заглаживание</li>
+<li><strong>Бетон B22,5 W6 F150 (<a href="/slovar/beton-m300/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">М300</a>)</strong> с подачей насосом, виброуплотнение глубинным вибратором, заглаживание</li>
 <li><strong>Укрытие плёнкой 5–7 суток с поливом</strong> — профилактика усадочных трещин по СП 70.13330.2012</li>
 </ol>
 
@@ -283,7 +284,7 @@ export const plitnyyFundamentPodGazobetonTolschinaArmirovanie: Article = {
 <tr><td>СП 20.13330.2016</td><td>Снеговая (III район ЛО, Sg = 1,5 кПа норм.) и ветровая нагрузки, предельный прогиб 1/500…1/700 под ячеистобетонную кладку (прил. Д)</td></tr>
 <tr><td>СП 339.1325800.2017</td><td>Конструкции из ячеистых бетонов, требования к жёсткости основания</td></tr>
 <tr><td>ГОСТ 26633-2015</td><td>Класс бетона по прочности B, по водонепроницаемости W, по морозостойкости F</td></tr>
-<tr><td>ГОСТ 34028-2016</td><td>Арматура А500С — рабочее армирование, серповидный профиль</td></tr>
+<tr><td><a href="/slovar/gost-34028/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">ГОСТ 34028</a>-2016</td><td>Арматура А500С — рабочее армирование, серповидный профиль</td></tr>
 <tr><td>ГОСТ 8267-93</td><td>Щебень гранитный фракции 20–40, марка по дробимости М1000</td></tr>
 <tr><td>СП 70.13330.2012</td><td>Производство бетонных работ, режим набора прочности</td></tr>
 <tr><td>ГОСТ 18105-2018</td><td>Контроль прочности бетона по кубикам 100×100×100 на 7, 14, 28 сутки</td></tr>
@@ -314,10 +315,10 @@ export const plitnyyFundamentPodGazobetonTolschinaArmirovanie: Article = {
 <li><strong>Толщина плиты «на глазок» 200 мм для 2 этажей газобетона</strong> без расчёта. Игнорируется СП 339.1325800.2017. Через 2–3 года трещины по углам проёмов</li>
 <li><strong>Одна сетка d10 шаг 200</strong> вместо двух — «потому что и так норм». В плите толще 160 мм армирование обязательно двухслойное</li>
 <li><strong>Шаг арматуры 250–300 мм</strong> вместо 150–200 — минимальный процент 0,1 % не добирается, момент несущей способности минус 25–35 %</li>
-<li><strong>Заливка прямо на торф/ил/чернозём</strong> без выторфовки. Любая органика = осадка 3–10 см за 5–7 лет</li>
+<li><strong>Заливка прямо на торф/ил/чернозём</strong> без <a href="/slovar/vytorfovka/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">выторфовки</a>. Любая органика = осадка 3–10 см за 5–7 лет</li>
 <li><strong>Подушка только из песка</strong> без щебня и виброплиты. Куп фактический 0,82–0,88 при норме 0,95. Осадка плиты 2–4 см с креном</li>
 <li><strong>Нет подбетонки</strong> — бетон льётся прямо на песок, цементное молоко уходит, нижняя зона ослаблена, защитный слой по факту 25–35 мм</li>
-<li><strong>Бетон М200 (В15)</strong> вместо М300 — нет марки по W и F, шелушится через 5–7 циклов промерзания</li>
+<li><strong><a href="/slovar/beton-m200/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">Бетон М200</a> (В15)</strong> вместо М300 — нет марки по W и F, шелушится через 5–7 циклов промерзания</li>
 <li><strong>Кладка стен через 5–7 дней</strong> — бетон набрал 50 % R28. Прогиб закрепляется, трещины на 2 год</li>
 <li><strong>Нет хомутов-«лягушек»</strong> между сетками. Верхняя сетка тонет при вибрировании, защитный слой сверху → 0, рыжие пятна на 3–5 год</li>
 <li><strong>Зимняя заливка без прогрева</strong> «зато сэкономили». При -10 °C бетон не набирает прочность, теряет 30–50 % R28</li>
@@ -337,7 +338,7 @@ export const plitnyyFundamentPodGazobetonTolschinaArmirovanie: Article = {
 <tr><th>Параметр</th><th>Норма</th><th>Чем меряем</th></tr>
 </thead>
 <tbody>
-<tr><td>Горизонтальность поверхности</td><td>≤ 5 мм на 2 м</td><td>2-метровое правило, нивелир по углам</td></tr>
+<tr><td>Горизонтальность поверхности</td><td>≤ 5 мм на 2 м</td><td>2-метровое правило, <a href="/slovar/lazernyy-nivelir/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">нивелир</a> по углам</td></tr>
 <tr><td>Разница углов по высоте</td><td>≤ 10 мм для плиты 10×10</td><td>Нивелир, оптический теодолит</td></tr>
 <tr><td>Прочность бетона</td><td>Не ниже B22,5 (М300)</td><td>Склерометр (молоток Шмидта) + протокол кубиков</td></tr>
 <tr><td>Защитный слой сверху</td><td>30–40 мм</td><td>Магнитный сканер арматуры</td></tr>

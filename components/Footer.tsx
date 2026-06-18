@@ -1,8 +1,27 @@
 import { SITE } from '@/lib/site';
+import { REGIONS } from '@/lib/regions';
 
 export default function Footer() {
   return (
     <footer className="bg-brand-ink text-white/80 mt-16">
+      <div className="container-x py-10 border-b border-white/10">
+        <h4 className="text-white font-bold mb-4 text-sm uppercase tracking-wider">Фундаменты по районам СПб и Ленобласти</h4>
+        <div className="grid gap-2 sm:grid-cols-3 lg:grid-cols-5 text-sm">
+          {REGIONS.map((r) => (
+            <a
+              key={r.slug}
+              href={`/fundament/${r.slug}/`}
+              className="hover:text-white transition"
+            >
+              {r.name}
+            </a>
+          ))}
+          <a href="/fundament/" className="hover:text-white transition font-bold">
+            Все районы →
+          </a>
+        </div>
+      </div>
+
       <div className="container-x py-12 md:py-16 grid gap-10 md:grid-cols-4">
         <div>
           <div className="flex items-center gap-2 mb-4">

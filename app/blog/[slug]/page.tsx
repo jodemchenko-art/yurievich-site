@@ -8,9 +8,11 @@ import {
 import { CATEGORY_LABELS } from '@/lib/articles/_types';
 import { SITE } from '@/lib/site';
 import { buildArticleGraph, buildGraph } from '@/lib/schema';
+import { getHowToForArticle, buildHowToSchema } from '@/lib/howto';
 import ArticleHeader from '@/components/blog/ArticleHeader';
 import ArticleBody from '@/components/blog/ArticleBody';
 import ArticleCta from '@/components/blog/ArticleCta';
+import InArticleCta from '@/components/blog/InArticleCta';
 import ArticleFaq from '@/components/blog/ArticleFaq';
 import RelatedArticles from '@/components/blog/RelatedArticles';
 
@@ -72,10 +74,12 @@ export default function ArticlePage({ params }: { params: Params }) {
   const related = getRelatedArticles(article.slug, 3);
   const canonicalUrl = `${SITE.url}/blog/${article.slug}/`;
 
-  // Единый @graph: Article + FAQPage + BreadcrumbList со ссылками на сущности
-  // из siteGraph (Org, Person Юрий и т.д.) через @id
+  // Единый @graph: Article + FAQPage + BreadcrumbList + (опц) HowTo
+  const howto = getHowToForArticle(article.slug);
+  const baseEntities = buildArticleGraph(article, canonicalUrl, `/blog/${article.slug}/`);
   const pageGraph = buildGraph(
-    buildArticleGraph(article, canonicalUrl, `/blog/${article.slug}/`)
+    baseEntities,
+    howto ? [buildHowToSchema(howto)] : []
   );
 
   return (
@@ -87,6 +91,7 @@ export default function ArticlePage({ params }: { params: Params }) {
 
       <ArticleHeader article={article} />
       <ArticleBody html={article.html} />
+      <InArticleCta source={`blog:${article.slug}`} variant="block" />
       <ArticleFaq items={article.faq} />
       <ArticleCta />
       <RelatedArticles articles={related} />
