@@ -7,6 +7,7 @@ export const plitnyyFundamentGatchinaCena: Article = {
   meta_title: "Плитный фундамент Гатчина цена за м² 2026 от 5500 ₽ · СК Юрьевич",
   meta_description: "Плитный фундамент Гатчина — цена за м² от 5 500 ₽ в 2026. Смета под карбонатные глины Сиверской, Пудости, Тайцов. Договор с фикс-ценой — звоните.",
   publishedAt: "2026-06-16",
+  updatedAt: "2026-06-19",
   category: "plitnyi-fundament",
   region: "Гатчинский район",
   reading_time: 15,

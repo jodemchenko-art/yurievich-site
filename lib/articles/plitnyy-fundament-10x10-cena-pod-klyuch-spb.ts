@@ -7,7 +7,7 @@ export const plitnyyFundament10x10CenaPodKlyuchSpb: Article = {
   meta_title: "Плитный фундамент 10×10 цена под ключ СПб 2026: смета · СК Юрьевич",
   meta_description: "Плитный фундамент 10×10 цена под ключ СПб от 550 тыс. ₽ в 2026. Полная смета 60 позиций, толщина 250-300 мм, бетон М300 W6 F150. Заказать расчёт.",
   publishedAt: "2026-06-16",
-  updatedAt: "2026-06-18",
+  updatedAt: "2026-06-19",
   category: "plitnyi-fundament",
   
   reading_time: 17,

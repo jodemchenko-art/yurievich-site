@@ -7,7 +7,7 @@ export const puchinistyyGruntKakoyFundament: Article = {
   meta_title: "Пучинистый грунт какой фундамент: разбор по СП · СК Юрьевич",
   meta_description: "Пучинистый грунт — какой фундамент: степень пучинистости по СП 22.13330.2016, выбор плиты или свай для Колтушей и Гатчины. С расчётом и кейсами.",
   publishedAt: "2026-06-17",
-  updatedAt: "2026-06-18",
+  updatedAt: "2026-06-19",
   category: "gruntovye-usloviya",
   
   reading_time: 18,

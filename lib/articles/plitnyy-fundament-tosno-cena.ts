@@ -7,6 +7,7 @@ export const plitnyyFundamentTosnoCena: Article = {
   meta_title: "Плитный фундамент Тосно цена 2026 под ключ · СК Юрьевич",
   meta_description: "Плитный фундамент в Тосно: цена под ключ 720–820 тыс. за плиту 9×10 в 2026. Геология района, спецификация, 3 кейса, договор без предоплат. Заявка — расчёт за 48 ч.",
   publishedAt: "2026-06-19",
+  updatedAt: "2026-06-19",
   category: "gruntovye-usloviya",
   region: "Тосненский район",
   reading_time: 9,

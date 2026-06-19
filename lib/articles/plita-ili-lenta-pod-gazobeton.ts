@@ -7,7 +7,7 @@ export const plitaIliLentaPodGazobeton: Article = {
   meta_title: "Что лучше плита или лента под газобетон в Ленобласти 2026",
   meta_description: "Что лучше — плита или лента под газобетон в Ленобласти? Разбор по грунтам Колтушей, Токсово, Гатчины, цены 2026, нормы СП 22. Рассчитаем оба варианта за 1 день.",
   publishedAt: "2026-06-16",
-  updatedAt: "2026-06-18",
+  updatedAt: "2026-06-19",
   category: "gazobeton",
   
   reading_time: 17,

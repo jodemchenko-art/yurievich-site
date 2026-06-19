@@ -7,7 +7,7 @@ export const plitnyyFundamentNaTorfeLeskolovoNaziya: Article = {
   meta_title: "Плитный фундамент на торфе: можно ли строить в ЛО, цены 2026",
   meta_description: "Плитный фундамент на торфе: можно ли строить в Ленобласти. Цены лета 2026, выторфовка vs сваи, кейсы Лесколово и Назия. Выезд прораба с щупом — бесплатно.",
   publishedAt: "2026-06-16",
-  updatedAt: "2026-06-18",
+  updatedAt: "2026-06-19",
   category: "gruntovye-usloviya",
   
   reading_time: 17,

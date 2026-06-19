@@ -7,6 +7,7 @@ export const monolitnayaPlita8x10CenaLenoblast: Article = {
   meta_title: "Монолитная плита 8х10 цена Ленобласть 2026: смета · СК Юрьевич",
   meta_description: "Монолитная плита 8х10 в Ленобласти: реальная смета по 16 позициям, цена от 580 тыс. ₽, бетон М300 W6, арматура А500С Ø12, договор фикс-цена без предоплат.",
   publishedAt: "2026-06-18",
+  updatedAt: "2026-06-19",
   category: "plitnyi-fundament",
   
   reading_time: 16,

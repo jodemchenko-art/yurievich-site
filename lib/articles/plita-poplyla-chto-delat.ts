@@ -7,6 +7,7 @@ export const plitaPoplylaChtoDelat: Article = {
   meta_title: "Плита поплыла что делать: диагностика, цена спасения · СК Юрьевич",
   meta_description: "Плита поплыла — что делать: диагностика по 4 причинам, буроинъекционные сваи, цена восстановления 0,3–1,5 млн, кейсы Лесколово и Кротово. Выезд технадзора за 2 дня.",
   publishedAt: "2026-06-18",
+  updatedAt: "2026-06-19",
   category: "plitnyi-fundament",
   
   reading_time: 18,

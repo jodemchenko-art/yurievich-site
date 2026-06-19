@@ -7,6 +7,7 @@ export const kogdaLuchsheZalivatPlitnyyFundamentLeningradskayaOblast: Article = 
   meta_title: "Когда заливать плитный фундамент в ЛО: сезоны 2026 · СК Юрьевич",
   meta_description: "Когда лучше заливать плитный фундамент в Ленинградской области: помесячный разбор, риски УГВ весной, оптимум июль-сентябрь, зимнее бетонирование. С расчётом цены.",
   publishedAt: "2026-06-17",
+  updatedAt: "2026-06-19",
   category: "plitnyi-fundament",
   
   reading_time: 16,

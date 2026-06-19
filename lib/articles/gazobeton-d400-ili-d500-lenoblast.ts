@@ -7,6 +7,7 @@ export const gazobetonD400IliD500Lenoblast: Article = {
   meta_title: "Газобетон D400 или D500: что лучше для дома в Ленобласти · СК Юрьевич",
   meta_description: "Газобетон D400 или D500 для дома в Ленобласти: сравнение по СП 50.13330, теплопроводности, цене, нагрузкам. Когда экономить на D400, когда выбирать D500 с ЭППС.",
   publishedAt: "2026-06-18",
+  updatedAt: "2026-06-19",
   category: "gazobeton",
   
   reading_time: 17,

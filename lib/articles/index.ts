@@ -24,6 +24,16 @@ import { promerzaetFundamentChtoDelat } from './promerzaet-fundament-chto-delat'
 import { puchinistyyGruntKakoyFundament } from './puchinistyy-grunt-kakoy-fundament';
 import { svaiIliPlitaPodGazobetonLeningradskayaOblast } from './svai-ili-plita-pod-gazobeton-leningradskaya-oblast';
 import { treschinyVFundamentePrichinyChtoDelat } from './treschiny-v-fundamente-prichiny-chto-delat';
+import { uchastokBolotistyyPodFundamentChtoDelat } from './uchastok-bolotistyy-pod-fundament-chto-delat';
+import { torfNaUchastkeKakStroitDom } from './torf-na-uchastke-kak-stroit-dom';
+import { plitnyyFundamentDlyaGazobetonaLenoblastOtzyvy } from './plitnyy-fundament-dlya-gazobetona-lenoblast-otzyvy';
+import { domIzGazobetonaLsrPodKlyuchCenaZaM2 } from './dom-iz-gazobetona-lsr-pod-klyuch-cena-za-m2';
+import { monolitnayaPlita250MmCenaZaM2 } from './monolitnaya-plita-250-mm-cena-za-m2';
+import { plitaPodGazobeton100m2CenaPodKlyuch } from './plita-pod-gazobeton-100m2-cena-pod-klyuch';
+import { plitnyyFundamentPodGazobetonLenoblastCena2026 } from './plitnyy-fundament-pod-gazobeton-lenoblast-cena-2026';
+import { plita12x12PodGazobetonCenaPodKlyuch } from './plita-12x12-pod-gazobeton-cena-pod-klyuch';
+import { skolkoArmaturyNaPlitu100M2 } from './skolko-armatury-na-plitu-100-m2';
+import { plitnyyFundamentVsevolozhskNaTorfe } from './plitnyy-fundament-vsevolozhsk-na-torfe';
 
 // Реестр статей блога. Авто-сгенерирован import-articles.js
 // Свежие статьи добавляются сюда автоматически.
@@ -54,6 +64,16 @@ export const ARTICLES: Article[] = [
   puchinistyyGruntKakoyFundament,
   svaiIliPlitaPodGazobetonLeningradskayaOblast,
   treschinyVFundamentePrichinyChtoDelat,
+  uchastokBolotistyyPodFundamentChtoDelat,
+  torfNaUchastkeKakStroitDom,
+  plitnyyFundamentDlyaGazobetonaLenoblastOtzyvy,
+  domIzGazobetonaLsrPodKlyuchCenaZaM2,
+  monolitnayaPlita250MmCenaZaM2,
+  plitaPodGazobeton100m2CenaPodKlyuch,
+  plitnyyFundamentPodGazobetonLenoblastCena2026,
+  plita12x12PodGazobetonCenaPodKlyuch,
+  skolkoArmaturyNaPlitu100M2,
+  plitnyyFundamentVsevolozhskNaTorfe,
 ];
 
 export function getArticleBySlug(slug: string): Article | undefined {

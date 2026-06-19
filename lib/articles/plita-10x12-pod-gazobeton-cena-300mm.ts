@@ -7,6 +7,7 @@ export const plita10x12PodGazobetonCena300mm: Article = {
   meta_title: "Плита 10×12 фундамент цена 2026 толщина 300 мм · СК Юрьевич",
   meta_description: "Плита 10×12 под двухэтажный газобетон: расчёт нагрузки, толщина 300 мм, армирование А500С, смета 720–980 тыс., грунты Ленобласти. Заявка — точный расчёт за 48 ч.",
   publishedAt: "2026-06-19",
+  updatedAt: "2026-06-19",
   category: "gazobeton",
   
   reading_time: 9,

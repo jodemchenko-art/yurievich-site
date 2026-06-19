@@ -16,6 +16,7 @@ import { SITE, SERVICES_LIST } from './site';
 import type { Article } from './articles/_types';
 import type { Region } from './regions';
 import { buildRegionFaq } from './regions';
+import { REVIEWS } from './reviews';
 
 // === @id constants — стабильные ID для всех сущностей ===
 export const ID = {
@@ -98,6 +99,25 @@ export function buildSiteEntities() {
       founder: { '@id': ID.yuri },
       employee: [{ '@id': ID.yuri }, { '@id': ID.valery }, { '@id': ID.evgeny }],
       makesOffer: SERVICES_LIST.map((s) => ({ '@id': ID.service(s.id) })),
+      review: REVIEWS.map((r) => ({
+        '@type': 'Review',
+        '@id': `${SITE.url}/#review-${r.id}`,
+        author: {
+          '@type': 'Person',
+          name: r.author,
+          ...(r.authorCity ? { address: { '@type': 'PostalAddress', addressLocality: r.authorCity } } : {}),
+        },
+        datePublished: r.date,
+        reviewRating: {
+          '@type': 'Rating',
+          ratingValue: r.rating,
+          bestRating: 5,
+          worstRating: 1,
+        },
+        reviewBody: r.body,
+        ...(r.project ? { itemReviewed: { '@id': ID.org } } : { itemReviewed: { '@id': ID.org } }),
+        publisher: { '@type': 'Organization', name: r.source },
+      })),
     },
 
     // Person — Юрий

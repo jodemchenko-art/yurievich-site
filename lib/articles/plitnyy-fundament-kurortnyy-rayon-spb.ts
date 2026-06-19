@@ -7,6 +7,7 @@ export const plitnyyFundamentKurortnyyRayonSpb: Article = {
   meta_title: "Плитный фундамент Курортный район СПб: цены 2026 · СК Юрьевич",
   meta_description: "Плитный фундамент в Курортном районе СПб: грунты Сестрорецка и Зеленогорска, цена от 5500 ₽/м², договор без предоплат. Бесплатный выезд за расчётом.",
   publishedAt: "2026-06-17",
+  updatedAt: "2026-06-19",
   category: "gruntovye-usloviya",
   region: "Курортный район",
   reading_time: 14,

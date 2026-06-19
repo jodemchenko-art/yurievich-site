@@ -7,6 +7,7 @@ export const gidroizolyaciyaPodPlitnymFundamentomNuzhnaLi: Article = {
   meta_title: "Гидроизоляция под плитным фундаментом: нужна ли · СК Юрьевич",
   meta_description: "Нужна ли гидроизоляция под плитным фундаментом — разбор по СП 28.13330.2017 и ГОСТ 30547: мембраны, ПВП, дренаж, цены для Ленобласти. 8 лет опыта на 239 объектах.",
   publishedAt: "2026-06-18",
+  updatedAt: "2026-06-19",
   category: "vybor-fundamenta",
   
   reading_time: 15,

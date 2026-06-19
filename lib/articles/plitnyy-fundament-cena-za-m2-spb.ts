@@ -7,7 +7,7 @@ export const plitnyyFundamentCenaZaM2Spb: Article = {
   meta_title: "Плитный фундамент цена за м² СПб 2026: разбор сметы · СК Юрьевич",
   meta_description: "Сколько стоит плитный фундамент за м² в СПб: реальный прайс 5500-7500 ₽, что входит, как отличить приманку 1900 ₽ от честной сметы. Расчёт по СП и ГОСТ.",
   publishedAt: "2026-06-17",
-  updatedAt: "2026-06-18",
+  updatedAt: "2026-06-19",
   category: "plitnyi-fundament",
   
   reading_time: 21,

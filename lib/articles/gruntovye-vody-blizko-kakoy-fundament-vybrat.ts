@@ -7,7 +7,7 @@ export const gruntovyeVodyBlizkoKakoyFundamentVybrat: Article = {
   meta_title: "Грунтовые воды близко: какой фундамент выбрать в ЛО · СК Юрьевич",
   meta_description: "Грунтовые воды близко — какой фундамент выбрать в Ленобласти: плита 300 мм W6 с дренажом vs сваи vs лента. Гидроизоляция, дренаж, цена решения 2026.",
   publishedAt: "2026-06-16",
-  updatedAt: "2026-06-18",
+  updatedAt: "2026-06-19",
   category: "gruntovye-usloviya",
   
   reading_time: 17,

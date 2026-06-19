@@ -94,7 +94,11 @@ export default function robots(): MetadataRoute.Robots {
         disallow: baseDisallow,
       },
     ],
-    sitemap: `${SITE.url}/sitemap.xml`,
+    sitemap: [
+      `${SITE.url}/sitemap.xml`,
+      `${SITE.url}/sitemap-images.xml`,
+      `${SITE.url}/sitemap-index.xml`,
+    ],
     host: SITE.url,
   };
 }

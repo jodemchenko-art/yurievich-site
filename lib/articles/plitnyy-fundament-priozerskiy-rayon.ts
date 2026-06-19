@@ -7,6 +7,7 @@ export const plitnyyFundamentPriozerskiyRayon: Article = {
   meta_title: "Плитный фундамент Приозерский район: цена от 5600 ₽/м² · СК Юрьевич",
   meta_description: "Плитный фундамент в Приозерском районе: моренные грунты, торфяные карманы, цена от 5600 ₽/м², фикс-договор без предоплат. Геология, выезд, расчёт за сутки.",
   publishedAt: "2026-06-18",
+  updatedAt: "2026-06-19",
   category: "gruntovye-usloviya",
   region: "Приозерский район",
   reading_time: 15,

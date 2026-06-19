@@ -7,7 +7,7 @@ export const svaiIliPlitaPodGazobetonLeningradskayaOblast: Article = {
   meta_title: "Сваи или плита под газобетон: что лучше для дома в ЛО · СК Юрьевич",
   meta_description: "Сваи или плита под газобетон в Ленобласти: сравнение винтовых, буронабивных, забивных свай и монолитной плиты. Цена, грунты, риски кладки D400.",
   publishedAt: "2026-06-16",
-  updatedAt: "2026-06-18",
+  updatedAt: "2026-06-19",
   category: "gazobeton",
   
   reading_time: 14,

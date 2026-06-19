@@ -7,7 +7,7 @@ export const kakZalitPlitnyyFundamentZimoy: Article = {
   meta_title: "Как залить плитный фундамент зимой — технология и цена · СК Юрьевич",
   meta_description: "Как залить плитный фундамент зимой: температурные режимы по СП 70.13330, противоморозные добавки, прогрев ПНСВ, цена зимнего бетонирования в ЛО.",
   publishedAt: "2026-06-16",
-  updatedAt: "2026-06-18",
+  updatedAt: "2026-06-19",
   category: "plitnyi-fundament",
   
   reading_time: 15,

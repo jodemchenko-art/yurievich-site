@@ -7,6 +7,7 @@ export const armirovaniePlityPodDvuhetazhnyyGazobeton: Article = {
   meta_title: "Армирование плиты под 2-этажный газобетон А500С · СК Юрьевич",
   meta_description: "Армирование плитного фундамента под двухэтажный газобетон: расчёт по СП 63.13330.2018, А500С Ø14 шаг 150, 3 тонны на 100 м², защитный слой 40 мм, чек-лист приёмки.",
   publishedAt: "2026-06-19",
+  updatedAt: "2026-06-19",
   category: "gazobeton",
   
   reading_time: 9,

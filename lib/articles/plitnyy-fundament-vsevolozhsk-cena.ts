@@ -7,6 +7,7 @@ export const plitnyyFundamentVsevolozhskCena: Article = {
   meta_title: "Плитный фундамент Всеволожск цена 2026: сметы и расчёт по СП",
   meta_description: "Плитный фундамент Всеволожск цена от 5500 ₽/м² в 2026. Реальные сметы, грунты Лесколово и Колтушей, расчёт по СП. Бесплатный выезд — звоните.",
   publishedAt: "2026-06-16",
+  updatedAt: "2026-06-19",
   category: "plitnyi-fundament",
   region: "Всеволожский район",
   reading_time: 18,

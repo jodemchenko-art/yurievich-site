@@ -7,7 +7,7 @@ export const monolitnayaPlitaIliUshpPodGazobeton: Article = {
   meta_title: "Плита или УШП под газобетон: сравнение 2026 · СК Юрьевич",
   meta_description: "Монолитная плита или УШП под газобетон: разница в цене 30-50%, риски ремонта тёплого пола в УШП, выбор под грунты ЛО. С расчётом и таблицами.",
   publishedAt: "2026-06-17",
-  updatedAt: "2026-06-18",
+  updatedAt: "2026-06-19",
   category: "gazobeton",
   
   reading_time: 19,

@@ -7,6 +7,7 @@ export const mzlfIliPlitaPodGazobeton: Article = {
   meta_title: "МЗЛФ или плита под газобетон: что выбрать 2026 · СК Юрьевич",
   meta_description: "МЗЛФ или плита под газобетон: сравнение жёсткости, грунты Ленобласти где работает лента, кейсы переделок, разница в цене 200 тыс. Заявка — расчёт под вашу геологию.",
   publishedAt: "2026-06-19",
+  updatedAt: "2026-06-19",
   category: "gazobeton",
   
   reading_time: 8,

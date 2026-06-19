@@ -7,6 +7,7 @@ export const promerzaetFundamentChtoDelat: Article = {
   meta_title: "Промерзает фундамент: что делать, цена переделки · СК Юрьевич",
   meta_description: "Промерзает фундамент: 5 признаков, 4 причины, тепловизионная диагностика, утеплённая отмостка ЭППС 100 мм — 138 тыс. на дом 9×10, кейсы переделок за 7–16 дней.",
   publishedAt: "2026-06-19",
+  updatedAt: "2026-06-19",
   category: "plitnyi-fundament",
   
   reading_time: 9,
