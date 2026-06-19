@@ -107,9 +107,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ru">
       <head>
         <link rel="icon" href="/favicon.ico" />
-        {/* Preconnect speeds up font loading (Core Web Vitals) */}
+
+        {/* Preconnect к критичным внешним доменам — экономит 100-300мс на RTT */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://mc.yandex.ru" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
         {/* Единый @graph со всеми базовыми сущностями (Org+Persons+WebSite+Services) */}
         <script
