@@ -1,4 +1,5 @@
 import type { Article } from './_types';
+import { armirovaniePlityPodDvuhetazhnyyGazobeton } from './armirovanie-plity-pod-dvuhetazhnyy-gazobeton';
 import { gazobetonD400IliD500Lenoblast } from './gazobeton-d400-ili-d500-lenoblast';
 import { gidroizolyaciyaPodPlitnymFundamentomNuzhnaLi } from './gidroizolyaciya-pod-plitnym-fundamentom-nuzhna-li';
 import { gruntovyeVodyBlizkoKakoyFundamentVybrat } from './gruntovye-vody-blizko-kakoy-fundament-vybrat';
@@ -6,6 +7,8 @@ import { kakZalitPlitnyyFundamentZimoy } from './kak-zalit-plitnyy-fundament-zim
 import { kogdaLuchsheZalivatPlitnyyFundamentLeningradskayaOblast } from './kogda-luchshe-zalivat-plitnyy-fundament-leningradskaya-oblast';
 import { monolitnayaPlita8x10CenaLenoblast } from './monolitnaya-plita-8x10-cena-lenoblast';
 import { monolitnayaPlitaIliUshpPodGazobeton } from './monolitnaya-plita-ili-ushp-pod-gazobeton';
+import { mzlfIliPlitaPodGazobeton } from './mzlf-ili-plita-pod-gazobeton';
+import { plita10x12PodGazobetonCena300mm } from './plita-10x12-pod-gazobeton-cena-300mm';
 import { plitaIliLentaPodGazobeton } from './plita-ili-lenta-pod-gazobeton';
 import { plitaPoplylaChtoDelat } from './plita-poplyla-chto-delat';
 import { plitnyyFundament10x10CenaPodKlyuchSpb } from './plitnyy-fundament-10x10-cena-pod-klyuch-spb';
@@ -15,7 +18,9 @@ import { plitnyyFundamentKurortnyyRayonSpb } from './plitnyy-fundament-kurortnyy
 import { plitnyyFundamentNaTorfeLeskolovoNaziya } from './plitnyy-fundament-na-torfe-leskolovo-naziya';
 import { plitnyyFundamentPodGazobetonTolschinaArmirovanie } from './plitnyy-fundament-pod-gazobeton-tolschina-armirovanie';
 import { plitnyyFundamentPriozerskiyRayon } from './plitnyy-fundament-priozerskiy-rayon';
+import { plitnyyFundamentTosnoCena } from './plitnyy-fundament-tosno-cena';
 import { plitnyyFundamentVsevolozhskCena } from './plitnyy-fundament-vsevolozhsk-cena';
+import { promerzaetFundamentChtoDelat } from './promerzaet-fundament-chto-delat';
 import { puchinistyyGruntKakoyFundament } from './puchinistyy-grunt-kakoy-fundament';
 import { svaiIliPlitaPodGazobetonLeningradskayaOblast } from './svai-ili-plita-pod-gazobeton-leningradskaya-oblast';
 import { treschinyVFundamentePrichinyChtoDelat } from './treschiny-v-fundamente-prichiny-chto-delat';
@@ -24,6 +29,7 @@ import { treschinyVFundamentePrichinyChtoDelat } from './treschiny-v-fundamente-
 // Свежие статьи добавляются сюда автоматически.
 
 export const ARTICLES: Article[] = [
+  armirovaniePlityPodDvuhetazhnyyGazobeton,
   gazobetonD400IliD500Lenoblast,
   gidroizolyaciyaPodPlitnymFundamentomNuzhnaLi,
   gruntovyeVodyBlizkoKakoyFundamentVybrat,
@@ -31,6 +37,8 @@ export const ARTICLES: Article[] = [
   kogdaLuchsheZalivatPlitnyyFundamentLeningradskayaOblast,
   monolitnayaPlita8x10CenaLenoblast,
   monolitnayaPlitaIliUshpPodGazobeton,
+  mzlfIliPlitaPodGazobeton,
+  plita10x12PodGazobetonCena300mm,
   plitaIliLentaPodGazobeton,
   plitaPoplylaChtoDelat,
   plitnyyFundament10x10CenaPodKlyuchSpb,
@@ -40,7 +48,9 @@ export const ARTICLES: Article[] = [
   plitnyyFundamentNaTorfeLeskolovoNaziya,
   plitnyyFundamentPodGazobetonTolschinaArmirovanie,
   plitnyyFundamentPriozerskiyRayon,
+  plitnyyFundamentTosnoCena,
   plitnyyFundamentVsevolozhskCena,
+  promerzaetFundamentChtoDelat,
   puchinistyyGruntKakoyFundament,
   svaiIliPlitaPodGazobetonLeningradskayaOblast,
   treschinyVFundamentePrichinyChtoDelat,
