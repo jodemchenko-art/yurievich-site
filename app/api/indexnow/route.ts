@@ -36,12 +36,13 @@ export async function POST(request: Request) {
 
   // Один URL — bulk-формат принимает Яндекс
   // ВАЖНО: host, keyLocation и URL в urlList должны быть на ОДНОМ домене
-  // (канонический у нас — без www, см. sitemap)
+  // (канонический у нас — С www, см. lib/site.ts → SITE.url)
   const payload = {
-    host: 'sk-yurievich.ru',
+    host: 'www.sk-yurievich.ru',
     key: INDEXNOW_KEY,
-    keyLocation: `https://sk-yurievich.ru/${INDEXNOW_KEY}.txt`,
-    urlList: urls.map((u) => u.replace('://www.', '://')),
+    keyLocation: `https://www.sk-yurievich.ru/${INDEXNOW_KEY}.txt`,
+    // нормализуем любой адрес к www-канону (и голый, и www → www)
+    urlList: urls.map((u) => u.replace(/^https:\/\/(www\.)?sk-yurievich\.ru/, 'https://www.sk-yurievich.ru')),
   };
 
   try {
