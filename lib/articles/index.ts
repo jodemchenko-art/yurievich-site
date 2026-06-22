@@ -49,6 +49,15 @@ import { torfNaUchastkeKakStroitDom } from './torf-na-uchastke-kak-stroit-dom';
 import { treschinyVFundamentePrichinyChtoDelat } from './treschiny-v-fundamente-prichiny-chto-delat';
 import { uchastokBolotistyyPodFundamentChtoDelat } from './uchastok-bolotistyy-pod-fundament-chto-delat';
 import { vytorfovkaUchastkaLeskolovoCena } from './vytorfovka-uchastka-leskolovo-cena';
+import { monolitnyyPlitnyyFundamentSpbPodKlyuch } from './monolitnyy-plitnyy-fundament-spb-pod-klyuch';
+import { domIzGazobetonaLsrPodKlyuchSpbLenoblast } from './dom-iz-gazobetona-lsr-pod-klyuch-spb-lenoblast';
+import { plitaNaSvayahLeskolovoOtzyvy } from './plita-na-svayah-leskolovo-otzyvy';
+import { plitaPodGazobetonGatchinaCena } from './plita-pod-gazobeton-gatchina-cena';
+import { betonM300DlyaFundamentaRashodICena } from './beton-m300-dlya-fundamenta-rashod-i-cena';
+import { armaturaA500sD12RashodNaPlitu } from './armatura-a500s-d12-rashod-na-plitu';
+import { eppsPodPlitnymFundamentomNuzhenLi } from './epps-pod-plitnym-fundamentom-nuzhen-li';
+import { podushkaPgsPodPlituTolschinaIRashod } from './podushka-pgs-pod-plitu-tolschina-i-rashod';
+import { otdelkaDomaIzGazobetona100m2Cena } from './otdelka-doma-iz-gazobetona-100m2-cena';
 
 // Реестр статей блога. Авто-сгенерирован import-articles.js
 // Свежие статьи добавляются сюда автоматически.
@@ -104,6 +113,15 @@ export const ARTICLES: Article[] = [
   treschinyVFundamentePrichinyChtoDelat,
   uchastokBolotistyyPodFundamentChtoDelat,
   vytorfovkaUchastkaLeskolovoCena,
+  monolitnyyPlitnyyFundamentSpbPodKlyuch,
+  domIzGazobetonaLsrPodKlyuchSpbLenoblast,
+  plitaNaSvayahLeskolovoOtzyvy,
+  plitaPodGazobetonGatchinaCena,
+  betonM300DlyaFundamentaRashodICena,
+  armaturaA500sD12RashodNaPlitu,
+  eppsPodPlitnymFundamentomNuzhenLi,
+  podushkaPgsPodPlituTolschinaIRashod,
+  otdelkaDomaIzGazobetona100m2Cena,
 ];
 
 export function getArticleBySlug(slug: string): Article | undefined {
