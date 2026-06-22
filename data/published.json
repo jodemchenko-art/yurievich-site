@@ -173,5 +173,30 @@
     "slug": "prosel-fundament-gazobetonnogo-doma",
     "primary_query": "просел фундамент газобетонного дома",
     "published_at": "2026-06-21"
+  },
+  {
+    "slug": "vytorfovka-uchastka-leskolovo-cena",
+    "primary_query": "выторфовка участка лесколово цена",
+    "published_at": "2026-06-22"
+  },
+  {
+    "slug": "plita-6x6-pod-gazobeton-cena",
+    "primary_query": "плита 6х6 под газобетон цена",
+    "published_at": "2026-06-22"
+  },
+  {
+    "slug": "osenyu-zalivat-plitnyy-fundament-ili-vesnoy",
+    "primary_query": "осенью заливать плитный фундамент или весной",
+    "published_at": "2026-06-22"
+  },
+  {
+    "slug": "beton-m300-ili-m350-dlya-plitnogo-fundamenta",
+    "primary_query": "бетон м300 или м350 для плитного фундамента",
+    "published_at": "2026-06-22"
+  },
+  {
+    "slug": "fundament-dal-usadku-chto-delat-gazobeton",
+    "primary_query": "фундамент дал усадку что делать",
+    "published_at": "2026-06-22"
   }
 ]

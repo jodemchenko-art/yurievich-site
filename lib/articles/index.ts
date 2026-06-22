@@ -1,6 +1,8 @@
 import type { Article } from './_types';
 import { armirovaniePlityPodDvuhetazhnyyGazobeton } from './armirovanie-plity-pod-dvuhetazhnyy-gazobeton';
+import { betonM300IliM350DlyaPlitnogoFundamenta } from './beton-m300-ili-m350-dlya-plitnogo-fundamenta';
 import { domIzGazobetonaLsrPodKlyuchCenaZaM2 } from './dom-iz-gazobetona-lsr-pod-klyuch-cena-za-m2';
+import { fundamentDalUsadkuChtoDelatGazobeton } from './fundament-dal-usadku-chto-delat-gazobeton';
 import { gazobetonD400IliD500Lenoblast } from './gazobeton-d400-ili-d500-lenoblast';
 import { gazobetonIliKeramoblokLenoblast } from './gazobeton-ili-keramoblok-lenoblast';
 import { gidroizolyaciyaPodPlitnymFundamentomNuzhnaLi } from './gidroizolyaciya-pod-plitnym-fundamentom-nuzhna-li';
@@ -13,9 +15,11 @@ import { monolitnayaPlita250MmCenaZaM2 } from './monolitnaya-plita-250-mm-cena-z
 import { monolitnayaPlita8x10CenaLenoblast } from './monolitnaya-plita-8x10-cena-lenoblast';
 import { monolitnayaPlitaIliUshpPodGazobeton } from './monolitnaya-plita-ili-ushp-pod-gazobeton';
 import { mzlfIliPlitaPodGazobeton } from './mzlf-ili-plita-pod-gazobeton';
+import { osenyuZalivatPlitnyyFundamentIliVesnoy } from './osenyu-zalivat-plitnyy-fundament-ili-vesnoy';
 import { plita10x12PodGazobetonCena300mm } from './plita-10x12-pod-gazobeton-cena-300mm';
 import { plita12x12PodGazobetonCenaPodKlyuch } from './plita-12x12-pod-gazobeton-cena-pod-klyuch';
 import { plita250Ili300MmPodGazobeton2Etazha } from './plita-250-ili-300-mm-pod-gazobeton-2-etazha';
+import { plita6x6PodGazobetonCena } from './plita-6x6-pod-gazobeton-cena';
 import { plitaIliLentaPodGazobeton } from './plita-ili-lenta-pod-gazobeton';
 import { plitaIliVintovyeSvaiPodGazobeton } from './plita-ili-vintovye-svai-pod-gazobeton';
 import { plitaPodGazobeton100m2CenaPodKlyuch } from './plita-pod-gazobeton-100m2-cena-pod-klyuch';
@@ -44,13 +48,16 @@ import { svaiIliPlitaPodGazobetonLeningradskayaOblast } from './svai-ili-plita-p
 import { torfNaUchastkeKakStroitDom } from './torf-na-uchastke-kak-stroit-dom';
 import { treschinyVFundamentePrichinyChtoDelat } from './treschiny-v-fundamente-prichiny-chto-delat';
 import { uchastokBolotistyyPodFundamentChtoDelat } from './uchastok-bolotistyy-pod-fundament-chto-delat';
+import { vytorfovkaUchastkaLeskolovoCena } from './vytorfovka-uchastka-leskolovo-cena';
 
 // Реестр статей блога. Авто-сгенерирован import-articles.js
 // Свежие статьи добавляются сюда автоматически.
 
 export const ARTICLES: Article[] = [
   armirovaniePlityPodDvuhetazhnyyGazobeton,
+  betonM300IliM350DlyaPlitnogoFundamenta,
   domIzGazobetonaLsrPodKlyuchCenaZaM2,
+  fundamentDalUsadkuChtoDelatGazobeton,
   gazobetonD400IliD500Lenoblast,
   gazobetonIliKeramoblokLenoblast,
   gidroizolyaciyaPodPlitnymFundamentomNuzhnaLi,
@@ -63,9 +70,11 @@ export const ARTICLES: Article[] = [
   monolitnayaPlita8x10CenaLenoblast,
   monolitnayaPlitaIliUshpPodGazobeton,
   mzlfIliPlitaPodGazobeton,
+  osenyuZalivatPlitnyyFundamentIliVesnoy,
   plita10x12PodGazobetonCena300mm,
   plita12x12PodGazobetonCenaPodKlyuch,
   plita250Ili300MmPodGazobeton2Etazha,
+  plita6x6PodGazobetonCena,
   plitaIliLentaPodGazobeton,
   plitaIliVintovyeSvaiPodGazobeton,
   plitaPodGazobeton100m2CenaPodKlyuch,
@@ -94,6 +103,7 @@ export const ARTICLES: Article[] = [
   torfNaUchastkeKakStroitDom,
   treschinyVFundamentePrichinyChtoDelat,
   uchastokBolotistyyPodFundamentChtoDelat,
+  vytorfovkaUchastkaLeskolovoCena,
 ];
 
 export function getArticleBySlug(slug: string): Article | undefined {
