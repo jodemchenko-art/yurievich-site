@@ -198,5 +198,30 @@
     "slug": "fundament-dal-usadku-chto-delat-gazobeton",
     "primary_query": "фундамент дал усадку что делать",
     "published_at": "2026-06-22"
+  },
+  {
+    "slug": "plitnyy-fundament-lomonosovskiy-rayon-cena",
+    "primary_query": "плитный фундамент Ломоносовский район",
+    "published_at": "2026-06-23"
+  },
+  {
+    "slug": "plitnyy-fundament-pod-gazobeton-375-mm-cena",
+    "primary_query": "плитный фундамент под газобетон 375",
+    "published_at": "2026-06-23"
+  },
+  {
+    "slug": "tolschina-plity-pod-dom-gazobeton-8x10",
+    "primary_query": "толщина плиты под газобетон 8х10",
+    "published_at": "2026-06-23"
+  },
+  {
+    "slug": "gazobeton-375-ili-400-mm-stena-bez-utepleniya-spb",
+    "primary_query": "газобетон 375 или 400 мм",
+    "published_at": "2026-06-23"
+  },
+  {
+    "slug": "plita-ili-zabivnye-svai-rostverk-na-torfe",
+    "primary_query": "плита или забивные сваи на торфе",
+    "published_at": "2026-06-23"
   }
 ]
