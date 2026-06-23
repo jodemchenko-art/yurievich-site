@@ -3,6 +3,7 @@ import { SITE } from '@/lib/site';
 import { ARTICLES } from '@/lib/articles';
 import { REGIONS } from '@/lib/regions';
 import { GLOSSARY } from '@/lib/glossary';
+import { LOCALITIES } from '@/lib/localities';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = SITE.url;
@@ -54,6 +55,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9, // Гео-посадки — высокий приоритет для локальной выдачи
   }));
 
+  const localityPages: MetadataRoute.Sitemap = LOCALITIES.map((l) => ({
+    url: `${base}/fundament/${l.regionSlug}/${l.slug}/`,
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.75, // НЧ-гео-хвосты («фундамент Лесколово»)
+  }));
+
+  const kontaktyPage: MetadataRoute.Sitemap = [{
+    url: `${base}/kontakty/`,
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }];
+
   const articlePages: MetadataRoute.Sitemap = ARTICLES.map((a) => ({
     url: `${base}/blog/${a.slug}/`,
     lastModified: new Date(a.updatedAt || a.publishedAt),
@@ -75,5 +90,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...regionPages, ...articlePages, ...slovarIndex, ...slovarTerms];
+  return [
+    ...staticPages,
+    ...regionPages,
+    ...localityPages,
+    ...kontaktyPage,
+    ...articlePages,
+    ...slovarIndex,
+    ...slovarTerms,
+  ];
 }

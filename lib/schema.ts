@@ -87,7 +87,13 @@ export function buildSiteEntities() {
         bestRating: '5',
         worstRating: '1',
       },
-      sameAs: [SITE.telegram, SITE.telegramChannel, SITE.whatsapp].filter(Boolean),
+      sameAs: [
+        SITE.telegram,
+        SITE.telegramChannel,
+        SITE.whatsapp,
+        'https://yandex.ru/maps/org/69393767573',
+      ].filter(Boolean),
+      hasMap: 'https://yandex.ru/maps/org/69393767573',
       knowsAbout: [
         'Монолитный плитный фундамент',
         'Дом из газобетона под ключ',
@@ -292,6 +298,31 @@ export function buildRegionGraph(region: Region, canonicalUrl: string, breadcrum
           priceCurrency: 'RUB',
           unitText: '₽/м²',
         },
+      },
+    },
+    // LocalBusiness филиал (branchOf) для гео-выдачи Яндекса
+    // Связывает район с головной организацией → Яндекс понимает «филиал в районе»
+    {
+      '@type': 'LocalBusiness',
+      '@id': `${canonicalUrl}#localbusiness`,
+      name: `СК «Юрьевич» — фундаменты в ${region.prepositional}`,
+      description: `Строительство монолитных плитных фундаментов под ключ в ${region.prepositional}. ${region.groundDescription.slice(0, 180)}`,
+      url: canonicalUrl,
+      telephone: SITE.phone,
+      priceRange: '₽₽',
+      branchOf: { '@id': ID.org },
+      parentOrganization: { '@id': ID.org },
+      areaServed: {
+        '@type': 'AdministrativeArea',
+        name: region.name,
+      },
+      sameAs: ['https://yandex.ru/maps/org/69393767573'],
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: SITE.rating,
+        reviewCount: SITE.reviewsCount,
+        bestRating: '5',
+        worstRating: '1',
       },
     },
     // Place entity для entity-based SEO (район как географическая локация)

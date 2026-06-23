@@ -7,6 +7,7 @@ import Reviews from '@/components/Reviews';
 import Process from '@/components/Process';
 import Brothers from '@/components/Brothers';
 import LsrBanner from '@/components/LsrBanner';
+import HomeBlogTeaser from '@/components/HomeBlogTeaser';
 import Faq from '@/components/Faq';
 import Contacts from '@/components/Contacts';
 import { SITE } from '@/lib/site';
@@ -67,6 +68,7 @@ export default function Home() {
       <Process />
       <Brothers />
       <LsrBanner />
+      <HomeBlogTeaser />
       <Faq />
       <Contacts />
     </>
