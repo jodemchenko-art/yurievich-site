@@ -8,6 +8,7 @@ import Process from '@/components/Process';
 import Brothers from '@/components/Brothers';
 import LsrBanner from '@/components/LsrBanner';
 import HomeBlogTeaser from '@/components/HomeBlogTeaser';
+import LeadMagnetBanner from '@/components/LeadMagnetBanner';
 import Faq from '@/components/Faq';
 import Contacts from '@/components/Contacts';
 import { SITE } from '@/lib/site';
@@ -65,6 +66,9 @@ export default function Home() {
       <QuizSection />
       <Portfolio />
       <Reviews />
+      <section className="section bg-brand-sand">
+        <div className="container-x"><LeadMagnetBanner source="home" /></div>
+      </section>
       <Process />
       <Brothers />
       <LsrBanner />

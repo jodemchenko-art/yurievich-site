@@ -13,6 +13,7 @@ import ArticleHeader from '@/components/blog/ArticleHeader';
 import ArticleBody from '@/components/blog/ArticleBody';
 import ArticleCta from '@/components/blog/ArticleCta';
 import InArticleCta from '@/components/blog/InArticleCta';
+import LeadMagnetBanner from '@/components/LeadMagnetBanner';
 import ArticleFaq from '@/components/blog/ArticleFaq';
 import RelatedArticles from '@/components/blog/RelatedArticles';
 
@@ -93,6 +94,7 @@ export default function ArticlePage({ params }: { params: Params }) {
       <ArticleBody html={article.html} />
       <InArticleCta source={`blog:${article.slug}`} variant="block" />
       <ArticleFaq items={article.faq} />
+      <div className="container-x"><LeadMagnetBanner source={`blog:${article.slug}`} /></div>
       <ArticleCta />
       <RelatedArticles articles={related} />
     </>
