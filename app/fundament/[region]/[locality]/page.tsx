@@ -5,6 +5,7 @@ import { REGIONS, getRegionBySlug } from '@/lib/regions';
 import { LOCALITIES, getLocalityBySlug } from '@/lib/localities';
 import { SITE } from '@/lib/site';
 import { buildGraph, buildBreadcrumb, buildFaqPage, ID } from '@/lib/schema';
+import { buildLocalitySnippet } from '@/lib/seo-snippets';
 
 type Params = { region: string; locality: string };
 
@@ -17,8 +18,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const locality = getLocalityBySlug(params.region, params.locality);
   if (!region || !locality) return {};
 
-  const title = `Фундамент в ${locality.prepositional} (${region.name}) — плита под газобетон, цена`;
-  const description = `Плитный фундамент под ключ в ${locality.prepositional}. Цена от ${locality.priceFrom.toLocaleString('ru-RU')} ₽/м². Грунты ${locality.name}, реальные кейсы СК «Юрьевич». Бесплатный выезд инженера.`;
+  const { title, description } = buildLocalitySnippet(locality, region);
 
   return {
     title,

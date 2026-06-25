@@ -5,15 +5,17 @@ import { REGIONS } from '@/lib/regions';
 import { buildBreadcrumb, buildGraph, ID } from '@/lib/schema';
 
 export const metadata: Metadata = {
-  title: `Контакты СК «Юрьевич» — фундаменты в СПб и Ленобласти`,
-  description: `Телефон ${SITE.phone}, Telegram ${SITE.telegram}, адрес ${SITE.baseLocation}, Санкт-Петербург. Карточка на Яндекс.Картах. Работаем в 9 районах ЛО.`,
+  title: `СК Юрьевич: контакты, адрес СПб, 9 районов ЛО ★5`,
+  description:
+    `☎ ${SITE.phone} · Telegram @YuraDem01 · ${SITE.baseLocation}, СПб. ` +
+    `Я.Карты: yandex.ru/maps/org/69393767573. 9 районов ЛО, 239 объектов, ★5 (35 отз).`,
   alternates: { canonical: '/kontakty/' },
   openGraph: {
     type: 'website',
     locale: 'ru_RU',
     url: `${SITE.url}/kontakty/`,
-    title: `Контакты СК «Юрьевич»`,
-    description: `Связаться: ${SITE.phone}, ${SITE.baseLocation}, СПб. Работаем в Ленобласти.`,
+    title: `Контакты СК «Юрьевич» — СПб + 9 районов ЛО ★5`,
+    description: `☎ ${SITE.phone}, ${SITE.baseLocation}, СПб. 239 объектов, ★5.`,
     siteName: SITE.name,
   },
 };

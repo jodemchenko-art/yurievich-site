@@ -8,6 +8,7 @@ import {
 import { CATEGORY_LABELS } from '@/lib/articles/_types';
 import { SITE } from '@/lib/site';
 import { buildArticleGraph, buildGraph } from '@/lib/schema';
+import { enhanceTitle, enhanceDescription } from '@/lib/seo-snippets';
 import { getHowToForArticle, buildHowToSchema } from '@/lib/howto';
 import ArticleHeader from '@/components/blog/ArticleHeader';
 import ArticleBody from '@/components/blog/ArticleBody';
@@ -31,17 +32,24 @@ export async function generateMetadata(
 
   const canonical = `/blog/${article.slug}/`;
 
+  // CTR-оптимизация: ★5, выезд бесплатно, телефон в description
+  const variant = article.category === 'plitnyi-fundament' || article.category === 'gazobeton'
+    ? 'commercial'
+    : 'informational';
+  const enhTitle = enhanceTitle(article.meta_title, variant);
+  const enhDesc = enhanceDescription(article.meta_description, variant);
+
   return {
-    title: article.meta_title,
-    description: article.meta_description,
+    title: enhTitle,
+    description: enhDesc,
     keywords: article.keywords,
     alternates: { canonical },
     openGraph: {
       type: 'article',
       locale: 'ru_RU',
       url: `${SITE.url}${canonical}`,
-      title: article.meta_title,
-      description: article.meta_description,
+      title: enhTitle,
+      description: enhDesc,
       siteName: SITE.name,
       publishedTime: article.publishedAt,
       modifiedTime: article.updatedAt || article.publishedAt,

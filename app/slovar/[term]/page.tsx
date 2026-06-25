@@ -5,6 +5,7 @@ import { GLOSSARY, getTermBySlug, getAllTermSlugs, getRelatedTerms, CATEGORY_LAB
 import { getArticleBySlug } from '@/lib/articles';
 import { SITE } from '@/lib/site';
 import { buildBreadcrumb, buildGraph } from '@/lib/schema';
+import { enhanceTitle, enhanceDescription } from '@/lib/seo-snippets';
 
 type Params = { term: string };
 
@@ -15,8 +16,10 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const t = getTermBySlug(params.term);
   if (!t) return {};
-  const title = `${t.term} — что это, для чего нужно | СК «Юрьевич»`;
-  const description = `${t.shortDef} Простое объяснение с практикой 239 объектов в СПб и Ленобласти.`;
+  const rawTitle = `${t.term} — что это, простыми словами · СК Юрьевич`;
+  const rawDesc = `${t.shortDef} Практика 239 объектов СПб и ЛО.`;
+  const title = enhanceTitle(rawTitle, 'informational');
+  const description = enhanceDescription(rawDesc, 'informational');
   return {
     title,
     description,

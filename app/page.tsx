@@ -14,10 +14,12 @@ import Contacts from '@/components/Contacts';
 import { SITE } from '@/lib/site';
 import { HOME_FAQ } from '@/lib/faq';
 
-// Per-page metadata override (more SEO-rich title for the homepage)
+// Per-page metadata override (CTR-оптимизированный сниппет для главной)
 export const metadata = {
-  title: `${SITE.tagline} · ${SITE.name} (договор, гарантия ${SITE.warrantyYears} лет)`,
-  description: SITE.longDesc,
+  title: 'Плитный фундамент СПб от 7 500 ₽/м² ★5 · СК Юрьевич',
+  description:
+    'Монолитная плита под газобетон в СПб и ЛО под ключ. Цена от 7,5 тыс ₽/м², гарантия 5 лет, ' +
+    'договор с фикс-ценой. 239 объектов, ★5 (35 отз). Выезд бесплатно. ☎ +7 911 830-01-10',
   alternates: { canonical: '/' },
 };
 

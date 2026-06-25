@@ -6,6 +6,7 @@ import { REGIONS, getRegionBySlug, getAllRegionSlugs, buildRegionFaq } from '@/l
 import { getArticleBySlug } from '@/lib/articles';
 import { SITE } from '@/lib/site';
 import { buildRegionGraph, buildGraph } from '@/lib/schema';
+import { buildRegionSnippet } from '@/lib/seo-snippets';
 
 type Params = { region: string };
 
@@ -17,8 +18,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const region = getRegionBySlug(params.region);
   if (!region) return {};
 
-  const title = `Плитный фундамент в ${region.prepositional} — цена, грунты, расчёт онлайн`;
-  const description = `Монолитный плитный фундамент под ключ в ${region.prepositional}. Цена от ${region.priceFrom.toLocaleString('ru-RU')} ₽/м². Онлайн-калькулятор, реальные сметы, грунты ${region.shortName}. Бесплатный выезд инженера.`;
+  const { title, description } = buildRegionSnippet(region);
 
   return {
     title,

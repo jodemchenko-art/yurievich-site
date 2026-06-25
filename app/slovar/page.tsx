@@ -5,15 +5,17 @@ import { SITE } from '@/lib/site';
 import { buildBreadcrumb, buildGraph } from '@/lib/schema';
 
 export const metadata: Metadata = {
-  title: 'Словарь стройтерминов — СК «Юрьевич»',
-  description: `Расшифровка ${GLOSSARY.length} ключевых терминов из стройки фундаментов в СПб и Ленобласти: бетон М300, арматура А500С, выторфовка, ЭППС и другие. Простые объяснения с примерами.`,
+  title: `Словарь стройтерминов: ${GLOSSARY.length} объяснений ★5 · СК Юрьевич`,
+  description:
+    `${GLOSSARY.length} терминов фундамента простыми словами: бетон М300, А500С, выторфовка, ЭППС. ` +
+    `Практика 239 объектов СПб и ЛО, ★5 (35 отз). ☎ +7 911 830-01-10`,
   alternates: { canonical: '/slovar/' },
   openGraph: {
     type: 'website',
     locale: 'ru_RU',
     url: `${SITE.url}/slovar/`,
-    title: 'Словарь стройтерминов — СК «Юрьевич»',
-    description: `${GLOSSARY.length} терминов из стройки фундаментов с практикой 239 объектов СПб и ЛО.`,
+    title: `Словарь стройтерминов ★5 — СК «Юрьевич»`,
+    description: `${GLOSSARY.length} терминов фундамента с практикой 239 объектов СПб и ЛО. ★5.`,
     siteName: SITE.name,
   },
 };
