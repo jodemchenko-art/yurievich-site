@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import StickyPhoneBar from '@/components/StickyPhoneBar';
 import FloatingChat from '@/components/FloatingChat';
+import LeadPopup from '@/components/LeadPopup';
 import { SITE } from '@/lib/site';
 import { buildSiteEntities, buildGraph } from '@/lib/schema';
 
@@ -132,6 +133,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <StickyPhoneBar />
         <FloatingChat />
+        <LeadPopup />
 
         {/* === Yandex.Metrika === */}
         {SITE.yandexMetrikaId && (
