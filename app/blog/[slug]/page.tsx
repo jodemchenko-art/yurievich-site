@@ -17,6 +17,7 @@ import InArticleCta from '@/components/blog/InArticleCta';
 import LeadMagnetBanner from '@/components/LeadMagnetBanner';
 import ArticleFaq from '@/components/blog/ArticleFaq';
 import RelatedArticles from '@/components/blog/RelatedArticles';
+import CommercialLinks from '@/components/blog/CommercialLinks';
 
 type Params = { slug: string };
 
@@ -104,6 +105,7 @@ export default function ArticlePage({ params }: { params: Params }) {
       <ArticleFaq items={article.faq} />
       <div className="container-x"><LeadMagnetBanner source={`blog:${article.slug}`} /></div>
       <ArticleCta />
+      <CommercialLinks />
       <RelatedArticles articles={related} />
     </>
   );
