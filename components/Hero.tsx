@@ -44,7 +44,7 @@ export default function Hero() {
 
           {/* Headline — single tone, single weight, tighter sizing */}
           <h1 className="text-[34px] leading-[1.08] sm:text-5xl sm:leading-[1.05] md:text-6xl lg:text-[68px] lg:leading-[1.02] font-extrabold tracking-[-0.01em] text-white">
-            Фундаменты и дома под&nbsp;ключ в&nbsp;СПб и&nbsp;Ленобласти
+            Плитный фундамент под&nbsp;ключ в&nbsp;СПб и&nbsp;Ленобласти
           </h1>
 
           {/* Slogan */}
