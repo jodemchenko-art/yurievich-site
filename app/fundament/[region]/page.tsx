@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Calculator from '@/components/Calculator';
+import OrderCta from '@/components/OrderCta';
 import { REGIONS, getRegionBySlug, getAllRegionSlugs, buildRegionFaq } from '@/lib/regions';
 import { getArticleBySlug } from '@/lib/articles';
 import { SITE } from '@/lib/site';
@@ -30,6 +31,9 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       `фундамент под ключ ${region.shortName}`,
       `цена плиты ${region.shortName}`,
       `калькулятор фундамента ${region.shortName}`,
+      `заказать фундамент ${region.shortName}`,
+      `цена фундамента ${region.shortName}`,
+      `сколько стоит фундамент ${region.shortName}`,
     ],
     alternates: { canonical: `/fundament/${region.slug}/` },
     openGraph: {
@@ -144,6 +148,8 @@ export default function RegionPage({ params }: { params: Params }) {
           </Link>
         </p>
       </section>
+
+      <OrderCta place={region.prepositional} priceFrom={region.priceFrom} />
 
       <section className="container-x pb-16 max-w-4xl">
         <h2 className="text-2xl md:text-3xl font-extrabold mb-8">Частые вопросы по {region.prepositional}</h2>

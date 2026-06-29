@@ -11,6 +11,7 @@ import HomeBlogTeaser from '@/components/HomeBlogTeaser';
 import LeadMagnetBanner from '@/components/LeadMagnetBanner';
 import Faq from '@/components/Faq';
 import Contacts from '@/components/Contacts';
+import OrderCta from '@/components/OrderCta';
 import { SITE } from '@/lib/site';
 import { HOME_FAQ } from '@/lib/faq';
 
@@ -68,6 +69,7 @@ export default function Home() {
       <QuizSection />
       <Portfolio />
       <Reviews />
+      <OrderCta place="СПб и Ленобласти" />
       <section className="section bg-brand-sand">
         <div className="container-x"><LeadMagnetBanner source="home" /></div>
       </section>
