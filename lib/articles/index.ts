@@ -61,6 +61,7 @@ import { svaiIliPlitaPodGazobetonLeningradskayaOblast } from './svai-ili-plita-p
 import { tolschinaPlityPodDomGazobeton8x10 } from './tolschina-plity-pod-dom-gazobeton-8x10';
 import { torfNaUchastkeKakStroitDom } from './torf-na-uchastke-kak-stroit-dom';
 import { treschinyVFundamentePrichinyChtoDelat } from './treschiny-v-fundamente-prichiny-chto-delat';
+import { uchastokBolotistyiFundamentChtoDelat } from './uchastok-bolotistyi-fundament-chto-delat';
 import { uchastokBolotistyyPodFundamentChtoDelat } from './uchastok-bolotistyy-pod-fundament-chto-delat';
 import { vytorfovkaUchastkaLeskolovoCena } from './vytorfovka-uchastka-leskolovo-cena';
 
@@ -130,6 +131,7 @@ export const ARTICLES: Article[] = [
   tolschinaPlityPodDomGazobeton8x10,
   torfNaUchastkeKakStroitDom,
   treschinyVFundamentePrichinyChtoDelat,
+  uchastokBolotistyiFundamentChtoDelat,
   uchastokBolotistyyPodFundamentChtoDelat,
   vytorfovkaUchastkaLeskolovoCena,
 ];
