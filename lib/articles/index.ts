@@ -5,6 +5,7 @@ import { betonM300DlyaFundamentaRashodICena } from './beton-m300-dlya-fundamenta
 import { betonM300IliM350DlyaPlitnogoFundamenta } from './beton-m300-ili-m350-dlya-plitnogo-fundamenta';
 import { domIzGazobetonaLsrPodKlyuchCenaZaM2 } from './dom-iz-gazobetona-lsr-pod-klyuch-cena-za-m2';
 import { domIzGazobetonaLsrPodKlyuchSpbLenoblast } from './dom-iz-gazobetona-lsr-pod-klyuch-spb-lenoblast';
+import { domIzGazobetonaLsrPodKlyuchTsenaZaKvadratnyMetr } from './dom-iz-gazobetona-lsr-pod-klyuch-tsena-za-kvadratny-metr';
 import { eppsPodPlitnymFundamentomNuzhenLi } from './epps-pod-plitnym-fundamentom-nuzhen-li';
 import { fundamentDalUsadkuChtoDelatGazobeton } from './fundament-dal-usadku-chto-delat-gazobeton';
 import { gazobeton375Ili400MmStenaBezUtepleniyaSpb } from './gazobeton-375-ili-400-mm-stena-bez-utepleniya-spb';
@@ -34,6 +35,8 @@ import { plitaNaSvayahLeskolovoOtzyvy } from './plita-na-svayah-leskolovo-otzyvy
 import { plitaPodGazobeton100m2CenaPodKlyuch } from './plita-pod-gazobeton-100m2-cena-pod-klyuch';
 import { plitaPodGazobetonGatchinaCena } from './plita-pod-gazobeton-gatchina-cena';
 import { plitaPoplylaChtoDelat } from './plita-poplyla-chto-delat';
+import { plitnyiFundamentGazobetonDomLeningradskayaOblastOtzyvy } from './plitnyi-fundament-gazobeton-dom-leningradskaya-oblast-otzyvy';
+import { plitnyiFundamentGazobetonDomTolshchina } from './plitnyi-fundament-gazobeton-dom-tolshchina';
 import { plitnyyFundament10x10CenaPodKlyuchSpb } from './plitnyy-fundament-10x10-cena-pod-klyuch-spb';
 import { plitnyyFundamentCenaZaM2Spb } from './plitnyy-fundament-cena-za-m2-spb';
 import { plitnyyFundamentDlyaGazobetonaLenoblastOtzyvy } from './plitnyy-fundament-dlya-gazobetona-lenoblast-otzyvy';
@@ -75,6 +78,7 @@ export const ARTICLES: Article[] = [
   betonM300IliM350DlyaPlitnogoFundamenta,
   domIzGazobetonaLsrPodKlyuchCenaZaM2,
   domIzGazobetonaLsrPodKlyuchSpbLenoblast,
+  domIzGazobetonaLsrPodKlyuchTsenaZaKvadratnyMetr,
   eppsPodPlitnymFundamentomNuzhenLi,
   fundamentDalUsadkuChtoDelatGazobeton,
   gazobeton375Ili400MmStenaBezUtepleniyaSpb,
@@ -104,6 +108,8 @@ export const ARTICLES: Article[] = [
   plitaPodGazobeton100m2CenaPodKlyuch,
   plitaPodGazobetonGatchinaCena,
   plitaPoplylaChtoDelat,
+  plitnyiFundamentGazobetonDomLeningradskayaOblastOtzyvy,
+  plitnyiFundamentGazobetonDomTolshchina,
   plitnyyFundament10x10CenaPodKlyuchSpb,
   plitnyyFundamentCenaZaM2Spb,
   plitnyyFundamentDlyaGazobetonaLenoblastOtzyvy,
