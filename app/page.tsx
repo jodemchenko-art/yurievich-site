@@ -12,15 +12,17 @@ import LeadMagnetBanner from '@/components/LeadMagnetBanner';
 import Faq from '@/components/Faq';
 import Contacts from '@/components/Contacts';
 import OrderCta from '@/components/OrderCta';
+import FoundationTypes from '@/components/FoundationTypes';
 import { SITE } from '@/lib/site';
 import { HOME_FAQ } from '@/lib/faq';
 
 // Per-page metadata override (CTR-оптимизированный сниппет для главной)
 export const metadata = {
-  title: 'Плитный фундамент СПб от 7 500 ₽/м² ★5 · СК Юрьевич',
+  title: 'Фундамент под ключ в СПб: плита, лента, сваи — цена от 7 500 ₽/м²',
   description:
-    'Монолитная плита под газобетон в СПб и ЛО под ключ. Цена от 7,5 тыс ₽/м², гарантия 5 лет, ' +
-    'договор с фикс-ценой. 239 объектов, ★5 (35 отз). Выезд бесплатно. ☎ +7 911 830-01-10',
+    'Заказать фундамент под ключ в СПб и Ленобласти: монолитная плита, ленточный и свайный фундамент. ' +
+    'Цена от 7 500 ₽/м², гарантия 5 лет, договор с фиксированной ценой. 239 объектов, ★5 (35 отз). ' +
+    'Бесплатный расчёт и выезд. ☎ +7 911 830-01-10',
   alternates: { canonical: '/' },
 };
 
@@ -65,6 +67,7 @@ export default function Home() {
 
       <Hero />
       <UtpIcons />
+      <FoundationTypes />
       <Services />
       <QuizSection />
       <Portfolio />

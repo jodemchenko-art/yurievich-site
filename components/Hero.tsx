@@ -44,11 +44,16 @@ export default function Hero() {
 
           {/* Headline — single tone, single weight, tighter sizing */}
           <h1 className="text-[34px] leading-[1.08] sm:text-5xl sm:leading-[1.05] md:text-6xl lg:text-[68px] lg:leading-[1.02] font-extrabold tracking-[-0.01em] text-white">
-            Плитный фундамент под&nbsp;ключ в&nbsp;СПб и&nbsp;Ленобласти
+            Фундамент под&nbsp;ключ в&nbsp;СПб и&nbsp;Ленобласти
           </h1>
 
+          {/* Sub-headline — commercial keyword spread: плита / лента / сваи */}
+          <p className="mt-4 md:mt-5 text-base sm:text-lg md:text-xl text-white/90 font-medium max-w-2xl">
+            Монолитная плита, ленточный и&nbsp;свайный фундамент — по&nbsp;фиксированной цене в&nbsp;договоре, с&nbsp;гарантией 5&nbsp;лет.
+          </p>
+
           {/* Slogan */}
-          <p className="mt-5 md:mt-6 text-base sm:text-lg md:text-xl text-white/90 italic font-light max-w-2xl">
+          <p className="mt-3 text-base sm:text-lg text-white/85 italic font-light max-w-2xl">
             «Строим как себе. И&nbsp;объясняем — как для&nbsp;себя».
           </p>
 

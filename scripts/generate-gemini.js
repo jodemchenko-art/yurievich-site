@@ -62,13 +62,22 @@ async function generate(t) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${KEY}`;
   const body = {
     contents: [{ parts: [{ text: buildPrompt(t) }] }],
-    generationConfig: { temperature: 0.85, maxOutputTokens: 8192, responseMimeType: 'application/json' },
+    generationConfig: {
+      temperature: 0.85,
+      maxOutputTokens: 20000,
+      responseMimeType: 'application/json',
+      thinkingConfig: { thinkingBudget: 0 },
+    },
   };
   const r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
   if (!r.ok) throw new Error('Gemini HTTP ' + r.status + ' ' + (await r.text()).slice(0, 200));
   const d = await r.json();
-  const txt = d.candidates?.[0]?.content?.parts?.[0]?.text;
-  if (!txt) throw new Error('пустой ответ Gemini');
+  const cand = d.candidates?.[0];
+  const txt = cand?.content?.parts?.[0]?.text;
+  if (!txt) throw new Error('пустой ответ Gemini (finishReason=' + (cand?.finishReason || '?') + ')');
+  if (cand.finishReason && cand.finishReason !== 'STOP') {
+    throw new Error('ответ оборван (finishReason=' + cand.finishReason + ')');
+  }
   const a = JSON.parse(txt);
   if (!a.slug || !a.title || !a.html || !Array.isArray(a.faq) || !a.faq.length) {
     throw new Error('неполная статья: ' + t.query);
