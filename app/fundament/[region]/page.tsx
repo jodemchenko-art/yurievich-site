@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Calculator from '@/components/Calculator';
 import OrderCta from '@/components/OrderCta';
+import RegionFoundationTypes from '@/components/RegionFoundationTypes';
 import { REGIONS, getRegionBySlug, getAllRegionSlugs, buildRegionFaq } from '@/lib/regions';
 import { getArticleBySlug } from '@/lib/articles';
 import { SITE } from '@/lib/site';
@@ -25,15 +26,18 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     title,
     description,
     keywords: [
-      `плитный фундамент ${region.shortName}`,
-      `плитный фундамент ${region.name}`,
-      `монолитная плита ${region.shortName}`,
       `фундамент под ключ ${region.shortName}`,
-      `цена плиты ${region.shortName}`,
-      `калькулятор фундамента ${region.shortName}`,
+      `фундамент ${region.shortName} цена`,
       `заказать фундамент ${region.shortName}`,
+      `плитный фундамент ${region.shortName}`,
+      `монолитная плита ${region.shortName}`,
+      `ленточный фундамент ${region.shortName}`,
+      `ленточный фундамент ${region.shortName} цена`,
+      `свайный фундамент ${region.shortName}`,
+      `свайный фундамент ${region.shortName} цена`,
       `цена фундамента ${region.shortName}`,
       `сколько стоит фундамент ${region.shortName}`,
+      `калькулятор фундамента ${region.shortName}`,
     ],
     alternates: { canonical: `/fundament/${region.slug}/` },
     openGraph: {
@@ -80,10 +84,10 @@ export default function RegionPage({ params }: { params: Params }) {
         </nav>
 
         <h1 className="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight max-w-4xl">
-          Плитный фундамент в {region.prepositional}: цена, грунты, расчёт онлайн
+          Фундамент под ключ в {region.prepositional}: плита, лента, сваи — цена и расчёт
         </h1>
         <p className="mt-5 text-lg text-brand-mute max-w-3xl leading-relaxed">
-          СК «Юрьевич» строит монолитные плитные фундаменты в {region.prepositional}{region.localitiesText}. Цена от <strong className="text-brand-ink">{region.priceFrom.toLocaleString('ru-RU')} ₽/м²</strong> в зависимости от грунта и материала стен. Дорога от базы: {region.drivingTime}.
+          СК «Юрьевич» строит фундаменты под ключ в {region.prepositional}{region.localitiesText} — монолитную плиту, ленточный и свайный фундамент. Цена от <strong className="text-brand-ink">{region.priceFrom.toLocaleString('ru-RU')} ₽/м²</strong> в зависимости от грунта и типа фундамента. Дорога от базы: {region.drivingTime}.
         </p>
 
         <div className="mt-6 flex flex-wrap gap-3 text-sm">
@@ -104,6 +108,8 @@ export default function RegionPage({ params }: { params: Params }) {
           Калькулятор уже учитывает <strong>типичные грунты {region.shortName}</strong>. Вы можете изменить параметры под свой участок.
         </p>
       </section>
+
+      <RegionFoundationTypes region={region} />
 
       <section className="container-x pb-16 max-w-4xl prose-yur">
         <h2>Грунты {region.shortName}: что важно знать</h2>

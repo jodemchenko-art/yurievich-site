@@ -116,8 +116,8 @@ export function buildRegionSnippet(region: {
   const title = `Фундамент в ${region.prepositional} от ${region.priceFrom.toLocaleString('ru-RU')} ₽/м² ★5 · СК Юрьевич`;
 
   const description =
-    `Плитный фундамент под газобетон в ${region.prepositional}. ` +
-    `Цена от ${priceK} тыс ₽/м² под ключ. ` +
+    `Фундамент под ключ в ${region.prepositional}: плита, лента, сваи. ` +
+    `Цена от ${priceK} тыс ₽/м². ` +
     `Выезд бесплатно. 239 объектов, гарантия 5 лет. ☎ ${SITE.phone}`;
 
   return {
