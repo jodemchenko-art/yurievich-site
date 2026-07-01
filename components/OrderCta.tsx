@@ -4,7 +4,7 @@ import { SITE } from '@/lib/site';
 // Транзакционный SEO-CTA: ловит коммерческие интенты «заказать фундамент/плиту»,
 // «цена фундамента в <месте>», «сколько стоит». Ставится на главную и гео-страницы.
 export default function OrderCta({ place, priceFrom }: { place: string; priceFrom?: number }) {
-  const price = priceFrom ? priceFrom.toLocaleString('ru-RU') : '7 500';
+  const price = priceFrom ? priceFrom.toLocaleString('ru-RU') : '5 500';
   return (
     <section className="container-x pb-16">
       <div className="rounded-2xl bg-brand-ink text-white p-7 md:p-10">
