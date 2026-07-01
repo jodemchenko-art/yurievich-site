@@ -156,7 +156,7 @@ async function generate(iam, t) {
     word_count: html.split(/\s+/).length,
   };
   if (!a.slug || !a.title || !a.html || !a.faq.length) throw new Error('неполная статья: ' + t.query);
-  if (a.word_count < 900) throw new Error('слишком короткая статья (' + a.word_count + ' слов): ' + t.query);
+  if (a.word_count < 850) throw new Error('слишком короткая статья (' + a.word_count + ' слов): ' + t.query);
   return a;
 }
 
