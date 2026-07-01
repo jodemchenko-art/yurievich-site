@@ -27,7 +27,7 @@ export const plitnyyFundamentPriozerskiyRayon: Article = {
   },
   {
     "q": "Сколько стоит плита 10×10 в Приозерском районе в 2026 году?",
-    "a": "От 580 000 ₽ на простой геологии (камовые пески Сосново). На моренном суглинке пучинистом — 700–780 тыс. На участках с торфом 1,5–2 м с заменой грунта — 850 тыс. – 1,1 млн. Точная цена считается после выезда на участок."
+    "a": "От 550 000 ₽ на простой геологии (камовые пески Сосново). На моренном суглинке пучинистом — 550–620 тыс. На участках с торфом 1,5–2 м с заменой грунта — 850 тыс. – 1,1 млн. Точная цена считается после выезда на участок."
   },
   {
     "q": "Нужен ли дренаж в Приозерском районе?",
@@ -100,20 +100,20 @@ export const plitnyyFundamentPriozerskiyRayon: Article = {
 
 <ul>
 <li>Геодезия и разметка — 12 000 ₽</li>
-<li>Подготовка площадки, снятие ПРС 200 мм — 28 000 ₽</li>
-<li>Разработка котлована 60 см с вывозом грунта — 65 000 ₽</li>
-<li>Песчано-гравийная подушка 400 мм с послойным трамбованием — 95 000 ₽</li>
-<li>Геотекстиль 200 г/м² + профилированная мембрана — 32 000 ₽</li>
-<li>Утепление ЭППС 100 мм по периметру (1 м от края) — 45 000 ₽</li>
-<li>Опалубка ламинированная фанера — 38 000 ₽</li>
-<li>Армокаркас <a href="/slovar/armatura-a500s/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">А500С</a> двойная сетка Ø12 шаг 200 — 158 000 ₽</li>
-<li><a href="/slovar/beton-m300/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">Бетон М300</a> <a href="/slovar/vodonepronicaemost-w6/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">W6</a> <a href="/slovar/morozostojkost-f150/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">F150</a>, 30 м³ с доставкой — 222 000 ₽</li>
-<li>Заливка с бетононасосом, вибрирование — 48 000 ₽</li>
-<li>Уход за бетоном 7 дней, демонтаж опалубки — 18 000 ₽</li>
+<li>Подготовка площадки, снятие ПРС 200 мм — 20 000 ₽</li>
+<li>Разработка котлована 60 см с вывозом грунта — 42 000 ₽</li>
+<li>Песчано-гравийная подушка 400 мм с послойным трамбованием — 68 000 ₽</li>
+<li>Геотекстиль 200 г/м² + профилированная мембрана — 24 000 ₽</li>
+<li>Утепление ЭППС 100 мм по периметру (1 м от края) — 34 000 ₽</li>
+<li>Опалубка ламинированная фанера — 28 000 ₽</li>
+<li>Армокаркас <a href="/slovar/armatura-a500s/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">А500С</a> двойная сетка Ø12 шаг 200 — 118 000 ₽</li>
+<li><a href="/slovar/beton-m300/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">Бетон М300</a> <a href="/slovar/vodonepronicaemost-w6/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">W6</a> <a href="/slovar/morozostojkost-f150/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">F150</a>, 30 м³ с доставкой — 165 000 ₽</li>
+<li>Заливка с бетононасосом, вибрирование — 22 000 ₽</li>
+<li>Уход за бетоном 7 дней, демонтаж опалубки — 17 000 ₽</li>
 <li>Технадзор Евгения 5 выездов с журналом работ — включено</li>
 </ul>
 
-<p>Итого 761 000 ₽ за плиту 100 м² толщиной 300 мм. То есть 7 610 ₽/м². Эту смету мы пишем в договор как фикс-цену: если миксер привёз бетон с задержкой и пришлось доплатить за простой бетононасоса — это наша проблема, не клиента.</p>
+<p>Итого 550 000 ₽ за плиту 100 м² толщиной 300 мм. То есть 5 500 ₽/м². Эту смету мы пишем в договор как фикс-цену: если миксер привёз бетон с задержкой и пришлось доплатить за простой бетононасоса — это наша проблема, не клиента.</p>
 
 <p>В дешёвом сегменте по Приозерскому району можно увидеть предложения 4 200–4 700 ₽/м². Открываете смету — а там «бетон М300» без указания W6, арматура А500С Ø10 шаг 250 (вместо Ø12 шаг 200), подушка 150 мм (вместо 300–400) и без геотекстиля. Через два сезона на таком участке плита получает трещины раскрытия 0,4–0,7 мм по СП 28.13330.2017 — а это уже не норма для W6, <a href="/slovar/gidroizolyaciya/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">гидроизоляция</a> нарушена, и в сырое лето в подплитном пространстве газобетон тянет влагу капилляром.</p>
 

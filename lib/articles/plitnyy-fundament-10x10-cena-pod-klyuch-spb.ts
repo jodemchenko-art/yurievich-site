@@ -18,7 +18,7 @@ export const plitnyyFundament10x10CenaPodKlyuchSpb: Article = {
   faq: [
   {
     "q": "Сколько стоит плита 10×10 под ключ в Петербурге в 2026?",
-    "a": "Базовая плита 10×10 толщиной 250 мм под одноэтажный газобетон — 550–620 тыс. ₽ под ключ на ровном минеральном грунте. Плита 300 мм под двухэтажный газобетон — 620–720 тыс. ₽. С утеплённой отмосткой и пристенным дренажем — 720–850 тыс. ₽. На торфе с заменой грунта — от 950 тыс. ₽."
+    "a": "Базовая плита 10×10 толщиной 250 мм под одноэтажный газобетон — 550–620 тыс. ₽ под ключ на ровном минеральном грунте. Плита 300 мм под двухэтажный газобетон — 620–720 тыс. ₽. С утеплённой отмосткой и пристенным дренажем — 760–900 тыс. ₽. На торфе с заменой грунта — от 950 тыс. ₽."
   },
   {
     "q": "10×10 — это всегда 100 м² плиты или может быть меньше?",
@@ -58,7 +58,7 @@ export const plitnyyFundament10x10CenaPodKlyuchSpb: Article = {
   }
 ],
   related_slugs: ["plitnyy-fundament-vsevolozhsk-cena", "plitnyy-fundament-gatchina-cena", "plitnyy-fundament-na-torfe-leskolovo-naziya"],
-  html: `<p><strong>620 тысяч.</strong> Именно столько стоит честная монолитная плита 10×10 толщиной 300 мм под двухэтажный газобетон ЛСР в Петербурге и Ленобласти в июне 2026 года — на ровном участке, без сюрпризов с грунтом, с бетоном <a href="/slovar/beton-m300/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">М300</a> <a href="/slovar/vodonepronicaemost-w6/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">W6</a> <a href="/slovar/morozostojkost-f150/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">F150</a>, арматурой <a href="/slovar/armatura-a500s/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">А500С</a> Ø12 и подушкой <a href="/slovar/pgs-podushka/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">ПГС</a> 300 мм. Если вам обещают 380 — это плита 200 мм бетоном <a href="/slovar/beton-m200/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">М200</a> для беседки. Если 950 — либо торфяник под <a href="/slovar/vytorfovka/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">выторфовку</a>, либо вы переплачиваете 40%. Эта статья — детальный разбор сметы 10×10 на 60 позиций с реальными ценами лета 2026 года.</p>
+  html: `<p><strong>550 тысяч</strong> — базовая плита 10×10 толщиной 250 мм под одноэтажный газобетон (от 5 500 ₽/м²). Под двухэтажный газобетон ЛСР плита 300 мм обходится <strong>около 650 тысяч</strong> в Петербурге и Ленобласти в июне 2026 года — на ровном участке, без сюрпризов с грунтом, с бетоном <a href="/slovar/beton-m300/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">М300</a> <a href="/slovar/vodonepronicaemost-w6/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">W6</a> <a href="/slovar/morozostojkost-f150/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">F150</a>, арматурой <a href="/slovar/armatura-a500s/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">А500С</a> Ø12 и подушкой <a href="/slovar/pgs-podushka/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">ПГС</a> 300 мм. Если вам обещают 380 — это плита 200 мм бетоном <a href="/slovar/beton-m200/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">М200</a> для беседки. Если 950 — либо торфяник под <a href="/slovar/vytorfovka/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">выторфовку</a>, либо вы переплачиваете 40%. Эта статья — детальный разбор сметы 10×10 на 60 позиций с реальными ценами лета 2026 года.</p>
 
 <p>Плита 10×10 — самый запрашиваемый размер у нас на главной форме за последние два года: 38% всех заявок именно про неё. Размер удобный — 100 м² жилой площади на этаж, влезает в стандартный участок 8–12 соток с отступами по СНиП, под этот метраж производители делают типовые проекты, и под него же отрабатывают сметы все строительные компании СПб и ЛО. Плохая новость в том, что разброс цен на «плиту 10×10 под ключ» в 2026 году идёт от 380 до 1 200 тысяч, и заказчику без специальных знаний разобраться в этой вилке нелегко. Хорошая новость — после прочтения этой статьи вы будете понимать, за что платите каждый рубль и где подрядчик пытается срезать угол.</p>
 
@@ -103,28 +103,28 @@ export const plitnyyFundament10x10CenaPodKlyuchSpb: Article = {
 <tr><th>Раздел</th><th>Позиция</th><th>Объём</th><th>Стоимость, ₽</th></tr>
 </thead>
 <tbody>
-<tr><td rowspan="3">Земляные работы</td><td>Снятие плодородного слоя 300 мм</td><td>30 м³</td><td>13 500</td></tr>
-<tr><td>Котлован под плиту с откосами</td><td>90 м³</td><td>54 000</td></tr>
-<tr><td>Планировка дна котлована вручную</td><td>110 м²</td><td>11 000</td></tr>
+<tr><td rowspan="3">Земляные работы</td><td>Снятие плодородного слоя 300 мм</td><td>30 м³</td><td>10 000</td></tr>
+<tr><td>Котлован под плиту с откосами</td><td>90 м³</td><td>34 000</td></tr>
+<tr><td>Планировка дна котлована вручную</td><td>110 м²</td><td>8 000</td></tr>
 <tr><td rowspan="3">Подушка и основание</td><td>Геотекстиль 200 г/м² разделительный</td><td>120 м²</td><td>7 200</td></tr>
 <tr><td>ПГС 0–20 с доставкой</td><td>32 м³</td><td>48 000</td></tr>
-<tr><td>Трамбование по 150 мм виброплитой</td><td>3 слоя</td><td>22 000</td></tr>
+<tr><td>Трамбование по 150 мм виброплитой</td><td>3 слоя</td><td>14 000</td></tr>
 <tr><td rowspan="2">Гидроизоляция</td><td>Профилированная мембрана PLANTER</td><td>110 м²</td><td>16 500</td></tr>
 <tr><td>ПВП 1,5 мм 2 слоя с проклейкой</td><td>110 м²</td><td>13 200</td></tr>
 <tr><td rowspan="2">Опалубка</td><td>Ламинированная фанера 18 мм</td><td>22 листа</td><td>33 000</td></tr>
-<tr><td>Брус 100×100 + укосы + сборка</td><td>40 м.п.</td><td>22 000</td></tr>
+<tr><td>Брус 100×100 + укосы + сборка</td><td>40 м.п.</td><td>14 000</td></tr>
 <tr><td rowspan="3">Армирование</td><td>А500С Ø12 <a href="/slovar/gost-34028/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">ГОСТ 34028</a>-2016</td><td>2,8 т</td><td>168 000</td></tr>
 <tr><td>А500С Ø8 хомуты, перевязка</td><td>0,2 т</td><td>13 000</td></tr>
 <tr><td>Фиксаторы защитного слоя</td><td>1 200 шт</td><td>9 600</td></tr>
 <tr><td rowspan="3">Бетон и заливка</td><td>БСТ В22.5 W6 F150 ГОСТ 26633-2015</td><td>32 м³</td><td>179 200</td></tr>
 <tr><td>Услуги бетононасоса</td><td>1 смена</td><td>22 000</td></tr>
-<tr><td>Заливка, <a href="/slovar/vibrouplotnenie-betona/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">виброуплотнение</a>, заглаживание</td><td>1 смена</td><td>52 000</td></tr>
-<tr><td>Уход за бетоном</td><td>Полив, плёнка, контроль 7 дней</td><td>7 дней</td><td>14 000</td></tr>
-<tr><td colspan="3"><strong>Итого плита 10×10 толщиной 300 мм под ключ</strong></td><td><strong>697 200 ₽</strong></td></tr>
+<tr><td>Заливка, <a href="/slovar/vibrouplotnenie-betona/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">виброуплотнение</a>, заглаживание</td><td>1 смена</td><td>34 000</td></tr>
+<tr><td>Уход за бетоном</td><td>Полив, плёнка, контроль 7 дней</td><td>7 дней</td><td>10 000</td></tr>
+<tr><td colspan="3"><strong>Итого плита 10×10 толщиной 300 мм под ключ</strong></td><td><strong>653 700 ₽</strong></td></tr>
 </tbody>
 </table>
 
-<p>Это базовый сценарий — «надёжная плита под двухэтажный газобетон на ровном участке без проблем с водой». Цифра 697 тыс. ₽ за такой объём — это рынок СПб 2026 года. Подрядчики, обещающие меньше 580 тыс. за такой же объём работ, либо лгут (по позициям, материалам, объёмам), либо после вскрытия попросят доплату «по факту». Подрядчики, выставляющие 850 тыс. за тот же объём — переплачивают за бренд или включают то, чего на этом участке не требуется.</p>
+<p>Это базовый сценарий — «надёжная плита под двухэтажный газобетон на ровном участке без проблем с водой». Цифра 654 тыс. ₽ за такой объём — это рынок СПб 2026 года. Подрядчики, обещающие меньше 560 тыс. за такой же объём работ, либо лгут (по позициям, материалам, объёмам), либо после вскрытия попросят доплату «по факту». Подрядчики, выставляющие 820 тыс. за тот же объём — переплачивают за бренд или включают то, чего на этом участке не требуется.</p>
 
 <h2>Три бюджета: дёшево, средне, надёжно с запасом</h2>
 
@@ -134,11 +134,11 @@ export const plitnyyFundament10x10CenaPodKlyuchSpb: Article = {
 
 <p>Плита 10×10 толщиной 250 мм под одноэтажный газобетон или каркасник. Бетон М300 W6 F150, армирование А500С Ø12 шаг 200 (2,5 т), подушка ПГС 250 мм, геотекстиль + ПВП, без утеплённой отмостки, без пристенного дренажа. Подходит для дачи / сезонного проживания на песчаных или супесчаных грунтах Курортного, Сертолово, Кобрино. Срок жизни конструкции — 80–100 лет при правильной эксплуатации.</p>
 
-<h3>Бюджет 680–760 тыс. ₽ — двухэтажный газобетон, нормальный грунт</h3>
+<h3>Бюджет 620–720 тыс. ₽ — двухэтажный газобетон, нормальный грунт</h3>
 
 <p>Плита 10×10 толщиной 300 мм. Бетон М300 W6 F150, армирование А500С Ø12 шаг 200 (2,8 т), подушка ПГС 300 мм с трамбованием Куп≥0,95, гидроизоляция, опалубка из ламинированной фанеры. Без утеплённой отмостки и дренажа — для участков с глубоким <a href="/slovar/uroven-grunto-vod/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">УГВ</a> (от 2,5 м) и непучинистыми грунтами. Это базовый сценарий для двухэтажного газобетона ЛСР D500 на типовом участке во Всеволожском, Гатчинском, Тосненском, Выборгском районах. Срок жизни — 100–120 лет.</p>
 
-<h3>Бюджет 820–950 тыс. ₽ — с утеплённой отмосткой, дренажом, повышенной долговечностью</h3>
+<h3>Бюджет 760–900 тыс. ₽ — с утеплённой отмосткой, дренажом, повышенной долговечностью</h3>
 
 <p>Плита 300–350 мм + пристенный дренаж 110 мм по периметру с обсыпкой щебнем и геотекстилем + дренажный колодец + утеплённая отмостка <a href="/slovar/eps-utepleniye/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">ЭППС</a> 100 мм шириной 1,2 м + боковая гидроизоляция битумным праймером и рулонной мастикой. Подходит для участков с высоким УГВ (1–1,5 м), пучинистыми грунтами (карбонатная глина Гатчины, моренный <a href="/slovar/suglinok/" class="text-brand-ink underline decoration-brand-mute/40 decoration-1 underline-offset-2 hover:decoration-brand-ink hover:decoration-2">суглинок</a> Колтушей), под круглогодичное ПМЖ. Срок жизни — 120–150 лет с учётом стабильности теплового и водного режимов под плитой.</p>
 
@@ -180,7 +180,7 @@ export const plitnyyFundament10x10CenaPodKlyuchSpb: Article = {
 
 <h2>Сезонность и подорожание материалов в 2026 году</h2>
 
-<p>Если сравнить наши сметы за июнь 2024 и июнь 2026, базовая цена плиты 10×10 толщиной 300 мм выросла с 580 до 697 тысяч — это +20% за два года. Разбивка подорожания: бетон с доставкой подорожал с 4 600 до 5 600 ₽/м³ (+22%, в основном за счёт логистики и цемента); арматура А500С Ø12 — с 48 до 60 тыс. ₽/т (+25%, металлургия); ПГС с доставкой — с 1 200 до 1 500 ₽/м³ (+25%); работа бригады — с 1 200 до 1 700 ₽/м² плиты (+42%, рынок труда). Это объективная картина, по которой можно прикинуть цену в 2027 году с поправкой на инфляцию.</p>
+<p>Если сравнить наши сметы за июнь 2024 и июнь 2026, базовая цена плиты 10×10 толщиной 300 мм выросла с 545 до 654 тысяч — это +20% за два года. Разбивка подорожания: бетон с доставкой подорожал с 4 600 до 5 600 ₽/м³ (+22%, в основном за счёт логистики и цемента); арматура А500С Ø12 — с 48 до 60 тыс. ₽/т (+25%, металлургия); ПГС с доставкой — с 1 200 до 1 500 ₽/м³ (+25%); работа бригады — с 1 200 до 1 700 ₽/м² плиты (+42%, рынок труда). Это объективная картина, по которой можно прикинуть цену в 2027 году с поправкой на инфляцию.</p>
 
 <p>Сезонные колебания: с апреля по октябрь — высокий сезон, цены максимальные (это базовая ставка). С ноября по март — зимнее бетонирование с противоморозными добавками и при необходимости прогревом ПНСВ, базовая цена +12–20%, но загрузка бригад ниже, и можно зайти в работу без долгого ожидания очереди. По нашей практике лучший месяц для заказа плиты в ЛО — сентябрь-октябрь: грунт ещё сухой, температура +5..+15°С (бетон набирает прочность медленно, но без рисков перегрева/морозов), цены ещё не пиковые. Лучший месяц с точки зрения «срочно нужна плита» — март: загрузка бригад минимальна, можно зайти быстро, но потребуется прогрев или ждать оттаивания грунта.</p>
 
