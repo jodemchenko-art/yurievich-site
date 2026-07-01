@@ -18,12 +18,14 @@ import { kakZalitPlitnyyFundamentZimoy } from './kak-zalit-plitnyy-fundament-zim
 import { kogdaLuchsheZalivatPlitnyyFundamentLeningradskayaOblast } from './kogda-luchshe-zalivat-plitnyy-fundament-leningradskaya-oblast';
 import { monolitnayaPlita12x12CenaSpb } from './monolitnaya-plita-12x12-cena-spb';
 import { monolitnayaPlita250MmCenaZaM2 } from './monolitnaya-plita-250-mm-cena-za-m2';
+import { monolitnayaPlita8h10TsenaLenoblast } from './monolitnaya-plita-8h10-tsena-lenoblast';
 import { monolitnayaPlita8x10CenaLenoblast } from './monolitnaya-plita-8x10-cena-lenoblast';
 import { monolitnayaPlitaIliUshpPodGazobeton } from './monolitnaya-plita-ili-ushp-pod-gazobeton';
 import { monolitnyyPlitnyyFundamentSpbPodKlyuch } from './monolitnyy-plitnyy-fundament-spb-pod-klyuch';
 import { mzlfIliPlitaPodGazobeton } from './mzlf-ili-plita-pod-gazobeton';
 import { osenyuZalivatPlitnyyFundamentIliVesnoy } from './osenyu-zalivat-plitnyy-fundament-ili-vesnoy';
 import { otdelkaDomaIzGazobetona100m2Cena } from './otdelka-doma-iz-gazobetona-100m2-cena';
+import { plataIliLentaPodDomIzGazobetona } from './plata-ili-lenta-pod-dom-iz-gazobetona';
 import { plita10x12PodGazobetonCena300mm } from './plita-10x12-pod-gazobeton-cena-300mm';
 import { plita12x12PodGazobetonCenaPodKlyuch } from './plita-12x12-pod-gazobeton-cena-pod-klyuch';
 import { plita250Ili300MmPodGazobeton2Etazha } from './plita-250-ili-300-mm-pod-gazobeton-2-etazha';
@@ -91,12 +93,14 @@ export const ARTICLES: Article[] = [
   kogdaLuchsheZalivatPlitnyyFundamentLeningradskayaOblast,
   monolitnayaPlita12x12CenaSpb,
   monolitnayaPlita250MmCenaZaM2,
+  monolitnayaPlita8h10TsenaLenoblast,
   monolitnayaPlita8x10CenaLenoblast,
   monolitnayaPlitaIliUshpPodGazobeton,
   monolitnyyPlitnyyFundamentSpbPodKlyuch,
   mzlfIliPlitaPodGazobeton,
   osenyuZalivatPlitnyyFundamentIliVesnoy,
   otdelkaDomaIzGazobetona100m2Cena,
+  plataIliLentaPodDomIzGazobetona,
   plita10x12PodGazobetonCena300mm,
   plita12x12PodGazobetonCenaPodKlyuch,
   plita250Ili300MmPodGazobeton2Etazha,
