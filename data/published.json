@@ -258,5 +258,20 @@
     "slug": "monolitnaya-plita-8h10-tsena-lenoblast",
     "primary_query": "монолитная плита 8х10 цена ленобласть",
     "published_at": "2026-07-01"
+  },
+  {
+    "slug": "monolitnaya-plita-250-mm-cena",
+    "primary_query": "монолитная плита 250 мм цена за м2",
+    "published_at": "2026-07-02"
+  },
+  {
+    "slug": "skolko-stoit-zalit-plitu-pod-gazobetonnyi-dom-100-m2",
+    "primary_query": "сколько стоит залить плиту под газобетонный дом 100 м2 с материалом",
+    "published_at": "2026-07-02"
+  },
+  {
+    "slug": "plitnyi-fundament-pod-gazobeton-cena",
+    "primary_query": "плитный фундамент под газобетон цена за м2 ленобласть 2026",
+    "published_at": "2026-07-02"
   }
 ]
