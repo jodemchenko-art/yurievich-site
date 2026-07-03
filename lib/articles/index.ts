@@ -8,8 +8,10 @@ import { domIzGazobetonaLsrPodKlyuchSpbLenoblast } from './dom-iz-gazobetona-lsr
 import { domIzGazobetonaLsrPodKlyuchTsenaZaKvadratnyMetr } from './dom-iz-gazobetona-lsr-pod-klyuch-tsena-za-kvadratny-metr';
 import { eppsPodPlitnymFundamentomNuzhenLi } from './epps-pod-plitnym-fundamentom-nuzhen-li';
 import { fundamentDalUsadkuChtoDelatGazobeton } from './fundament-dal-usadku-chto-delat-gazobeton';
+import { fundamentPlitaPesochnyyDibuny } from './fundament-plita-pesochnyy-dibuny';
 import { gazobeton375Ili400MmStenaBezUtepleniyaSpb } from './gazobeton-375-ili-400-mm-stena-bez-utepleniya-spb';
 import { gazobetonD400IliD500Lenoblast } from './gazobeton-d400-ili-d500-lenoblast';
+import { gazobetonIliKarkasnikChtoDeshevleTeplee } from './gazobeton-ili-karkasnik-chto-deshevle-teplee';
 import { gazobetonIliKeramoblokLenoblast } from './gazobeton-ili-keramoblok-lenoblast';
 import { gidroizolyaciyaPodPlitnymFundamentomNuzhnaLi } from './gidroizolyaciya-pod-plitnym-fundamentom-nuzhna-li';
 import { glubinaZalozheniyaFundamentaLeningradskayaOblast } from './glubina-zalozheniya-fundamenta-leningradskaya-oblast';
@@ -39,10 +41,12 @@ import { plitaNaSvayahLeskolovo } from './plita-na-svayah-leskolovo';
 import { plitaPodGazobeton100m2CenaPodKlyuch } from './plita-pod-gazobeton-100m2-cena-pod-klyuch';
 import { plitaPodGazobetonGatchinaCena } from './plita-pod-gazobeton-gatchina-cena';
 import { plitaPoplylaChtoDelat } from './plita-poplyla-chto-delat';
+import { plitaSRebramiPodGazobetonLenoblast } from './plita-s-rebrami-pod-gazobeton-lenoblast';
 import { plitnyiFundamentGazobetonDomLeningradskayaOblastOtzyvy } from './plitnyi-fundament-gazobeton-dom-leningradskaya-oblast-otzyvy';
 import { plitnyiFundamentGazobetonDomTolshchina } from './plitnyi-fundament-gazobeton-dom-tolshchina';
 import { plitnyiFundamentPodGazobetonCena } from './plitnyi-fundament-pod-gazobeton-cena';
 import { plitnyyFundament10x10CenaPodKlyuchSpb } from './plitnyy-fundament-10x10-cena-pod-klyuch-spb';
+import { plitnyyFundament9x12PodGazobetonCena } from './plitnyy-fundament-9x12-pod-gazobeton-cena';
 import { plitnyyFundamentCenaZaM2Spb } from './plitnyy-fundament-cena-za-m2-spb';
 import { plitnyyFundamentDlyaGazobetonaLenoblastOtzyvy } from './plitnyy-fundament-dlya-gazobetona-lenoblast-otzyvy';
 import { plitnyyFundamentGatchinaCena } from './plitnyy-fundament-gatchina-cena';
@@ -64,6 +68,7 @@ import { promerzaetFundamentChtoDelat } from './promerzaet-fundament-chto-delat'
 import { proselFundamentGazobetonnogoDoma } from './prosel-fundament-gazobetonnogo-doma';
 import { puchinistyyGruntKakoyFundament } from './puchinistyy-grunt-kakoy-fundament';
 import { skolkoArmaturyNaPlitu100M2 } from './skolko-armatury-na-plitu-100-m2';
+import { skolkoProsluzhitPlitnyyFundamentDoma } from './skolko-prosluzhit-plitnyy-fundament-doma';
 import { skolkoSohnetPlitnyyFundamentPeredKladkoyGazobetona } from './skolko-sohnet-plitnyy-fundament-pered-kladkoy-gazobetona';
 import { skolkoStoitZalitPlituPodGazobetonnyiDom100M2 } from './skolko-stoit-zalit-plitu-pod-gazobetonnyi-dom-100-m2';
 import { svaiIliPlitaPodGazobetonLeningradskayaOblast } from './svai-ili-plita-pod-gazobeton-leningradskaya-oblast';
@@ -87,8 +92,10 @@ export const ARTICLES: Article[] = [
   domIzGazobetonaLsrPodKlyuchTsenaZaKvadratnyMetr,
   eppsPodPlitnymFundamentomNuzhenLi,
   fundamentDalUsadkuChtoDelatGazobeton,
+  fundamentPlitaPesochnyyDibuny,
   gazobeton375Ili400MmStenaBezUtepleniyaSpb,
   gazobetonD400IliD500Lenoblast,
+  gazobetonIliKarkasnikChtoDeshevleTeplee,
   gazobetonIliKeramoblokLenoblast,
   gidroizolyaciyaPodPlitnymFundamentomNuzhnaLi,
   glubinaZalozheniyaFundamentaLeningradskayaOblast,
@@ -118,10 +125,12 @@ export const ARTICLES: Article[] = [
   plitaPodGazobeton100m2CenaPodKlyuch,
   plitaPodGazobetonGatchinaCena,
   plitaPoplylaChtoDelat,
+  plitaSRebramiPodGazobetonLenoblast,
   plitnyiFundamentGazobetonDomLeningradskayaOblastOtzyvy,
   plitnyiFundamentGazobetonDomTolshchina,
   plitnyiFundamentPodGazobetonCena,
   plitnyyFundament10x10CenaPodKlyuchSpb,
+  plitnyyFundament9x12PodGazobetonCena,
   plitnyyFundamentCenaZaM2Spb,
   plitnyyFundamentDlyaGazobetonaLenoblastOtzyvy,
   plitnyyFundamentGatchinaCena,
@@ -143,6 +152,7 @@ export const ARTICLES: Article[] = [
   proselFundamentGazobetonnogoDoma,
   puchinistyyGruntKakoyFundament,
   skolkoArmaturyNaPlitu100M2,
+  skolkoProsluzhitPlitnyyFundamentDoma,
   skolkoSohnetPlitnyyFundamentPeredKladkoyGazobetona,
   skolkoStoitZalitPlituPodGazobetonnyiDom100M2,
   svaiIliPlitaPodGazobetonLeningradskayaOblast,
