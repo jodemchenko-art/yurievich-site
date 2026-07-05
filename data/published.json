@@ -313,5 +313,15 @@
     "slug": "monolitnaya-plita-skolko-stoit-zalit-v-gatchine",
     "primary_query": "монолитная плита сколько стоит залить в гатчине под газобетон",
     "published_at": "2026-07-04"
+  },
+  {
+    "slug": "cena-vytorfovki-uchastka-10-sotok-leskolovo",
+    "primary_query": "цена выторфовки участка 10 соток лесколово",
+    "published_at": "2026-07-05"
+  },
+  {
+    "slug": "armirovanie-plitnogo-fundamenta-gazobeton",
+    "primary_query": "армирование плитного фундамента под двухэтажный газобетонный дом",
+    "published_at": "2026-07-05"
   }
 ]
