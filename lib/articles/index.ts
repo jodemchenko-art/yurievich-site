@@ -4,7 +4,9 @@ import { armirovaniePlitnogoFundamentaGazobeton } from './armirovanie-plitnogo-f
 import { armirovaniePlityPodDvuhetazhnyyGazobeton } from './armirovanie-plity-pod-dvuhetazhnyy-gazobeton';
 import { betonM300DlyaFundamentaRashodICena } from './beton-m300-dlya-fundamenta-rashod-i-cena';
 import { betonM300IliM350DlyaPlitnogoFundamenta } from './beton-m300-ili-m350-dlya-plitnogo-fundamenta';
+import { cenaPlitySZameneiGruntaNaTorfeLeskolovo } from './cena-plity-s-zamenei-grunta-na-torfe-leskolovo';
 import { cenaVytorfovkiUchastka10SotokLeskolovo } from './cena-vytorfovki-uchastka-10-sotok-leskolovo';
+import { chtoDelatEsliFundamentDalUsadkuGazobeton } from './chto-delat-esli-fundament-dal-usadku-gazobeton';
 import { domIzGazobetonaLsrPodKlyuchCenaZaM2 } from './dom-iz-gazobetona-lsr-pod-klyuch-cena-za-m2';
 import { domIzGazobetonaLsrPodKlyuchSpbLenoblast } from './dom-iz-gazobetona-lsr-pod-klyuch-spb-lenoblast';
 import { domIzGazobetonaLsrPodKlyuchTsenaZaKvadratnyMetr } from './dom-iz-gazobetona-lsr-pod-klyuch-tsena-za-kvadratny-metr';
@@ -91,7 +93,9 @@ export const ARTICLES: Article[] = [
   armirovaniePlityPodDvuhetazhnyyGazobeton,
   betonM300DlyaFundamentaRashodICena,
   betonM300IliM350DlyaPlitnogoFundamenta,
+  cenaPlitySZameneiGruntaNaTorfeLeskolovo,
   cenaVytorfovkiUchastka10SotokLeskolovo,
+  chtoDelatEsliFundamentDalUsadkuGazobeton,
   domIzGazobetonaLsrPodKlyuchCenaZaM2,
   domIzGazobetonaLsrPodKlyuchSpbLenoblast,
   domIzGazobetonaLsrPodKlyuchTsenaZaKvadratnyMetr,
