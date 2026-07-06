@@ -24,7 +24,8 @@ if [ -z "$YA_TOKEN" ] || [ -z "$YA_USER" ] || [ -z "$YA_HOST" ]; then
 fi
 
 YA_HOST_ENC=$(python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1],safe=''))" "$YA_HOST")
-SITEMAP_URL="https://sk-yurievich.ru/sitemap.xml"
+# Канон = www (зафиксировано 2026-07-06). Индекс живёт на www-зеркале; без-www отдаёт 301.
+SITEMAP_URL="https://www.sk-yurievich.ru/sitemap.xml"
 
 collect_blog_urls() {
   # Тянем sitemap, выдёргиваем все /blog/ URL'ы

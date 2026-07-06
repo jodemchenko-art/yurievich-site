@@ -5,6 +5,7 @@ import Calculator from '@/components/Calculator';
 import OrderCta from '@/components/OrderCta';
 import RegionFoundationTypes from '@/components/RegionFoundationTypes';
 import { REGIONS, getRegionBySlug, getAllRegionSlugs, buildRegionFaq } from '@/lib/regions';
+import { getLocalitiesByRegion } from '@/lib/localities';
 import { getArticleBySlug } from '@/lib/articles';
 import { SITE } from '@/lib/site';
 import { buildRegionGraph, buildGraph } from '@/lib/schema';
@@ -59,6 +60,7 @@ export default function RegionPage({ params }: { params: Params }) {
   const related = (region.relatedArticleSlugs || [])
     .map((s) => getArticleBySlug(s))
     .filter(Boolean) as NonNullable<ReturnType<typeof getArticleBySlug>>[];
+  const localities = getLocalitiesByRegion(region.slug);
 
   // FAQ под Нейро-цитирование Алисы (#27)
   const faq = region.faq && region.faq.length > 0 ? region.faq : buildRegionFaq(region);
@@ -154,6 +156,31 @@ export default function RegionPage({ params }: { params: Params }) {
           </Link>
         </p>
       </section>
+
+      {localities.length > 0 && (
+        <section className="container-x pb-16 max-w-4xl">
+          <h2 className="text-2xl md:text-3xl font-extrabold mb-4">
+            Фундамент в населённых пунктах {region.shortName}
+          </h2>
+          <p className="text-brand-mute mb-6">
+            Мы знаем грунты конкретных посёлков {region.prepositional}. Выберите свой — цена и решение под местную геологию:
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {localities.map((l) => (
+              <Link
+                key={l.slug}
+                href={`/fundament/${region.slug}/${l.slug}/`}
+                className="block bg-white rounded-xl border border-brand-line p-4 hover:border-brand-ink hover:shadow-md transition"
+              >
+                <div className="font-bold text-brand-ink">Фундамент в {l.prepositional}</div>
+                <div className="text-sm text-brand-mute mt-1">
+                  от {l.priceFrom.toLocaleString('ru-RU')} ₽/м² · {l.driveTime}
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       <OrderCta place={region.prepositional} priceFrom={region.priceFrom} />
 
