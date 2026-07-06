@@ -65,8 +65,16 @@ export default function Calculator({
 
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [messenger, setMessenger] = useState<'whatsapp' | 'telegram' | 'call'>('whatsapp');
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const MESSENGERS = {
+    whatsapp: { label: 'WhatsApp', url: SITE.whatsapp },
+    telegram: { label: 'Telegram', url: SITE.telegram },
+    call: { label: 'Звонок', url: `tel:${SITE.phoneRaw}` },
+  } as const;
+  const storeyLabel = storeys === 1 ? '1 этаж' : storeys === 1.5 ? '1,5 этажа' : '2 этажа';
 
   const result = useMemo(() => {
     const area = SIZE_AREA[size];
@@ -115,10 +123,12 @@ export default function Calculator({
           answers: [
             ...(regionLabel ? [{ q: 'Район', a: regionLabel }] : []),
             { q: 'Размер дома', a: size },
-            { q: 'Этажность', a: `${storeys} этажа` },
+            { q: 'Этажность', a: storeyLabel },
             { q: 'Грунт', a: GROUND_LABEL[ground].name },
             { q: 'Материал стен', a: MATERIAL_LOAD[material].name },
-            { q: 'Расчёт калькулятора', a: `${fmt(result.totalPrice)} ₽ (${fmt(result.pricePerM2)} ₽/м² × ${result.area} м²)` },
+            { q: 'Куда прислать смету', a: MESSENGERS[messenger].label },
+            // предварительный расчёт — ТОЛЬКО для нас, клиенту на сайте не показываем
+            { q: '≈расчёт (для нас)', a: `${fmt(result.totalPrice)} ₽ (${fmt(result.pricePerM2)} ₽/м² × ${result.area} м²)` },
           ],
           contact: { name, phone },
         }),
@@ -130,13 +140,27 @@ export default function Calculator({
   };
 
   if (submitted) {
+    const m = MESSENGERS[messenger];
     return (
-      <div className="bg-white rounded-3xl p-10 text-center shadow-xl border border-brand-line">
+      <div className="bg-white rounded-3xl p-8 md:p-10 text-center shadow-xl border border-brand-line">
         <div className="text-6xl mb-4">✅</div>
         <h3 className="text-2xl font-extrabold">Заявка принята!</h3>
         <p className="mt-3 text-brand-mute">
-          Юрий перезвонит в ближайший час с точным расчётом по позициям.
+          {messenger === 'call'
+            ? `Юрий перезвонит по номеру ${phone} в ближайший час и назовёт точную смету по вашему участку.`
+            : `Готовим точную смету по позициям под ваш участок — пришлём её в ${m.label} и перезвоним в ближайший час.`}
         </p>
+        {messenger !== 'call' && (
+          <a
+            href={m.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block mt-6 rounded-xl bg-brand-ink text-white px-7 py-4 font-bold no-underline hover:opacity-90 transition"
+          >
+            Открыть чат в {m.label} →
+          </a>
+        )}
+        <p className="mt-4 text-xs text-brand-mute">★ 5.0 · 35 отзывов · Гарантия {SITE.warrantyYears} лет</p>
       </div>
     );
   }
@@ -225,50 +249,37 @@ export default function Calculator({
         </div>
       </div>
 
-      {/* Right: result */}
+      {/* Right: lead capture → messenger (без показа цены) */}
       <div className="lg:col-span-2">
         <div className="bg-brand-ink text-white rounded-3xl p-6 md:p-8 shadow-xl sticky top-24">
           <div className="text-sm uppercase tracking-widest text-white/60 font-semibold mb-2">
-            Ваш плитный фундамент
+            Ваш расчёт готов ✅
           </div>
-          <div className="text-4xl md:text-5xl font-extrabold leading-tight mb-1">
-            ~{fmt(result.totalPrice)} <span className="text-2xl text-white/70">₽</span>
-          </div>
-          <div className="text-sm text-white/70 mb-6">
-            ({fmt(result.pricePerM2)} ₽/м² × {result.area} м², толщина плиты {result.thickness} мм)
+          <h3 className="text-2xl md:text-[28px] font-extrabold leading-tight mb-3">
+            Пришлём точную смету по позициям
+          </h3>
+          <p className="text-sm text-white/70 mb-5 leading-relaxed">
+            По вашим параметрам ({size.replace('x', '×')} м, {storeyLabel}, {GROUND_LABEL[ground].name.toLowerCase()})
+            подготовим детальную смету под ваш участок и геологию. Куда прислать?
+          </p>
+
+          {/* что входит — без цен */}
+          <div className="border-t border-white/20 pt-4 space-y-1.5 text-sm mb-5">
+            {[
+              'Бетон М300 W6 F150',
+              'Арматура А500С, двойная сетка',
+              'Работа бригады + прораб',
+              'Опалубка и подушка ПГС',
+              'Доставка и геология участка',
+            ].map((x) => (
+              <div key={x} className="flex items-center gap-2">
+                <span className="text-emerald-400 flex-shrink-0">✓</span>
+                <span className="text-white/85">{x}</span>
+              </div>
+            ))}
           </div>
 
-          <div className="border-t border-white/20 pt-5 space-y-2 text-sm">
-            <div className="flex justify-between">
-              <span className="text-white/70">Бетон М300 W6 F150</span>
-              <span className="font-bold">{fmt(result.breakdown.concrete)} ₽</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-white/70">Арматура А500С</span>
-              <span className="font-bold">{fmt(result.breakdown.rebar)} ₽</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-white/70">Работа бригады</span>
-              <span className="font-bold">{fmt(result.breakdown.labor)} ₽</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-white/70">Опалубка</span>
-              <span className="font-bold">{fmt(result.breakdown.formwork)} ₽</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-white/70">Подушка ПГС</span>
-              <span className="font-bold">{fmt(result.breakdown.podpushka)} ₽</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-white/70">Доставка, доп. работы</span>
-              <span className="font-bold">{fmt(result.breakdown.extras)} ₽</span>
-            </div>
-          </div>
-
-          <form onSubmit={submit} className="mt-6 pt-6 border-t border-white/20">
-            <p className="text-xs text-white/70 mb-3 leading-relaxed">
-              Это предварительный расчёт. Юрий перезвонит и пришлёт <strong>точную смету по позициям</strong> под ваш участок и геологию.
-            </p>
+          <form onSubmit={submit} className="pt-1">
             <input
               required
               value={name}
@@ -284,17 +295,62 @@ export default function Calculator({
               placeholder="+7 ___ ___-__-__"
               className="w-full rounded-xl border-2 border-white/20 bg-white/10 px-4 py-3 text-white placeholder:text-white/40 focus:border-white focus:outline-none mb-3"
             />
+
+            {/* выбор мессенджера */}
+            <div className="mb-3">
+              <div className="text-xs text-white/60 mb-2">Куда прислать смету:</div>
+              <div className="grid grid-cols-3 gap-2">
+                {(['whatsapp', 'telegram', 'call'] as const).map((mk) => (
+                  <button
+                    key={mk}
+                    type="button"
+                    onClick={() => setMessenger(mk)}
+                    className={`rounded-xl border-2 py-2.5 text-xs font-bold transition ${
+                      messenger === mk
+                        ? 'border-white bg-white text-brand-ink'
+                        : 'border-white/20 text-white/80 hover:border-white/50'
+                    }`}
+                  >
+                    {MESSENGERS[mk].label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             <button
               type="submit"
               disabled={loading || !name.trim() || !phone.trim()}
-              className="w-full rounded-xl bg-white text-brand-ink py-4 font-bold text-base hover:bg-brand-sand transition disabled:opacity-50"
+              className="w-full rounded-xl bg-amber-400 text-brand-ink py-4 font-bold text-base hover:opacity-90 transition disabled:opacity-50"
             >
-              {loading ? 'Отправляем…' : 'Получить точный расчёт'}
+              {loading ? 'Отправляем…' : 'Прислать точную смету →'}
             </button>
             <p className="mt-3 text-xs text-white/50 text-center">
-              ★ 5.0 · 35 отзывов · Гарантия {SITE.warrantyYears} лет
+              Бесплатно · ★ 5.0 · 35 отзывов · Гарантия {SITE.warrantyYears} лет
             </p>
           </form>
+
+          {/* или сразу написать в мессенджер */}
+          <div className="mt-4 pt-4 border-t border-white/20 text-center">
+            <div className="text-xs text-white/50 mb-2">или напишите нам прямо сейчас:</div>
+            <div className="flex gap-2 justify-center">
+              <a
+                href={SITE.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 rounded-xl border border-white/30 py-2.5 text-sm font-bold no-underline text-white hover:bg-white/10 transition"
+              >
+                WhatsApp
+              </a>
+              <a
+                href={SITE.telegram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 rounded-xl border border-white/30 py-2.5 text-sm font-bold no-underline text-white hover:bg-white/10 transition"
+              >
+                Telegram
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
