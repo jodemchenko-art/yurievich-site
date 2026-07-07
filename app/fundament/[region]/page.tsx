@@ -7,6 +7,7 @@ import RegionFoundationTypes from '@/components/RegionFoundationTypes';
 import { REGIONS, getRegionBySlug, getAllRegionSlugs, buildRegionFaq } from '@/lib/regions';
 import { getLocalitiesByRegion } from '@/lib/localities';
 import { getArticleBySlug } from '@/lib/articles';
+import { getArticleSlugsForRegion } from '@/lib/articleRegion';
 import { SITE } from '@/lib/site';
 import { buildRegionGraph, buildGraph } from '@/lib/schema';
 import { buildRegionSnippet } from '@/lib/seo-snippets';
@@ -57,7 +58,12 @@ export default function RegionPage({ params }: { params: Params }) {
   if (!region) notFound();
 
   const canonicalUrl = `${SITE.url}/fundament/${region.slug}/`;
-  const related = (region.relatedArticleSlugs || [])
+  // B6: район подтягивает свои гео-статьи (hub → spoke) + кураторские related, дедуп, максимум 6
+  const relatedSlugs = Array.from(new Set([
+    ...getArticleSlugsForRegion(region.slug),
+    ...(region.relatedArticleSlugs || []),
+  ])).slice(0, 6);
+  const related = relatedSlugs
     .map((s) => getArticleBySlug(s))
     .filter(Boolean) as NonNullable<ReturnType<typeof getArticleBySlug>>[];
   const localities = getLocalitiesByRegion(region.slug);
@@ -86,7 +92,9 @@ export default function RegionPage({ params }: { params: Params }) {
         </nav>
 
         <h1 className="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight max-w-4xl">
-          Фундамент под ключ в {region.prepositional}: плита, лента, сваи — цена и расчёт
+          {region.slug === 'spb'
+            ? 'Фундамент под ключ в Санкт-Петербурге — по районам города: плита, лента, сваи'
+            : `Фундамент под ключ в ${region.prepositional}: плита, лента, сваи — цена и расчёт`}
         </h1>
         <p className="mt-5 text-lg text-brand-mute max-w-3xl leading-relaxed">
           СК «Юрьевич» строит фундаменты под ключ в {region.prepositional}{region.localitiesText} — монолитную плиту, ленточный и свайный фундамент. Цена от <strong className="text-brand-ink">{region.priceFrom.toLocaleString('ru-RU')} ₽/м²</strong> в зависимости от грунта и типа фундамента. Дорога от базы: {region.drivingTime}.

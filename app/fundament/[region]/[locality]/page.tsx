@@ -2,7 +2,9 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { REGIONS, getRegionBySlug } from '@/lib/regions';
-import { LOCALITIES, getLocalityBySlug } from '@/lib/localities';
+import { LOCALITIES, getLocalityBySlug, getLocalitiesByRegion } from '@/lib/localities';
+import { getArticleBySlug } from '@/lib/articles';
+import { getArticleSlugsForRegion } from '@/lib/articleRegion';
 import { SITE } from '@/lib/site';
 import { buildGraph, buildBreadcrumb, buildFaqPage, ID } from '@/lib/schema';
 import { buildLocalitySnippet } from '@/lib/seo-snippets';
@@ -51,6 +53,13 @@ export default function LocalityPage({ params }: { params: Params }) {
 
   const canonicalUrl = `${SITE.url}/fundament/${region.slug}/${locality.slug}/`;
   const breadcrumbPath = `/fundament/${region.slug}/${locality.slug}/`;
+
+  // B7: боковая перелинковка — соседние посёлки района + статьи района (убираем тупики)
+  const siblings = getLocalitiesByRegion(region.slug).filter((l) => l.slug !== locality.slug);
+  const regionArticles = (getArticleSlugsForRegion(region.slug)
+    .map((s) => getArticleBySlug(s))
+    .filter(Boolean) as NonNullable<ReturnType<typeof getArticleBySlug>>[])
+    .slice(0, 3);
 
   const pageGraph = buildGraph(
     [
@@ -214,6 +223,56 @@ export default function LocalityPage({ params }: { params: Params }) {
           </div>
         </div>
       </section>
+
+      {(siblings.length > 0 || regionArticles.length > 0) && (
+        <section className="section">
+          <div className="container-x max-w-4xl">
+            {siblings.length > 0 && (
+              <>
+                <h2 className="text-2xl md:text-3xl font-extrabold text-brand-ink mb-4">
+                  Фундамент в соседних посёлках {region.shortName}
+                </h2>
+                <div className="grid gap-3 sm:grid-cols-2 mb-10">
+                  {siblings.map((l) => (
+                    <Link
+                      key={l.slug}
+                      href={`/fundament/${region.slug}/${l.slug}/`}
+                      className="block bg-white rounded-xl border border-brand-line p-4 hover:border-brand-ink hover:shadow-md transition"
+                    >
+                      <div className="font-bold text-brand-ink">Фундамент в {l.prepositional}</div>
+                      <div className="text-sm text-brand-mute mt-1">
+                        от {l.priceFrom.toLocaleString('ru-RU')} ₽/м² · {l.driveTime}
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </>
+            )}
+            {regionArticles.length > 0 && (
+              <>
+                <h2 className="text-2xl md:text-3xl font-extrabold text-brand-ink mb-4">
+                  Полезные статьи по {region.prepositional}
+                </h2>
+                <ul className="space-y-2 mb-8">
+                  {regionArticles.map((a) => (
+                    <li key={a.slug}>
+                      <Link
+                        href={`/blog/${a.slug}/`}
+                        className="text-brand-ink underline decoration-brand-line underline-offset-4 hover:decoration-brand-ink transition"
+                      >
+                        {a.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+            <Link href={`/fundament/${region.slug}/`} className="text-brand-ink font-semibold hover:underline">
+              ← Все посёлки и цены {region.shortName}
+            </Link>
+          </div>
+        </section>
+      )}
 
       <section className="section">
         <div className="container-x">

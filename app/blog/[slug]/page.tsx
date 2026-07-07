@@ -18,6 +18,9 @@ import LeadMagnetBanner from '@/components/LeadMagnetBanner';
 import ArticleFaq from '@/components/blog/ArticleFaq';
 import RelatedArticles from '@/components/blog/RelatedArticles';
 import CommercialLinks from '@/components/blog/CommercialLinks';
+import Link from 'next/link';
+import { getRegionSlugForArticle } from '@/lib/articleRegion';
+import { getRegionBySlug } from '@/lib/regions';
 
 type Params = { slug: string };
 
@@ -83,6 +86,9 @@ export default function ArticlePage({ params }: { params: Params }) {
 
   const related = getRelatedArticles(article.slug, 3);
   const canonicalUrl = `${SITE.url}/blog/${article.slug}/`;
+  // B6: точечная ссылка на район статьи (spoke → hub)
+  const regionSlug = getRegionSlugForArticle(article.slug);
+  const region = regionSlug ? getRegionBySlug(regionSlug) : undefined;
 
   // Единый @graph: Article + FAQPage + BreadcrumbList + (опц) HowTo
   const howto = getHowToForArticle(article.slug);
@@ -105,6 +111,22 @@ export default function ArticlePage({ params }: { params: Params }) {
       <ArticleFaq items={article.faq} />
       <div className="container-x"><LeadMagnetBanner source={`blog:${article.slug}`} /></div>
       <ArticleCta />
+      {region && (
+        <section className="container-x mt-12">
+          <Link
+            href={`/fundament/${region.slug}/`}
+            className="block rounded-2xl border-2 border-brand-ink bg-brand-sand/50 p-6 md:p-7 hover:shadow-lg transition no-underline"
+          >
+            <div className="text-sm font-semibold uppercase tracking-wider text-brand-mute mb-1">📍 Ваш район</div>
+            <div className="text-xl md:text-2xl font-extrabold text-brand-ink">
+              Строите фундамент в {region.prepositional}? →
+            </div>
+            <p className="mt-2 text-brand-mute">
+              Цены, грунты и онлайн-калькулятор специально для {region.prepositional} — от {region.priceFrom.toLocaleString('ru-RU')} ₽/м².
+            </p>
+          </Link>
+        </section>
+      )}
       <CommercialLinks />
       <RelatedArticles articles={related} />
     </>
