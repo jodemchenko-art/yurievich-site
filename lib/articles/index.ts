@@ -4,6 +4,7 @@ import { armirovaniePlitnogoFundamentaGazobeton } from './armirovanie-plitnogo-f
 import { armirovaniePlityPodDvuhetazhnyyGazobeton } from './armirovanie-plity-pod-dvuhetazhnyy-gazobeton';
 import { betonM300DlyaFundamentaRashodICena } from './beton-m300-dlya-fundamenta-rashod-i-cena';
 import { betonM300IliM350DlyaPlitnogoFundamenta } from './beton-m300-ili-m350-dlya-plitnogo-fundamenta';
+import { cenaFundamentaPodGazobeton100M2 } from './cena-fundamenta-pod-gazobeton-100-m2';
 import { cenaPlitySZameneiGruntaNaTorfeLeskolovo } from './cena-plity-s-zamenei-grunta-na-torfe-leskolovo';
 import { cenaVytorfovkiUchastka10SotokLeskolovo } from './cena-vytorfovki-uchastka-10-sotok-leskolovo';
 import { domIzGazobetonaLsrPodKlyuchCenaZaM2 } from './dom-iz-gazobetona-lsr-pod-klyuch-cena-za-m2';
@@ -11,6 +12,7 @@ import { domIzGazobetonaLsrPodKlyuchSpbLenoblast } from './dom-iz-gazobetona-lsr
 import { eppsPodPlitnymFundamentomNuzhenLi } from './epps-pod-plitnym-fundamentom-nuzhen-li';
 import { fundamentDalUsadkuChtoDelatGazobeton } from './fundament-dal-usadku-chto-delat-gazobeton';
 import { fundamentPlitaPesochnyyDibuny } from './fundament-plita-pesochnyy-dibuny';
+import { fundamentPodKarkasnyyDomSpb } from './fundament-pod-karkasnyy-dom-spb';
 import { gazobeton375Ili400MmStenaBezUtepleniyaSpb } from './gazobeton-375-ili-400-mm-stena-bez-utepleniya-spb';
 import { gazobetonD400IliD500Lenoblast } from './gazobeton-d400-ili-d500-lenoblast';
 import { gazobetonIliKarkasnikChtoDeshevleTeplee } from './gazobeton-ili-karkasnik-chto-deshevle-teplee';
@@ -67,6 +69,7 @@ import { puchinistyyGruntKakoyFundament } from './puchinistyy-grunt-kakoy-fundam
 import { skolkoArmaturyNaPlitu100M2 } from './skolko-armatury-na-plitu-100-m2';
 import { skolkoProsluzhitPlitnyyFundamentDoma } from './skolko-prosluzhit-plitnyy-fundament-doma';
 import { skolkoSohnetPlitnyyFundamentPeredKladkoyGazobetona } from './skolko-sohnet-plitnyy-fundament-pered-kladkoy-gazobetona';
+import { skolkoStoitZalitMonolitnuyuPlitu8h10Spb } from './skolko-stoit-zalit-monolitnuyu-plitu-8h10-spb';
 import { skolkoStoitZalitPlituPodGazobetonnyiDom100M2 } from './skolko-stoit-zalit-plitu-pod-gazobetonnyi-dom-100-m2';
 import { svaiIliPlitaPodGazobetonLeningradskayaOblast } from './svai-ili-plita-pod-gazobeton-leningradskaya-oblast';
 import { tolschinaPlityPodDomGazobeton8x10 } from './tolschina-plity-pod-dom-gazobeton-8x10';
@@ -84,6 +87,7 @@ export const ARTICLES: Article[] = [
   armirovaniePlityPodDvuhetazhnyyGazobeton,
   betonM300DlyaFundamentaRashodICena,
   betonM300IliM350DlyaPlitnogoFundamenta,
+  cenaFundamentaPodGazobeton100M2,
   cenaPlitySZameneiGruntaNaTorfeLeskolovo,
   cenaVytorfovkiUchastka10SotokLeskolovo,
   domIzGazobetonaLsrPodKlyuchCenaZaM2,
@@ -91,6 +95,7 @@ export const ARTICLES: Article[] = [
   eppsPodPlitnymFundamentomNuzhenLi,
   fundamentDalUsadkuChtoDelatGazobeton,
   fundamentPlitaPesochnyyDibuny,
+  fundamentPodKarkasnyyDomSpb,
   gazobeton375Ili400MmStenaBezUtepleniyaSpb,
   gazobetonD400IliD500Lenoblast,
   gazobetonIliKarkasnikChtoDeshevleTeplee,
@@ -147,6 +152,7 @@ export const ARTICLES: Article[] = [
   skolkoArmaturyNaPlitu100M2,
   skolkoProsluzhitPlitnyyFundamentDoma,
   skolkoSohnetPlitnyyFundamentPeredKladkoyGazobetona,
+  skolkoStoitZalitMonolitnuyuPlitu8h10Spb,
   skolkoStoitZalitPlituPodGazobetonnyiDom100M2,
   svaiIliPlitaPodGazobetonLeningradskayaOblast,
   tolschinaPlityPodDomGazobeton8x10,

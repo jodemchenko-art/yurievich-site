@@ -338,5 +338,20 @@
     "slug": "cena-plity-s-zamenei-grunta-na-torfe-leskolovo",
     "primary_query": "цена плиты с заменой грунта на торфе лесколово",
     "published_at": "2026-07-06"
+  },
+  {
+    "slug": "skolko-stoit-zalit-monolitnuyu-plitu-8h10-spb",
+    "primary_query": "сколько стоит залить монолитную плиту 8х10 под ключ спб",
+    "published_at": "2026-07-07"
+  },
+  {
+    "slug": "cena-fundamenta-pod-gazobeton-100-m2",
+    "primary_query": "цена фундамента под дом из газобетона 100 м2 под ключ",
+    "published_at": "2026-07-07"
+  },
+  {
+    "slug": "fundament-pod-karkasnyy-dom-spb",
+    "primary_query": "фундамент под каркасный дом цена под ключ спб",
+    "published_at": "2026-07-07"
   }
 ]
