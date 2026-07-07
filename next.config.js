@@ -48,6 +48,29 @@ const nextConfig = {
       },
     ];
   },
+
+  // === 301-редиректы: слитые дубли-статьи → канонические (SEO-чистка 07.07.2026) ===
+  // Старые адреса и их накопленный вес переходят на сильную статью.
+  async redirects() {
+    return [
+      { source: '/blog/uchastok-bolotistyi-fundament-chto-delat', destination: '/blog/uchastok-bolotistyy-pod-fundament-chto-delat/', permanent: true },
+      { source: '/blog/chto-delat-esli-fundament-dal-usadku-gazobeton', destination: '/blog/fundament-dal-usadku-chto-delat-gazobeton/', permanent: true },
+      { source: '/blog/monolitnaya-plita-250-mm-cena', destination: '/blog/monolitnaya-plita-250-mm-cena-za-m2/', permanent: true },
+      { source: '/blog/monolitnaya-plita-8h10-tsena-lenoblast', destination: '/blog/monolitnaya-plita-8x10-cena-lenoblast/', permanent: true },
+      { source: '/blog/dom-iz-gazobetona-lsr-pod-klyuch-tsena-za-kvadratny-metr', destination: '/blog/dom-iz-gazobetona-lsr-pod-klyuch-cena-za-m2/', permanent: true },
+      { source: '/blog/plita-pod-gazobeton-gatchina-cena', destination: '/blog/plitnyy-fundament-gatchina-cena/', permanent: true },
+      { source: '/blog/monolitnaya-plita-skolko-stoit-zalit-v-gatchine', destination: '/blog/plitnyy-fundament-gatchina-cena/', permanent: true },
+      { source: '/blog/plata-ili-lenta-pod-dom-iz-gazobetona', destination: '/blog/plita-ili-lenta-pod-gazobeton/', permanent: true },
+      { source: '/blog/plita-na-svayah-leskolovo-otzyvy', destination: '/blog/plita-na-svayah-leskolovo/', permanent: true },
+
+      // A4: города-дубли локалити → страница своего района (убрана каннибализация «фундамент {город}»)
+      { source: '/fundament/vsevolozhsk/vsevolozhsk-gorod', destination: '/fundament/vsevolozhsk/', permanent: true },
+      { source: '/fundament/gatchina/gatchina-gorod', destination: '/fundament/gatchina/', permanent: true },
+      { source: '/fundament/tosno/tosno-gorod', destination: '/fundament/tosno/', permanent: true },
+      { source: '/fundament/vyborg/vyborg-gorod', destination: '/fundament/vyborg/', permanent: true },
+      { source: '/fundament/priozersk/priozersk-gorod', destination: '/fundament/priozersk/', permanent: true },
+    ];
+  },
 };
 
 module.exports = nextConfig;
