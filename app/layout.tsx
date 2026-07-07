@@ -116,8 +116,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/favicon.ico" />
 
         {/* Preconnect к критичным внешним доменам — экономит 100-300мс на RTT */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        {/* Самохост Manrope (без Google Fonts — душат в РФ). Предзагрузка веса заголовков H1 */}
+        <link rel="preload" as="font" type="font/woff2" href="/fonts/manrope-800-cyrillic.woff2" crossOrigin="anonymous" />
+        <link rel="preload" as="font" type="font/woff2" href="/fonts/manrope-800-latin.woff2" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://mc.yandex.ru" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
