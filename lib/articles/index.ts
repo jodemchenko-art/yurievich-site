@@ -12,6 +12,7 @@ import { domIzGazobetonaLsrPodKlyuchSpbLenoblast } from './dom-iz-gazobetona-lsr
 import { eppsPodPlitnymFundamentomNuzhenLi } from './epps-pod-plitnym-fundamentom-nuzhen-li';
 import { fundamentDalUsadkuChtoDelatGazobeton } from './fundament-dal-usadku-chto-delat-gazobeton';
 import { fundamentPlitaPesochnyyDibuny } from './fundament-plita-pesochnyy-dibuny';
+import { fundamentPodBanyuIzGazobetonaSpb } from './fundament-pod-banyu-iz-gazobetona-spb';
 import { fundamentPodKarkasnyyDomSpb } from './fundament-pod-karkasnyy-dom-spb';
 import { gazobeton375Ili400MmStenaBezUtepleniyaSpb } from './gazobeton-375-ili-400-mm-stena-bez-utepleniya-spb';
 import { gazobetonD400IliD500Lenoblast } from './gazobeton-d400-ili-d500-lenoblast';
@@ -72,10 +73,12 @@ import { skolkoSohnetPlitnyyFundamentPeredKladkoyGazobetona } from './skolko-soh
 import { skolkoStoitZalitMonolitnuyuPlitu8h10Spb } from './skolko-stoit-zalit-monolitnuyu-plitu-8h10-spb';
 import { skolkoStoitZalitPlituPodGazobetonnyiDom100M2 } from './skolko-stoit-zalit-plitu-pod-gazobetonnyi-dom-100-m2';
 import { svaiIliPlitaPodGazobetonLeningradskayaOblast } from './svai-ili-plita-pod-gazobeton-leningradskaya-oblast';
+import { svaynoRostverkovyyFundamentPodKlyuchCenaLeningradskayaOblast } from './svayno-rostverkovyy-fundament-pod-klyuch-cena-leningradskaya-oblast';
 import { tolschinaPlityPodDomGazobeton8x10 } from './tolschina-plity-pod-dom-gazobeton-8x10';
 import { torfNaUchastkeKakStroitDom } from './torf-na-uchastke-kak-stroit-dom';
 import { treschinyVFundamentePrichinyChtoDelat } from './treschiny-v-fundamente-prichiny-chto-delat';
 import { uchastokBolotistyyPodFundamentChtoDelat } from './uchastok-bolotistyy-pod-fundament-chto-delat';
+import { uteplyonnayaShvedskayaPlitaUshpSpb } from './uteplyonnaya-shvedskaya-plita-ushp-spb';
 import { vytorfovkaUchastkaLeskolovoCena } from './vytorfovka-uchastka-leskolovo-cena';
 
 // Реестр статей блога. Авто-сгенерирован import-articles.js
@@ -95,6 +98,7 @@ export const ARTICLES: Article[] = [
   eppsPodPlitnymFundamentomNuzhenLi,
   fundamentDalUsadkuChtoDelatGazobeton,
   fundamentPlitaPesochnyyDibuny,
+  fundamentPodBanyuIzGazobetonaSpb,
   fundamentPodKarkasnyyDomSpb,
   gazobeton375Ili400MmStenaBezUtepleniyaSpb,
   gazobetonD400IliD500Lenoblast,
@@ -155,10 +159,12 @@ export const ARTICLES: Article[] = [
   skolkoStoitZalitMonolitnuyuPlitu8h10Spb,
   skolkoStoitZalitPlituPodGazobetonnyiDom100M2,
   svaiIliPlitaPodGazobetonLeningradskayaOblast,
+  svaynoRostverkovyyFundamentPodKlyuchCenaLeningradskayaOblast,
   tolschinaPlityPodDomGazobeton8x10,
   torfNaUchastkeKakStroitDom,
   treschinyVFundamentePrichinyChtoDelat,
   uchastokBolotistyyPodFundamentChtoDelat,
+  uteplyonnayaShvedskayaPlitaUshpSpb,
   vytorfovkaUchastkaLeskolovoCena,
 ];
 

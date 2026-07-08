@@ -353,5 +353,20 @@
     "slug": "fundament-pod-karkasnyy-dom-spb",
     "primary_query": "фундамент под каркасный дом цена под ключ спб",
     "published_at": "2026-07-07"
+  },
+  {
+    "slug": "fundament-pod-banyu-iz-gazobetona-spb",
+    "primary_query": "фундамент под баню из газобетона цена спб",
+    "published_at": "2026-07-08"
+  },
+  {
+    "slug": "uteplyonnaya-shvedskaya-plita-ushp-spb",
+    "primary_query": "утеплённая шведская плита ушп цена под ключ спб за м2",
+    "published_at": "2026-07-08"
+  },
+  {
+    "slug": "svayno-rostverkovyy-fundament-pod-klyuch-cena-leningradskaya-oblast",
+    "primary_query": "свайно-ростверковый фундамент под ключ цена ленинградская область",
+    "published_at": "2026-07-08"
   }
 ]
