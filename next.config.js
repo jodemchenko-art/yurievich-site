@@ -63,6 +63,15 @@ const nextConfig = {
       { source: '/blog/plata-ili-lenta-pod-dom-iz-gazobetona', destination: '/blog/plita-ili-lenta-pod-gazobeton/', permanent: true },
       { source: '/blog/plita-na-svayah-leskolovo-otzyvy', destination: '/blog/plita-na-svayah-leskolovo/', permanent: true },
 
+      // 08.07: near-дубли автопилота -> канон (SEO-чистка)
+      { source: '/blog/plitnyi-fundament-gazobeton-dom-tolshchina', destination: '/blog/plitnyy-fundament-pod-gazobeton-tolschina-armirovanie/', permanent: true },
+      { source: '/blog/armirovanie-plitnogo-fundamenta-gazobeton', destination: '/blog/armirovanie-plity-pod-dvuhetazhnyy-gazobeton/', permanent: true },
+      { source: '/blog/cena-vytorfovki-uchastka-10-sotok-leskolovo', destination: '/blog/vytorfovka-uchastka-leskolovo-cena/', permanent: true },
+      { source: '/blog/skolko-stoit-zalit-monolitnuyu-plitu-8h10-spb', destination: '/blog/monolitnaya-plita-8x10-cena-lenoblast/', permanent: true },
+      { source: '/blog/dom-iz-gazobetona-lsr-pod-klyuch-spb-lenoblast', destination: '/blog/dom-iz-gazobetona-lsr-pod-klyuch-cena-za-m2/', permanent: true },
+      { source: '/blog/skolko-stoit-zalit-plitu-pod-gazobetonnyi-dom-100-m2', destination: '/blog/plita-pod-gazobeton-100m2-cena-pod-klyuch/', permanent: true },
+      { source: '/blog/cena-fundamenta-pod-gazobeton-100-m2', destination: '/blog/plita-pod-gazobeton-100m2-cena-pod-klyuch/', permanent: true },
+
       // A4: города-дубли локалити → страница своего района (убрана каннибализация «фундамент {город}»)
       { source: '/fundament/vsevolozhsk/vsevolozhsk-gorod', destination: '/fundament/vsevolozhsk/', permanent: true },
       { source: '/fundament/gatchina/gatchina-gorod', destination: '/fundament/gatchina/', permanent: true },

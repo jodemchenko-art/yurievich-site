@@ -1,14 +1,10 @@
 import type { Article } from './_types';
 import { armaturaA500sD12RashodNaPlitu } from './armatura-a500s-d12-rashod-na-plitu';
-import { armirovaniePlitnogoFundamentaGazobeton } from './armirovanie-plitnogo-fundamenta-gazobeton';
 import { armirovaniePlityPodDvuhetazhnyyGazobeton } from './armirovanie-plity-pod-dvuhetazhnyy-gazobeton';
 import { betonM300DlyaFundamentaRashodICena } from './beton-m300-dlya-fundamenta-rashod-i-cena';
 import { betonM300IliM350DlyaPlitnogoFundamenta } from './beton-m300-ili-m350-dlya-plitnogo-fundamenta';
-import { cenaFundamentaPodGazobeton100M2 } from './cena-fundamenta-pod-gazobeton-100-m2';
 import { cenaPlitySZameneiGruntaNaTorfeLeskolovo } from './cena-plity-s-zamenei-grunta-na-torfe-leskolovo';
-import { cenaVytorfovkiUchastka10SotokLeskolovo } from './cena-vytorfovki-uchastka-10-sotok-leskolovo';
 import { domIzGazobetonaLsrPodKlyuchCenaZaM2 } from './dom-iz-gazobetona-lsr-pod-klyuch-cena-za-m2';
-import { domIzGazobetonaLsrPodKlyuchSpbLenoblast } from './dom-iz-gazobetona-lsr-pod-klyuch-spb-lenoblast';
 import { eppsPodPlitnymFundamentomNuzhenLi } from './epps-pod-plitnym-fundamentom-nuzhen-li';
 import { fundamentDalUsadkuChtoDelatGazobeton } from './fundament-dal-usadku-chto-delat-gazobeton';
 import { fundamentPlitaPesochnyyDibuny } from './fundament-plita-pesochnyy-dibuny';
@@ -43,7 +39,6 @@ import { plitaPodGazobeton100m2CenaPodKlyuch } from './plita-pod-gazobeton-100m2
 import { plitaPoplylaChtoDelat } from './plita-poplyla-chto-delat';
 import { plitaSRebramiPodGazobetonLenoblast } from './plita-s-rebrami-pod-gazobeton-lenoblast';
 import { plitnyiFundamentGazobetonDomLeningradskayaOblastOtzyvy } from './plitnyi-fundament-gazobeton-dom-leningradskaya-oblast-otzyvy';
-import { plitnyiFundamentGazobetonDomTolshchina } from './plitnyi-fundament-gazobeton-dom-tolshchina';
 import { plitnyiFundamentPodGazobetonCena } from './plitnyi-fundament-pod-gazobeton-cena';
 import { plitnyyFundament10x10CenaPodKlyuchSpb } from './plitnyy-fundament-10x10-cena-pod-klyuch-spb';
 import { plitnyyFundament9x12PodGazobetonCena } from './plitnyy-fundament-9x12-pod-gazobeton-cena';
@@ -70,8 +65,6 @@ import { puchinistyyGruntKakoyFundament } from './puchinistyy-grunt-kakoy-fundam
 import { skolkoArmaturyNaPlitu100M2 } from './skolko-armatury-na-plitu-100-m2';
 import { skolkoProsluzhitPlitnyyFundamentDoma } from './skolko-prosluzhit-plitnyy-fundament-doma';
 import { skolkoSohnetPlitnyyFundamentPeredKladkoyGazobetona } from './skolko-sohnet-plitnyy-fundament-pered-kladkoy-gazobetona';
-import { skolkoStoitZalitMonolitnuyuPlitu8h10Spb } from './skolko-stoit-zalit-monolitnuyu-plitu-8h10-spb';
-import { skolkoStoitZalitPlituPodGazobetonnyiDom100M2 } from './skolko-stoit-zalit-plitu-pod-gazobetonnyi-dom-100-m2';
 import { svaiIliPlitaPodGazobetonLeningradskayaOblast } from './svai-ili-plita-pod-gazobeton-leningradskaya-oblast';
 import { svaynoRostverkovyyFundamentPodKlyuchCenaLeningradskayaOblast } from './svayno-rostverkovyy-fundament-pod-klyuch-cena-leningradskaya-oblast';
 import { tolschinaPlityPodDomGazobeton8x10 } from './tolschina-plity-pod-dom-gazobeton-8x10';
@@ -86,15 +79,11 @@ import { vytorfovkaUchastkaLeskolovoCena } from './vytorfovka-uchastka-leskolovo
 
 export const ARTICLES: Article[] = [
   armaturaA500sD12RashodNaPlitu,
-  armirovaniePlitnogoFundamentaGazobeton,
   armirovaniePlityPodDvuhetazhnyyGazobeton,
   betonM300DlyaFundamentaRashodICena,
   betonM300IliM350DlyaPlitnogoFundamenta,
-  cenaFundamentaPodGazobeton100M2,
   cenaPlitySZameneiGruntaNaTorfeLeskolovo,
-  cenaVytorfovkiUchastka10SotokLeskolovo,
   domIzGazobetonaLsrPodKlyuchCenaZaM2,
-  domIzGazobetonaLsrPodKlyuchSpbLenoblast,
   eppsPodPlitnymFundamentomNuzhenLi,
   fundamentDalUsadkuChtoDelatGazobeton,
   fundamentPlitaPesochnyyDibuny,
@@ -129,7 +118,6 @@ export const ARTICLES: Article[] = [
   plitaPoplylaChtoDelat,
   plitaSRebramiPodGazobetonLenoblast,
   plitnyiFundamentGazobetonDomLeningradskayaOblastOtzyvy,
-  plitnyiFundamentGazobetonDomTolshchina,
   plitnyiFundamentPodGazobetonCena,
   plitnyyFundament10x10CenaPodKlyuchSpb,
   plitnyyFundament9x12PodGazobetonCena,
@@ -156,8 +144,6 @@ export const ARTICLES: Article[] = [
   skolkoArmaturyNaPlitu100M2,
   skolkoProsluzhitPlitnyyFundamentDoma,
   skolkoSohnetPlitnyyFundamentPeredKladkoyGazobetona,
-  skolkoStoitZalitMonolitnuyuPlitu8h10Spb,
-  skolkoStoitZalitPlituPodGazobetonnyiDom100M2,
   svaiIliPlitaPodGazobetonLeningradskayaOblast,
   svaynoRostverkovyyFundamentPodKlyuchCenaLeningradskayaOblast,
   tolschinaPlityPodDomGazobeton8x10,
