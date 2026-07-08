@@ -91,6 +91,7 @@ export function buildSiteEntities() {
         SITE.telegram,
         SITE.telegramChannel,
         SITE.whatsapp,
+        (SITE as any).vk,
         'https://yandex.ru/maps/org/69393767573',
       ].filter(Boolean),
       hasMap: 'https://yandex.ru/maps/org/69393767573',

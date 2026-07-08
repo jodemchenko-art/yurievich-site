@@ -83,6 +83,18 @@ export default function Contacts() {
                 </div>
               </a>
 
+              <a href={SITE.vk} target="_blank" rel="noopener" className="flex items-center gap-4 group">
+                <div className="h-14 w-14 rounded-2xl bg-[#0077FF] flex items-center justify-center text-white text-xl font-extrabold">
+                  VK
+                </div>
+                <div>
+                  <div className="text-xs text-brand-mute uppercase tracking-wider">ВКонтакте</div>
+                  <div className="text-lg font-bold group-hover:text-brand-red transition">
+                    Сообщество компании →
+                  </div>
+                </div>
+              </a>
+
               <div className="flex items-center gap-4">
                 <div className="h-14 w-14 rounded-2xl bg-brand-ink flex items-center justify-center text-white text-xl">
                   📍

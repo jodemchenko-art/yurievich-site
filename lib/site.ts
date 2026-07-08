@@ -20,6 +20,7 @@ export const SITE = {
   whatsapp: 'https://wa.me/79118300110',
   telegram: 'https://t.me/YuraDem01',
   telegramChannel: 'https://t.me/sk_yurievich',
+  vk: 'https://vk.ru/lenbeton78', // сообщество компании ВКонтакте (Ленбетон78)
 
   // === Location ===
   city: 'Санкт-Петербург',

@@ -66,12 +66,14 @@ export default function Footer() {
               </a>
             </li>
             <li>База: {SITE.baseLocation}</li>
-            <li className="flex gap-3 pt-2">
+            <li className="flex flex-wrap gap-3 pt-2">
               <a href={SITE.whatsapp} target="_blank" rel="noopener" className="hover:text-white transition">WhatsApp</a>
               <span>·</span>
               <a href={SITE.telegram} target="_blank" rel="noopener" className="hover:text-white transition">Telegram</a>
               <span>·</span>
               <a href={SITE.telegramChannel} target="_blank" rel="noopener" className="hover:text-white transition">Канал стройки</a>
+              <span>·</span>
+              <a href={SITE.vk} target="_blank" rel="noopener" className="hover:text-white transition">ВКонтакте</a>
             </li>
           </ul>
         </div>
