@@ -23,6 +23,7 @@ import { monolitnayaPlita12x12CenaSpb } from './monolitnaya-plita-12x12-cena-spb
 import { monolitnayaPlita250MmCenaZaM2 } from './monolitnaya-plita-250-mm-cena-za-m2';
 import { monolitnayaPlita8x10CenaLenoblast } from './monolitnaya-plita-8x10-cena-lenoblast';
 import { monolitnayaPlitaIliUshpPodGazobeton } from './monolitnaya-plita-ili-ushp-pod-gazobeton';
+import { monolitnayaPlitaTsenaRabotaSpb } from './monolitnaya-plita-tsena-rabota-spb';
 import { monolitnyyPlitnyyFundamentSpbPodKlyuch } from './monolitnyy-plitnyy-fundament-spb-pod-klyuch';
 import { mzlfIliPlitaPodGazobeton } from './mzlf-ili-plita-pod-gazobeton';
 import { osenyuZalivatPlitnyyFundamentIliVesnoy } from './osenyu-zalivat-plitnyy-fundament-ili-vesnoy';
@@ -102,6 +103,7 @@ export const ARTICLES: Article[] = [
   monolitnayaPlita250MmCenaZaM2,
   monolitnayaPlita8x10CenaLenoblast,
   monolitnayaPlitaIliUshpPodGazobeton,
+  monolitnayaPlitaTsenaRabotaSpb,
   monolitnyyPlitnyyFundamentSpbPodKlyuch,
   mzlfIliPlitaPodGazobeton,
   osenyuZalivatPlitnyyFundamentIliVesnoy,
