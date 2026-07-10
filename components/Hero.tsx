@@ -3,10 +3,10 @@ import { SITE } from '@/lib/site';
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-brand-ink text-white min-h-[88vh] flex items-center">
-      {/* Photo background */}
+      {/* Photo background (виден до/вместо видео, с медленным Ken Burns) */}
       <div
         aria-hidden
-        className="absolute inset-0 bg-cover bg-center"
+        className="hero-kenburns absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/images/stock/p37733181.jpg')" }}
       />
 
@@ -18,10 +18,9 @@ export default function Hero() {
         playsInline
         preload="metadata"
         poster="/images/stock/p37733181.jpg"
-        className="absolute inset-0 h-full w-full object-cover"
+        className="hero-video absolute inset-0 h-full w-full object-cover"
       >
         <source src="/video/hero.mp4" type="video/mp4" />
-        <source src="/video/hero.webm" type="video/webm" />
       </video>
 
       {/* Heavy dark overlay — make text always readable */}

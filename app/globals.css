@@ -240,3 +240,27 @@
 .prose-yur > *:last-child {
   margin-bottom: 0;
 }
+
+/* Hero: медленный «дышащий» Ken Burns на фон-постер (виден до/вместо видео) */
+@keyframes heroKenBurns {
+  0%   { transform: scale(1.02) translate3d(0, 0, 0); }
+  100% { transform: scale(1.12) translate3d(-1.5%, -1%, 0); }
+}
+.hero-kenburns {
+  animation: heroKenBurns 26s ease-in-out infinite alternate;
+  will-change: transform;
+}
+/* Плавное проявление hero-видео поверх постера (чистый CSS, без JS) */
+@keyframes heroVideoFade {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+.hero-video {
+  opacity: 1;
+  animation: heroVideoFade 1.6s ease-in-out 0.2s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-kenburns { animation: none; }
+  .hero-video { animation: none; }
+}
