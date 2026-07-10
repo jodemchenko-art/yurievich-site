@@ -221,8 +221,8 @@ export default function Calculator({
                     material === m ? 'border-brand-ink bg-brand-sand' : 'border-brand-line hover:border-brand-ink/40'
                   }`}
                 >
-                  <div className="font-bold">{MATERIAL_LOAD[m].name}</div>
-                  <div className="text-xs text-brand-mute mt-0.5">плита {MATERIAL_LOAD[m].thicknessMM} мм</div>
+                  <span className="block font-bold">{MATERIAL_LOAD[m].name}</span>
+                  <span className="block text-xs text-brand-mute mt-0.5">плита {MATERIAL_LOAD[m].thicknessMM} мм</span>
                 </button>
               ))}
             </div>
@@ -240,8 +240,8 @@ export default function Calculator({
                     ground === g ? 'border-brand-ink bg-brand-sand' : 'border-brand-line hover:border-brand-ink/40'
                   }`}
                 >
-                  <div className="font-bold text-sm">{GROUND_LABEL[g].name}</div>
-                  <div className="text-xs text-brand-mute mt-0.5">{GROUND_LABEL[g].note}</div>
+                  <span className="block font-bold text-sm">{GROUND_LABEL[g].name}</span>
+                  <span className="block text-xs text-brand-mute mt-0.5">{GROUND_LABEL[g].note}</span>
                 </button>
               ))}
             </div>

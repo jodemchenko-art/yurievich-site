@@ -160,7 +160,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <img
                   src={`https://mc.yandex.ru/watch/${SITE.yandexMetrikaId}`}
                   style={{ position: 'absolute', left: '-9999px' }}
-                  alt=""
+                  alt="Яндекс.Метрика"
                 />
               </div>
             </noscript>
