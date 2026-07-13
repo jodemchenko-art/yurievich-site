@@ -8,6 +8,7 @@ import { domIzGazobetonaLsrPodKlyuchCenaZaM2 } from './dom-iz-gazobetona-lsr-pod
 import { eppsPodPlitnymFundamentomNuzhenLi } from './epps-pod-plitnym-fundamentom-nuzhen-li';
 import { fundamentDalUsadkuChtoDelatGazobeton } from './fundament-dal-usadku-chto-delat-gazobeton';
 import { fundamentPlitaPesochnyyDibuny } from './fundament-plita-pesochnyy-dibuny';
+import { fundamentPlitaPodGarazhSpb } from './fundament-plita-pod-garazh-spb';
 import { fundamentPodBanyuIzGazobetonaSpb } from './fundament-pod-banyu-iz-gazobetona-spb';
 import { fundamentPodKarkasnyyDomSpb } from './fundament-pod-karkasnyy-dom-spb';
 import { gazobeton375Ili400MmStenaBezUtepleniyaSpb } from './gazobeton-375-ili-400-mm-stena-bez-utepleniya-spb';
@@ -89,6 +90,7 @@ export const ARTICLES: Article[] = [
   eppsPodPlitnymFundamentomNuzhenLi,
   fundamentDalUsadkuChtoDelatGazobeton,
   fundamentPlitaPesochnyyDibuny,
+  fundamentPlitaPodGarazhSpb,
   fundamentPodBanyuIzGazobetonaSpb,
   fundamentPodKarkasnyyDomSpb,
   gazobeton375Ili400MmStenaBezUtepleniyaSpb,
