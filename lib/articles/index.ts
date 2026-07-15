@@ -78,6 +78,7 @@ import { treschinyVFundamentePrichinyChtoDelat } from './treschiny-v-fundamente-
 import { uchastokBolotistyyPodFundamentChtoDelat } from './uchastok-bolotistyy-pod-fundament-chto-delat';
 import { uteplyonnayaShvedskayaPlitaUshpSpb } from './uteplyonnaya-shvedskaya-plita-ushp-spb';
 import { vytorfovkaUchastkaLeskolovoCena } from './vytorfovka-uchastka-leskolovo-cena';
+import { zakazatZalivkuFundamentaPodKlyuchSpbNedorogo } from './zakazat-zalivku-fundamenta-pod-klyuch-spb-nedorogo';
 
 // Реестр статей блога. Авто-сгенерирован import-articles.js
 // Свежие статьи добавляются сюда автоматически.
@@ -162,6 +163,7 @@ export const ARTICLES: Article[] = [
   uchastokBolotistyyPodFundamentChtoDelat,
   uteplyonnayaShvedskayaPlitaUshpSpb,
   vytorfovkaUchastkaLeskolovoCena,
+  zakazatZalivkuFundamentaPodKlyuchSpbNedorogo,
 ];
 
 export function getArticleBySlug(slug: string): Article | undefined {
