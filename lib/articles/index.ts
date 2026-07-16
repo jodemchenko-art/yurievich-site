@@ -10,6 +10,7 @@ import { fundamentDalUsadkuChtoDelatGazobeton } from './fundament-dal-usadku-cht
 import { fundamentPlitaPesochnyyDibuny } from './fundament-plita-pesochnyy-dibuny';
 import { fundamentPlitaPodGarazhSpb } from './fundament-plita-pod-garazh-spb';
 import { fundamentPodBanyuIzGazobetonaSpb } from './fundament-pod-banyu-iz-gazobetona-spb';
+import { fundamentPodDvuhetazhnyyDomIzGazobetonaCena } from './fundament-pod-dvuhetazhnyy-dom-iz-gazobetona-cena';
 import { fundamentPodKarkasnyyDomSpb } from './fundament-pod-karkasnyy-dom-spb';
 import { gazobeton375Ili400MmStenaBezUtepleniyaSpb } from './gazobeton-375-ili-400-mm-stena-bez-utepleniya-spb';
 import { gazobetonD400IliD500Lenoblast } from './gazobeton-d400-ili-d500-lenoblast';
@@ -95,6 +96,7 @@ export const ARTICLES: Article[] = [
   fundamentPlitaPesochnyyDibuny,
   fundamentPlitaPodGarazhSpb,
   fundamentPodBanyuIzGazobetonaSpb,
+  fundamentPodDvuhetazhnyyDomIzGazobetonaCena,
   fundamentPodKarkasnyyDomSpb,
   gazobeton375Ili400MmStenaBezUtepleniyaSpb,
   gazobetonD400IliD500Lenoblast,
