@@ -23,6 +23,7 @@ export default function LeadMagnetBanner({
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [consent, setConsent] = useState(false);
 
   const PDF_URL = '/lead-magnets/cheklist-fundament-2026.pdf';
 
@@ -30,6 +31,10 @@ export default function LeadMagnetBanner({
     e.preventDefault();
     if (phone.replace(/\D/g, '').length < 10) {
       setError('Введите телефон (мин. 10 цифр)');
+      return;
+    }
+    if (!consent) {
+      setError('Отметьте согласие на обработку персональных данных');
       return;
     }
     setError(null);
@@ -121,10 +126,22 @@ export default function LeadMagnetBanner({
             required
           />
           {error && <p className="text-sm text-red-300">{error}</p>}
+          <label className="flex items-start gap-2 text-xs text-white/70">
+            <input
+              type="checkbox"
+              checked={consent}
+              onChange={(e) => setConsent(e.target.checked)}
+              className="mt-0.5"
+            />
+            <span>
+              Согласен на обработку персональных данных согласно{' '}
+              <a href="/privacy" className="underline text-white">политике</a>.
+            </span>
+          </label>
           <button
             type="submit"
-            disabled={loading}
-            className="w-full px-6 py-4 rounded-xl bg-white text-brand-ink font-extrabold text-lg hover:bg-white/90 transition disabled:opacity-50"
+            disabled={loading || !consent}
+            className="w-full px-6 py-4 rounded-xl bg-white text-brand-ink font-extrabold text-lg hover:bg-white/90 transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? 'Готовим...' : '📥 Скачать чек-лист'}
           </button>

@@ -20,6 +20,7 @@ export default function LeadPopup() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [consent, setConsent] = useState(false);
 
   useEffect(() => {
     // Не показывать если юзер уже закрыл в этой сессии
@@ -63,6 +64,10 @@ export default function LeadPopup() {
     e.preventDefault();
     if (!name.trim() || phone.replace(/\D/g, '').length < 10) {
       setError('Заполните имя и телефон (мин. 10 цифр)');
+      return;
+    }
+    if (!consent) {
+      setError('Отметьте согласие на обработку персональных данных');
       return;
     }
     setError(null);
@@ -169,10 +174,23 @@ export default function LeadPopup() {
                 <p className="mt-3 text-sm text-red-600">{error}</p>
               )}
 
+              <label className="flex items-start gap-2 text-xs text-brand-mute mt-4">
+                <input
+                  type="checkbox"
+                  checked={consent}
+                  onChange={(e) => setConsent(e.target.checked)}
+                  className="mt-0.5"
+                />
+                <span>
+                  Согласен на обработку персональных данных согласно{' '}
+                  <a href="/privacy" className="underline">политике</a>.
+                </span>
+              </label>
+
               <button
                 type="submit"
-                disabled={loading}
-                className="mt-4 w-full px-6 py-4 rounded-xl bg-brand-ink text-white font-extrabold text-lg hover:bg-brand-ink/90 transition disabled:opacity-50"
+                disabled={loading || !consent}
+                className="mt-4 w-full px-6 py-4 rounded-xl bg-brand-ink text-white font-extrabold text-lg hover:bg-brand-ink/90 transition disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? 'Отправляем...' : 'Получить расчёт'}
               </button>

@@ -9,10 +9,11 @@ export default function Contacts() {
   const [comment, setComment] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [consent, setConsent] = useState(false);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !phone.trim()) return;
+    if (!name.trim() || !phone.trim() || !consent) return;
     setLoading(true);
     try {
       await fetch('/api/lead/', {
@@ -162,18 +163,26 @@ export default function Contacts() {
                     </label>
                   </div>
 
+                  <label className="flex items-start gap-2 text-xs text-brand-mute mt-4">
+                    <input
+                      type="checkbox"
+                      checked={consent}
+                      onChange={(e) => setConsent(e.target.checked)}
+                      className="mt-0.5"
+                    />
+                    <span>
+                      Согласен на обработку персональных данных согласно{' '}
+                      <a href="/privacy" className="underline">политике обработки данных</a>.
+                    </span>
+                  </label>
+
                   <button
                     type="submit"
-                    disabled={loading || !name.trim() || !phone.trim()}
-                    className="mt-6 w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled={loading || !name.trim() || !phone.trim() || !consent}
+                    className="mt-4 w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {loading ? 'Отправляем…' : 'Получить смету бесплатно'}
                   </button>
-
-                  <p className="mt-3 text-xs text-brand-mute text-center">
-                    Нажимая, вы соглашаетесь с{' '}
-                    <a href="/privacy" className="underline">политикой обработки данных</a>
-                  </p>
                 </form>
               )}
             </div>
