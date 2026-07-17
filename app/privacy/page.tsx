@@ -26,8 +26,8 @@ export default function PrivacyPage() {
         «О персональных данных».
       </p>
       <p className="mt-3 text-brand-mute">
-        <strong>Оператор персональных данных:</strong> {SITE.name} (строительная компания «Юрьевич»,
-        далее — «Оператор»).<br />
+        <strong>Оператор персональных данных:</strong> {SITE.name} (строительная компания «Юрьевич»),
+        Индивидуальный предприниматель, ОГРНИП 321010000000886, ИНН 010403581080 (далее — «Оператор»).<br />
         Адрес: 198328, г. Санкт-Петербург, ул. Пионерстроя, д. 23Б.<br />
         Телефон: <a href={`tel:${SITE.phoneRaw}`} className="underline">{SITE.phone}</a>.<br />
         Telegram: <a href={SITE.telegram} className="underline">@YuraDem01</a>,{' '}
