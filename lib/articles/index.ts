@@ -30,6 +30,7 @@ import { monolitnyyPlitnyyFundamentSpbPodKlyuch } from './monolitnyy-plitnyy-fun
 import { mzlfIliPlitaPodGazobeton } from './mzlf-ili-plita-pod-gazobeton';
 import { osenyuZalivatPlitnyyFundamentIliVesnoy } from './osenyu-zalivat-plitnyy-fundament-ili-vesnoy';
 import { otdelkaDomaIzGazobetona100m2Cena } from './otdelka-doma-iz-gazobetona-100m2-cena';
+import { plita10x10350mmDvoynoeArmirovanieCena } from './plita-10x10-350mm-dvoynoe-armirovanie-cena';
 import { plita10x12PodGazobetonCena300mm } from './plita-10x12-pod-gazobeton-cena-300mm';
 import { plita12x12PodGazobetonCenaPodKlyuch } from './plita-12x12-pod-gazobeton-cena-pod-klyuch';
 import { plita250Ili300MmPodGazobeton2Etazha } from './plita-250-ili-300-mm-pod-gazobeton-2-etazha';
@@ -116,6 +117,7 @@ export const ARTICLES: Article[] = [
   mzlfIliPlitaPodGazobeton,
   osenyuZalivatPlitnyyFundamentIliVesnoy,
   otdelkaDomaIzGazobetona100m2Cena,
+  plita10x10350mmDvoynoeArmirovanieCena,
   plita10x12PodGazobetonCena300mm,
   plita12x12PodGazobetonCenaPodKlyuch,
   plita250Ili300MmPodGazobeton2Etazha,
