@@ -113,12 +113,12 @@ export function buildRegionSnippet(region: {
   drivingTime?: string;
 }) {
   const priceK = Math.round(region.priceFrom / 100) / 10; // 7500 → 7.5
-  const title = `Фундамент в ${region.prepositional} от ${region.priceFrom.toLocaleString('ru-RU')} ₽/м² ★5 · СК Юрьевич`;
+  const title = `Фундамент под ключ в ${region.prepositional} от ${region.priceFrom.toLocaleString('ru-RU')} ₽/м² ★5`;
 
   const description =
-    `Фундамент под ключ в ${region.prepositional}: плита, лента, сваи. ` +
+    `Монолитный фундамент под ключ в ${region.prepositional} на пучинистых грунтах: плита, лента, сваи. ` +
     `Цена от ${priceK} тыс ₽/м². ` +
-    `Выезд бесплатно. 239 объектов, гарантия 5 лет. ☎ ${SITE.phone}`;
+    `Выезд инженера бесплатно, гарантия 5 лет. ☎ ${SITE.phone}`;
 
   return {
     title: enhanceTitle(title, 'geo'),
@@ -135,12 +135,12 @@ export function buildLocalitySnippet(locality: {
   priceFrom: number;
 }, region: { shortName: string }) {
   const priceK = Math.round(locality.priceFrom / 100) / 10;
-  const title = `Фундамент в ${locality.prepositional} от ${locality.priceFrom.toLocaleString('ru-RU')} ₽/м² ★5 · ${region.shortName}`;
+  const title = `Фундамент под ключ в ${locality.prepositional} от ${locality.priceFrom.toLocaleString('ru-RU')} ₽/м² ★5`;
 
   const description =
-    `Плитный фундамент в ${locality.prepositional} под газобетон. ` +
-    `Цена от ${priceK} тыс ₽/м² под ключ. ` +
-    `Геология грунтов, выезд бесплатно. 239 объектов, ★5 на Авито. ☎ ${SITE.phone}`;
+    `Монолитный фундамент под ключ в ${locality.prepositional} на пучинистых грунтах, под газобетон. ` +
+    `Цена от ${priceK} тыс ₽/м². ` +
+    `Геология грунтов, выезд инженера бесплатно. ★5 на Авито. ☎ ${SITE.phone}`;
 
   return {
     title: enhanceTitle(title, 'geo'),
