@@ -1,15 +1,17 @@
 import { SITE } from '@/lib/site';
 
+// Реальные объекты (фото и данные из сообщества ВК «Ленбетон78»)
 const OBJECTS = [
-  { type: 'Монолитная плита 130 м²', loc: 'Всеволожский р-н, ЛО', year: '2025', img: '/images/stock/p37733181.jpg' },
-  { type: 'Дом из газобетона 168 м²', loc: 'Курортный р-н, СПб', year: '2025', img: '/images/stock/p30580640.jpg' },
-  { type: 'Монолитная плита 96 м²', loc: 'Гатчинский р-н, ЛО', year: '2025', img: '/images/stock/p19408681.jpg' },
-  { type: 'Монолитная плита 90 м²', loc: 'Выборгский р-н, ЛО', year: '2024', img: '/images/stock/p29257600.jpg' },
-  { type: 'Дом из газобетона 220 м²', loc: 'Тосненский р-н, ЛО', year: '2024', img: '/images/stock/p7031604.jpg' },
-  { type: 'Монолитная плита УШП 140 м²', loc: 'Приозерский р-н, ЛО', year: '2024', img: '/images/stock/p37733177.jpg' },
-  { type: 'Газобетон. Коробка 145 м²', loc: 'Ломоносовский р-н, ЛО', year: '2024', img: '/images/stock/p7598365.jpg' },
-  { type: 'Монолитная плита под коттедж', loc: 'Всеволожский р-н, ЛО', year: '2024', img: '/images/stock/p32141074.jpg' },
-  { type: 'Монолитная плита 110 м²', loc: 'Кировский р-н, ЛО', year: '2024', img: '/images/stock/p7031581.jpg' },
+  { type: 'Монолитная плита 120 м²', loc: 'Ропша, Ломоносовский р-н, ЛО', stage: 'Армокаркас', img: '/images/objects/ropsha-120-armo.jpg' },
+  { type: 'Монолитная плита 120 м²', loc: 'Ропша, Ломоносовский р-н, ЛО', stage: 'Плита залита', img: '/images/objects/ropsha-120-plita.jpg' },
+  { type: 'Монолитная плита 150 м²', loc: 'СНТ «Красный Октябрь», ЛО', stage: 'Армокаркас', img: '/images/objects/krasny-oktyabr-150-armo.jpg' },
+  { type: 'Монолитная плита 150 м²', loc: 'СНТ «Красный Октябрь», ЛО', stage: 'Плита залита', img: '/images/objects/krasny-oktyabr-150-plita.jpg' },
+  { type: 'Монолитная плита 144 м²', loc: 'дер. Торики, ЛО', stage: 'Армокаркас', img: '/images/objects/toriki-144-armo.jpg' },
+  { type: 'Монолитная плита 144 м²', loc: 'дер. Торики, ЛО', stage: 'Плита залита', img: '/images/objects/toriki-144-plita.jpg' },
+  { type: 'Монолитная плита 100 м²', loc: 'Низино, Ломоносовский р-н, ЛО', stage: 'Армокаркас', img: '/images/objects/nizino-100-armo.jpg' },
+  { type: 'Монолитная плита 100 м²', loc: 'Низино, Ломоносовский р-н, ЛО', stage: 'Плита залита', img: '/images/objects/nizino-100-plita.jpg' },
+  { type: 'Монолитная плита 104 м²', loc: 'Пеники, Ломоносовский р-н, ЛО', stage: 'Армокаркас', img: '/images/objects/peniki-104-armo.jpg' },
+  { type: 'Монолитная плита 104 м²', loc: 'Пеники, Ломоносовский р-н, ЛО', stage: 'Плита залита', img: '/images/objects/peniki-104-plita.jpg' },
 ];
 
 export default function Portfolio() {
@@ -48,7 +50,7 @@ export default function Portfolio() {
                   style={{ backgroundImage: `url('${o.img}')` }}
                 />
                 <span className="absolute top-3 left-3 bg-white/95 text-brand-ink text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded backdrop-blur">
-                  {o.year}
+                  {o.stage}
                 </span>
                 <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent" />
               </div>
