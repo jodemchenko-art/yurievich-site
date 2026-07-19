@@ -5,6 +5,7 @@ import { betonM300DlyaFundamentaRashodICena } from './beton-m300-dlya-fundamenta
 import { betonM300IliM350DlyaPlitnogoFundamenta } from './beton-m300-ili-m350-dlya-plitnogo-fundamenta';
 import { cenaPlitySZameneiGruntaNaTorfeLeskolovo } from './cena-plity-s-zamenei-grunta-na-torfe-leskolovo';
 import { domIzGazobetonaLsrPodKlyuchCenaZaM2 } from './dom-iz-gazobetona-lsr-pod-klyuch-cena-za-m2';
+import { domPodKlyuchIliKorobkaPodKrysuGazobetonSpb } from './dom-pod-klyuch-ili-korobka-pod-krysu-gazobeton-spb';
 import { eppsPodPlitnymFundamentomNuzhenLi } from './epps-pod-plitnym-fundamentom-nuzhen-li';
 import { fundamentDalUsadkuChtoDelatGazobeton } from './fundament-dal-usadku-chto-delat-gazobeton';
 import { fundamentPlitaPesochnyyDibuny } from './fundament-plita-pesochnyy-dibuny';
@@ -92,6 +93,7 @@ export const ARTICLES: Article[] = [
   betonM300IliM350DlyaPlitnogoFundamenta,
   cenaPlitySZameneiGruntaNaTorfeLeskolovo,
   domIzGazobetonaLsrPodKlyuchCenaZaM2,
+  domPodKlyuchIliKorobkaPodKrysuGazobetonSpb,
   eppsPodPlitnymFundamentomNuzhenLi,
   fundamentDalUsadkuChtoDelatGazobeton,
   fundamentPlitaPesochnyyDibuny,
