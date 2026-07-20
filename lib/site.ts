@@ -76,7 +76,7 @@ export const SITE = {
 
   // === Verification (fill after registering in Webmaster consoles) ===
   yandexVerification: 'dbea9882d2a34dc0', // → Яндекс.Вебмастер → подтверждение прав → метатег
-  googleVerification: 'Z_6ItM2V5MQha6-vH_BFQ64JVMSBaM7GFNBCqqdBKDo', // → Google Search Console → HTML tag
+  googleVerification: ['Z_6ItM2V5MQha6-vH_BFQ64JVMSBaM7GFNBCqqdBKDo', '3OofzBku5azejEwVxGg4R09YpdaUfSeAiSH8KiLTN4I'], // → Google Search Console → HTML tag (старый + jakedemchuk733)
 
   // === Analytics (fill after creating counters) ===
   yandexMetrikaId: '109522194', // 8-digit number from metrika.yandex.ru

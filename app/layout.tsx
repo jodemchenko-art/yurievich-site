@@ -75,7 +75,7 @@ export const metadata: Metadata = {
 
   // Search engine verification — fill these in after registering in Webmaster
   verification: {
-    google: SITE.googleVerification || undefined,
+    google: SITE.googleVerification ? [...SITE.googleVerification] : undefined,
     yandex: SITE.yandexVerification || undefined,
   },
 
