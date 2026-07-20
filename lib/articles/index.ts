@@ -3,6 +3,7 @@ import { armaturaA500sD12RashodNaPlitu } from './armatura-a500s-d12-rashod-na-pl
 import { armirovaniePlityPodDvuhetazhnyyGazobeton } from './armirovanie-plity-pod-dvuhetazhnyy-gazobeton';
 import { betonM300DlyaFundamentaRashodICena } from './beton-m300-dlya-fundamenta-rashod-i-cena';
 import { betonM300IliM350DlyaPlitnogoFundamenta } from './beton-m300-ili-m350-dlya-plitnogo-fundamenta';
+import { cenaPlityFundamenta12h12Spb } from './cena-plity-fundamenta-12h12-spb';
 import { cenaPlitySZameneiGruntaNaTorfeLeskolovo } from './cena-plity-s-zamenei-grunta-na-torfe-leskolovo';
 import { domIzGazobetonaLsrPodKlyuchCenaZaM2 } from './dom-iz-gazobetona-lsr-pod-klyuch-cena-za-m2';
 import { domPodKlyuchIliKorobkaPodKrysuGazobetonSpb } from './dom-pod-klyuch-ili-korobka-pod-krysu-gazobeton-spb';
@@ -91,6 +92,7 @@ export const ARTICLES: Article[] = [
   armirovaniePlityPodDvuhetazhnyyGazobeton,
   betonM300DlyaFundamentaRashodICena,
   betonM300IliM350DlyaPlitnogoFundamenta,
+  cenaPlityFundamenta12h12Spb,
   cenaPlitySZameneiGruntaNaTorfeLeskolovo,
   domIzGazobetonaLsrPodKlyuchCenaZaM2,
   domPodKlyuchIliKorobkaPodKrysuGazobetonSpb,
