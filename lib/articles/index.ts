@@ -23,6 +23,7 @@ import { glubinaZalozheniyaFundamentaLeningradskayaOblast } from './glubina-zalo
 import { gruntovyeVodyBlizkoKakoyFundamentVybrat } from './gruntovye-vody-blizko-kakoy-fundament-vybrat';
 import { kakZalitPlitnyyFundamentZimoy } from './kak-zalit-plitnyy-fundament-zimoy';
 import { kogdaLuchsheZalivatPlitnyyFundamentLeningradskayaOblast } from './kogda-luchshe-zalivat-plitnyy-fundament-leningradskaya-oblast';
+import { korobkaIzGazobetonaPodKryshuSpbCena } from './korobka-iz-gazobetona-pod-kryshu-spb-cena';
 import { monolitnayaPlita12x12CenaSpb } from './monolitnaya-plita-12x12-cena-spb';
 import { monolitnayaPlita250MmCenaZaM2 } from './monolitnaya-plita-250-mm-cena-za-m2';
 import { monolitnayaPlita8x10CenaLenoblast } from './monolitnaya-plita-8x10-cena-lenoblast';
@@ -112,6 +113,7 @@ export const ARTICLES: Article[] = [
   gruntovyeVodyBlizkoKakoyFundamentVybrat,
   kakZalitPlitnyyFundamentZimoy,
   kogdaLuchsheZalivatPlitnyyFundamentLeningradskayaOblast,
+  korobkaIzGazobetonaPodKryshuSpbCena,
   monolitnayaPlita12x12CenaSpb,
   monolitnayaPlita250MmCenaZaM2,
   monolitnayaPlita8x10CenaLenoblast,
