@@ -1,4 +1,5 @@
 import { SITE } from '@/lib/site';
+import HeroVideo from './HeroVideo';
 
 export default function Hero() {
   return (
@@ -10,18 +11,8 @@ export default function Hero() {
         style={{ backgroundImage: "url('/images/stock/p37733181.jpg')" }}
       />
 
-      {/* Video slot — drop hero.mp4 into public/video/ to activate */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        poster="/images/stock/p37733181.jpg"
-        className="hero-video absolute inset-0 h-full w-full object-cover"
-      >
-        <source src="/video/hero.mp4" type="video/mp4" />
-      </video>
+      {/* Видео-фон — только десктоп/быстрая сеть (мобильным остаётся фото-фон) */}
+      <HeroVideo />
 
       {/* Heavy dark overlay — make text always readable */}
       <div
