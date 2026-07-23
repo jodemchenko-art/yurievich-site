@@ -74,6 +74,7 @@ import { puchinistyyGruntKakoyFundament } from './puchinistyy-grunt-kakoy-fundam
 import { skolkoArmaturyNaPlitu100M2 } from './skolko-armatury-na-plitu-100-m2';
 import { skolkoProsluzhitPlitnyyFundamentDoma } from './skolko-prosluzhit-plitnyy-fundament-doma';
 import { skolkoSohnetPlitnyyFundamentPeredKladkoyGazobetona } from './skolko-sohnet-plitnyy-fundament-pered-kladkoy-gazobetona';
+import { skolkoStoitFundamentPodDomPodKlyuchLeningradskayaOblast } from './skolko-stoit-fundament-pod-dom-pod-klyuch-leningradskaya-oblast';
 import { smetaNaMonolitnuyuPlituFundamentaObrazecSpb } from './smeta-na-monolitnuyu-plitu-fundamenta-obrazec-spb';
 import { svaiIliPlitaPodGazobetonLeningradskayaOblast } from './svai-ili-plita-pod-gazobeton-leningradskaya-oblast';
 import { svaynoRostverkovyyFundamentPodKlyuchCenaLeningradskayaOblast } from './svayno-rostverkovyy-fundament-pod-klyuch-cena-leningradskaya-oblast';
@@ -164,6 +165,7 @@ export const ARTICLES: Article[] = [
   skolkoArmaturyNaPlitu100M2,
   skolkoProsluzhitPlitnyyFundamentDoma,
   skolkoSohnetPlitnyyFundamentPeredKladkoyGazobetona,
+  skolkoStoitFundamentPodDomPodKlyuchLeningradskayaOblast,
   smetaNaMonolitnuyuPlituFundamentaObrazecSpb,
   svaiIliPlitaPodGazobetonLeningradskayaOblast,
   svaynoRostverkovyyFundamentPodKlyuchCenaLeningradskayaOblast,

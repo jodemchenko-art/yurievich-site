@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Кейс · Иосиф Юрьевич</title>
+</head>
+<body>
+<style>
+:root{
+  --forest:#2E4738; --forest-2:#34513F; --forest-3:#3E5D49;
+  --earth:#6E4E38; --earth-2:#5A3E2C; --sand:#C9A97C;
+  --cream:#F0E9D8; --cream-dim:#CFC7B2; --cream-faint:#A69E88;
+  --gold:#DDAB63; --gold-2:#EBC891; --peach:#E7B78E;
+  --ink-dark:#3A2E22;
+  --panel:rgba(255,255,255,.055); --panel-2:rgba(255,255,255,.09);
+  --hair:rgba(240,233,216,.14);
+  --shadow:0 22px 46px -18px rgba(12,22,14,.7);
+  --radius:26px; --radius-sm:18px;
+  --disp:ui-rounded,'SF Pro Rounded','Segoe UI',system-ui,'Manrope',sans-serif;
+  --body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:var(--body); color:var(--cream); -webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(120% 75% at 86% -5%, rgba(150,180,130,.22), transparent 55%),
+    radial-gradient(110% 90% at 6% 108%, rgba(150,96,58,.30), transparent 58%),
+    linear-gradient(158deg,#37543F 0%, #45543C 46%, #5A4030 100%);
+  background-attachment:fixed;
+  scroll-snap-type:y mandatory; scroll-behavior:smooth; height:100vh; overflow-y:scroll; overflow-x:hidden;
+}
+body::-webkit-scrollbar{width:0}
+.leafdeco{position:fixed; top:-40px; right:-40px; width:min(38vw,440px); z-index:0; opacity:.14; pointer-events:none; transform:rotate(8deg)}
+.leafdeco2{position:fixed; bottom:-60px; left:-50px; width:min(26vw,300px); z-index:0; opacity:.09; pointer-events:none; transform:rotate(-18deg)}
+
+.slide{position:relative; z-index:1; min-height:100vh; scroll-snap-align:start; scroll-snap-stop:always;
+  display:flex; flex-direction:column; justify-content:center;
+  padding:clamp(30px,5vw,72px) clamp(22px,6vw,92px) clamp(58px,7vw,92px);}
+.wrap{width:100%; max-width:1180px; margin:0 auto}
+
+/* eyebrow */
+.eyebrow{display:flex; align-items:center; gap:13px; margin-bottom:22px}
+.eyebrow .n{background:linear-gradient(135deg,var(--gold),var(--peach)); color:var(--earth-2); font-family:var(--disp);
+  font-weight:800; font-size:13px; padding:5px 12px; border-radius:99px; letter-spacing:.02em}
+.eyebrow .kicker2{font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold-2); font-weight:600}
+.eyebrow .ln{flex:1; height:1px; background:var(--hair)}
+h1.slidetitle{font-family:var(--disp); font-size:clamp(27px,3.7vw,46px); line-height:1.05; font-weight:800;
+  letter-spacing:-.015em; margin:0 0 4px; text-wrap:balance; color:var(--cream)}
+.subtitle{color:var(--cream-dim); font-size:clamp(14px,1.5vw,18px); max-width:62ch; line-height:1.55}
+
+/* reveal */
+.rv{opacity:0; transform:translateY(20px); transition:opacity .65s cubic-bezier(.2,.7,.2,1), transform .65s cubic-bezier(.2,.7,.2,1)}
+.slide.active .rv{opacity:1; transform:none; transition-delay:calc(var(--i,0)*80ms)}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1!important; transform:none!important; transition:none}}
+
+/* three columns */
+.cols{display:grid; grid-template-columns:1fr 1.05fr 1fr; gap:16px; margin-top:26px}
+@media(max-width:860px){.cols{grid-template-columns:1fr}}
+.col{border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); border:1px solid var(--hair)}
+.col.before{background:linear-gradient(165deg, rgba(78,110,88,.5), rgba(46,71,56,.55))}
+.col.did{background:linear-gradient(165deg, rgba(110,78,56,.6), rgba(74,50,36,.66))}
+.col.after{background:linear-gradient(165deg, rgba(201,169,124,.28), rgba(120,86,48,.32))}
+.col .hd{font-family:var(--disp); font-size:12px; letter-spacing:.06em; padding:12px 16px; font-weight:800; color:var(--gold-2)}
+.col.before .hd{color:#bcd6c2}
+.col ul{list-style:none; margin:0; padding:6px 16px 16px; display:flex; flex-direction:column; gap:11px}
+.col li{position:relative; padding-left:17px; font-size:13.5px; line-height:1.45; color:var(--cream)}
+.col li::before{content:''; position:absolute; left:0; top:7px; width:7px; height:7px; border-radius:50%; background:var(--gold)}
+.col.before li::before{background:#8fbf9c}
+.col.did li{padding-left:0; display:flex; gap:10px}
+.col.did li::before{display:none}
+.col.did .d{font-family:var(--disp); font-size:11.5px; color:var(--gold-2); font-weight:800; min-width:54px; padding-top:1px}
+
+/* metric tiles */
+.metrics{display:grid; grid-auto-flow:column; grid-auto-columns:1fr; gap:16px; margin-top:22px}
+@media(max-width:860px){.metrics{grid-auto-flow:row}}
+.metric{border-radius:var(--radius); background:linear-gradient(160deg, rgba(240,233,216,.14), rgba(240,233,216,.05));
+  border:1px solid var(--hair); padding:22px 18px; text-align:center; box-shadow:var(--shadow); position:relative; overflow:hidden}
+.metric .big{font-family:var(--disp); font-size:clamp(30px,3.7vw,46px); font-weight:800; color:var(--gold-2);
+  line-height:1; letter-spacing:-.01em; font-variant-numeric:tabular-nums}
+.metric .lab{color:var(--cream-dim); font-size:12.5px; margin-top:10px; line-height:1.4}
+.metric .bar{height:6px; border-radius:99px; background:rgba(240,233,216,.14); margin-top:15px; overflow:hidden}
+.metric .bar > i{display:block; height:100%; width:0; border-radius:99px; background:linear-gradient(90deg,#8fbf9c,var(--gold)); transition:width 1.1s cubic-bezier(.2,.7,.2,1) .25s}
+.slide.active .metric .bar > i{width:var(--w,100%)}
+
+/* note */
+.note{margin-top:18px; display:flex; border-radius:var(--radius-sm); overflow:hidden; box-shadow:var(--shadow); border:1px solid var(--hair)}
+.note .tag{background:linear-gradient(135deg,var(--gold),var(--peach)); color:var(--earth-2); font-family:var(--disp); font-size:11px;
+  letter-spacing:.1em; padding:13px 15px; display:flex; align-items:center; font-weight:800; white-space:nowrap}
+.note .txt{padding:13px 17px; color:var(--cream); font-size:13.5px; line-height:1.5; background:rgba(46,71,56,.5)}
+.note.accent .tag{background:linear-gradient(135deg,var(--gold),var(--peach))}
+.note.accent .txt{font-weight:600}
+
+/* dashboard + icon cards */
+.dash{display:grid; grid-template-columns:repeat(5,1fr); gap:15px; margin-top:26px}
+@media(max-width:980px){.dash{grid-template-columns:repeat(2,1fr)}}
+.card{border-radius:var(--radius); padding:18px; box-shadow:var(--shadow); border:1px solid var(--hair);
+  transition:transform .28s cubic-bezier(.2,.7,.2,1); display:flex; flex-direction:column; gap:11px}
+.card:hover{transform:translateY(-5px)}
+.card.t0{background:linear-gradient(165deg, rgba(86,122,94,.55), rgba(52,80,63,.62))}
+.card.t1{background:linear-gradient(165deg, rgba(110,78,56,.6), rgba(74,50,36,.66))}
+.card.t2{background:linear-gradient(165deg, rgba(201,169,124,.3), rgba(150,110,66,.36))}
+.ico{width:48px; height:48px; border-radius:50%; display:grid; place-items:center; flex:none;
+  background:rgba(240,233,216,.1); border:1px solid rgba(240,233,216,.22)}
+.ico svg{width:23px; height:23px; stroke:var(--cream); fill:none; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round}
+.card .cn{font-family:var(--disp); font-weight:800; font-size:15px; color:var(--cream)}
+.card .cd{color:var(--cream-dim); font-size:12.5px; line-height:1.45}
+
+/* timeline */
+.tl{display:grid; grid-template-columns:1fr 1fr; gap:6px 40px; margin-top:24px}
+@media(max-width:860px){.tl{grid-template-columns:1fr}}
+.tl .row{display:flex; gap:14px; align-items:baseline; padding:11px 0; border-bottom:1px solid var(--hair)}
+.tl .dt{font-family:var(--disp); font-size:14px; color:var(--gold-2); font-weight:800; min-width:56px}
+.tl .ev{font-size:14px; color:var(--cream)}
+
+/* deal */
+.deal{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:24px}
+@media(max-width:860px){.deal{grid-template-columns:1fr}}
+.dealcard{border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); border:1px solid var(--hair)}
+.dealcard .top{background:linear-gradient(165deg,rgba(110,78,56,.66),rgba(74,50,36,.72)); padding:17px}
+.dealcard .lbl{font-family:var(--disp); font-size:10.5px; letter-spacing:.1em; color:var(--gold-2); text-transform:uppercase; font-weight:800}
+.dealcard .obj{font-family:var(--disp); font-weight:800; font-size:16px; margin:6px 0 4px; color:var(--cream)}
+.dealcard .meta{color:var(--cream-dim); font-size:12.5px}
+.aireco{padding:17px; background:linear-gradient(165deg,rgba(201,169,124,.24),rgba(120,86,48,.3))}
+.aireco ul{margin:8px 0 0; padding-left:17px; display:flex; flex-direction:column; gap:7px}
+.aireco li{font-size:13px; line-height:1.42; color:var(--cream)}
+.smeta{border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); border:1px solid var(--hair); background:rgba(46,71,56,.5)}
+.smeta .sh{background:linear-gradient(135deg,rgba(110,78,56,.8),rgba(74,50,36,.85)); color:var(--gold-2); font-family:var(--disp); font-size:11px; letter-spacing:.06em; padding:12px 16px; font-weight:800}
+.smeta .obj{font-family:var(--disp); font-weight:800; font-size:14.5px; padding:13px 16px 8px; color:var(--cream)}
+.smeta .r{display:flex; justify-content:space-between; gap:12px; padding:9px 16px; font-size:13px; border-top:1px solid var(--hair); color:var(--cream-dim)}
+.smeta .r .p{font-family:var(--disp); font-weight:800; color:var(--cream); font-variant-numeric:tabular-nums; white-space:nowrap}
+.smeta .tot{display:flex; justify-content:space-between; padding:14px 16px; background:linear-gradient(90deg,rgba(221,171,99,.22),rgba(221,171,99,.1)); font-family:var(--disp); font-weight:800; color:var(--cream)}
+.smeta .tot .p{color:var(--gold-2); font-size:18px}
+
+/* title */
+.brandline{display:flex; align-items:center; gap:14px; margin-bottom:30px}
+.mono-badge{background:linear-gradient(140deg,var(--gold),var(--peach)); color:var(--earth-2); font-family:var(--disp); font-weight:800; font-size:20px;
+  width:54px; height:54px; display:grid; place-items:center; border-radius:16px}
+.brandline .bt{font-family:var(--disp); font-weight:800; font-size:19px; color:var(--cream)}
+.brandline .bs{font-size:10.5px; letter-spacing:.18em; color:var(--gold-2); text-transform:uppercase; margin-top:3px; font-weight:600}
+.hero-h{font-family:var(--disp); font-size:clamp(34px,6vw,74px); line-height:1.02; font-weight:800; letter-spacing:-.025em; margin:0; color:var(--cream)}
+.hero-h .am{color:var(--gold-2)}
+.hero-sub{color:var(--cream-dim); font-size:clamp(15px,1.7vw,20px); margin-top:22px; max-width:60ch; line-height:1.55}
+.hero-metrics{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:40px; max-width:840px}
+@media(max-width:720px){.hero-metrics{grid-template-columns:1fr}}
+.hm{border-radius:var(--radius); padding:24px 18px; text-align:center; box-shadow:var(--shadow); border:1px solid var(--hair)}
+.hm:nth-child(1){background:linear-gradient(165deg,rgba(86,122,94,.55),rgba(52,80,63,.62))}
+.hm:nth-child(2){background:linear-gradient(165deg,rgba(110,78,56,.6),rgba(74,50,36,.66))}
+.hm:nth-child(3){background:linear-gradient(165deg,rgba(201,169,124,.3),rgba(150,110,66,.36))}
+.hm .v{font-family:var(--disp); font-size:clamp(30px,4vw,48px); font-weight:800; color:var(--gold-2); line-height:1; font-variant-numeric:tabular-nums}
+.hm .l{color:var(--cream-dim); font-size:12.5px; margin-top:11px; line-height:1.4}
+.hero-foot{font-size:12.5px; color:var(--cream-faint); margin-top:36px; letter-spacing:.03em}
+
+/* closing */
+.close-h{font-family:var(--disp); font-size:clamp(30px,5vw,60px); font-weight:800; letter-spacing:-.02em; line-height:1.05; margin:0; color:var(--cream)}
+.close-cta{display:flex; flex-wrap:wrap; gap:16px 40px; align-items:baseline; margin-top:32px; padding-top:26px; border-top:2px solid var(--gold)}
+.close-cta .q{font-family:var(--disp); font-size:clamp(18px,2.2vw,26px); font-weight:800; color:var(--cream)}
+.close-cta .tg{font-family:var(--disp); font-size:clamp(20px,2.4vw,30px); color:var(--gold-2); font-weight:800}
+
+/* chrome */
+.rail{position:fixed; right:20px; top:50%; transform:translateY(-50%); z-index:20; display:flex; flex-direction:column; gap:9px}
+.rail button{width:9px; height:9px; padding:0; border:none; border-radius:50%; background:rgba(240,233,216,.25); cursor:pointer; transition:.25s}
+.rail button.on{background:var(--gold-2); transform:scale(1.5)}
+.topbar{position:fixed; top:0; left:0; right:0; z-index:20; display:flex; justify-content:space-between; align-items:center;
+  padding:16px clamp(20px,4vw,40px); font-size:11px; letter-spacing:.12em; color:var(--cream-faint); text-transform:uppercase; pointer-events:none; font-weight:600}
+.progress{position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg,var(--gold),var(--peach)); z-index:21; transition:width .25s; border-radius:0 3px 3px 0}
+.hint{position:fixed; bottom:16px; left:50%; transform:translateX(-50%); z-index:20; font-size:10.5px; letter-spacing:.14em; color:var(--cream-faint); text-transform:uppercase; animation:pulse 2.4s infinite; font-weight:600}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+</style>
+
+<svg class="leafdeco" viewBox="0 0 200 200"><g fill="#DDAB63"><path d="M100 10c40 20 70 60 60 120-30-20-70-30-80-70-6-24 4-40 20-50z"/><path d="M96 26c18 26 22 60 8 96" stroke="#2E4738" stroke-width="2" fill="none"/></g></svg>
+<svg class="leafdeco2" viewBox="0 0 200 200"><g fill="#C9A97C"><path d="M100 10c40 20 70 60 60 120-30-20-70-30-80-70-6-24 4-40 20-50z"/></g></svg>
+
+<div class="progress" id="prog"></div>
+<div class="topbar"><span>ИОСИФ ЮРЬЕВИЧ · КЕЙС</span><span id="counter">01 / 14</span></div>
+<div class="rail" id="rail"></div>
+<div class="hint">↓ / → листать · ← назад</div>
+
+<main id="deck"></main>
+
+<script>
+const ICONS={
+  tag:'<path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0l-7-7A2 2 0 0 1 3 12V4h8a2 2 0 0 1 1.4.6l7.2 7.2a2 2 0 0 1 0 2.6z"/><circle cx="7.5" cy="8.5" r="1.3"/>',
+  globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>',
+  search:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>',
+  pin:'<path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/>',
+  map:'<path d="M9 3L3 6v15l6-3 6 3 6-3V3l-6 3-6-3z"/><path d="M9 3v15M15 6v15"/>',
+  layers:'<path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 16l9 5 9-5"/>',
+  image:'<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M21 15l-5-5L5 21"/>',
+  play:'<circle cx="12" cy="12" r="9"/><path d="M10 8.2l6 3.8-6 3.8z"/>',
+  share:'<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/>',
+  sparkle:'<path d="M12 3l1.9 5.6L19 10l-5.1 1.4L12 17l-1.9-5.6L5 10l5.1-1.4z"/>',
+  funnel:'<path d="M3 4h18l-7 8v6l-4 2v-8z"/>'
+};
+const icon=n=>`<span class="ico"><svg viewBox="0 0 24 24">${ICONS[n]||''}</svg></span>`;
+
+const SLIDES = [
+  {type:'title'},{type:'dashboard'},{type:'timeline'},
+  {type:'ba', n:'04', kicker:'Авито · главный канал', title:'Авито — конверсия в заявку выросла в 4 раза',
+    before:['Конверсия в заявку около 2,4% — вдвое-втрое ниже нормы','Аккаунт почти не давал обращений','Дорогая категория «Фундаментные и бетонные работы»','Слабая упаковка объявлений'],
+    did:[{d:'26.05',t:'Снял аналитику спроса: ключ «плита» = 5275/нед — чемпион'},{d:'нач.июня',t:'Взялся за аккаунт вплотную — видно момент перелома конверсии'},{d:'июнь',t:'Клоны объявления-чемпиона, цена-приманка «от 1500 ₽», SEO-заголовки'},{d:'—',t:'Упаковал профиль: баннеры ПК+смартфон, акции, витрина услуг'},{d:'—',t:'Снял кинематографичное видео — такого нет ни у одного конкурента в РФ'},{d:'15.06',t:'Подключил Avito API — свежая статистика с РФ-IP'}],
+    after:['Конверсия в заявку 2,4% → 9,3% — уровень эталона ниши (9,22%)','121 обращение (контакт) за месяц','Средняя цена контакта 602 ₽','Рейтинг 5.0, отзывов 39'],
+    metrics:[{big:'9,3%',val:9.3,dec:1,suf:'%',lab:'конверсия в заявку',from:2.4,to:9.3,sub:'было 2,4%'},{big:'121',val:121,lab:'обращения за месяц'},{big:'602 ₽',val:602,suf:' ₽',lab:'средняя цена контакта'}],
+    note:'Ключевое: я НЕ уходил в дешёвую категорию — остался в дорогой «Фундаментные работы» и всё равно вышел на эталон ниши. Рычаг — упаковка и конверсия, а не «спрятаться в дешёвый раздел».'},
+  {type:'levers', n:'05', kicker:'Авито · знание ниши', title:'Я знаю площадку по цифрам, а не на глаз',
+    data:['Средняя конверсия ниши (эталон Авито СПб+ЛО) = 9,22% — я вышел на 9,3%','Фундаменты конвертируют ×2,7 лучше домов (3,05% против 1,14%)','Золотая ценовая зона фундаментов 50–200к ₽ → конверсия до 4,7%','У 100% конкурентов в топе видео в объявлениях = 0%'],
+    levers:['Снял кинематографичное видео для объявлений — такого нет ни у одного конкурента по всей России','Обложка с лицом + конкретный метраж поднимает конверсию сильнее дешёвого ценника','Цена заявки = цена показа ÷ конверсия — работаю по формуле, не вслепую','Результат сделан в дорогой категории «Фундаментные работы» — без ухода в дешёвый раздел'],
+    banner:'Аккаунт вышел на конверсию 9,3% — уровень лучших в нише, оставаясь в дорогой категории.'},
+  {type:'ba', n:'06', kicker:'Сайт · sk-yurievich.ru', title:'Сайт — из невидимого в растущий',
+    before:['Сайт стоял на Vercel — в России открывался только через VPN','Яндекс сайт не видел: критическая ошибка DNS','Страниц в поиске — практически 0','Из Яндекса — 0 визитов'],
+    did:[{d:'22.06',t:'Переезд на российский VPS — сайт открывается без VPN'},{d:'—',t:'Next.js + автодеплой + SSL + реверс-прокси'},{d:'10.07',t:'9 фотореалистичных изображений + видео-фон (нейросети)'},{d:'—',t:'Почистил дубли статей, сделал перелинковку и редиректы'}],
+    after:['Сайт на российском хостинге, открывается без VPN','В индексе Яндекса: 1 → 23 страницы','0 ошибок технической диагностики','96 визитов / 70 посетителей за квартал (весной было ~0)'],
+    metrics:[{big:'1 → 23',val:23,lab:'страницы в индексе',from:1,to:23,sub:'было 1'},{big:'96',val:96,lab:'визитов за квартал'},{big:'70',val:70,lab:'посетителей сайта'}],
+    note:'Домен молодой — поисковый трафик пока информационный (читатели). SEO-заявки зреют 2–3 месяца; ускоряет только траст: реальные объекты с фото и ценами.'},
+  {type:'ba', n:'07', kicker:'SEO · Яндекс', title:'Поисковый фундамент под заявки',
+    before:['Ошибка DNS, данные не загружались, ИКС не присвоен','Карты сайта не обработаны','Семантики (списка запросов) не было','Из Яндекса ноль органических визитов'],
+    did:[{d:'20.06',t:'Зафиксировал канон, починил индексацию, убрал ошибку DNS'},{d:'30.06',t:'Подключил Wordstat → снял ядро 927 коммерческих фраз'},{d:'06.07',t:'+14 гео-посадок, хаб /fundament переписан под ВЧ-запросы'},{d:'18.07',t:'CTR-оптимизация: разобрал 189 запросов, вплёл в заголовки'}],
+    after:['Сайт показывается по 336 поисковым запросам (было 0)','Запросы целевые, коммерческие — «фундамент под ключ»','23 страницы в индексе, 0 ошибок диагностики','Семантическое ядро — 927 фраз'],
+    metrics:[{big:'0 → 336',val:336,lab:'поисковых запросов',from:0,to:336,sub:'было 0'},{big:'927',val:927,lab:'фраз в ядре'},{big:'0',val:0,lab:'ошибок диагностики'}],
+    note:'Запросы уже целевые, но показов и кликов пока мало — позиции только формируются на молодом домене. Статьи льём бережно (~2/нед), растём вдолгую.'},
+  {type:'ba', n:'08', kicker:'Яндекс.Карты + 2ГИС', title:'Геосервисы — просмотры, звонки и маршруты',
+    before:['Карточка Яндекс.Карт базового уровня, не сцеплена с сайтом','2ГИС не зарегистрирован','Прайс без ключевых слов, описание в одну строку','Отзывов почти нет'],
+    did:[{d:'—',t:'Упаковал карточку: 55 фото, видео, истории, услуги с 3D-рендерами'},{d:'16.07',t:'Движок «карточка каждый день» — задание в Telegram в 07:00'},{d:'09.07',t:'2ГИС: аккаунт создан, паспорт и компания подтверждены'},{d:'—',t:'Авито-мост: клиенты с 5.0 дублируют отзыв на Карты'}],
+    after:['Карточка упакована премиально, рейтинг 4,3 / 6 отзывов','456 переходов в профиль за месяц — рост ×11','15 звонков, 10 маршрутов, 17 переходов на сайт с карточки','2ГИС запущен: в нише 2653 поиска в неделю'],
+    metrics:[{big:'456',val:456,lab:'перехода в профиль (×11)'},{big:'15',val:15,lab:'нажатий «Позвонить» (×14)'},{big:'17',val:17,lab:'перехода на сайт (было ~0)'}],
+    note:'Отзывов пока 6 и они растут — это главный рычаг ранжирования в картах. Догоняем через довольных клиентов с Авито (5.0 / 39 отзывов).'},
+  {type:'ba', n:'09', kicker:'CRM · воронка продаж', title:'Подняли из потерь год обращений',
+    before:['CRM не было вообще — заявки терялись','«Очень много клиентов потеряно из-за отсутствия CRM»','Год переписки с клиентами лежал мёртвым грузом','Битрикс на бесплатном тарифе не завёлся'],
+    did:[{d:'18.06',t:'Выбрал amoCRM, построил воронку из 10 стадий по срочности'},{d:'18.06',t:'Поднял базу за год — 1086 обращений, ИИ классифицировал и залил'},{d:'—',t:'По каждой сделке ИИ готовит сообщение клиенту + вложен КП'},{d:'—',t:'Мост Авито → amoCRM, автообработка каждые 15 минут'}],
+    after:['1086 обращений подняты, классифицированы и разложены по воронке','Разложено по срочности: Новые, Срочные, На неделе, Сезонные','У срочных — готовый КП под отправку','Новые заявки с Авито падают в CRM автоматически'],
+    metrics:[{big:'1 086',val:1086,lab:'обращений подняты из потерь'},{big:'10',val:10,lab:'стадий воронки по срочности'},{big:'15 мин',val:15,suf:' мин',lab:'цикл авто-обработки заявок'}],
+    note:'Это обращения за год, которые лежали без движения — ИИ прочитал переписку, расставил по срочности и вернул в работу. Не «нарисованные» деньги, а реальные диалоги.'},
+  {type:'deal'},{type:'content'},{type:'infra'},{type:'honest'},{type:'closing'}
+];
+
+const deck=document.getElementById('deck');
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+function head(n,kicker,title){return `<div class="eyebrow rv"><span class="n">${n}</span><span class="kicker2">${esc(kicker)}</span><span class="ln"></span></div><h1 class="slidetitle rv" style="--i:1">${esc(title)}</h1>`;}
+function metricsHTML(ms){return `<div class="metrics">`+ms.map((m,i)=>`<div class="metric rv" style="--i:${i+2}"><div class="big" data-count="${m.val}" data-suf="${m.suf||''}" data-dec="${m.dec||0}">0${m.suf||''}</div><div class="lab">${esc(m.lab)}${m.sub?` · <span style="color:var(--cream-faint)">${esc(m.sub)}</span>`:''}</div>${m.from!==undefined?`<div class="bar"><i style="--w:100%"></i></div>`:''}</div>`).join('')+`</div>`;}
+function baSlide(s){return `<div class="wrap">${head(s.n,s.kicker,s.title)}<div class="cols rv" style="--i:2"><div class="col before"><div class="hd">Было</div><ul>${s.before.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div><div class="col did"><div class="hd">Что я сделал</div><ul>${s.did.map(x=>`<li><span class="d">${esc(x.d)}</span><span>${esc(x.t)}</span></li>`).join('')}</ul></div><div class="col after"><div class="hd">Стало — результат</div><ul>${s.after.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div>${metricsHTML(s.metrics)}${s.note?`<div class="note rv" style="--i:6"><div class="tag">ЧЕСТНО</div><div class="txt">${esc(s.note)}</div></div>`:''}</div>`;}
+function leversSlide(s){return `<div class="wrap">${head(s.n,s.kicker,s.title)}<div class="cols rv" style="--i:2;grid-template-columns:1fr 1fr"><div class="col did"><div class="hd">Что показали данные ниши</div><ul>${s.data.map(x=>`<li style="padding-left:17px">${esc(x)}</li>`).join('')}</ul></div><div class="col after"><div class="hd">Рычаги, которые я использую</div><ul>${s.levers.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div><div class="note accent rv" style="--i:4"><div class="tag">ВЫВОД</div><div class="txt">${esc(s.banner)}</div></div></div>`;}
+function titleSlide(){return `<div class="wrap"><div class="brandline rv"><div class="mono-badge">ИЮ</div><div><div class="bt">ИОСИФ ЮРЬЕВИЧ</div><div class="bs">Маркетинг нового поколения</div></div></div><h1 class="hero-h rv" style="--i:1">Как я веду<br>фундаментный бизнес<br><span class="am">на армии ИИ-агентов</span></h1><p class="hero-sub rv" style="--i:2">Реальный кейс: СК ЮРЬЕВИЧ · ФУНДАМЕНТЫ (СПб + Ленобласть). Что было · что я сделал · что стало — по каждому направлению. Только подтверждаемые цифры.</p><div class="hero-metrics"><div class="hm rv" style="--i:3"><div class="v" data-count="9.3" data-dec="1" data-suf="%">0%</div><div class="l">конверсия в заявку на Авито · было 2,4%</div></div><div class="hm rv" style="--i:4"><div class="v" data-count="121">0</div><div class="l">обращения с Авито за месяц</div></div><div class="hm rv" style="--i:5"><div class="v" data-count="456">0</div><div class="l">перехода в карточку Карт · рост ×11</div></div></div><div class="hero-foot rv" style="--i:6">Telegram: @iosif_yurievich · период работы: май – июль 2026</div></div>`;}
+function dashboardSlide(){
+  const tiles=[['Авито','tag','Конверсия в заявку 2,4% → 9,3%. 121 обращение за месяц.'],['Сайт','globe','Vercel → российский VPS (без VPN). Индекс Яндекса 1 → 23.'],['SEO Яндекс','search','Показы по 336 запросам (было 0). Ядро 927 фраз.'],['Яндекс.Карты','pin','456 переходов в профиль (×11), 15 звонков, 17 на сайт.'],['2ГИС','map','Запущен. В нише 2653 поиска в неделю.'],['CRM','layers','1086 обращений подняты из потерь и разложены по воронке.'],['Карусели','image','Постеры уровня агентства, идеальная кириллица.'],['Видео / Reels','play','Дешёвый конвейер роликов + уникальное видео для Авито.'],['Соцсети','share','Настроен автопостинг (ВК, Telegram, Threads).'],['Фирменный стиль','sparkle','Единый бренд везде: логотип, цвета, шрифты.']];
+  return `<div class="wrap">${head('02','Обзор','Карта направлений — что я закрыл')}<div class="dash">${tiles.map((t,i)=>`<div class="card t${i%3} rv" style="--i:${i+2}">${icon(t[1])}<div class="cn">${esc(t[0])}</div><div class="cd">${esc(t[2])}</div></div>`).join('')}</div><p class="subtitle rv" style="--i:12;margin-top:22px">10 направлений маркетинга — веду один человек с ИИ-агентами. Без агентства и команды из 10 человек.</p></div>`;
+}
+function timelineSlide(){const tl=[['28.05','Собран новый сайт (Next.js)'],['15.06','Авито API + прорыв по конверсии'],['17.06','Запущен Telegram-канал'],['18.06','CRM: подняты 1086 обращений'],['22.06','Переезд сайта на российский VPS'],['26.06','Сайт вошёл в индекс Яндекса'],['30.06','Семантика — ядро 927 фраз'],['09.07','2ГИС: аккаунт подтверждён'],['16.07','Движок карточки + индекс вырос до 23'],['18.07','CTR-оптимизация заголовков сайта']];return `<div class="wrap">${head('03','Хронология','Что и когда сделано — за ~2 месяца')}<div class="tl">${tl.map((r,i)=>`<div class="row rv" style="--i:${i+2}"><span class="dt">${r[0]}</span><span class="ev">${esc(r[1])}</span></div>`).join('')}</div><p class="subtitle rv" style="--i:13;margin-top:22px">Каждая веха — реальная дата. Скорость даёт ИИ-конвейер: то, на что агентство тратит недели, собирается за часы.</p></div>`;}
+function dealSlide(){return `<div class="wrap">${head('10','CRM · внутри одной сделки','Пример: ИИ готовит продажу за менеджера')}<div class="deal rv" style="--i:2"><div style="display:flex;flex-direction:column;gap:16px"><div class="dealcard"><div class="top"><div class="lbl">Карточка сделки в CRM</div><div class="obj">Монолитная плита 10×10 · дом под ключ</div><div class="meta">Бюджет ~850 000 ₽ · теги: «считал цену», «сезон-лето», приоритет высокий</div></div><div class="aireco"><div class="lbl" style="color:var(--gold-2);font-family:var(--disp);font-weight:800;font-size:10.5px;letter-spacing:.08em">ИИ-РЕКОМЕНДАЦИЯ — ГОТОВА ДЛЯ МЕНЕДЖЕРА</div><ul><li>ИИ прочитал переписку: клиент уточнял цену на плиту 10×10, торопится к сезону</li><li>Приоритет — перезвонить сегодня, не упустить</li><li>Скрипт: фикс-цена, гарантия, оплата по этапам после приёмки</li><li>Готовый ответ клиенту — отправить одним касанием</li></ul></div></div></div><div class="smeta"><div class="sh">ГОТОВЫЙ КП · СМЕТА — ИИ ФОРМИРУЕТ ПОД ОБЪЕКТ</div><div class="obj">Монолитная плита 10×10 м · 100 м² · под ключ</div><div class="r"><span>Земляные работы, песчано-гравийная подушка</span><span class="p">120 000 ₽</span></div><div class="r"><span>Опалубка и армирование (двойной каркас)</span><span class="p">210 000 ₽</span></div><div class="r"><span>Бетон М300 с доставкой и заливкой</span><span class="p">390 000 ₽</span></div><div class="r"><span>Гидро- и теплоизоляция, вывод коммуникаций</span><span class="p">130 000 ₽</span></div><div class="tot"><span>ИТОГО под ключ, с материалами</span><span class="p">850 000 ₽</span></div></div></div><div class="note rv" style="--i:3"><div class="tag">ЧЕСТНО</div><div class="txt">Пример типовой сделки. Так ИИ-агент обрабатывает обращения: читает диалог, даёт рекомендацию и прикладывает КП со сметой — менеджеру остаётся позвонить и закрыть.</div></div></div>`;}
+function contentSlide(){const cols=[['Карусели','image','Нейросеть рисует весь постер целиком с идеальной кириллицей — уровень агентства. Правило: 2 из 10 — призыв к заявке.'],['Видео / Reels','play','Дешёвый конвейер вирусных роликов (~15 ₽ за ролик) + уникальное видео для Авито, которого нет ни у кого в РФ. Аккаунт перезапускаю.'],['Лид-воронка','funnel','Путь из соцсетей: комментарий → квиз → расчёт → заявка в CRM. Спроектирована под ключ.'],['Фирменный стиль','sparkle','Единый узнаваемый бренд: логотип, цвета, шрифты. Сайт, Авито, карточки, карусели — как один бренд.']];return `<div class="wrap">${head('11','Контент + бренд','Контент, который качает бренд и лицо клиента')}<div class="dash" style="grid-template-columns:repeat(4,1fr)">${cols.map((c,i)=>`<div class="card t${i%3} rv" style="--i:${i+2}">${icon(c[1])}<div class="cn">${esc(c[0])}</div><div class="cd">${esc(c[2])}</div></div>`).join('')}</div><div class="note accent rv" style="--i:6"><div class="tag">СУТЬ</div><div class="txt">Задача контента — не подписчики, а сильный бренд и узнаваемое лицо клиента. Трендовые Reels и карусели делают из подрядчика того, кому доверяют.</div></div></div>`;}
+function infraSlide(){const left=['Автодеплой сайта — по расписанию','SEO-статьи на нейросети — бережно, ~2/нед','Движок карточки в Картах — задание в Telegram','Заявки с Авито → в CRM — каждые 15 минут'];const right=['Автопостинг: ВКонтакте','Автопостинг: Telegram','Автопостинг: Threads','Отчёты по процессам — в личный Telegram'];return `<div class="wrap">${head('12','Автоматизация','ИИ-конвейер, который работает 24/7 — сам')}<div class="cols rv" style="--i:2;grid-template-columns:1fr 1fr"><div class="col did"><div class="hd">Что крутится само на сервере</div><ul>${left.map(x=>`<li style="padding-left:17px">${esc(x)}</li>`).join('')}</ul></div><div class="col after"><div class="hd">Дистрибуция контента</div><ul>${right.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div><div class="note rv" style="--i:4"><div class="tag">ЧЕСТНО</div><div class="txt">Соцсети пока в начале: движки постят сами, но аудитория маленькая — это задел, а не результат. Главные заявки идут с Авито, Карт и CRM.</div></div><p class="subtitle rv" style="--i:5;margin-top:16px;color:var(--gold-2);font-weight:600">Это и есть «маркетолог нового поколения»: один человек + ИИ-агенты делают объём целого агентства.</p></div>`;}
+function honestSlide(){const items=['Заявки с сайта пока информационные — SEO зреет 2–3 месяца, ускоряет только траст (реальные объекты с фото и ценами)','Отзывов на картах пока 6 — растим через довольных клиентов с Авито','Соцсети в начале роста — аудитория маленькая, это задел на будущее','Reels-формат перезапускаю на новом аккаунте','Платный ВК-трафик — только пробовали, веду осторожно, без слива бюджета'];return `<div class="wrap">${head('13','Честно','Что ещё в работе — без сказок')}<div class="cols rv" style="--i:2;grid-template-columns:1fr 1fr"><div class="col before"><div class="hd">В работе</div><ul>${items.slice(0,3).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div><div class="col before"><div class="hd">В работе</div><ul>${items.slice(3).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div><div class="note accent rv" style="--i:4"><div class="tag">ПРИНЦИП</div><div class="txt">Не обещаю «топ и 100 заявок за первый месяц». Строю систему, которая наполняет воронку каждый месяц — и растёт. Честность — часть услуги.</div></div></div>`;}
+function closingSlide(){return `<div class="wrap"><div class="eyebrow rv"><span class="n">14</span><span class="kicker2">Итог</span><span class="ln"></span></div><h1 class="close-h rv" style="--i:1">Один человек. ИИ-агенты.<br>Результат — на подтверждаемых цифрах.</h1><div class="hero-metrics rv" style="--i:2;margin-top:34px"><div class="hm"><div class="v" data-count="9.3" data-dec="1" data-suf="%">0%</div><div class="l">конверсия в заявку на Авито</div></div><div class="hm"><div class="v" data-count="456">0</div><div class="l">перехода в карточку Карт (×11)</div></div><div class="hm"><div class="v" data-count="336">0</div><div class="l">поисковых запросов в Яндексе (было 0)</div></div></div><div class="close-cta rv" style="--i:3"><span class="q">Хотите так же для своей фундаментной фирмы?</span><span class="tg">@iosif_yurievich</span></div><p class="hero-foot rv" style="--i:4;margin-top:20px">Маркетинг нового поколения — ИИ-агенты вместо команды из 10 человек.</p></div>`;}
+
+const R={title:titleSlide,dashboard:dashboardSlide,timeline:timelineSlide,deal:dealSlide,content:contentSlide,infra:infraSlide,honest:honestSlide,closing:closingSlide};
+SLIDES.forEach(s=>{const sec=document.createElement('section');sec.className='slide';sec.innerHTML=(s.type==='ba')?baSlide(s):(s.type==='levers')?leversSlide(s):R[s.type]();deck.appendChild(sec);});
+
+const slides=[...document.querySelectorAll('.slide')];
+const rail=document.getElementById('rail');
+slides.forEach((_,i)=>{const b=document.createElement('button');b.onclick=()=>slides[i].scrollIntoView();rail.appendChild(b);});
+const dots=[...rail.children], counter=document.getElementById('counter'), prog=document.getElementById('prog'), pad=n=>String(n).padStart(2,'0');
+const fmt=(v,d)=>v.toLocaleString('ru-RU',{minimumFractionDigits:d,maximumFractionDigits:d});
+function countUp(el){if(el.dataset.done)return;el.dataset.done=1;const t=parseFloat(el.dataset.count),d=+(el.dataset.dec||0),s=el.dataset.suf||'';if(matchMedia('(prefers-reduced-motion:reduce)').matches){el.textContent=fmt(t,d)+s;return;}const dur=1050,t0=performance.now();(function tick(now){const p=Math.min(1,(now-t0)/dur),e=1-Math.pow(1-p,3);el.textContent=fmt(t*e,d)+s;if(p<1)requestAnimationFrame(tick);else el.textContent=fmt(t,d)+s;})(t0);}
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{const i=slides.indexOf(e.target);if(e.isIntersecting&&e.intersectionRatio>.55){e.target.classList.add('active');dots.forEach((d,j)=>d.classList.toggle('on',j===i));counter.textContent=pad(i+1)+' / '+pad(slides.length);prog.style.width=((i+1)/slides.length*100)+'%';e.target.querySelectorAll('[data-count]').forEach(countUp);}});},{threshold:[.55]});
+slides.forEach(s=>io.observe(s));
+let idx=0;const go=d=>{idx=Math.max(0,Math.min(slides.length-1,idx+d));slides[idx].scrollIntoView();};
+addEventListener('keydown',e=>{if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(1);}if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(-1);}});
+addEventListener('scroll',()=>{const c=innerHeight/2;slides.forEach((s,i)=>{const r=s.getBoundingClientRect();if(r.top<=c&&r.bottom>=c)idx=i;});},{passive:true});
+</script>
+
+</body>
+</html>
