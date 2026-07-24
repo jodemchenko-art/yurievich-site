@@ -82,6 +82,7 @@ import { tolschinaPlityPodDomGazobeton8x10 } from './tolschina-plity-pod-dom-gaz
 import { torfNaUchastkeKakStroitDom } from './torf-na-uchastke-kak-stroit-dom';
 import { treschinyVFundamentePrichinyChtoDelat } from './treschiny-v-fundamente-prichiny-chto-delat';
 import { uchastokBolotistyyPodFundamentChtoDelat } from './uchastok-bolotistyy-pod-fundament-chto-delat';
+import { uklonNaUchastkeKakoyFundamentVybrat } from './uklon-na-uchastke-kakoy-fundament-vybrat';
 import { uteplyonnayaShvedskayaPlitaUshpSpb } from './uteplyonnaya-shvedskaya-plita-ushp-spb';
 import { vytorfovkaUchastkaLeskolovoCena } from './vytorfovka-uchastka-leskolovo-cena';
 import { zakazatZalivkuFundamentaPodKlyuchSpbNedorogo } from './zakazat-zalivku-fundamenta-pod-klyuch-spb-nedorogo';
@@ -173,6 +174,7 @@ export const ARTICLES: Article[] = [
   torfNaUchastkeKakStroitDom,
   treschinyVFundamentePrichinyChtoDelat,
   uchastokBolotistyyPodFundamentChtoDelat,
+  uklonNaUchastkeKakoyFundamentVybrat,
   uteplyonnayaShvedskayaPlitaUshpSpb,
   vytorfovkaUchastkaLeskolovoCena,
   zakazatZalivkuFundamentaPodKlyuchSpbNedorogo,
