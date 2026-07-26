@@ -43,12 +43,26 @@ export const SITE = {
   ],
 
   // === Trust signals ===
+  // ⚠️ Правило: сюда попадает ТОЛЬКО то, что клиент может проверить сам по ссылке.
   rating: '5.0',
   reviewsCount: 35,
   projectsCount: 239,
   warrantyYears: 5,
   yearsOnMarket: null, // not confirmed
+  // ⚠️ ТРЕБУЕТ ПОДТВЕРЖДЕНИЯ ЮРИЯ. До 26.07.2026 год начала работы был написан
+  // на сайте восемью разными способами (2013…2021) — это читалось как враньё.
+  // Свели всё к 2018 (самый частый вариант). Назовёт реальный — меняем здесь
+  // и прогоняем скрипт нормализации по статьям.
+  foundedYear: 2018,
   partnerOf: 'ЛСР Газобетон',
+  // Профиль Авито — публичный пруф рейтинга, отзывов и числа объектов.
+  // ⚠️ ПУСТО НАМЕРЕННО: точную ссылку даёт Юрий (Авито → мой профиль → «Поделиться»).
+  // Пока пусто — блок отзывов не показывает кликабельный пруф. НЕ выдумывать ссылку.
+  avitoProfile: '',
+
+  // === Реквизиты ИП (проверяемо по ЕГРИП / сервису ФНС «Прозрачный бизнес») ===
+  inn: '010403581080',
+  ogrnip: '321010000000886',
 
   // === SEO ===
   defaultOgImage: '/images/og-default.jpg',
@@ -76,7 +90,7 @@ export const SITE = {
 
   // === Verification (fill after registering in Webmaster consoles) ===
   yandexVerification: 'dbea9882d2a34dc0', // → Яндекс.Вебмастер → подтверждение прав → метатег
-  googleVerification: ['Z_6ItM2V5MQha6-vH_BFQ64JVMSBaM7GFNBCqqdBKDo', '3OofzBku5azejEwVxGg4R09YpdaUfSeAiSH8KiLTN4I'], // → Google Search Console → HTML tag (старый + jakedemchuk733)
+  googleVerification: ['Z_6ItM2V5MQha6-vH_BFQ64JVMSBaM7GFNBCqqdBKDo', '3OofzBku5azejEwVxGg4R09YpdaUfSeAiSH8KiLTN4I'], // → Google Search Console → HTML tag (старый + аккаунт юзера jakedemchuk733)
 
   // === Analytics (fill after creating counters) ===
   yandexMetrikaId: '109522194', // 8-digit number from metrika.yandex.ru

@@ -76,7 +76,6 @@ export const REGIONS: Region[] = [
     priceTo: 11500,
     drivingTime: '30-50 мин от КАД',
     relatedArticleSlugs: [
-      'plitnyy-fundament-vsevolozhsk-cena',
       'plitnyy-fundament-na-torfe-leskolovo-naziya',
       'gruntovye-vody-blizko-kakoy-fundament-vybrat',
     ],
@@ -99,7 +98,6 @@ export const REGIONS: Region[] = [
     priceTo: 9500,
     drivingTime: '45-65 мин от КАД',
     relatedArticleSlugs: [
-      'plitnyy-fundament-gatchina-cena',
       'puchinistyy-grunt-kakoy-fundament',
       'plita-ili-lenta-pod-gazobeton',
     ],
@@ -237,7 +235,6 @@ export const REGIONS: Region[] = [
     priceTo: 8500,
     drivingTime: '15-45 мин от КАД',
     relatedArticleSlugs: [
-      'plitnyy-fundament-kurortnyy-rayon-spb',
       'plitnyy-fundament-10x10-cena-pod-klyuch-spb',
       'plitnyy-fundament-pod-gazobeton-tolschina-armirovanie',
     ],
@@ -261,8 +258,6 @@ export const REGIONS: Region[] = [
     drivingTime: 'в черте города или 15-40 мин от КАД',
     relatedArticleSlugs: [
       'plitnyy-fundament-10x10-cena-pod-klyuch-spb',
-      'plitnyy-fundament-cena-za-m2-spb',
-      'plitnyy-fundament-vsevolozhsk-cena',
     ],
   },
 ];

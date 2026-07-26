@@ -16,7 +16,6 @@ import { SITE, SERVICES_LIST } from './site';
 import type { Article } from './articles/_types';
 import type { Region } from './regions';
 import { buildRegionFaq } from './regions';
-import { REVIEWS } from './reviews';
 
 // === @id constants — стабильные ID для всех сущностей ===
 export const ID = {
@@ -80,13 +79,15 @@ export function buildSiteEntities() {
           closes: '18:00',
         },
       ],
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: SITE.rating,
-        reviewCount: SITE.reviewsCount,
-        bestRating: '5',
-        worstRating: '1',
-      },
+      // Реквизиты ИП — проверяемый сигнал E-E-A-T (можно пробить по ЕГРИП/ФНС)
+      taxID: SITE.inn,
+      identifier: [
+        { '@type': 'PropertyValue', propertyID: 'ОГРНИП', value: SITE.ogrnip },
+        { '@type': 'PropertyValue', propertyID: 'ИНН', value: SITE.inn },
+      ],
+      // ⚠️ aggregateRating/review НАМЕРЕННО не размечаем: рейтинг компании о самой себе
+      // (self-serving) Google для Organization/LocalBusiness не показывает, а подтвердить
+      // тексты отзывов нечем. Рейтинг живёт на Авито и Я.Картах — туда и ссылаемся.
       sameAs: [
         SITE.telegram,
         SITE.telegramChannel,
@@ -106,25 +107,6 @@ export function buildSiteEntities() {
       founder: { '@id': ID.yuri },
       employee: [{ '@id': ID.yuri }, { '@id': ID.valery }, { '@id': ID.evgeny }],
       makesOffer: SERVICES_LIST.map((s) => ({ '@id': ID.service(s.id) })),
-      review: REVIEWS.map((r) => ({
-        '@type': 'Review',
-        '@id': `${SITE.url}/#review-${r.id}`,
-        author: {
-          '@type': 'Person',
-          name: r.author,
-          ...(r.authorCity ? { address: { '@type': 'PostalAddress', addressLocality: r.authorCity } } : {}),
-        },
-        datePublished: r.date,
-        reviewRating: {
-          '@type': 'Rating',
-          ratingValue: r.rating,
-          bestRating: 5,
-          worstRating: 1,
-        },
-        reviewBody: r.body,
-        ...(r.project ? { itemReviewed: { '@id': ID.org } } : { itemReviewed: { '@id': ID.org } }),
-        publisher: { '@type': 'Organization', name: r.source },
-      })),
     },
 
     // Person — Юрий
@@ -318,13 +300,7 @@ export function buildRegionGraph(region: Region, canonicalUrl: string, breadcrum
         name: region.name,
       },
       sameAs: ['https://yandex.ru/maps/org/69393767573'],
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: SITE.rating,
-        reviewCount: SITE.reviewsCount,
-        bestRating: '5',
-        worstRating: '1',
-      },
+      taxID: SITE.inn,
     },
     // Place entity для entity-based SEO (район как географическая локация)
     {

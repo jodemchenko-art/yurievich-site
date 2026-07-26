@@ -1,54 +1,48 @@
-'use client';
-
-import { useState } from 'react';
 import { SITE } from '@/lib/site';
 
-const REVIEWS = [
+/**
+ * Блок «Отзывы».
+ *
+ * ⚠️ ПРАВИЛО (не нарушать): здесь НЕТ придуманных цитат клиентов.
+ * Раньше в этом файле лежали 5 захардкоженных «отзывов», которых никто не писал,
+ * а рядом стояла фраза «все реальные, можно проверить» — без единой ссылки на пруф.
+ * Для поисковика это недостоверная информация, для клиента — повод не поверить и уйти.
+ *
+ * Показываем только то, что человек может открыть и проверить сам:
+ * рейтинг на площадках, живой канал стройки, сообщество с фото объектов.
+ * Когда Юрий пришлёт ссылку на профиль Авито — она подставится в SITE.avitoProfile
+ * и появится кнопка «Читать отзывы на Авито».
+ */
+
+const PROOFS = [
   {
-    name: 'Александр',
-    loc: 'Всеволожский р-н, ЛО',
-    object: 'Монолитная плита 130 м²',
-    date: 'апрель 2025',
-    text:
-      'Заказывал плиту под дом из газобетона. Ребята приехали на замер бесплатно, через день прислали смету, разложенную по позициям — всё прозрачно. Цена в договоре, как и обещали, не менялась. Работали аккуратно, после стройки убрали участок. Рекомендую!',
+    href: SITE.avitoProfile,
+    label: 'Авито',
+    value: `${SITE.rating} ★ · ${SITE.reviewsCount} отзывов`,
+    note: 'Профиль компании с отзывами заказчиков',
   },
   {
-    name: 'Дмитрий и Ольга',
-    loc: 'Курортный р-н, СПб',
-    object: 'Дом 168 м² из газобетона ЛСР',
-    date: 'март 2025',
-    text:
-      'Строили дом под ключ. Юрий вёл нас от первого звонка до сдачи — всегда на связи. Газобетон именно ЛСР, как и обещали, с паспортами. Сроки сорвали на 4 дня из-за погоды, но честно предупредили заранее. Гарантия 5 лет в руки — спокойно.',
+    href: 'https://yandex.ru/maps/org/69393767573',
+    label: 'Яндекс.Карты',
+    value: 'Карточка компании',
+    note: 'Отзывы и фото на карте',
   },
   {
-    name: 'Сергей',
-    loc: 'Гатчинский р-н, ЛО',
-    object: 'Ленточный фундамент 96 м.п.',
-    date: 'февраль 2025',
-    text:
-      'Лили зимой при -12. Опыт у братьев есть — прогрев, добавки, всё по технологии. Бетон с завода с паспортом, мне его на месте показали. Без допов в процессе — это редкость в нашей нише. Спасибо!',
+    href: SITE.vk,
+    label: 'ВКонтакте',
+    value: 'Сообщество «Ленбетон78»',
+    note: 'Фото объектов с площадок',
   },
   {
-    name: 'Наталья',
-    loc: 'Тосненский р-н, ЛО',
-    object: 'Дом 220 м² + плита УШП',
-    date: 'январь 2025',
-    text:
-      'Долго выбирала строителей, объехала пять компаний. У «Юрьевич» подкупило, что братья — это семья, а не бригада с улицы. Стройка шла полгода, не торопились, делали качественно. Все этапы под фотоотчётом. Дом получился — мечта.',
-  },
-  {
-    name: 'Михаил',
-    loc: 'Выборгский р-н, ЛО',
-    object: 'Монолитная плита 90 м²',
-    date: 'ноябрь 2024',
-    text:
-      'Заказывал плиту под небольшой дом 8х10. Реальные цены, без накруток. Понравилось, что Валерий каждый день был на объекте — контроль качества чувствовался. Сдали в срок. Через год буду заказывать у них же стены.',
+    href: SITE.telegramChannel,
+    label: 'Telegram',
+    value: 'Канал стройки',
+    note: 'Как идут работы, день за днём',
   },
 ];
 
 export default function Reviews() {
-  const [idx, setIdx] = useState(0);
-  const r = REVIEWS[idx];
+  const proofs = PROOFS.filter((p) => Boolean(p.href));
 
   return (
     <section id="otzyvy" className="section bg-brand-sand">
@@ -56,64 +50,37 @@ export default function Reviews() {
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="text-brand-red font-bold text-sm uppercase tracking-wide">Отзывы</span>
           <h2 className="section-title mt-2">
-            {SITE.rating} ★ из 5,0 · {SITE.reviewsCount} отзывов
+            {SITE.rating} ★ из 5,0 · {SITE.reviewsCount} отзывов на Авито
           </h2>
           <p className="section-sub">
-            Ни одного отзыва ниже пятёрки. Все — реальные, можно проверить на нашем Авито-профиле.
+            Мы не публикуем отзывы у себя на сайте — их слишком легко написать самому.
+            Смотрите там, где мы не можем ничего отредактировать: на площадках и в живых
+            каналах, где видно каждый объект.
           </p>
         </div>
 
-        <div className="max-w-3xl mx-auto">
-          <article className="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-brand-line">
-            <div className="flex items-center gap-1 text-2xl text-amber-500 mb-4">
-              {'★★★★★'.split('').map((s, i) => <span key={i}>{s}</span>)}
-            </div>
-            <p className="text-base md:text-xl leading-relaxed text-brand-ink">
-              «{r.text}»
-            </p>
-            <div className="mt-8 pt-6 border-t border-brand-line">
-              <div className="flex items-center justify-between flex-wrap gap-3">
-                <div>
-                  <div className="font-bold text-brand-ink">{r.name}</div>
-                  <div className="text-sm text-brand-mute">{r.loc} · {r.date}</div>
-                </div>
-                <div className="text-sm bg-brand-sand px-3 py-2 rounded-lg font-medium">
-                  {r.object}
-                </div>
+        <div className="max-w-4xl mx-auto grid gap-4 sm:grid-cols-2">
+          {proofs.map((p) => (
+            <a
+              key={p.label}
+              href={p.href}
+              target="_blank"
+              rel="noopener nofollow"
+              className="block bg-white rounded-2xl p-6 border border-brand-line shadow-sm hover:shadow-lg hover:border-brand-red transition"
+            >
+              <div className="text-sm font-bold uppercase tracking-wide text-brand-mute">
+                {p.label}
               </div>
-            </div>
-          </article>
-
-          {/* Dots */}
-          <div className="flex justify-center gap-2 mt-6">
-            {REVIEWS.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setIdx(i)}
-                aria-label={`Отзыв ${i + 1}`}
-                className={`h-2 rounded-full transition ${
-                  i === idx ? 'w-8 bg-brand-red' : 'w-2 bg-brand-line hover:bg-brand-mute'
-                }`}
-              />
-            ))}
-          </div>
-
-          {/* Nav */}
-          <div className="flex justify-center gap-3 mt-6">
-            <button
-              onClick={() => setIdx((v) => (v === 0 ? REVIEWS.length - 1 : v - 1))}
-              className="rounded-full border-2 border-brand-line bg-white px-4 py-2 text-sm font-semibold hover:border-brand-red transition"
-            >
-              ← Назад
-            </button>
-            <button
-              onClick={() => setIdx((v) => (v + 1) % REVIEWS.length)}
-              className="rounded-full border-2 border-brand-line bg-white px-4 py-2 text-sm font-semibold hover:border-brand-red transition"
-            >
-              Вперёд →
-            </button>
-          </div>
+              <div className="mt-2 text-lg font-extrabold text-brand-ink">{p.value}</div>
+              <div className="mt-1 text-sm text-brand-mute">{p.note}</div>
+            </a>
+          ))}
         </div>
+
+        <p className="text-center text-sm text-brand-mute mt-8 max-w-2xl mx-auto">
+          ИП Демченко, ОГРНИП {SITE.ogrnip}, ИНН {SITE.inn} — реквизиты можно пробить
+          на сайте ФНС до подписания договора.
+        </p>
       </div>
     </section>
   );

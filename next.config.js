@@ -44,6 +44,9 @@ const nextConfig = {
           { key: 'Cache-Control', value: 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400' },
           { key: 'X-Content-Type-Options', value: 'nosniff' },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          // HSTS: браузер сам ходит по https, без лишнего http→https редиректа.
+          // Минус один хоп на первом заходе + плюсик к оценке безопасности сайта.
+          { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
         ],
       },
     ];
@@ -58,8 +61,9 @@ const nextConfig = {
       { source: '/blog/monolitnaya-plita-250-mm-cena', destination: '/blog/monolitnaya-plita-250-mm-cena-za-m2/', permanent: true },
       { source: '/blog/monolitnaya-plita-8h10-tsena-lenoblast', destination: '/blog/monolitnaya-plita-8x10-cena-lenoblast/', permanent: true },
       { source: '/blog/dom-iz-gazobetona-lsr-pod-klyuch-tsena-za-kvadratny-metr', destination: '/blog/dom-iz-gazobetona-lsr-pod-klyuch-cena-za-m2/', permanent: true },
-      { source: '/blog/plita-pod-gazobeton-gatchina-cena', destination: '/blog/plitnyy-fundament-gatchina-cena/', permanent: true },
-      { source: '/blog/monolitnaya-plita-skolko-stoit-zalit-v-gatchine', destination: '/blog/plitnyy-fundament-gatchina-cena/', permanent: true },
+      // ↓ раньше вели на статью-каннибал про Гатчину, теперь сразу на посадочную района (без цепочки 301→301)
+      { source: '/blog/plita-pod-gazobeton-gatchina-cena', destination: '/fundament/gatchina/', permanent: true },
+      { source: '/blog/monolitnaya-plita-skolko-stoit-zalit-v-gatchine', destination: '/fundament/gatchina/', permanent: true },
       { source: '/blog/plata-ili-lenta-pod-dom-iz-gazobetona', destination: '/blog/plita-ili-lenta-pod-gazobeton/', permanent: true },
       { source: '/blog/plita-na-svayah-leskolovo-otzyvy', destination: '/blog/plita-na-svayah-leskolovo/', permanent: true },
 
@@ -78,6 +82,36 @@ const nextConfig = {
       { source: '/fundament/tosno/tosno-gorod', destination: '/fundament/tosno/', permanent: true },
       { source: '/fundament/vyborg/vyborg-gorod', destination: '/fundament/vyborg/', permanent: true },
       { source: '/fundament/priozersk/priozersk-gorod', destination: '/fundament/priozersk/', permanent: true },
+
+      // === 2026-07-26, SEO-аудит. Склейка каннибалов ===
+      // Проблема: под один и тот же коммерческий запрос у нас било по 2-4 страницы —
+      // блог-статья, посадочная района и хаб. Поисковик в такой ситуации не выбирает
+      // «лучшую», он занижает все. Оставляем одну страницу на запрос.
+
+      // Гео-запросы «фундамент {район} цена» — это работа посадочных /fundament/[район]/,
+      // а не блога. Статьи-двойники снимаем и склеиваем с посадочными.
+      { source: '/blog/plitnyy-fundament-gatchina-cena', destination: '/fundament/gatchina/', permanent: true },
+      { source: '/blog/plitnyy-fundament-vsevolozhsk-cena', destination: '/fundament/vsevolozhsk/', permanent: true },
+      { source: '/blog/plitnyy-fundament-tosno-cena', destination: '/fundament/tosno/', permanent: true },
+      { source: '/blog/plitnyy-fundament-vyborgskiy-rayon', destination: '/fundament/vyborg/', permanent: true },
+      { source: '/blog/plitnyy-fundament-priozerskiy-rayon', destination: '/fundament/priozersk/', permanent: true },
+      { source: '/blog/plitnyy-fundament-kirovskiy-rayon-lo', destination: '/fundament/kirov/', permanent: true },
+      { source: '/blog/plitnyy-fundament-kurortnyy-rayon-spb', destination: '/fundament/kurortnyy/', permanent: true },
+      { source: '/blog/plitnyy-fundament-lomonosovskiy-rayon-cena', destination: '/fundament/lomonosov/', permanent: true },
+
+      // «плитный фундамент цена СПб» и его синонимы — это денежная страница /fundament/
+      // (там теперь таблица цен по размерам). Четыре статьи под тот же запрос — сняты.
+      { source: '/blog/plitnyi-fundament-pod-gazobeton-cena', destination: '/fundament/', permanent: true },
+      { source: '/blog/plitnyy-fundament-cena-za-m2-spb', destination: '/fundament/', permanent: true },
+      { source: '/blog/monolitnaya-plita-tsena-rabota-spb', destination: '/fundament/', permanent: true },
+      { source: '/blog/monolitnyy-plitnyy-fundament-spb-pod-klyuch', destination: '/fundament/', permanent: true },
+
+      // 12×12 — было три статьи на один запрос. Оставили ту, что Яндекс уже держит в поиске.
+      { source: '/blog/monolitnaya-plita-12x12-cena-spb', destination: '/blog/cena-plity-fundamenta-12h12-spb/', permanent: true },
+      { source: '/blog/plita-12x12-pod-gazobeton-cena-pod-klyuch', destination: '/blog/cena-plity-fundamenta-12h12-spb/', permanent: true },
+
+      // Две почти одинаковые статьи про отзывы — оставили одну.
+      { source: '/blog/plitnyi-fundament-gazobeton-dom-leningradskaya-oblast-otzyvy', destination: '/blog/plitnyy-fundament-dlya-gazobetona-lenoblast-otzyvy/', permanent: true },
     ];
   },
 };

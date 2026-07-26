@@ -149,7 +149,7 @@ export const plita250Ili300MmPodGazobeton2Etazha: Article = {
 
 <p>Если граница между 250 и 300 мм неочевидна (что бывает на 30–40% участков ЛО) — заходим в 300 мм с запасом. Перерасход 90 тысяч на доме 10×10 — это страховка от 1,4 млн на восстановление, выбор очевиден.</p>
 
-<p>Посмотреть наши <a href="/#portfolio">завершённые двухэтажные газобетонные дома</a> и почитать детально <a href="/blog/plitnyy-fundament-pod-gazobeton-tolschina-armirovanie/">про толщину и армирование плиты под газобетон</a> или <a href="/blog/armirovanie-plity-pod-dvuhetazhnyy-gazobeton/">армирование плиты под двухэтажный газобетон</a>. Для сравнения цен загляните в материалы <a href="/blog/monolitnaya-plita-250-mm-cena-za-m2/">по цене плиты 250 мм за м²</a> и <a href="/blog/monolitnaya-plita-12x12-cena-spb/">плите 12×12 в СПб</a>.</p>
+<p>Посмотреть наши <a href="/#portfolio">завершённые двухэтажные газобетонные дома</a> и почитать детально <a href="/blog/plitnyy-fundament-pod-gazobeton-tolschina-armirovanie/">про толщину и армирование плиты под газобетон</a> или <a href="/blog/armirovanie-plity-pod-dvuhetazhnyy-gazobeton/">армирование плиты под двухэтажный газобетон</a>. Для сравнения цен загляните в материалы <a href="/blog/monolitnaya-plita-250-mm-cena-za-m2/">по цене плиты 250 мм за м²</a> и <a href="/blog/cena-plity-fundamenta-12h12-spb/">плите 12×12 в СПб</a>.</p>
 
 <h2>Куда обращаться за расчётом и сметой</h2>
 

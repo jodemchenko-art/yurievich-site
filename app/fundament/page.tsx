@@ -3,6 +3,13 @@ import Link from 'next/link';
 import { REGIONS } from '@/lib/regions';
 import { LOCALITIES, getLocalitiesByRegion } from '@/lib/localities';
 import { SITE } from '@/lib/site';
+import PriceTable from '@/components/PriceTable';
+import {
+  PRICE_TABLE_COLUMNS,
+  PRICE_TABLE_GROUND,
+  PRICE_TABLE_ROWS,
+  calcPlita,
+} from '@/lib/pricing';
 
 export const metadata: Metadata = {
   title: 'Фундамент под ключ в СПб и ЛО на пучинистых грунтах — монолитный',
@@ -86,6 +93,36 @@ const HUB_SCHEMA = {
           unitText: '₽/м²',
         },
       },
+      // Прайс по размерам — те же цифры, что в видимой таблице на странице.
+      // Нужен, чтобы Яндекс/Алиса и AI-поиск могли процитировать конкретную сумму
+      // на запрос «плита 10х10 цена», а не только вилку «от 5 500».
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Монолитная плита под ключ — цены по размерам',
+        itemListElement: PRICE_TABLE_ROWS.map((size) => {
+          const col = PRICE_TABLE_COLUMNS.find((c) => c.key === 'gazo-2')!;
+          const r = calcPlita({
+            size,
+            material: col.material,
+            ground: PRICE_TABLE_GROUND,
+            storeys: col.storeys,
+          });
+          return {
+            '@type': 'Offer',
+            name: `Монолитная плита ${size.replace('x', '×')} м (${r.area} м²) под двухэтажный дом из газобетона`,
+            priceCurrency: 'RUB',
+            price: r.total,
+            priceSpecification: {
+              '@type': 'UnitPriceSpecification',
+              price: r.pricePerM2,
+              priceCurrency: 'RUB',
+              unitText: '₽/м²',
+            },
+            areaServed: SITE.areaServed,
+            availability: 'https://schema.org/InStock',
+          };
+        }),
+      },
     },
   ],
 };
@@ -148,6 +185,8 @@ export default function FundamentIndexPage() {
           </a>
         </div>
       </section>
+
+      <PriceTable />
 
       <section className="container-x pb-10">
         <h2 className="text-2xl md:text-3xl font-extrabold mb-6">Выберите район работ</h2>

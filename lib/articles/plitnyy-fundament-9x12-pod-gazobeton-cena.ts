@@ -396,6 +396,6 @@ export const plitnyyFundament9x12PodGazobetonCena: Article = {
 
 <p><a href="/#calc">Заявка на расчёт</a> — заполните форму, посчитаем за 24 часа. Или сразу <a href="/#contacts">позвоните</a> — Юрий обсудит проект по телефону, экономит вам 3-4 итерации почты.</p>
 
-<p>Если ищете подрядчика по конкретному размеру — у нас есть отдельные разборы <a href="/blog/monolitnaya-plita-8h10-tsena-lenoblast/">8×10</a>, <a href="/blog/plita-10x12-pod-gazobeton-cena-300mm/">10×12</a>, <a href="/blog/monolitnaya-plita-12x12-cena-spb/">12×12</a> — сравните.</p>
+<p>Если ищете подрядчика по конкретному размеру — у нас есть отдельные разборы <a href="/blog/monolitnaya-plita-8h10-tsena-lenoblast/">8×10</a>, <a href="/blog/plita-10x12-pod-gazobeton-cena-300mm/">10×12</a>, <a href="/blog/cena-plity-fundamenta-12h12-spb/">12×12</a> — сравните.</p>
 `,
 };

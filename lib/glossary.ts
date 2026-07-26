@@ -33,7 +33,7 @@ export const GLOSSARY: GlossaryTerm[] = [
 
 В СК «Юрьевич» 100% объектов с 2018 года залиты бетоном М300 W6 F150 с заводов ЛСР. У нас в архиве 239 паспортов качества — показываем каждому заказчику при приёмке.`,
     related: ['beton-m400', 'beton-m200', 'klass-prochnosti', 'vodonepronicaemost-w6', 'morozostojkost-f150'],
-    relatedArticles: ['plitnyy-fundament-cena-za-m2-spb'],
+    relatedArticles: [],
   },
   {
     slug: 'beton-m200',

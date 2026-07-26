@@ -81,7 +81,11 @@ export default function Footer() {
 
       <div className="border-t border-white/10">
         <div className="container-x py-6 text-xs text-white/50 flex flex-col md:flex-row justify-between gap-2">
-          <span>© СК «Юрьевич», {new Date().getFullYear()}. Все права защищены.</span>
+          {/* Реквизиты открыто: клиент может пробить ИП до звонка, поисковик видит
+              реальное юрлицо за сайтом. У большинства конкурентов этого нет. */}
+          <span>
+            © {new Date().getFullYear()} ИП Демченко · ОГРНИП {SITE.ogrnip} · ИНН {SITE.inn}
+          </span>
           <span>Семейная стройка в СПб и Ленобласти.</span>
         </div>
       </div>

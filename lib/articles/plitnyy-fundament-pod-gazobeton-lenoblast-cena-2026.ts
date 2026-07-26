@@ -120,7 +120,7 @@ export const plitnyyFundamentPodGazobetonLenoblastCena2026: Article = {
 </tbody>
 </table>
 
-<p>Конкретику по отдельным районам мы разбирали в материалах <a href="/blog/plitnyy-fundament-vsevolozhsk-cena/">плита во Всеволожске</a>, <a href="/blog/plitnyy-fundament-gatchina-cena/">плита в Гатчине</a>, <a href="/blog/plitnyy-fundament-priozerskiy-rayon/">Приозерский район</a>, <a href="/blog/plitnyy-fundament-tosno-cena/">Тосно</a> и <a href="/blog/plitnyy-fundament-kurortnyy-rayon-spb/">Курортный район</a>.</p>
+<p>Конкретику по отдельным районам мы разбирали в материалах <a href="/fundament/vsevolozhsk/">плита во Всеволожске</a>, <a href="/fundament/gatchina/">плита в Гатчине</a>, <a href="/fundament/priozersk/">Приозерский район</a>, <a href="/fundament/tosno/">Тосно</a> и <a href="/fundament/kurortnyy/">Курортный район</a>.</p>
 
 <h2>Когда плита под газобетон не подойдёт и что брать вместо</h2>
 <p>Плита — не универсальное решение. На сильнопучинистых грунтах с торфом более 1,5 м или близкими грунтовыми водами (УГВ выше 0,5 м) плита либо требует дорогого основания, либо проигрывает свайно-ростверковому фундаменту. Разбор есть в материалах <a href="/blog/svai-ili-plita-pod-gazobeton-leningradskaya-oblast/">сваи или плита под газобетон в ЛО</a>, <a href="/blog/plitnyy-fundament-na-torfe-leskolovo-naziya/">плита на торфе в Лесколово и Назии</a>, <a href="/blog/gruntovye-vody-blizko-kakoy-fundament-vybrat/">какой фундамент при высоком УГВ</a> и <a href="/blog/puchinistyy-grunt-kakoy-fundament/">пучинистый грунт</a>.</p>
@@ -134,7 +134,7 @@ export const plitnyyFundamentPodGazobetonLenoblastCena2026: Article = {
 
 <h2>Почему 239 заказчиков выбрали СК «Юрьевич»</h2>
 <ul>
-<li><strong>239 сданных объектов</strong> в СПб и Ленобласти с 2013 года — в основном плиты под газобетон 8×10, 10×10, 10×12.</li>
+<li><strong>239 сданных объектов</strong> в СПб и Ленобласти с 2018 года — в основном плиты под газобетон 8×10, 10×10, 10×12.</li>
 <li><strong>Рейтинг 5.0★</strong> на основе 35 отзывов на Авито — все отзывы реальных клиентов с фото объектов.</li>
 <li><strong>Партнёрство с ЛСР Газобетон</strong> — закупаем блоки D400/D500 напрямую с завода без посредников, цена ниже рынка на 8–12%.</li>
 <li><strong>Гарантия 5 лет</strong> на фундамент с выездом и устранением за наш счёт при любых геометрических или несущих дефектах.</li>
