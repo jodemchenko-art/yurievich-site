@@ -44,6 +44,7 @@ import { plitaIliLentaPodGazobeton } from './plita-ili-lenta-pod-gazobeton';
 import { plitaIliVintovyeSvaiPodGazobeton } from './plita-ili-vintovye-svai-pod-gazobeton';
 import { plitaIliZabivnyeSvaiRostverkNaTorfe } from './plita-ili-zabivnye-svai-rostverk-na-torfe';
 import { plitaNaSvayahLeskolovo } from './plita-na-svayah-leskolovo';
+import { plitaPodDomSMansardoyIzGazobetonaCena } from './plita-pod-dom-s-mansardoy-iz-gazobetona-cena';
 import { plitaPodGazobeton100m2CenaPodKlyuch } from './plita-pod-gazobeton-100m2-cena-pod-klyuch';
 import { plitaPoplylaChtoDelat } from './plita-poplyla-chto-delat';
 import { plitaSRebramiPodGazobetonLenoblast } from './plita-s-rebrami-pod-gazobeton-lenoblast';
@@ -136,6 +137,7 @@ export const ARTICLES: Article[] = [
   plitaIliVintovyeSvaiPodGazobeton,
   plitaIliZabivnyeSvaiRostverkNaTorfe,
   plitaNaSvayahLeskolovo,
+  plitaPodDomSMansardoyIzGazobetonaCena,
   plitaPodGazobeton100m2CenaPodKlyuch,
   plitaPoplylaChtoDelat,
   plitaSRebramiPodGazobetonLenoblast,
