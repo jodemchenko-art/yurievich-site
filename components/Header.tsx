@@ -23,14 +23,14 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-hair bg-white/95 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-rule bg-paper0/95 backdrop-blur">
       {/* Служебная строка */}
-      <div className="hidden bg-bp-950 text-white md:block">
+      <div className="hidden bg-bp-950 text-chalk md:block">
         <div className="container-x flex items-center justify-between py-2">
-          <span className="mono text-[11px] tracking-wider text-bp-text">
+          <span className="mono text-[11px] tracking-wider text-chalkdim">
             ДОГОВОР С ФИКС-ЦЕНОЙ · ГАРАНТИЯ {SITE.warrantyYears} ЛЕТ · ВЫЕЗД ИНЖЕНЕРА БЕСПЛАТНО
           </span>
-          <a href={`tel:${SITE.phoneRaw}`} className="mono text-[11px] tracking-wider text-signal ulink">
+          <a href={`tel:${SITE.phoneRaw}`} className="mono text-[11px] tracking-wider text-sand ulink">
             {SITE.phone}
           </a>
         </div>
@@ -41,14 +41,14 @@ export default function Header() {
         <a href="/" className="flex items-center gap-3" aria-label="СК Юрьевич — на главную">
           <span className="relative flex h-10 w-10 items-center justify-center bg-graphite text-base font-extrabold text-white">
             Ю
-            <span aria-hidden className="absolute -bottom-px -right-px h-2.5 w-2.5 border-b border-r border-signal" />
-            <span aria-hidden className="absolute -left-px -top-px h-2.5 w-2.5 border-l border-t border-signal" />
+            <span aria-hidden className="absolute -bottom-px -right-px h-2.5 w-2.5 border-b border-r border-sand" />
+            <span aria-hidden className="absolute -left-px -top-px h-2.5 w-2.5 border-l border-t border-sand" />
           </span>
           <span className="leading-tight">
             <span className="block text-[15px] font-extrabold tracking-tight text-graphite md:text-base">
               СК «Юрьевич»
             </span>
-            <span className="mono block whitespace-nowrap text-[9px] tracking-wider text-brand-mute md:text-[10px]">
+            <span className="mono block whitespace-nowrap text-[9px] tracking-wider text-inkmute md:text-[10px]">
               <span className="sm:hidden">ФУНДАМЕНТЫ · СПб + ЛО</span>
               <span className="hidden sm:inline">ФУНДАМЕНТЫ · ДОМА ПОД КЛЮЧ</span>
             </span>
@@ -60,7 +60,7 @@ export default function Header() {
             <a
               key={n.href}
               href={n.href}
-              className="ulink text-[13px] font-semibold text-brand-mute transition-colors hover:text-graphite"
+              className="ulink text-[13px] font-semibold text-inkmute transition-colors hover:text-graphite"
             >
               {n.label}
             </a>
@@ -96,7 +96,7 @@ export default function Header() {
 
       {/* Мобильное меню */}
       {open && (
-        <div className="border-t border-hair bg-white lg:hidden">
+        <div className="border-t border-rule bg-paper0 lg:hidden">
           <div className="container-x flex flex-col py-2">
             {NAV.map((n) => (
               <a
@@ -106,7 +106,7 @@ export default function Header() {
                 className="flex items-center justify-between border-b border-hair py-3.5 text-[15px] font-semibold text-graphite last:border-b-0"
               >
                 {n.label}
-                <span aria-hidden className="mono text-xs text-hair">
+                <span aria-hidden className="mono text-xs text-sand">
                   →
                 </span>
               </a>

@@ -93,7 +93,7 @@
   max-width: 72ch;
   margin-left: auto;
   margin-right: auto;
-  color: #1f2937;
+  color: #24211C;
   line-height: 1.75;
   font-size: 17px;
 }
@@ -110,7 +110,7 @@
   font-weight: 800;
   margin-top: 3rem;
   margin-bottom: 1rem;
-  color: #111418;
+  color: #191713;
   letter-spacing: -0.01em;
   line-height: 1.25;
 }
@@ -127,7 +127,7 @@
   font-weight: 700;
   margin-top: 2rem;
   margin-bottom: 0.75rem;
-  color: #111418;
+  color: #191713;
   letter-spacing: -0.005em;
 }
 
@@ -143,25 +143,25 @@
 }
 
 .prose-yur strong {
-  color: #111418;
+  color: #191713;
   font-weight: 700;
 }
 
 .prose-yur em {
-  color: #374151;
+  color: #5A554D;
 }
 
 .prose-yur a {
-  color: #1B3A5C;
+  color: #1E44AE;
   text-decoration: underline;
-  text-decoration-color: rgba(27, 58, 92, 0.4);
+  text-decoration-color: rgba(30, 68, 174, 0.4);
   text-underline-offset: 3px;
   text-decoration-thickness: 1.5px;
   transition: text-decoration-color 0.2s;
 }
 
 .prose-yur a:hover {
-  text-decoration-color: #1B3A5C;
+  text-decoration-color: #1E44AE;
 }
 
 .prose-yur ul, .prose-yur ol {
@@ -180,16 +180,16 @@
 }
 
 .prose-yur li::marker {
-  color: #1B3A5C;
+  color: #1E44AE;
 }
 
 .prose-yur blockquote {
   margin: 2rem 0;
   padding: 1.25rem 1.5rem;
-  border-left: 4px solid #1B3A5C;
-  background: #F4F1EB;
+  border-left: 4px solid #1E44AE;
+  background: #F0EDE6;
   font-style: italic;
-  color: #1f2937;
+  color: #24211C;
   border-radius: 0 0.75rem 0.75rem 0;
 }
 
@@ -214,7 +214,7 @@
 }
 
 .prose-yur th {
-  background: #1B3A5C;
+  background: #1E44AE;
   color: white;
   font-weight: 700;
   text-align: left;
@@ -224,12 +224,12 @@
 
 .prose-yur td {
   padding: 0.75rem 1rem;
-  border: 1px solid #E6E2DA;
+  border: 1px solid #DCD5C8;
   vertical-align: top;
 }
 
 .prose-yur tr:nth-child(even) td {
-  background: #FAFAFA;
+  background: #FBFAF7;
 }
 
 .prose-yur img {
@@ -273,34 +273,71 @@
 }
 
 /* ==========================================================================
-   ДИЗАЙН-СИСТЕМА «ИНЖЕНЕРНЫЙ ЧЕРТЁЖ» (главная, 26.07.2026)
-   Принципы: прямые углы вместо скруглений, волосяные линии вместо теней,
-   моноширинные служебные подписи, янтарная выноска как единственный акцент.
-   Всё на CSS — ни одной новой зависимости, ни одного лишнего килобайта.
+   ДИЗАЙН-СИСТЕМА «СИНЬКА И БУМАГА» (26.07.2026, вторая итерация)
+
+   Прямые углы, волосяные линии, моноширинные служебные подписи — как в первой
+   версии. Изменено главное: страница СВЕТЛАЯ, тёмного ровно три полосы,
+   единственный хроматический цвет — ультрамарин, и он живёт только там,
+   где человек должен нажать. Всё остальное — бумага, графит и песок.
    ========================================================================== */
 
-/* --- Миллиметровка / синька: фон-сетка -------------------------------- */
-.grid-paper {
-  background-image:
-    linear-gradient(to right, rgba(20, 26, 31, 0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(20, 26, 31, 0.045) 1px, transparent 1px);
-  background-size: 32px 32px;
+:root {
+  --paper-0: #FBFAF7;
+  --paper-100: #F0EDE6;
+  --paper-200: #E2DCD0;
+  --cold-100: #E9ECEE;
+  --cold-200: #DBE1E4;
+  --gra-950: #1A1714;
+  --gra-900: #24211C;
+  --gra-800: #2F2B25;
+
+  --ink-900: #191713;
+  --ink-600: #5A554D;
+  --ink-cold: #545A5E;
+  --chalk: #F2EFE9;
+  --chalk-dim: #B3ABA0;
+
+  --hair-warm: #DCD5C8;
+  --hair-cold: #CFD6D9;
+  --hair-dark: #322D26;
+  --rule-warm: #7A7265;
+  --rule-cold: #77828A;
+  --rule-dark: #746A5C;
+
+  --ultra-700: #17357F;
+  --ultra-600: #1E44AE;
+  --ultra-400: #4C7CF0;
+  --ultra-200: #A8BEF7;
+  --sand-300: #C4B7A4;
 }
+
+/* --- Миллиметровка: она смысловая, а не декоративная ------------------
+   Есть только на тёплой извести (там, где объясняем) и крупная на графите.
+   На холодной плоскости «замера» сетки нет вообще — по одному этому человек
+   считывает смену раздела ещё до того, как прочитал заголовок. */
+.grid-paper,
 .grid-paper-lg {
   background-image:
-    linear-gradient(to right, rgba(20, 26, 31, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(20, 26, 31, 0.05) 1px, transparent 1px),
-    linear-gradient(to right, rgba(20, 26, 31, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(20, 26, 31, 0.035) 1px, transparent 1px);
-  background-size: 128px 128px, 128px 128px, 32px 32px, 32px 32px;
+    linear-gradient(to right, var(--hair-warm) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--hair-warm) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+@media (min-width: 640px) {
+  /* мелкий шаг только на десктопе: на 2-3× плотности он даёт муар */
+  .grid-paper-lg {
+    background-image:
+      linear-gradient(to right, var(--hair-warm) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--hair-warm) 1px, transparent 1px),
+      linear-gradient(to right, rgba(220, 213, 200, 0.55) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(220, 213, 200, 0.55) 1px, transparent 1px);
+    background-size: 40px 40px, 40px 40px, 8px 8px, 8px 8px;
+  }
 }
 .grid-paper-dark {
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.055) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.055) 1px, transparent 1px),
-    linear-gradient(to right, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
-  background-size: 128px 128px, 128px 128px, 32px 32px, 32px 32px;
+    linear-gradient(to right, var(--hair-dark) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--hair-dark) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
 /* --- Типографика ------------------------------------------------------ */
@@ -310,7 +347,6 @@
   font-weight: 500;
 }
 
-/* Служебная подпись: «ЭТАП 03 · АРМИРОВАНИЕ» */
 .eyebrow {
   font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-weight: 500;
@@ -323,7 +359,6 @@
   .eyebrow { font-size: 12px; }
 }
 
-/* Заголовки: плотный трекинг, фluid-размер, без «прыжков» на мобиле */
 .display-1 {
   font-size: clamp(2.05rem, 5.6vw, 3.9rem);
   line-height: 1.02;
@@ -347,7 +382,6 @@
   line-height: 1.6;
 }
 
-/* Число-«показание прибора» */
 .metric {
   font-weight: 800;
   letter-spacing: -0.03em;
@@ -355,82 +389,107 @@
   line-height: 0.95;
 }
 
-/* --- Линии и плашки --------------------------------------------------- */
-.hair { border-color: #DFDBD2; }
-.hair-dark { border-color: #1E3D52; }
-
-/* Датум-линия с засечкой слева — «начало отсчёта» секции */
+/* --- Линии и плашки ---------------------------------------------------
+   Два яруса линий вместо одного. Волосяная 1.25:1 хороша на макбуке и
+   физически исчезает на дешёвом Android в солнце — поэтому всё несущее
+   (рамки карточек, разлиновка таблиц, границы полей) рисуется --rule-*,
+   а --hair-* остаётся только на сетке и мягких разделителях. */
 .datum {
   position: relative;
-  border-top: 1px solid #DFDBD2;
+  border-top: 1px solid var(--rule-warm);
 }
 .datum::before {
   content: '';
   position: absolute;
   top: -5px;
   left: 0;
-  width: 1px;
+  width: 2px;
   height: 10px;
-  background: #E8A33D;
+  background: var(--sand-300);
 }
-.datum-dark { border-top-color: #1E3D52; }
+.datum-dark { border-top-color: var(--rule-dark); }
+.datum-cold { border-top-color: var(--rule-cold); }
 
-/* Плита-карточка: прямые углы, волосяная рамка, без теней */
 .plate {
-  background: #fff;
-  border: 1px solid #DFDBD2;
+  background: var(--paper-0);
+  border: 1px solid var(--rule-warm);
+  position: relative;
+}
+.plate-cold {
+  background: var(--paper-0);
+  border: 1px solid var(--rule-cold);
   position: relative;
 }
 .plate-dark {
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid #1E3D52;
+  background: var(--gra-800);
+  border: 1px solid var(--rule-dark);
   position: relative;
 }
 
-/* Уголки-«реперы» у плиты (чертёжная рамка) */
+/* Уголки-реперы чертёжной рамки — песок, не акцент: синим на странице
+   имеет право быть только то, что нажимают. */
 .ticks::before,
 .ticks::after {
   content: '';
   position: absolute;
   width: 10px;
   height: 10px;
-  border-color: #E8A33D;
+  border-color: var(--sand-300);
   border-style: solid;
-  opacity: 0.9;
 }
-.ticks::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
-.ticks::after { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+.ticks::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+.ticks::after { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
 
-/* --- Кнопки ----------------------------------------------------------- */
+/* --- Кнопки -----------------------------------------------------------
+   Кнопка заявки выглядит ОДИНАКОВО на светлом и на тёмном: одна заливка,
+   один смысл. Под ней жёсткий песочный офсет-блок без размытия — это
+   типографский приём печати, а не «тень как у всех». */
 .btn-signal {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  background: #E8A33D;
-  color: #141A1F;
+  background: var(--ultra-600);
+  color: #FFFFFF;
   font-weight: 800;
   letter-spacing: -0.01em;
   padding: 1rem 1.6rem;
-  border: 1px solid #E8A33D;
+  border: 1px solid var(--ultra-600);
+  box-shadow: 3px 3px 0 0 var(--sand-300);
   transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
 }
-.btn-signal:hover { background: #F2B85C; border-color: #F2B85C; transform: translateY(-1px); }
-.btn-signal:active { transform: translateY(0) scale(0.995); }
+.btn-signal:hover {
+  background: var(--ultra-700);
+  border-color: var(--ultra-700);
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 0 var(--sand-300);
+}
+.btn-signal:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 0 var(--sand-300);
+}
+/* На графите добавляем светлую рамку: сама заливка к тёмному фону даёт
+   всего 2.1:1, и без рамки кнопка теряет границу для слабовидящих. */
+.on-dark .btn-signal,
+.btn-signal.on-dark {
+  border-color: var(--chalk-dim);
+  box-shadow: 2px 2px 0 0 var(--sand-300);
+}
 
 .btn-dark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  background: #0A1A26;
-  color: #fff;
+  background: var(--gra-950);
+  color: var(--chalk);
   font-weight: 700;
   padding: 1rem 1.6rem;
-  border: 1px solid #0A1A26;
+  border: 1px solid var(--gra-950);
   transition: background 0.18s ease, transform 0.18s ease;
 }
-.btn-dark:hover { background: #143045; transform: translateY(-1px); }
+.btn-dark:hover { background: var(--gra-800); transform: translateY(-1px); }
 
 .btn-line {
   display: inline-flex;
@@ -445,10 +504,9 @@
   transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
 }
 .btn-line:hover { transform: translateY(-1px); }
-.btn-line-dark:hover { background: rgba(255, 255, 255, 0.08); }
-.btn-line-light:hover { background: #141A1F; color: #fff; }
+.btn-line-dark:hover { background: rgba(242, 239, 233, 0.1); }
+.btn-line-light:hover { background: var(--ink-900); color: var(--paper-0); }
 
-/* Стрелка внутри кнопки уезжает вправо на ховере */
 .btn-signal .arw,
 .btn-dark .arw,
 .btn-line .arw { transition: transform 0.18s ease; }
@@ -456,7 +514,6 @@
 .btn-dark:hover .arw,
 .btn-line:hover .arw { transform: translateX(4px); }
 
-/* Ссылка с «проявляющимся» подчёркиванием */
 .ulink {
   background-image: linear-gradient(currentColor, currentColor);
   background-size: 0% 1px;
@@ -466,7 +523,7 @@
 }
 .ulink:hover { background-size: 100% 1px; }
 
-/* --- Появление при скролле (IntersectionObserver вешает .is-in) -------- */
+/* --- Появление при скролле -------------------------------------------- */
 [data-reveal] {
   opacity: 0;
   transform: translateY(14px);
@@ -478,7 +535,9 @@
   transform: none;
 }
 
-/* --- Отрисовка выносок на hero-фото (SVG) ----------------------------- */
+/* --- Выноски на фото: белая линия, а не синяя -------------------------
+   Синяя линия исчезает на небе, белая читается и на бетоне, и на грунте,
+   и на зелени. Ультрамарин остаётся только узловой точкой. */
 @keyframes annoDraw {
   to { stroke-dashoffset: 0; }
 }
@@ -507,21 +566,17 @@
 }
 .stage-range::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 44px;
+  width: 48px;
   height: 100%;
   background: transparent;
   cursor: ew-resize;
 }
 .stage-range::-moz-range-thumb {
-  width: 44px;
+  width: 48px;
   height: 100%;
   border: 0;
   background: transparent;
   cursor: ew-resize;
-}
-.stage-range:focus-visible {
-  outline: 2px solid #E8A33D;
-  outline-offset: 2px;
 }
 
 /* --- FAQ на <details> — без JS ---------------------------------------- */
@@ -530,8 +585,6 @@
 .faq-item[open] .faq-sign { transform: rotate(45deg); }
 .faq-sign { transition: transform 0.2s ease; }
 
-/* Плавное раскрытие ответа: 0fr -> 1fr. Закрытие остаётся мгновенным —
-   так работает <details>, и ради этого тащить JS не стоит. */
 .faq-body {
   display: grid;
   grid-template-rows: 0fr;
@@ -539,27 +592,14 @@
 }
 .faq-item[open] .faq-body { grid-template-rows: 1fr; }
 
-/* --- Доступность ------------------------------------------------------ */
-a:focus-visible,
-button:focus-visible,
-summary:focus-visible,
-input:focus-visible,
-textarea:focus-visible {
-  outline: 2px solid #E8A33D;
-  outline-offset: 2px;
-}
-
-/* --- Скролл-сборка чертежа ------------------------------------------- */
-/* Движок кладёт в контейнер --p = 0..1 (прогресс прохода через экран).
-   Каждый слой стартует в свой момент --s и «встаёт на место».
-   Без JS переменная --p отсутствует → var(--p, 1) = 1 → всё нарисовано сразу. */
+/* --- Скролл-сборка чертежа -------------------------------------------- */
 .bp-layer {
   --t: clamp(0, calc((var(--p, 1) - var(--s, 0)) * 5), 1);
   opacity: var(--t);
   transform: translateY(calc((1 - var(--t)) * 22px));
 }
 
-/* --- Заголовок «проявляется» из-под линии, а не просто гаснет --------- */
+/* --- Заголовок проявляется из-под линии -------------------------------- */
 [data-reveal] .mask {
   clip-path: inset(0 0 105% 0);
   transition: clip-path 0.9s cubic-bezier(0.16, 1, 0.3, 1);
@@ -569,11 +609,57 @@ textarea:focus-visible {
   clip-path: inset(0 0 -25% 0);
 }
 
+/* --- Выбор варианта в квизе заливается слева направо -------------------
+   На мобильном нет ховера, и до перехода к следующему вопросу человек
+   вообще не получает обратной связи. Эта заливка — она и есть. */
+.pick {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.pick::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(30, 68, 174, 0.1);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pick[data-picked='1']::before { transform: scaleX(1); }
+
+
+/* --- Кнопка отправки: полоса «идёт отправка» --------------------------- */
+@keyframes sendBar {
+  0%   { transform: scaleX(0); }
+  70%  { transform: scaleX(0.85); }
+  100% { transform: scaleX(1); }
+}
+.send-bar { animation: sendBar 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+/* --- Доступность ------------------------------------------------------ */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--ultra-600);
+  outline-offset: 2px;
+}
+.on-dark a:focus-visible,
+.on-dark button:focus-visible,
+.on-dark input:focus-visible,
+.on-dark textarea:focus-visible {
+  outline-color: var(--ultra-400);
+}
+
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] { opacity: 1; transform: none; transition: none; }
   [data-reveal] .mask, [data-reveal].is-in .mask { clip-path: none; transition: none; }
   .bp-layer { opacity: 1; transform: none; }
   .anno-line { stroke-dashoffset: 0; animation: none; }
   .anno-label { opacity: 1; animation: none; }
+  .pick::before { transition: none; }
   .btn-signal:hover, .btn-dark:hover, .btn-line:hover { transform: none; }
 }

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { calcPlita, fmtRub, type Ground, type SizeKey, type Storeys } from '@/lib/pricing';
+import { SITE } from '@/lib/site';
 
 type Answer = string;
 type Answers = Record<number, Answer>;
@@ -147,12 +148,62 @@ export default function Quiz() {
 
   if (submitted) {
     return (
-      <div className="border border-hair bg-white p-8 text-center text-graphite md:p-12">
-        <div className="mono text-xs tracking-widest text-signal-dark">ЗАЯВКА ПРИНЯТА</div>
-        <h3 className="display-3 mt-3 text-graphite">Спасибо, записали</h3>
-        <p className="mt-3 text-brand-mute max-w-md mx-auto">
-          Юрий перезвонит в ближайшее рабочее время — обычно в течение часа. Подробную смету пришлём в течение 1 рабочего дня после замера.
-        </p>
+      /**
+       * Экран после отправки — не «спасибо», а расписание.
+       *
+       * На чеке в полмиллиона недозвон дороже самой заявки: человек должен
+       * знать, чей номер у него сейчас высветится и когда. Поэтому здесь три
+       * пункта «что дальше» и живые контакты, а галочка рисуется штрихом —
+       * это подтверждение действия, а не украшение.
+       */
+      <div className="border border-rule bg-paper0 p-8 text-graphite md:p-10">
+        <div className="flex items-center gap-3">
+          <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden>
+            <rect x="0.5" y="0.5" width="33" height="33" stroke="#1E44AE" />
+            <path
+              d="M8 17.5 L14.5 24 L26 11"
+              stroke="#1E44AE"
+              strokeWidth="2.4"
+              fill="none"
+              className="anno-line"
+              style={{ ['--d' as any]: '80ms' }}
+            />
+          </svg>
+          <div>
+            <div className="mono text-[11px] tracking-widest text-inkmute">ЗАЯВКА ПРИНЯТА</div>
+            <h3 className="display-3 mt-1 text-graphite">Спасибо, записали</h3>
+          </div>
+        </div>
+
+        <ol className="mt-6 border-t border-hair">
+          {[
+            ['01', 'Юрий перезвонит сам', `Обычно в течение часа в рабочее время. Номер: ${SITE.phone}`],
+            ['02', 'Бесплатный выезд на участок', 'Согласуем удобное время, замерим пятно застройки.'],
+            ['03', 'Смета в течение 1 рабочего дня', 'По позициям. Остаётся у вас в любом случае.'],
+          ].map(([n, t, d]) => (
+            <li key={n} className="flex gap-3 border-b border-hair py-3">
+              <span className="mono flex-shrink-0 text-[11px] text-sand">{n}</span>
+              <span>
+                <span className="block text-sm font-bold leading-snug text-graphite">{t}</span>
+                <span className="mt-0.5 block text-xs leading-relaxed text-inkmute">{d}</span>
+              </span>
+            </li>
+          ))}
+        </ol>
+
+        <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
+          <a href={`tel:${SITE.phoneRaw}`} className="mono text-sm text-graphite ulink">
+            {SITE.phone}
+          </a>
+          <a
+            href={SITE.telegram}
+            target="_blank"
+            rel="noopener"
+            className="mono text-sm text-signal ulink"
+          >
+            Написать в Telegram →
+          </a>
+        </div>
       </div>
     );
   }
@@ -160,16 +211,16 @@ export default function Quiz() {
   const onContacts = step === STEPS.length;
 
   return (
-    <div className="border border-hair bg-white text-graphite">
+    <div className="border border-rule bg-paper0 text-graphite">
       {/* Progress */}
       <div className="px-6 md:px-8 pt-6">
         <div className="flex items-center justify-between mb-2 text-xs md:text-sm">
-          <span className="font-semibold text-brand-mute">
+          <span className="font-semibold text-inkmute">
             Шаг {Math.min(step + 1, totalSteps)} из {totalSteps}
           </span>
-          <span className="text-brand-mute">{Math.round(progress)}%</span>
+          <span className="text-inkmute">{Math.round(progress)}%</span>
         </div>
-        <div className="h-1 bg-paper overflow-hidden">
+        <div className="h-1 bg-paper2 overflow-hidden">
           <div
             className="h-full bg-signal transition-all duration-500"
             style={{ width: `${progress}%` }}
@@ -184,7 +235,7 @@ export default function Quiz() {
               {STEPS[step].title}
             </h3>
             {STEPS[step].sub && (
-              <p className="mt-2 text-sm md:text-base text-brand-mute">{STEPS[step].sub}</p>
+              <p className="mt-2 text-sm md:text-base text-inkmute">{STEPS[step].sub}</p>
             )}
 
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
@@ -195,10 +246,11 @@ export default function Quiz() {
                     key={opt}
                     type="button"
                     onClick={() => pick(opt)}
-                    className={`text-left border px-5 py-4 font-semibold transition ${
+                    data-picked={isActive ? '1' : '0'}
+                    className={`pick text-left border px-5 py-4 font-semibold transition ${
                       isActive
-                        ? 'border-signal bg-signal/10 text-graphite'
-                        : 'border-hair bg-white hover:border-signal/50 hover:bg-paper'
+                        ? 'border-signal text-graphite'
+                        : 'border-rule bg-paper0 hover:border-signal/60 hover:bg-paper'
                     }`}
                   >
                     {opt}
@@ -211,7 +263,7 @@ export default function Quiz() {
               <button
                 type="button"
                 onClick={() => setStep((s) => Math.max(0, s - 1))}
-                className="mt-6 text-sm text-brand-mute hover:text-brand-ink underline"
+                className="mt-6 text-sm text-inkmute hover:text-brand-ink underline"
               >
                 ← Назад
               </button>
@@ -222,7 +274,7 @@ export default function Quiz() {
             <h3 className="display-3 text-graphite">
               Куда прислать расчёт?
             </h3>
-            <p className="mt-2 text-sm md:text-base text-brand-mute">
+            <p className="mt-2 text-sm md:text-base text-inkmute">
               Юрий перезвонит сам, не колл-центр. Смета — в течение 1 рабочего дня после замера.
             </p>
 
@@ -231,12 +283,12 @@ export default function Quiz() {
               const est = estimate(answers);
               if (!est) return null;
               return (
-                <div className="mt-5 border border-hair bg-paper p-4">
+                <div className="mt-5 border border-rule bg-paper p-4">
                   <div className="eyebrow text-signal-dark">Ориентир {est.note}</div>
                   <div className="mono mt-2 text-lg leading-tight text-graphite md:text-xl">
                     {fmtRub(est.from)} – {fmtRub(est.to)} ₽
                   </div>
-                  <p className="mt-2 text-xs leading-relaxed text-brand-mute">
+                  <p className="mt-2 text-xs leading-relaxed text-inkmute">
                     Это не смета, а порядок цифр по таблице цен. Точную сумму считаем после
                     бесплатного замера и фиксируем в договоре — она не меняется без вашей подписи.
                   </p>
@@ -246,30 +298,30 @@ export default function Quiz() {
 
             <div className="mt-6 grid gap-4">
               <label className="block">
-                <span className="eyebrow text-brand-mute">Как к вам обращаться?</span>
+                <span className="eyebrow text-inkmute">Как к вам обращаться?</span>
                 <input
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Иван"
-                  className="mt-2 w-full border border-hair px-4 py-3 text-base transition-colors focus:border-signal focus:outline-none"
+                  className="mt-2 w-full border border-rule bg-paper0 px-4 py-3 text-base transition-colors focus:border-signal focus:outline-none"
                 />
               </label>
 
               <label className="block">
-                <span className="eyebrow text-brand-mute">Телефон</span>
+                <span className="eyebrow text-inkmute">Телефон</span>
                 <input
                   required
                   type="tel"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="+7 ___ ___-__-__"
-                  className="mt-2 w-full border border-hair px-4 py-3 text-base transition-colors focus:border-signal focus:outline-none"
+                  className="mt-2 w-full border border-rule bg-paper0 px-4 py-3 text-base transition-colors focus:border-signal focus:outline-none"
                 />
               </label>
 
               <div>
-                <span className="eyebrow text-brand-mute">Как удобнее связаться?</span>
+                <span className="eyebrow text-inkmute">Как удобнее связаться?</span>
                 <div className="mt-2 grid grid-cols-3 gap-2">
                   {(['whatsapp', 'telegram', 'call'] as const).map((t) => (
                     <button
@@ -279,7 +331,7 @@ export default function Quiz() {
                       className={`border px-3 py-3 text-sm font-semibold transition ${
                         contactType === t
                           ? 'border-signal bg-signal/10'
-                          : 'border-hair hover:border-signal/50'
+                          : 'border-rule hover:border-signal/60'
                       }`}
                     >
                       {t === 'whatsapp' && 'WhatsApp'}
@@ -290,7 +342,7 @@ export default function Quiz() {
                 </div>
               </div>
 
-              <label className="flex items-start gap-2 text-xs text-brand-mute mt-2">
+              <label className="flex items-start gap-2 text-xs text-inkmute mt-2">
                 <input
                   type="checkbox"
                   checked={consent}
@@ -308,16 +360,27 @@ export default function Quiz() {
               <button
                 type="button"
                 onClick={() => setStep((s) => s - 1)}
-                className="sm:w-1/3 border border-hair py-4 font-semibold transition hover:bg-paper"
+                className="sm:w-1/3 border border-rule py-4 font-semibold transition hover:bg-paper"
               >
                 ← Назад
               </button>
               <button
                 type="submit"
                 disabled={loading || !name.trim() || !phone.trim() || !consent}
-                className="btn-signal flex-1 justify-center disabled:cursor-not-allowed disabled:opacity-50"
+                className="btn-signal relative flex-1 justify-center overflow-hidden disabled:cursor-not-allowed disabled:opacity-50"
               >
-                {loading ? 'Отправляем…' : 'Получить расчёт →'}
+                {loading ? 'Отправляем…' : 'Получить расчёт'}
+                {!loading && (
+                  <span className="arw" aria-hidden>
+                    →
+                  </span>
+                )}
+                {loading && (
+                  <span
+                    aria-hidden
+                    className="send-bar absolute bottom-0 left-0 h-0.5 w-full origin-left bg-white/70"
+                  />
+                )}
               </button>
             </div>
           </form>

@@ -11,9 +11,9 @@ import CountUp from './CountUp';
  */
 export default function ProofStrip() {
   return (
-    <section className="border-y border-bp-line bg-bp-900 text-white">
+    <section data-plane="paper" className="border-y border-rule bg-paper2 text-graphite">
       <div className="container-x">
-        <div className="grid grid-cols-2 gap-px bg-bp-line lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-px bg-rule/35 lg:grid-cols-4">
           <Cell
             value={<CountUp to={SITE.projectsCount} />}
             label="завершённых объектов"
@@ -23,7 +23,7 @@ export default function ProofStrip() {
             value={
               <>
                 <CountUp to={5} decimals={1} />
-                <span className="text-signal"> ★</span>
+                <span className="text-sand"> ★</span>
               </>
             }
             label={`${SITE.reviewsCount} отзывов на Авито`}
@@ -37,7 +37,7 @@ export default function ProofStrip() {
           />
         </div>
 
-        <p className="mono py-4 text-[11px] leading-relaxed text-bp-text sm:text-xs">
+        <p className="mono py-4 text-[11px] leading-relaxed text-inkmute sm:text-xs">
           ИП Демченко · ОГРНИП {SITE.ogrnip} · ИНН {SITE.inn} —{' '}
           <a
             href="https://egrul.nalog.ru/"
@@ -65,16 +65,16 @@ function Cell({
   mono?: boolean;
 }) {
   return (
-    <div className="bg-bp-900 px-1 py-6 sm:px-4 md:py-8" data-reveal>
+    <div className="bg-paper2 px-1 py-6 sm:px-4 md:py-8" data-reveal>
       <div
-        className={`${mono ? 'mono text-3xl md:text-4xl' : 'metric text-4xl md:text-5xl'} text-white`}
+        className={`${mono ? 'mono text-3xl md:text-4xl' : 'metric text-4xl md:text-5xl'} text-graphite`}
       >
         {value}
       </div>
-      <div className="mt-2 text-sm font-semibold leading-tight text-white/90 md:text-base">
+      <div className="mt-2 text-sm font-semibold leading-tight text-graphite md:text-base">
         {label}
       </div>
-      <div className="mono mt-1.5 text-[10px] leading-tight text-bp-text sm:text-[11px]">{note}</div>
+      <div className="mono mt-1.5 text-[10px] leading-tight text-inkmute sm:text-[11px]">{note}</div>
     </div>
   );
 }

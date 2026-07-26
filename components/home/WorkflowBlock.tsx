@@ -54,9 +54,8 @@ const STEPS = [
 
 export default function WorkflowBlock() {
   return (
-    <section id="process" className="relative overflow-hidden bg-paper">
-      <div aria-hidden className="absolute inset-0 grid-paper" />
-
+    <section id="process" data-plane="paper" className="relative overflow-hidden bg-paper0">
+      
       <div className="container-x relative py-16 md:py-24">
         <SectionHead
           index="06"
@@ -84,32 +83,32 @@ export default function WorkflowBlock() {
               style={{ ['--d' as any]: `${i * 70}ms` }}
             >
               <div className="flex items-baseline gap-4 md:col-span-4">
-                <span className="mono text-xs text-signal-dark">{s.n}</span>
+                <span className="mono flex h-6 w-6 flex-shrink-0 items-center justify-center bg-sand text-[11px] text-graphite">{s.n}</span>
                 <h3 className="text-lg font-extrabold leading-tight text-graphite md:text-xl">
                   {s.title}
                 </h3>
               </div>
 
               <div className="md:col-span-4">
-                <div className="eyebrow text-brand-mute">Делаем мы</div>
+                <div className="eyebrow text-inkmute">Делаем мы</div>
                 <p className="mt-2 text-sm leading-relaxed text-graphite">{s.us}</p>
               </div>
 
               <div className="md:col-span-2">
-                <div className="eyebrow text-brand-mute">От вас</div>
-                <p className="mt-2 text-sm leading-relaxed text-brand-mute">{s.you}</p>
+                <div className="eyebrow text-inkmute">От вас</div>
+                <p className="mt-2 text-sm leading-relaxed text-inkmute">{s.you}</p>
               </div>
 
               <div className="md:col-span-2">
-                <div className="eyebrow text-brand-mute">Срок · деньги</div>
+                <div className="eyebrow text-inkmute">Срок · деньги</div>
                 <p className="mono mt-2 text-[12px] leading-relaxed text-graphite">{s.time}</p>
-                <p className="mono mt-1 text-[12px] leading-relaxed text-signal-dark">{s.money}</p>
+                <p className="mono mt-1 text-[12px] leading-relaxed text-graphite">{s.money}</p>
               </div>
             </article>
           ))}
         </div>
 
-        <div className="mt-10 grid gap-px border border-hair bg-hair md:grid-cols-3">
+        <div className="mt-10 grid gap-px border border-rule bg-rule/40 md:grid-cols-3">
           {[
             {
               t: 'Без предоплаты за работу',
@@ -124,9 +123,9 @@ export default function WorkflowBlock() {
               d: 'Доп. работы возможны только вашим решением и оформляются допсоглашением.',
             },
           ].map((x, i) => (
-            <div key={x.t} className="bg-white p-6" data-reveal style={{ ['--d' as any]: `${i * 80}ms` }}>
+            <div key={x.t} className="bg-paper2 p-6" data-reveal style={{ ['--d' as any]: `${i * 80}ms` }}>
               <div className="text-base font-extrabold leading-snug text-graphite">{x.t}</div>
-              <p className="mt-2 text-sm leading-relaxed text-brand-mute">{x.d}</p>
+              <p className="mt-2 text-sm leading-relaxed text-inkmute">{x.d}</p>
             </div>
           ))}
         </div>

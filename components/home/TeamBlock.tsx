@@ -37,31 +37,29 @@ const ROLES = [
 
 export default function TeamBlock() {
   return (
-    <section id="brothers" className="relative overflow-hidden bg-bp-900 text-white">
-      <div aria-hidden className="absolute inset-0 grid-paper-dark" />
-
+    <section id="brothers" data-plane="paper" className="relative overflow-hidden bg-paper2 text-graphite">
+      
       <div className="container-x relative py-16 md:py-24">
         <SectionHead
           index="07"
           label="Кто отвечает"
-          dark
           title={<>Работают хозяева, а&nbsp;не&nbsp;наёмная бригада</>}
           lede="Три родных брата. Мы не нанимаем прорабов и не передаём объекты субподрядчикам — поэтому у каждой ошибки на площадке есть конкретная фамилия."
         />
 
         {/* Штамп: три позиции ответственности */}
-        <div className="mt-10 grid gap-px border border-bp-line bg-bp-line md:mt-14 md:grid-cols-3">
+        <div className="mt-10 grid gap-px border border-rule bg-rule/40 md:mt-14 md:grid-cols-3">
           {ROLES.map((r, i) => (
             <article
               key={r.name}
-              className="bg-bp-900 p-6 md:p-8"
+              className="bg-paper0 p-6 md:p-8"
               data-reveal
               style={{ ['--d' as any]: `${i * 90}ms` }}
             >
-              <div className="eyebrow text-signal">{r.role}</div>
-              <h3 className="display-3 mt-3 text-white">{r.name}</h3>
-              <p className="mt-4 text-sm leading-relaxed text-bp-text">{r.duty}</p>
-              <div className="mono mt-6 border-t border-bp-line pt-3 text-[11px] leading-relaxed text-white/70">
+              <div className="eyebrow text-inkmute">{r.role}</div>
+              <h3 className="display-3 mt-3 text-graphite">{r.name}</h3>
+              <p className="mt-4 text-sm leading-relaxed text-inkmute">{r.duty}</p>
+              <div className="mono mt-6 border-t border-hair pt-3 text-[11px] leading-relaxed text-graphite">
                 {r.sign}
               </div>
             </article>
@@ -69,7 +67,7 @@ export default function TeamBlock() {
         </div>
 
         <div className="mt-8 grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
-          <p className="max-w-2xl text-sm leading-relaxed text-bp-text" data-reveal>
+          <p className="max-w-2xl text-sm leading-relaxed text-inkmute" data-reveal>
             Фотографий команды здесь пока нет: снимать постановочные портреты «под сайт» мы не
             стали, а чужие лица из фотобанка ставить не будем. Как мы выглядим и как работаем —
             видно в канале стройки: там объекты, техника и люди в кадре каждый рабочий день.
@@ -80,7 +78,7 @@ export default function TeamBlock() {
               href={SITE.telegramChannel}
               target="_blank"
               rel="noopener"
-              className="btn-line btn-line-dark mono border-white/25 text-xs text-white"
+              className="btn-line btn-line-light mono border-rule text-xs text-graphite"
             >
               Канал стройки
               <span className="arw" aria-hidden>→</span>
@@ -89,7 +87,7 @@ export default function TeamBlock() {
               href={SITE.telegram}
               target="_blank"
               rel="noopener"
-              className="btn-line btn-line-dark mono border-white/25 text-xs text-white"
+              className="btn-line btn-line-light mono border-rule text-xs text-graphite"
             >
               Написать Юрию
               <span className="arw" aria-hidden>→</span>

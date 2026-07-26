@@ -1,17 +1,100 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import { SITE } from '@/lib/site';
 
-// Мобильная нижняя панель: звонок / WhatsApp / Telegram / расчёт.
-// ~70% трафика — мобильный, и часть людей принципиально не звонит, а пишет.
-// Иконки — SVG, не эмодзи: эмодзи рисуются по-разному на Android и iOS
-// и первым же взглядом выдают «сайт на конструкторе».
-
+/**
+ * Мобильная нижняя панель: звонок / WhatsApp / Telegram / расчёт.
+ *
+ * Поведение важнее оформления:
+ *  • на первом экране панели НЕТ — она отъедает 56 px у оффера, а человек,
+ *    который ещё ничего не прочитал, всё равно не звонит;
+ *  • появляется, когда hero уехал вверх;
+ *  • ОДИН раз за сессию, после того как человек посмотрел таблицу цен,
+ *    сегмент «Расчёт» разворачивается в широкую кнопку на 3 секунды —
+ *    ровно на пике намерения «а сколько на мой дом»;
+ *  • прячется, когда на экране форма заявки: дублировать кнопку над формой
+ *    незачем.
+ *
+ * Иконки — SVG, не эмодзи: эмодзи по-разному рисуются на Android и iOS
+ * и первым же взглядом выдают «сайт на конструкторе».
+ */
 export default function StickyPhoneBar() {
+  const [shown, setShown] = useState(false);
+  const [wide, setWide] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setShown(window.scrollY > window.innerHeight * 0.8);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Разворот сегмента «Расчёт» — один раз за сессию, после блока цен
+    const KEY = 'yur_bar_hint_v1';
+    let io: IntersectionObserver | null = null;
+    const prices = document.getElementById('ceny');
+    let alreadyHinted = false;
+    try {
+      alreadyHinted = sessionStorage.getItem(KEY) === '1';
+    } catch {}
+
+    if (prices && !alreadyHinted && 'IntersectionObserver' in window) {
+      io = new IntersectionObserver(
+        (entries) => {
+          const e = entries[0];
+          // ждём, пока цены УЙДУТ вверх — значит, человек их прочитал
+          if (e && !e.isIntersecting && e.boundingClientRect.top < 0) {
+            io?.disconnect();
+            try {
+              sessionStorage.setItem(KEY, '1');
+            } catch {}
+            setWide(true);
+            setTimeout(() => setWide(false), 3000);
+          }
+        },
+        { threshold: 0 }
+      );
+      io.observe(prices);
+    }
+
+    // Прячем панель, когда в кадре форма заявки
+    let formIo: IntersectionObserver | null = null;
+    const form = document.getElementById('contacts');
+    if (form && 'IntersectionObserver' in window) {
+      formIo = new IntersectionObserver(
+        (entries) => {
+          const e = entries[0];
+          if (e) setShown((prev) => (e.isIntersecting ? false : prev));
+        },
+        { threshold: 0.12 }
+      );
+      formIo.observe(form);
+    }
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      io?.disconnect();
+      formIo?.disconnect();
+    };
+  }, []);
+
   return (
-    <div className="fixed inset-x-0 bottom-0 z-30 border-t border-hair bg-white/95 backdrop-blur md:hidden">
-      <div className="grid grid-cols-4 gap-px bg-hair">
+    <div
+      className={`fixed inset-x-0 bottom-0 z-30 border-t border-rule bg-paper0/95 backdrop-blur transition-transform duration-300 md:hidden ${
+        shown ? 'translate-y-0' : 'translate-y-full'
+      }`}
+      style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
+      aria-hidden={!shown}
+    >
+      <div
+        className="grid gap-px bg-rule/40 transition-[grid-template-columns] duration-300"
+        style={{ gridTemplateColumns: wide ? '1fr 1fr 1fr 2.6fr' : '1fr 1fr 1fr 1fr' }}
+      >
         <a
           href={`tel:${SITE.phoneRaw}`}
           aria-label="Позвонить"
+          tabIndex={shown ? 0 : -1}
           className="flex flex-col items-center justify-center gap-1 bg-graphite py-2.5 text-white"
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -30,6 +113,7 @@ export default function StickyPhoneBar() {
           target="_blank"
           rel="noopener"
           aria-label="Написать в WhatsApp"
+          tabIndex={shown ? 0 : -1}
           className="flex flex-col items-center justify-center gap-1 bg-[#1FA855] py-2.5 text-white"
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
@@ -43,6 +127,7 @@ export default function StickyPhoneBar() {
           target="_blank"
           rel="noopener"
           aria-label="Написать в Telegram"
+          tabIndex={shown ? 0 : -1}
           className="flex flex-col items-center justify-center gap-1 bg-[#1F87BC] py-2.5 text-white"
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
@@ -54,9 +139,10 @@ export default function StickyPhoneBar() {
         <a
           href="#calc"
           aria-label="Рассчитать стоимость"
-          className="flex flex-col items-center justify-center gap-1 bg-signal py-2.5 text-graphite"
+          tabIndex={shown ? 0 : -1}
+          className="flex items-center justify-center gap-2 bg-signal py-2.5 text-white"
         >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden className="flex-shrink-0">
             <path
               d="M3 18h18M4 18L12 5l8 13M8.5 13h7"
               stroke="currentColor"
@@ -65,7 +151,9 @@ export default function StickyPhoneBar() {
               strokeLinejoin="round"
             />
           </svg>
-          <span className="mono text-[9px] leading-none">РАСЧЁТ</span>
+          <span className="mono whitespace-nowrap text-[9px] leading-none">
+            {wide ? 'ПОСЧИТАТЬ МОЙ РАЗМЕР' : 'РАСЧЁТ'}
+          </span>
         </a>
       </div>
     </div>

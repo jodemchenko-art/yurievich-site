@@ -57,7 +57,7 @@ const OBJECTS = [
 
 export default function ObjectsChronicle() {
   return (
-    <section id="portfolio" className="relative overflow-hidden bg-bp-900 text-white">
+    <section id="portfolio" data-plane="graphite" className="on-dark relative overflow-hidden bg-bp-900 text-chalk">
       <div aria-hidden className="absolute inset-0 grid-paper-dark" />
 
       <div className="container-x relative py-16 md:py-24">
@@ -73,7 +73,7 @@ export default function ObjectsChronicle() {
             href={SITE.telegramChannel}
             target="_blank"
             rel="noopener"
-            className="btn-line btn-line-dark mono w-full justify-center border-white/25 text-xs text-white sm:w-auto"
+            className="btn-line btn-line-dark mono w-full justify-center border-chalkdim/45 text-xs text-chalk sm:w-auto"
           >
             Канал стройки
             <span className="arw" aria-hidden>→</span>
@@ -92,11 +92,11 @@ export default function ObjectsChronicle() {
             style={{ ['--d' as any]: '120ms' }}
           >
             <div>
-              <div className="eyebrow text-signal">Архив работ</div>
-              <p className="display-3 mt-3 text-white">
+              <div className="eyebrow text-sand">Архив работ</div>
+              <p className="display-3 mt-3 text-chalk">
                 Всего {SITE.projectsCount} завершённых объектов
               </p>
-              <p className="mt-3 text-sm leading-relaxed text-bp-text">
+              <p className="mt-3 text-sm leading-relaxed text-chalkdim">
                 Здесь показаны пять — с двумя стадиями каждый. Остальные лежат там, где мы их
                 выкладывали по ходу работ: с датами, погодой и комментариями заказчиков.
                 А ещё можем свозить вас на действующий объект — посмотреть технологию живьём.
@@ -108,7 +108,7 @@ export default function ObjectsChronicle() {
                 href={SITE.vk}
                 target="_blank"
                 rel="noopener"
-                className="btn-line btn-line-dark mono justify-center border-white/25 text-xs text-white"
+                className="btn-line btn-line-dark mono justify-center border-chalkdim/45 text-xs text-chalk"
               >
                 ВКонтакте
                 <span className="arw" aria-hidden>→</span>
@@ -117,7 +117,7 @@ export default function ObjectsChronicle() {
                 href={SITE.telegramChannel}
                 target="_blank"
                 rel="noopener"
-                className="btn-line btn-line-dark mono justify-center border-white/25 text-xs text-white"
+                className="btn-line btn-line-dark mono justify-center border-chalkdim/45 text-xs text-chalk"
               >
                 Telegram
                 <span className="arw" aria-hidden>→</span>
@@ -229,27 +229,27 @@ function ObjectCard({
         {/* Линия раздела + рукоятка */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-y-0 w-px bg-signal"
+          className="pointer-events-none absolute inset-y-0 w-px bg-signal-bright"
           style={{ left: `${pos}%` }}
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute top-1/2 flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center border border-signal bg-bp-950/80 backdrop-blur-sm"
+          className="pointer-events-none absolute top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center border border-signal-bright bg-bp-950/85 backdrop-blur-sm"
           style={{ left: `${pos}%` }}
         >
-          <span className="mono text-[11px] text-signal">↔</span>
+          <span className="mono text-[12px] text-signal-bright">↔</span>
         </div>
 
         {/* Подписи стадий */}
-        <span className="mono pointer-events-none absolute left-2 top-2 bg-bp-950/80 px-2 py-1 text-[10px] tracking-wider text-white">
+        <span className="mono pointer-events-none absolute left-2 top-2 bg-bp-950/75 px-2 py-1 text-[10px] tracking-wider text-chalk">
           АРМОКАРКАС
         </span>
-        <span className="mono pointer-events-none absolute right-2 top-2 bg-signal px-2 py-1 text-[10px] tracking-wider text-graphite">
+        <span className="mono pointer-events-none absolute right-2 top-2 bg-sand px-2 py-1 text-[10px] tracking-wider text-graphite">
           ПЛИТА ЗАЛИТА
         </span>
 
         {!touched && (
-          <span className="mono pointer-events-none absolute bottom-2 left-1/2 -translate-x-1/2 bg-bp-950/85 px-2.5 py-1 text-[10px] tracking-wider text-signal">
+          <span className="mono pointer-events-none absolute bottom-2 left-1/2 -translate-x-1/2 bg-bp-950/85 px-2.5 py-1 text-[10px] tracking-wider text-sand">
             ← ПОТЯНИТЕ →
           </span>
         )}
@@ -271,12 +271,12 @@ function ObjectCard({
 
       <figcaption className="flex items-end justify-between gap-3 px-1 pb-1 pt-3">
         <div>
-          <div className="text-base font-extrabold leading-tight text-white">{loc}</div>
-          <div className="mono mt-1 text-[10px] leading-tight text-bp-text sm:text-[11px]">
+          <div className="text-base font-extrabold leading-tight text-chalk">{loc}</div>
+          <div className="mono mt-1 text-[10px] leading-tight text-chalkdim sm:text-[11px]">
             {district}
           </div>
         </div>
-        <div className="mono flex-shrink-0 text-sm text-signal">{area}</div>
+        <div className="mono flex-shrink-0 text-sm text-sand">{area}</div>
       </figcaption>
     </figure>
   );

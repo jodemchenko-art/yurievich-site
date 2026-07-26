@@ -28,8 +28,8 @@ export default function SectionHead({
       data-reveal
     >
       <div className={align === 'between' ? 'max-w-2xl' : 'max-w-3xl'}>
-        <div className={`eyebrow ${dark ? 'text-signal' : 'text-signal-dark'}`}>
-          <span className={dark ? 'text-bp-text' : 'text-brand-mute'}>{index}</span>
+        <div className={`eyebrow ${dark ? 'text-sand' : 'text-inkmute'}`}>
+          <span className={dark ? 'text-chalkdim' : 'text-sand'}>{index}</span>
           <span className="mx-2 opacity-40">/</span>
           {label}
         </div>
@@ -37,7 +37,7 @@ export default function SectionHead({
         <h2 className={`display-2 mask mt-3 md:mt-4 ${dark ? 'text-white' : 'text-graphite'}`}>{title}</h2>
 
         {lede && (
-          <p className={`lede mt-4 max-w-2xl ${dark ? 'text-bp-text' : 'text-brand-mute'}`}>{lede}</p>
+          <p className={`lede mt-4 max-w-2xl ${dark ? 'text-bp-text' : 'text-inkmute'}`}>{lede}</p>
         )}
       </div>
 

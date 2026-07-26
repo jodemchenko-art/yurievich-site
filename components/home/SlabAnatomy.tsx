@@ -23,27 +23,27 @@ import SectionHead from './SectionHead';
  */
 const C = {
   sheet: '#FBFAF7',      // поле чертежа
-  soil: '#E4DED1',       // грунт
-  soilHatch: '#B9AE97',
-  soilLine: '#8C8271',
-  sand: '#F0EADC',       // песчано-щебёночная подушка
-  sandDots: '#C0B49A',
-  membrane: '#25333C',   // геотекстиль + гидроизоляция
-  membraneLine: '#14232B',
-  ins: '#F6E9CE',        // утепление
-  insHatch: '#D8B87A',
-  insLine: '#B99A5F',
-  concrete: '#E6E4DE',   // бетон
-  concreteDots: '#CFCBC1',
-  concreteLine: '#4A5560',
-  rebar: '#2B3945',      // арматура
-  form: '#D8C9A8',       // опалубка
-  pipe: '#EFE3D0',       // выпуски
-  pipeLine: '#B07C2C',
-  pipeCap: '#C9862A',
-  accent: '#E8A33D',     // подсветка активного слоя
-  ink: '#141A1F',        // размерные линии и подписи
-  mute: '#6B7076',
+  soil: '#DED7C9',       // грунт
+  soilHatch: '#A79C88',
+  soilLine: '#7A7265',
+  sand: '#E2DCD0',       // песчано-щебёночная подушка
+  sandDots: '#C4B7A4',
+  membrane: '#2F2B25',   // геотекстиль + гидроизоляция
+  membraneLine: '#1A1714',
+  ins: '#EDE6D6',        // утепление
+  insHatch: '#C4B7A4',
+  insLine: '#9A8F7C',
+  concrete: '#DDDFDC',   // бетон — серый, а не бежевый
+  concreteDots: '#C7C9C6',
+  concreteLine: '#6E7472',
+  rebar: '#3A3E3C',      // арматура
+  form: '#C4B7A4',       // опалубка — песок
+  pipe: '#CFD6D9',       // выпуски коммуникаций
+  pipeLine: '#545A5E',
+  pipeCap: '#2F2B25',
+  accent: '#1E44AE',     // подсветка активного слоя — единственный синий
+  ink: '#191713',        // размерные линии и подписи
+  mute: '#5A554D',
 };
 
 type Layer = {
@@ -103,7 +103,7 @@ export default function SlabAnatomy() {
   const current = active === null ? null : LAYERS[active];
 
   return (
-    <section id="razrez" className="relative overflow-hidden bg-paper">
+    <section id="razrez" data-plane="paper" className="relative overflow-hidden bg-paper">
       <div aria-hidden className="absolute inset-0 grid-paper-lg" />
 
       <div className="container-x relative py-16 md:py-24">
@@ -270,17 +270,17 @@ export default function SlabAnatomy() {
             <div className="datum mt-4 min-h-[104px] pt-4 sm:min-h-[92px]">
               {current ? (
                 <>
-                  <div className="eyebrow text-signal-dark">
+                  <div className="eyebrow text-inkmute">
                     Слой {current.n} · {current.spec}
                   </div>
                   <div className="mt-2 text-base font-bold leading-snug text-graphite">
                     {current.title}
                   </div>
-                  <p className="mt-1.5 text-sm leading-relaxed text-brand-mute">{current.why}</p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-inkmute">{current.why}</p>
                 </>
               ) : (
-                <p className="text-sm leading-relaxed text-brand-mute">
-                  <span className="mono text-signal-dark">↓</span> Выберите слой в списке —
+                <p className="text-sm leading-relaxed text-inkmute">
+                  <span className="mono text-sand">↓</span> Выберите слой в списке —
                   здесь появится, зачем он нужен и чем оборачивается экономия на нём.
                   Такой же разрез мы рисуем от руки на замере.
                 </p>
@@ -302,11 +302,11 @@ export default function SlabAnatomy() {
                       onClick={() => setActive(on ? null : i)}
                       aria-pressed={on}
                       className={`flex w-full items-baseline gap-4 border-b border-hair px-2 py-3.5 text-left transition-colors ${
-                        on ? 'bg-white' : 'hover:bg-white/70'
+                        on ? 'bg-paper0 shadow-[inset_2px_0_0_0_#1E44AE]' : 'hover:bg-paper0/70'
                       }`}
                     >
                       <span
-                        className={`mono text-xs ${on ? 'text-signal-dark' : 'text-brand-mute'}`}
+                        className={`mono text-xs ${on ? 'text-signal' : 'text-inkmute'}`}
                       >
                         {l.n}
                       </span>
@@ -318,12 +318,12 @@ export default function SlabAnatomy() {
                         >
                           {l.title}
                         </span>
-                        <span className="mono mt-1 block text-[11px] text-brand-mute">{l.spec}</span>
+                        <span className="mono mt-1 block text-[11px] text-inkmute">{l.spec}</span>
                       </span>
                       <span
                         aria-hidden
                         className={`mono text-xs transition-transform ${
-                          on ? 'translate-x-0 text-signal-dark' : '-translate-x-1 text-hair'
+                          on ? 'translate-x-0 text-signal' : '-translate-x-1 text-sand'
                         }`}
                       >
                         →
@@ -334,7 +334,7 @@ export default function SlabAnatomy() {
               })}
             </ol>
 
-            <p className="mt-6 text-sm leading-relaxed text-brand-mute">
+            <p className="mt-6 text-sm leading-relaxed text-inkmute">
               Толщину плиты, шаг арматуры и подушку считаем под конкретный дом и грунт.
               Если на вашем участке хватит более простого решения — скажем прямо:
               лишний бетон не делает фундамент лучше, он делает его дороже.

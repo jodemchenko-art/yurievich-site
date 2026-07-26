@@ -38,7 +38,7 @@ export default function PriceRowCta({
       </span>
       <span
         aria-hidden
-        className="mono flex-shrink-0 text-[11px] text-hair transition-all group-hover:translate-x-0.5 group-hover:text-signal-dark"
+        className="mono flex-shrink-0 text-[11px] text-sand transition-all group-hover:translate-x-0.5 group-hover:text-signal"
       >
         →
       </span>

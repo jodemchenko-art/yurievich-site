@@ -93,7 +93,7 @@ const HOUSES = [
 
 export default function TypesBlock() {
   return (
-    <section id="uslugi" className="relative bg-white">
+    <section id="uslugi" data-plane="paper" className="relative bg-paper0">
       <div className="container-x py-16 md:py-24">
         <SectionHead
           index="02"
@@ -102,22 +102,22 @@ export default function TypesBlock() {
           lede="СК «Юрьевич» заливает фундаменты под ключ в Санкт-Петербурге и Ленинградской области. Тип подбираем по грунту участка: это решает и цену, и то, что будет с домом через несколько зим."
         />
 
-        <div className="mt-10 grid gap-px border border-hair bg-hair md:mt-14 md:grid-cols-3">
+        <div className="mt-10 grid gap-px border border-rule bg-rule/40 md:mt-14 md:grid-cols-3">
           {TYPES.map((t, i) => (
             <article
               key={t.id}
-              className="flex flex-col bg-white p-6 md:p-7"
+              className="flex flex-col bg-paper0 p-6 md:p-7"
               data-reveal
               style={{ ['--d' as any]: `${i * 90}ms` }}
             >
-              <div className="eyebrow text-signal-dark">{t.intent}</div>
+              <div className="eyebrow text-inkmute">{t.intent}</div>
               <h3 className="display-3 mt-3 text-graphite">{t.title}</h3>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-brand-mute">{t.body}</p>
+              <p className="mt-3 flex-1 text-sm leading-relaxed text-inkmute">{t.body}</p>
 
               <dl className="mt-5 border-t border-hair">
                 {t.specs.map(([k, v]) => (
                   <div key={k} className="flex items-baseline justify-between gap-3 border-b border-hair py-2">
-                    <dt className="mono text-[11px] uppercase tracking-wider text-brand-mute">{k}</dt>
+                    <dt className="mono text-[11px] uppercase tracking-wider text-inkmute">{k}</dt>
                     <dd className="mono text-[12px] text-graphite">{v}</dd>
                   </div>
                 ))}
@@ -127,7 +127,7 @@ export default function TypesBlock() {
                 <div className="text-base font-extrabold text-graphite">{t.price}</div>
                 <a
                   href="#calc"
-                  className="mono text-xs text-signal-dark ulink whitespace-nowrap"
+                  className="mono text-xs text-signal ulink whitespace-nowrap"
                 >
                   рассчитать →
                 </a>
@@ -136,7 +136,7 @@ export default function TypesBlock() {
           ))}
         </div>
 
-        <p className="mt-6 max-w-3xl text-sm leading-relaxed text-brand-mute">
+        <p className="mt-6 max-w-3xl text-sm leading-relaxed text-inkmute">
           Не знаете, какой фундамент выбрать? Это нормально. Посмотрим геологию участка, посчитаем
           стоимость плиты, ленты и свай и честно скажем, где можно сэкономить без риска для дома.
           Работаем по районам ЛО:{' '}
@@ -147,19 +147,19 @@ export default function TypesBlock() {
         </p>
 
         {/* Дома из газобетона — второй продукт, без «продающего» давления */}
-        <div className="mt-12 grid gap-px border border-hair bg-hair md:grid-cols-2">
+        <div className="mt-12 grid gap-px border border-rule bg-rule/40 md:grid-cols-2">
           {HOUSES.map((h, i) => (
             <div
               key={h.title}
-              className="bg-paper p-6 md:p-7"
+              className="bg-paper2 p-6 md:p-7"
               data-reveal
               style={{ ['--d' as any]: `${i * 90}ms` }}
             >
-              <div className="eyebrow text-brand-mute">Дома из газобетона · партнёр ЛСР</div>
+              <div className="eyebrow text-inkmute">Дома из газобетона · партнёр ЛСР</div>
               <h3 className="mt-3 text-lg font-extrabold leading-snug text-graphite md:text-xl">
                 {h.title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-brand-mute">{h.desc}</p>
+              <p className="mt-2 text-sm leading-relaxed text-inkmute">{h.desc}</p>
               <div className="mono mt-4 text-sm text-graphite">{h.price}</div>
             </div>
           ))}

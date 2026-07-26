@@ -43,8 +43,10 @@ export default function ProofBlock() {
   const proofs = PROOFS.filter((p) => Boolean(p.href));
 
   return (
-    <section id="otzyvy" className="relative bg-white">
-      <div className="container-x py-16 md:py-24">
+    <section id="otzyvy" data-plane="paper" className="relative overflow-hidden bg-paper">
+      <div aria-hidden className="absolute inset-0 grid-paper" />
+
+      <div className="container-x relative py-16 md:py-24">
         <SectionHead
           index="08"
           label="Где нас проверить"
@@ -58,38 +60,44 @@ export default function ProofBlock() {
           }
         />
 
-        <div className="mt-10 grid gap-px border border-hair bg-hair md:mt-14 md:grid-cols-2 lg:grid-cols-4">
+        {/* Колонок ровно столько, сколько живых пруфов: пустая ячейка в сетке
+            читается как «тут что-то отвалилось» — в блоке доверия это дорого. */}
+        <div
+          className={`mt-10 grid gap-px border border-rule bg-rule/40 md:mt-14 md:grid-cols-2 ${
+            proofs.length >= 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'
+          }`}
+        >
           {proofs.map((p, i) => (
             <a
               key={p.label}
               href={p.href}
               target="_blank"
               rel="noopener nofollow"
-              className="group flex flex-col justify-between bg-white p-6 transition-colors hover:bg-paper"
+              className="group flex flex-col justify-between bg-paper0 p-6 transition-colors hover:bg-paper2"
               data-reveal
               style={{ ['--d' as any]: `${i * 80}ms` }}
             >
               <div>
-                <div className="eyebrow text-brand-mute">{p.label}</div>
+                <div className="eyebrow text-inkmute">{p.label}</div>
                 <div className="mt-3 text-lg font-extrabold leading-snug text-graphite">
                   {p.value}
                 </div>
-                <p className="mt-2 text-sm leading-relaxed text-brand-mute">{p.note}</p>
+                <p className="mt-2 text-sm leading-relaxed text-inkmute">{p.note}</p>
               </div>
-              <span className="mono mt-6 text-xs text-signal-dark">
+              <span className="mono mt-6 text-xs text-signal">
                 открыть <span className="arw inline-block transition-transform group-hover:translate-x-1">→</span>
               </span>
             </a>
           ))}
         </div>
 
-        <div className="mt-8 grid gap-6 border-t border-hair pt-6 md:grid-cols-2">
-          <p className="text-sm leading-relaxed text-brand-mute" data-reveal>
+        <div className="mt-8 grid gap-6 border-t border-rule pt-6 md:grid-cols-2">
+          <p className="text-sm leading-relaxed text-inkmute" data-reveal>
             <span className="text-graphite">Можем свозить на действующий объект.</span> Это самая
             честная проверка: вы своими глазами видите армирование, опалубку и то, как ведут себя
             на площадке люди, которым вы собираетесь отдать деньги.
           </p>
-          <p className="mono text-[11px] leading-relaxed text-brand-mute" data-reveal>
+          <p className="mono text-[11px] leading-relaxed text-inkmute" data-reveal>
             ИП Демченко · ОГРНИП {SITE.ogrnip} · ИНН {SITE.inn}. Реквизиты можно пробить на сайте
             ФНС до подписания договора — и увидеть, что за фамилией стоит действующее ИП, а не
             «бригада с объявления».

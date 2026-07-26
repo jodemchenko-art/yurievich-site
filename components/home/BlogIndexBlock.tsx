@@ -26,21 +26,21 @@ export default function BlogIndexBlock() {
   if (featured.length === 0) return null;
 
   return (
-    <section id="home-blog" className="bg-white">
+    <section id="home-blog" data-plane="paper" className="bg-paper">
       <div className="container-x py-14 md:py-20">
         <div className="datum grid gap-8 pt-6 md:grid-cols-[280px_1fr] md:gap-12">
           <div data-reveal>
-            <div className="eyebrow text-signal-dark">
-              <span className="text-brand-mute">10</span>
+            <div className="eyebrow text-inkmute">
+              <span className="text-inkmute">10</span>
               <span className="mx-2 opacity-40">/</span>
               Справочник
             </div>
             <h2 className="display-3 mt-3 text-graphite">Разбираем стройку без воды</h2>
-            <p className="mt-3 text-sm leading-relaxed text-brand-mute">
+            <p className="mt-3 text-sm leading-relaxed text-inkmute">
               Цены, технологии, грунты Ленобласти и ошибки подрядчиков — то, что обычно узнают
               уже после заливки.
             </p>
-            <Link href="/blog/" className="mono mt-4 inline-block text-xs text-signal-dark ulink">
+            <Link href="/blog/" className="mono mt-4 inline-block text-xs text-signal ulink">
               все {ARTICLES.length} материалов →
             </Link>
           </div>
@@ -50,20 +50,20 @@ export default function BlogIndexBlock() {
               <li key={a.slug} data-reveal style={{ ['--d' as any]: `${i * 50}ms` }}>
                 <Link
                   href={`/blog/${a.slug}/`}
-                  className="group flex items-baseline gap-4 border-b border-hair py-3.5 transition-colors hover:bg-paper"
+                  className="group flex items-baseline gap-4 border-b border-hair py-3.5 transition-colors hover:bg-paper0"
                 >
-                  <span className="mono text-[11px] text-brand-mute">
+                  <span className="mono text-[11px] text-inkmute">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <span className="flex-1 text-[15px] font-semibold leading-snug text-graphite">
                     {a.title}
                   </span>
-                  <span className="mono hidden flex-shrink-0 text-[11px] text-brand-mute sm:block">
+                  <span className="mono hidden flex-shrink-0 text-[11px] text-inkmute sm:block">
                     {a.reading_time} мин
                   </span>
                   <span
                     aria-hidden
-                    className="mono flex-shrink-0 text-xs text-hair transition-all group-hover:translate-x-1 group-hover:text-signal-dark"
+                    className="mono flex-shrink-0 text-xs text-sand transition-all group-hover:translate-x-1 group-hover:text-signal"
                   >
                     →
                   </span>

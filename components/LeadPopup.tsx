@@ -112,7 +112,7 @@ export default function LeadPopup() {
         <button
           onClick={close}
           aria-label="Закрыть"
-          className="absolute right-2 top-2 z-10 flex h-9 w-9 items-center justify-center border border-hair bg-white text-xl text-brand-mute transition-colors hover:text-graphite"
+          className="absolute right-2 top-2 z-10 flex h-9 w-9 items-center justify-center border border-rule bg-paper0 text-xl text-inkmute transition-colors hover:text-graphite"
         >
           ×
         </button>
@@ -121,7 +121,7 @@ export default function LeadPopup() {
           <div className="p-7 text-center">
             <div className="mono text-xs tracking-widest text-signal-dark">ЗАЯВКА ПРИНЯТА</div>
             <h3 className="display-3 mt-3 text-graphite">Спасибо, записали</h3>
-            <p className="mt-3 text-brand-mute">
+            <p className="mt-3 text-inkmute">
               Юрий перезвонит в ближайшее рабочее время — обычно в течение часа.
             </p>
             <a
@@ -140,7 +140,7 @@ export default function LeadPopup() {
               <h3 id="popup-title" className="display-3 mt-3 text-graphite">
                 Уходите? Оставьте участок — пришлём расчёт
               </h3>
-              <p className="mt-2 text-brand-mute text-sm leading-relaxed">
+              <p className="mt-2 text-inkmute text-sm leading-relaxed">
                 Юрий перезвонит, задаст несколько вопросов про участок и пришлёт смету.
                 Ни к чему не обязывает: смета остаётся у вас в любом случае.
               </p>
@@ -154,7 +154,7 @@ export default function LeadPopup() {
                 placeholder="Ваше имя"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="mt-4 w-full border border-hair bg-white px-4 py-3 text-graphite transition-colors placeholder:text-brand-mute focus:border-signal focus:outline-none"
+                className="mt-4 w-full border border-rule bg-paper0 px-4 py-3 text-graphite transition-colors placeholder:text-inkmute focus:border-signal focus:outline-none"
                 required
               />
               <input
@@ -164,15 +164,15 @@ export default function LeadPopup() {
                 placeholder="+7 (___) ___-__-__"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="mono mt-3 w-full border border-hair bg-white px-4 py-3 text-graphite transition-colors placeholder:text-brand-mute focus:border-signal focus:outline-none"
+                className="mono mt-3 w-full border border-rule bg-paper0 px-4 py-3 text-graphite transition-colors placeholder:text-inkmute focus:border-signal focus:outline-none"
                 required
               />
 
               {error && (
-                <p className="mt-3 border-l-2 border-signal bg-paper px-3 py-2 text-sm text-graphite">{error}</p>
+                <p className="mt-3 border-l-2 border-graphite bg-paper2 px-3 py-2 text-sm font-semibold text-graphite">{error}</p>
               )}
 
-              <label className="flex items-start gap-2 text-xs text-brand-mute mt-4">
+              <label className="flex items-start gap-2 text-xs text-inkmute mt-4">
                 <input
                   type="checkbox"
                   checked={consent}
@@ -193,14 +193,14 @@ export default function LeadPopup() {
                 {loading ? 'Отправляем...' : 'Получить расчёт'}
               </button>
 
-              <p className="mt-3 text-xs text-brand-mute text-center">
+              <p className="mt-3 text-xs text-inkmute text-center">
                 Или сразу позвоните:{' '}
                 <a href={`tel:${SITE.phoneRaw}`} className="mono text-graphite ulink">
                   {SITE.phone}
                 </a>
               </p>
 
-              <div className="mono mt-4 flex items-center justify-center gap-3 border-t border-hair pt-4 text-[10px] text-brand-mute">
+              <div className="mono mt-4 flex items-center justify-center gap-3 border-t border-hair pt-4 text-[10px] text-inkmute">
                 <span>★★★★★ 5.0 · 35 отзывов</span>
                 <span>•</span>
                 <span>239 объектов</span>
