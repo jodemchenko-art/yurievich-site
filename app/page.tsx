@@ -1,18 +1,17 @@
-import Hero from '@/components/Hero';
-import UtpIcons from '@/components/UtpIcons';
-import Services from '@/components/Services';
-import QuizSection from '@/components/QuizSection';
-import Portfolio from '@/components/Portfolio';
-import Reviews from '@/components/Reviews';
-import Process from '@/components/Process';
-import Brothers from '@/components/Brothers';
-import LsrBanner from '@/components/LsrBanner';
-import HomeBlogTeaser from '@/components/HomeBlogTeaser';
-import LeadMagnetBanner from '@/components/LeadMagnetBanner';
-import Faq from '@/components/Faq';
-import Contacts from '@/components/Contacts';
-import OrderCta from '@/components/OrderCta';
-import FoundationTypes from '@/components/FoundationTypes';
+import Reveal from '@/components/home/Reveal';
+import Hero from '@/components/home/Hero';
+import ProofStrip from '@/components/home/ProofStrip';
+import SlabAnatomy from '@/components/home/SlabAnatomy';
+import TypesBlock from '@/components/home/TypesBlock';
+import ObjectsChronicle from '@/components/home/ObjectsChronicle';
+import PriceBlock from '@/components/home/PriceBlock';
+import LeadBlock from '@/components/home/LeadBlock';
+import WorkflowBlock from '@/components/home/WorkflowBlock';
+import TeamBlock from '@/components/home/TeamBlock';
+import ProofBlock from '@/components/home/ProofBlock';
+import FaqBlock from '@/components/home/FaqBlock';
+import BlogIndexBlock from '@/components/home/BlogIndexBlock';
+import ContactBlock from '@/components/home/ContactBlock';
 import { SITE } from '@/lib/site';
 import { HOME_FAQ } from '@/lib/faq';
 
@@ -53,6 +52,19 @@ const FAQ_PAGE_SCHEMA = {
   })),
 };
 
+/**
+ * ГЛАВНАЯ — редизайн 26.07.2026, система «инженерный чертёж».
+ *
+ * Порядок блоков подчинён не «красоте», а последовательности вопросов в голове
+ * человека, который выбирает, кому доверить фундамент:
+ *   кто вы → что я вообще покупаю → что мне подойдёт → покажите работы →
+ *   сколько это стоит → [заявка] → как всё будет происходить → кто отвечает →
+ *   где вас проверить → остались вопросы → [заявка]
+ *
+ * Точек заявки ровно три: первый экран (кнопка-якорь), расчёт после цены (#calc)
+ * и контакты внизу. Между ними — только объяснение и доказательства: на крупной
+ * покупке давление в каждом экране читается как «мне впаривают».
+ */
 export default function Home() {
   return (
     <>
@@ -65,23 +77,21 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_PAGE_SCHEMA) }}
       />
 
+      <Reveal />
+
       <Hero />
-      <UtpIcons />
-      <FoundationTypes />
-      <Services />
-      <QuizSection />
-      <Portfolio />
-      <Reviews />
-      <OrderCta place="СПб и Ленобласти" />
-      <section className="section bg-brand-sand">
-        <div className="container-x"><LeadMagnetBanner source="home" /></div>
-      </section>
-      <Process />
-      <Brothers />
-      <LsrBanner />
-      <HomeBlogTeaser />
-      <Faq />
-      <Contacts />
+      <ProofStrip />
+      <SlabAnatomy />
+      <TypesBlock />
+      <ObjectsChronicle />
+      <PriceBlock />
+      <LeadBlock />
+      <WorkflowBlock />
+      <TeamBlock />
+      <ProofBlock />
+      <FaqBlock />
+      <BlogIndexBlock />
+      <ContactBlock />
     </>
   );
 }

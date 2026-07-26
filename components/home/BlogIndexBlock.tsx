@@ -1,0 +1,78 @@
+import Link from 'next/link';
+import { ARTICLES } from '@/lib/articles';
+
+/**
+ * Блок блога сделан списком-указателем, а не плиткой карточек с обложками.
+ * Причины две: страница внизу не должна ещё раз тянуть шесть картинок
+ * (это лишние сотни килобайт на мобильном интернете), а перекрёстные ссылки
+ * на статьи нужны для внутренней перелинковки — их ценность в тексте ссылки,
+ * а не в обложке.
+ */
+
+const FEATURED_SLUGS = [
+  'plitnyy-fundament-cena-za-m2-spb',
+  'plitnyy-fundament-10x10-cena-pod-klyuch-spb',
+  'plita-ili-lenta-pod-gazobeton',
+  'svai-ili-plita-pod-gazobeton-leningradskaya-oblast',
+  'monolitnyy-plitnyy-fundament-spb-pod-klyuch',
+  'plitnyy-fundament-pod-gazobeton-tolschina-armirovanie',
+];
+
+export default function BlogIndexBlock() {
+  const featured = FEATURED_SLUGS.map((slug) => ARTICLES.find((a) => a.slug === slug)).filter(
+    Boolean
+  ) as typeof ARTICLES;
+
+  if (featured.length === 0) return null;
+
+  return (
+    <section id="home-blog" className="bg-white">
+      <div className="container-x py-14 md:py-20">
+        <div className="datum grid gap-8 pt-6 md:grid-cols-[280px_1fr] md:gap-12">
+          <div data-reveal>
+            <div className="eyebrow text-signal-dark">
+              <span className="text-brand-mute">10</span>
+              <span className="mx-2 opacity-40">/</span>
+              Справочник
+            </div>
+            <h2 className="display-3 mt-3 text-graphite">Разбираем стройку без воды</h2>
+            <p className="mt-3 text-sm leading-relaxed text-brand-mute">
+              Цены, технологии, грунты Ленобласти и ошибки подрядчиков — то, что обычно узнают
+              уже после заливки.
+            </p>
+            <Link href="/blog/" className="mono mt-4 inline-block text-xs text-signal-dark ulink">
+              все {ARTICLES.length} материалов →
+            </Link>
+          </div>
+
+          <ul className="border-t border-hair">
+            {featured.map((a, i) => (
+              <li key={a.slug} data-reveal style={{ ['--d' as any]: `${i * 50}ms` }}>
+                <Link
+                  href={`/blog/${a.slug}/`}
+                  className="group flex items-baseline gap-4 border-b border-hair py-3.5 transition-colors hover:bg-paper"
+                >
+                  <span className="mono text-[11px] text-brand-mute">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span className="flex-1 text-[15px] font-semibold leading-snug text-graphite">
+                    {a.title}
+                  </span>
+                  <span className="mono hidden flex-shrink-0 text-[11px] text-brand-mute sm:block">
+                    {a.reading_time} мин
+                  </span>
+                  <span
+                    aria-hidden
+                    className="mono flex-shrink-0 text-xs text-hair transition-all group-hover:translate-x-1 group-hover:text-signal-dark"
+                  >
+                    →
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -3,15 +3,19 @@
 import { useEffect, useState } from 'react';
 import { SITE } from '@/lib/site';
 
-// Smart lead popup:
-// — показывается через 35 секунд пребывания на сайте ИЛИ при exit-intent на десктопе
+// Lead popup — ТОЛЬКО exit-intent (26.07.2026).
+// Таймер на 35 секунд убран сознательно: он срабатывал ровно тогда, когда человек
+// читал разбор конструкции, и превращал спокойный сайт в «меня продают».
+// Осталось единственное срабатывание — когда курсор уходит за верхнюю кромку
+// окна, то есть человек уже уходит. На мобильных такого события нет — там
+// работает нижняя панель со звонком.
+// — показывается при exit-intent на десктопе
 // — не показывается повторно если юзер закрыл (sessionStorage)
 // — не показывается на /spasibo/ и api-страницах
 // — не показывается если юзер уже на #contacts
 // Цель: ловить юзера который "почитал и уходит" не оставив заявки.
 
 const STORAGE_KEY = 'lead_popup_closed_v1';
-const SHOW_AFTER_MS = 35000;
 
 export default function LeadPopup() {
   const [show, setShow] = useState(false);
@@ -38,17 +42,13 @@ export default function LeadPopup() {
       setShow(true);
     };
 
-    // Триггер 1: таймер
-    const timer = setTimeout(trigger, SHOW_AFTER_MS);
-
-    // Триггер 2: exit-intent (мышь к верху экрана — десктоп)
+    // Единственный триггер: exit-intent (мышь ушла за верх окна — десктоп)
     const onMouseLeave = (e: MouseEvent) => {
       if (e.clientY < 5) trigger();
     };
     document.addEventListener('mouseleave', onMouseLeave);
 
     return () => {
-      clearTimeout(timer);
       document.removeEventListener('mouseleave', onMouseLeave);
     };
   }, []);
@@ -79,7 +79,7 @@ export default function LeadPopup() {
         body: JSON.stringify({
           source: 'popup',
           contact: { name, phone },
-          comment: 'Запрос через попап (35с / exit-intent)',
+          comment: 'Запрос через попап (exit-intent)',
           context: typeof window !== 'undefined' ? window.location.pathname : '',
         }),
       });
@@ -106,29 +106,29 @@ export default function LeadPopup() {
       onClick={close}
     >
       <div
-        className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden"
+        className="plate ticks relative w-full max-w-md"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={close}
           aria-label="Закрыть"
-          className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/80 hover:bg-white border border-brand-line flex items-center justify-center text-brand-mute hover:text-brand-ink text-xl"
+          className="absolute right-2 top-2 z-10 flex h-9 w-9 items-center justify-center border border-hair bg-white text-xl text-brand-mute transition-colors hover:text-graphite"
         >
           ×
         </button>
 
         {submitted ? (
           <div className="p-7 text-center">
-            <div className="text-5xl mb-4">✅</div>
-            <h3 className="text-2xl font-extrabold text-brand-ink">Заявка принята!</h3>
+            <div className="mono text-xs tracking-widest text-signal-dark">ЗАЯВКА ПРИНЯТА</div>
+            <h3 className="display-3 mt-3 text-graphite">Спасибо, записали</h3>
             <p className="mt-3 text-brand-mute">
-              Юрий перезвонит вам в течение часа. Сейчас идёт {new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })} — попадаете в рабочее окно.
+              Юрий перезвонит в ближайшее рабочее время — обычно в течение часа.
             </p>
             <a
               href={SITE.telegram}
               target="_blank"
               rel="noopener"
-              className="mt-5 inline-block px-6 py-3 rounded-xl bg-[#229ED9] text-white font-semibold hover:bg-[#1c89bd]"
+              className="mono mt-5 inline-block bg-[#1F87BC] px-6 py-3 text-sm font-semibold text-white"
             >
               Написать в Telegram сейчас
             </a>
@@ -136,15 +136,13 @@ export default function LeadPopup() {
         ) : (
           <>
             <div className="px-6 pt-7 pb-2">
-              <div className="inline-block px-3 py-1 rounded-full bg-brand-sand text-xs font-bold uppercase tracking-wider text-brand-ink">
-                Бесплатно
-              </div>
-              <h3 id="popup-title" className="mt-3 text-2xl md:text-3xl font-extrabold text-brand-ink leading-tight">
-                Расчёт фундамента за 1 день
+              <div className="eyebrow text-signal-dark">Бесплатно · без обязательств</div>
+              <h3 id="popup-title" className="display-3 mt-3 text-graphite">
+                Уходите? Оставьте участок — пришлём расчёт
               </h3>
               <p className="mt-2 text-brand-mute text-sm leading-relaxed">
-                Юрий лично перезвонит, задаст 3 вопроса о участке и пришлёт смету по почте.
-                Без обязательств и предоплаты.
+                Юрий перезвонит, задаст несколько вопросов про участок и пришлёт смету.
+                Ни к чему не обязывает: смета остаётся у вас в любом случае.
               </p>
             </div>
 
@@ -156,7 +154,7 @@ export default function LeadPopup() {
                 placeholder="Ваше имя"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="mt-4 w-full px-4 py-3 rounded-xl border border-brand-line bg-white text-brand-ink placeholder:text-brand-mute focus:border-brand-ink focus:outline-none"
+                className="mt-4 w-full border border-hair bg-white px-4 py-3 text-graphite transition-colors placeholder:text-brand-mute focus:border-signal focus:outline-none"
                 required
               />
               <input
@@ -166,12 +164,12 @@ export default function LeadPopup() {
                 placeholder="+7 (___) ___-__-__"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="mt-3 w-full px-4 py-3 rounded-xl border border-brand-line bg-white text-brand-ink placeholder:text-brand-mute focus:border-brand-ink focus:outline-none"
+                className="mono mt-3 w-full border border-hair bg-white px-4 py-3 text-graphite transition-colors placeholder:text-brand-mute focus:border-signal focus:outline-none"
                 required
               />
 
               {error && (
-                <p className="mt-3 text-sm text-red-600">{error}</p>
+                <p className="mt-3 border-l-2 border-signal bg-paper px-3 py-2 text-sm text-graphite">{error}</p>
               )}
 
               <label className="flex items-start gap-2 text-xs text-brand-mute mt-4">
@@ -190,19 +188,19 @@ export default function LeadPopup() {
               <button
                 type="submit"
                 disabled={loading || !consent}
-                className="mt-4 w-full px-6 py-4 rounded-xl bg-brand-ink text-white font-extrabold text-lg hover:bg-brand-ink/90 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                className="btn-signal mt-4 w-full justify-center disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {loading ? 'Отправляем...' : 'Получить расчёт'}
               </button>
 
               <p className="mt-3 text-xs text-brand-mute text-center">
                 Или сразу позвоните:{' '}
-                <a href={`tel:${SITE.phoneRaw}`} className="text-brand-ink font-semibold underline">
+                <a href={`tel:${SITE.phoneRaw}`} className="mono text-graphite ulink">
                   {SITE.phone}
                 </a>
               </p>
 
-              <div className="mt-4 pt-4 border-t border-brand-line flex items-center justify-center gap-4 text-xs text-brand-mute">
+              <div className="mono mt-4 flex items-center justify-center gap-3 border-t border-hair pt-4 text-[10px] text-brand-mute">
                 <span>★★★★★ 5.0 · 35 отзывов</span>
                 <span>•</span>
                 <span>239 объектов</span>

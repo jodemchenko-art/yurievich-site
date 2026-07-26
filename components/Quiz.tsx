@@ -79,11 +79,11 @@ export default function Quiz() {
 
   if (submitted) {
     return (
-      <div className="bg-white rounded-3xl p-8 md:p-12 text-center shadow-xl border border-brand-line">
-        <div className="text-6xl mb-4">✅</div>
-        <h3 className="text-2xl md:text-3xl font-extrabold">Заявка принята!</h3>
+      <div className="border border-hair bg-white p-8 text-center text-graphite md:p-12">
+        <div className="mono text-xs tracking-widest text-signal-dark">ЗАЯВКА ПРИНЯТА</div>
+        <h3 className="display-3 mt-3 text-graphite">Спасибо, записали</h3>
         <p className="mt-3 text-brand-mute max-w-md mx-auto">
-          Юрий перезвонит вам в ближайший час. Подробную смету пришлём в течение 1 рабочего дня.
+          Юрий перезвонит в ближайшее рабочее время — обычно в течение часа. Подробную смету пришлём в течение 1 рабочего дня после замера.
         </p>
       </div>
     );
@@ -92,7 +92,7 @@ export default function Quiz() {
   const onContacts = step === STEPS.length;
 
   return (
-    <div className="bg-white rounded-3xl overflow-hidden shadow-xl border border-brand-line">
+    <div className="border border-hair bg-white text-graphite">
       {/* Progress */}
       <div className="px-6 md:px-8 pt-6">
         <div className="flex items-center justify-between mb-2 text-xs md:text-sm">
@@ -101,9 +101,9 @@ export default function Quiz() {
           </span>
           <span className="text-brand-mute">{Math.round(progress)}%</span>
         </div>
-        <div className="h-2 bg-brand-sand rounded-full overflow-hidden">
+        <div className="h-1 bg-paper overflow-hidden">
           <div
-            className="h-full bg-brand-red rounded-full transition-all duration-500"
+            className="h-full bg-signal transition-all duration-500"
             style={{ width: `${progress}%` }}
           />
         </div>
@@ -112,7 +112,7 @@ export default function Quiz() {
       <div className="p-6 md:p-10">
         {!onContacts ? (
           <>
-            <h3 className="text-xl md:text-3xl font-extrabold leading-tight">
+            <h3 className="display-3 text-graphite">
               {STEPS[step].title}
             </h3>
             {STEPS[step].sub && (
@@ -127,10 +127,10 @@ export default function Quiz() {
                     key={opt}
                     type="button"
                     onClick={() => pick(opt)}
-                    className={`text-left rounded-xl border-2 px-5 py-4 font-semibold transition ${
+                    className={`text-left border px-5 py-4 font-semibold transition ${
                       isActive
-                        ? 'border-brand-red bg-brand-red/5 text-brand-ink'
-                        : 'border-brand-line bg-white hover:border-brand-red/40 hover:bg-brand-sand/50'
+                        ? 'border-signal bg-signal/10 text-graphite'
+                        : 'border-hair bg-white hover:border-signal/50 hover:bg-paper'
                     }`}
                   >
                     {opt}
@@ -151,49 +151,49 @@ export default function Quiz() {
           </>
         ) : (
           <form onSubmit={submit}>
-            <h3 className="text-xl md:text-3xl font-extrabold leading-tight">
+            <h3 className="display-3 text-graphite">
               Куда прислать расчёт?
             </h3>
             <p className="mt-2 text-sm md:text-base text-brand-mute">
-              Юрий сам перезвонит в ближайший час. Смета — в течение 1 рабочего дня.
+              Юрий перезвонит сам, не колл-центр. Смета — в течение 1 рабочего дня после замера.
             </p>
 
             <div className="mt-6 grid gap-4">
               <label className="block">
-                <span className="text-sm font-semibold text-brand-ink">Как к вам обращаться?</span>
+                <span className="eyebrow text-brand-mute">Как к вам обращаться?</span>
                 <input
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Иван"
-                  className="mt-1 w-full rounded-xl border-2 border-brand-line px-4 py-3 text-base focus:border-brand-red focus:outline-none transition"
+                  className="mt-2 w-full border border-hair px-4 py-3 text-base transition-colors focus:border-signal focus:outline-none"
                 />
               </label>
 
               <label className="block">
-                <span className="text-sm font-semibold text-brand-ink">Телефон</span>
+                <span className="eyebrow text-brand-mute">Телефон</span>
                 <input
                   required
                   type="tel"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="+7 ___ ___-__-__"
-                  className="mt-1 w-full rounded-xl border-2 border-brand-line px-4 py-3 text-base focus:border-brand-red focus:outline-none transition"
+                  className="mt-2 w-full border border-hair px-4 py-3 text-base transition-colors focus:border-signal focus:outline-none"
                 />
               </label>
 
               <div>
-                <span className="text-sm font-semibold text-brand-ink">Как удобнее связаться?</span>
+                <span className="eyebrow text-brand-mute">Как удобнее связаться?</span>
                 <div className="mt-2 grid grid-cols-3 gap-2">
                   {(['whatsapp', 'telegram', 'call'] as const).map((t) => (
                     <button
                       type="button"
                       key={t}
                       onClick={() => setContactType(t)}
-                      className={`rounded-xl border-2 px-3 py-3 text-sm font-semibold transition ${
+                      className={`border px-3 py-3 text-sm font-semibold transition ${
                         contactType === t
-                          ? 'border-brand-red bg-brand-red/5'
-                          : 'border-brand-line hover:border-brand-red/40'
+                          ? 'border-signal bg-signal/10'
+                          : 'border-hair hover:border-signal/50'
                       }`}
                     >
                       {t === 'whatsapp' && '💬 WhatsApp'}
@@ -222,14 +222,14 @@ export default function Quiz() {
               <button
                 type="button"
                 onClick={() => setStep((s) => s - 1)}
-                className="sm:w-1/3 rounded-xl border-2 border-brand-line py-4 font-semibold hover:bg-brand-sand transition"
+                className="sm:w-1/3 border border-hair py-4 font-semibold transition hover:bg-paper"
               >
                 ← Назад
               </button>
               <button
                 type="submit"
                 disabled={loading || !name.trim() || !phone.trim() || !consent}
-                className="flex-1 btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                className="btn-signal flex-1 justify-center disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {loading ? 'Отправляем…' : 'Получить расчёт →'}
               </button>

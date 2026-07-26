@@ -21,6 +21,13 @@
 /* latin */
 @font-face { font-family: 'Manrope'; font-style: normal; font-weight: 800; font-display: swap; src: url(/fonts/manrope-800-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 
+/* JetBrains Mono — САМОХОСТ (26.07.2026). Один вес (500) на цифры, коды и служебные
+   подписи дизайн-системы «инженерный чертёж». Google Fonts CDN не используем — душат в РФ. */
+/* cyrillic */
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 500; font-display: swap; src: url(/fonts/jetbrainsmono-500-cyrillic.woff2) format('woff2'); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+/* latin */
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 500; font-display: swap; src: url(/fonts/jetbrainsmono-500-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -263,4 +270,279 @@
 @media (prefers-reduced-motion: reduce) {
   .hero-kenburns { animation: none; }
   .hero-video { animation: none; }
+}
+
+/* ==========================================================================
+   ДИЗАЙН-СИСТЕМА «ИНЖЕНЕРНЫЙ ЧЕРТЁЖ» (главная, 26.07.2026)
+   Принципы: прямые углы вместо скруглений, волосяные линии вместо теней,
+   моноширинные служебные подписи, янтарная выноска как единственный акцент.
+   Всё на CSS — ни одной новой зависимости, ни одного лишнего килобайта.
+   ========================================================================== */
+
+/* --- Миллиметровка / синька: фон-сетка -------------------------------- */
+.grid-paper {
+  background-image:
+    linear-gradient(to right, rgba(20, 26, 31, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(20, 26, 31, 0.045) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.grid-paper-lg {
+  background-image:
+    linear-gradient(to right, rgba(20, 26, 31, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(20, 26, 31, 0.05) 1px, transparent 1px),
+    linear-gradient(to right, rgba(20, 26, 31, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(20, 26, 31, 0.035) 1px, transparent 1px);
+  background-size: 128px 128px, 128px 128px, 32px 32px, 32px 32px;
+}
+.grid-paper-dark {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(to right, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 128px 128px, 128px 128px, 32px 32px, 32px 32px;
+}
+
+/* --- Типографика ------------------------------------------------------ */
+.mono {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+/* Служебная подпись: «ЭТАП 03 · АРМИРОВАНИЕ» */
+.eyebrow {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 1.2;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+@media (min-width: 768px) {
+  .eyebrow { font-size: 12px; }
+}
+
+/* Заголовки: плотный трекинг, фluid-размер, без «прыжков» на мобиле */
+.display-1 {
+  font-size: clamp(2.05rem, 5.6vw, 3.9rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  font-weight: 800;
+}
+.display-2 {
+  font-size: clamp(1.7rem, 4.4vw, 3.1rem);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+}
+.display-3 {
+  font-size: clamp(1.25rem, 2.6vw, 1.65rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  font-weight: 800;
+}
+.lede {
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  line-height: 1.6;
+}
+
+/* Число-«показание прибора» */
+.metric {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  line-height: 0.95;
+}
+
+/* --- Линии и плашки --------------------------------------------------- */
+.hair { border-color: #DFDBD2; }
+.hair-dark { border-color: #1E3D52; }
+
+/* Датум-линия с засечкой слева — «начало отсчёта» секции */
+.datum {
+  position: relative;
+  border-top: 1px solid #DFDBD2;
+}
+.datum::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 1px;
+  height: 10px;
+  background: #E8A33D;
+}
+.datum-dark { border-top-color: #1E3D52; }
+
+/* Плита-карточка: прямые углы, волосяная рамка, без теней */
+.plate {
+  background: #fff;
+  border: 1px solid #DFDBD2;
+  position: relative;
+}
+.plate-dark {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid #1E3D52;
+  position: relative;
+}
+
+/* Уголки-«реперы» у плиты (чертёжная рамка) */
+.ticks::before,
+.ticks::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: #E8A33D;
+  border-style: solid;
+  opacity: 0.9;
+}
+.ticks::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+.ticks::after { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+
+/* --- Кнопки ----------------------------------------------------------- */
+.btn-signal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: #E8A33D;
+  color: #141A1F;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  padding: 1rem 1.6rem;
+  border: 1px solid #E8A33D;
+  transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+.btn-signal:hover { background: #F2B85C; border-color: #F2B85C; transform: translateY(-1px); }
+.btn-signal:active { transform: translateY(0) scale(0.995); }
+
+.btn-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: #0A1A26;
+  color: #fff;
+  font-weight: 700;
+  padding: 1rem 1.6rem;
+  border: 1px solid #0A1A26;
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+.btn-dark:hover { background: #143045; transform: translateY(-1px); }
+
+.btn-line {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: transparent;
+  color: inherit;
+  font-weight: 700;
+  padding: 1rem 1.6rem;
+  border: 1px solid currentColor;
+  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+.btn-line:hover { transform: translateY(-1px); }
+.btn-line-dark:hover { background: rgba(255, 255, 255, 0.08); }
+.btn-line-light:hover { background: #141A1F; color: #fff; }
+
+/* Стрелка внутри кнопки уезжает вправо на ховере */
+.btn-signal .arw,
+.btn-dark .arw,
+.btn-line .arw { transition: transform 0.18s ease; }
+.btn-signal:hover .arw,
+.btn-dark:hover .arw,
+.btn-line:hover .arw { transform: translateX(4px); }
+
+/* Ссылка с «проявляющимся» подчёркиванием */
+.ulink {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 0.25s ease;
+}
+.ulink:hover { background-size: 100% 1px; }
+
+/* --- Появление при скролле (IntersectionObserver вешает .is-in) -------- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--d, 0ms);
+}
+[data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- Отрисовка выносок на hero-фото (SVG) ----------------------------- */
+@keyframes annoDraw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes annoFade {
+  to { opacity: 1; }
+}
+.anno-line {
+  stroke-dasharray: 320;
+  stroke-dashoffset: 320;
+  animation: annoDraw 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--d, 0ms);
+}
+.anno-label {
+  opacity: 0;
+  animation: annoFade 0.5s ease forwards;
+  animation-delay: calc(var(--d, 0ms) + 500ms);
+}
+
+/* --- Ползунок «армокаркас → плита» ------------------------------------ */
+.stage-range {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: ew-resize;
+  touch-action: pan-y;
+}
+.stage-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 44px;
+  height: 100%;
+  background: transparent;
+  cursor: ew-resize;
+}
+.stage-range::-moz-range-thumb {
+  width: 44px;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  cursor: ew-resize;
+}
+.stage-range:focus-visible {
+  outline: 2px solid #E8A33D;
+  outline-offset: 2px;
+}
+
+/* --- FAQ на <details> — без JS ---------------------------------------- */
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary { list-style: none; cursor: pointer; }
+.faq-item[open] .faq-sign { transform: rotate(45deg); }
+.faq-sign { transition: transform 0.2s ease; }
+
+/* --- Доступность ------------------------------------------------------ */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #E8A33D;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .anno-line { stroke-dashoffset: 0; animation: none; }
+  .anno-label { opacity: 1; animation: none; }
+  .btn-signal:hover, .btn-dark:hover, .btn-line:hover { transform: none; }
 }
