@@ -147,38 +147,102 @@ function ObjectCard({
   index: number;
   demo?: boolean;
 }) {
-  const [pos, setPos] = useState(52);
   const [touched, setTouched] = useState(false);
   const frameRef = useRef<HTMLDivElement>(null);
+  const posRef = useRef(52);
+  const rafRef = useRef(0);
+  const draggingRef = useRef(false);
 
   /**
-   * Само-демонстрация первой карточки.
+   * Почему тут НЕ input[type=range].
    *
-   * Люди не догадываются, что картинку можно тянуть, — и весь смысл блока
-   * (проверка «до/после» на одной площадке) проходит мимо. Поэтому когда карточка
-   * впервые попадает в кадр, шторка один раз сама уезжает и возвращается:
-   * зритель видит смену стадии и понимает, что этим можно управлять.
+   * Раньше поверх фото лежал прозрачный ползунок. В Chrome нажатие мимо бегунка
+   * перебрасывает значение скачком и НЕ начинает перетаскивание — то есть шторка
+   * дёргалась, но не тянулась. Здесь обычные pointer-события с захватом указателя:
+   * работает и мышью, и пальцем, и с любой точки кадра.
+   *
+   * Позиция пишется прямо в CSS-переменную --x, минуя состояние React: на
+   * перетаскивании это разница между «плавно едет» и «ползёт рывками», потому что
+   * ререндер карточки с двумя фото на каждый кадр слабый телефон не вытягивает.
+   */
+  const apply = (v: number) => {
+    const el = frameRef.current;
+    if (!el) return;
+    posRef.current = v;
+    el.style.setProperty('--x', `${v}%`);
+    el.setAttribute('aria-valuenow', String(Math.round(v)));
+  };
+
+  const fromClientX = (clientX: number) => {
+    const el = frameRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const v = ((clientX - r.left) / r.width) * 100;
+    const clamped = Math.min(100, Math.max(0, v));
+    cancelAnimationFrame(rafRef.current);
+    rafRef.current = requestAnimationFrame(() => apply(clamped));
+  };
+
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    // Тянуть можно откуда угодно, а не только за рукоятку
+    draggingRef.current = true;
+    (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
+    if (!touched) setTouched(true);
+    fromClientX(e.clientX);
+  };
+
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!draggingRef.current) return;
+    fromClientX(e.clientX);
+  };
+
+  const stop = (e: React.PointerEvent<HTMLDivElement>) => {
+    draggingRef.current = false;
+    (e.currentTarget as HTMLElement).releasePointerCapture?.(e.pointerId);
+  };
+
+  // Клавиатура: стрелки двигают шторку, Home/End — в края
+  const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const step = e.shiftKey ? 10 : 3;
+    let v = posRef.current;
+    if (e.key === 'ArrowLeft') v -= step;
+    else if (e.key === 'ArrowRight') v += step;
+    else if (e.key === 'Home') v = 0;
+    else if (e.key === 'End') v = 100;
+    else return;
+    e.preventDefault();
+    if (!touched) setTouched(true);
+    apply(Math.min(100, Math.max(0, v)));
+  };
+
+  /**
+   * Само-демонстрация первой карточки: когда она впервые попадает в кадр,
+   * шторка один раз сама уезжает и возвращается. Без этого люди не догадываются,
+   * что кадр интерактивный, и весь смысл блока проходит мимо.
    * Событие firstview присылает движок анимаций (components/home/Motion.tsx).
    */
   useEffect(() => {
     const el = frameRef.current;
-    if (!el || !demo) return;
+    if (!el) return;
+    apply(52);
+    if (!demo) return;
 
     let raf = 0;
     const run = () => {
+      if (draggingRef.current) return; // человек уже сам взялся — не мешаем
       const from = 52;
       const to = 16;
       const dur = 2200;
       let t0 = 0;
       const step = (now: number) => {
+        if (draggingRef.current) return;
         if (!t0) t0 = now;
         const t = Math.min(1, (now - t0) / dur);
-        // туда и обратно: 0 -> 1 -> 0
         const wave = Math.sin(t * Math.PI);
         const eased = wave * wave * (3 - 2 * wave);
-        setPos(from + (to - from) * eased);
+        apply(from + (to - from) * eased);
         if (t < 1) raf = requestAnimationFrame(step);
-        else setPos(from);
+        else apply(from);
       };
       raf = requestAnimationFrame(step);
     };
@@ -190,6 +254,8 @@ function ObjectCard({
     };
   }, [demo]);
 
+  useEffect(() => () => cancelAnimationFrame(rafRef.current), []);
+
   return (
     <figure
       className="plate-dark ticks p-2"
@@ -199,30 +265,42 @@ function ObjectCard({
       <div
         ref={frameRef}
         {...(demo ? { 'data-demo': '' } : {})}
-        className="relative aspect-[4/3] select-none overflow-hidden bg-bp-950 sm:aspect-[3/2]"
+        role="slider"
+        tabIndex={0}
+        aria-label={`Объект в ${loc}: потяните, чтобы сравнить армокаркас и залитую плиту`}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={52}
+        aria-orientation="horizontal"
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={stop}
+        onPointerCancel={stop}
+        onKeyDown={onKeyDown}
+        className="stage-frame relative aspect-[4/3] cursor-ew-resize select-none overflow-hidden bg-bp-950 sm:aspect-[3/2]"
+        style={{ ['--x' as any]: '52%' }}
       >
         <img
           src={armo}
           alt={`Армокаркас плиты ${area}, объект в ${loc}`}
           loading="lazy"
           decoding="async"
+          draggable={false}
           width={600}
           height={800}
-          className="absolute inset-0 h-full w-full object-cover"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
         />
 
-        <div
-          className="absolute inset-0"
-          style={{ clipPath: `inset(0 0 0 ${pos}%)` }}
-        >
+        <div className="absolute inset-0" style={{ clipPath: 'inset(0 0 0 var(--x))' }}>
           <img
             src={plita}
             alt={`Залитая монолитная плита ${area}, объект в ${loc}`}
             loading="lazy"
             decoding="async"
+            draggable={false}
             width={600}
             height={800}
-            className="absolute inset-0 h-full w-full object-cover"
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover"
           />
         </div>
 
@@ -230,12 +308,12 @@ function ObjectCard({
         <div
           aria-hidden
           className="pointer-events-none absolute inset-y-0 w-px bg-signal-bright"
-          style={{ left: `${pos}%` }}
+          style={{ left: 'var(--x)' }}
         />
         <div
           aria-hidden
           className="pointer-events-none absolute top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center border border-signal-bright bg-bp-950/85 backdrop-blur-sm"
-          style={{ left: `${pos}%` }}
+          style={{ left: 'var(--x)' }}
         >
           <span className="mono text-[12px] text-signal-bright">↔</span>
         </div>
@@ -253,20 +331,6 @@ function ObjectCard({
             ← ПОТЯНИТЕ →
           </span>
         )}
-
-        <input
-          type="range"
-          min={0}
-          max={100}
-          step={1}
-          value={pos}
-          onChange={(e) => {
-            setPos(Number(e.target.value));
-            if (!touched) setTouched(true);
-          }}
-          aria-label={`Объект в ${loc}: сдвиньте, чтобы сравнить армокаркас и залитую плиту`}
-          className="stage-range absolute inset-0 h-full w-full opacity-0"
-        />
       </div>
 
       <figcaption className="flex items-end justify-between gap-3 px-1 pb-1 pt-3">

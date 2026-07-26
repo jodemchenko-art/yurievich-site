@@ -556,27 +556,19 @@
   animation-delay: calc(var(--d, 0ms) + 500ms);
 }
 
-/* --- Ползунок «армокаркас → плита» ------------------------------------ */
-.stage-range {
-  -webkit-appearance: none;
-  appearance: none;
-  background: transparent;
-  cursor: ew-resize;
+/* --- Кадр «армокаркас → плита» ----------------------------------------
+   touch-action: pan-y — вертикальный скролл страницы остаётся у браузера,
+   а горизонтальное движение пальца достаётся нам. Без этого палец либо
+   не тянет шторку, либо перестаёт листать страницу. */
+.stage-frame {
   touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
-.stage-range::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 48px;
-  height: 100%;
-  background: transparent;
-  cursor: ew-resize;
-}
-.stage-range::-moz-range-thumb {
-  width: 48px;
-  height: 100%;
-  border: 0;
-  background: transparent;
-  cursor: ew-resize;
+.stage-frame:focus-visible {
+  outline: 2px solid #4C7CF0;
+  outline-offset: 2px;
 }
 
 /* --- FAQ на <details> — без JS ---------------------------------------- */
