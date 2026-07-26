@@ -9,13 +9,16 @@ import { ARTICLES } from '@/lib/articles';
  * а не в обложке.
  */
 
+// ⚠️ Только живые слаги. Две статьи из прежнего списка были склеены
+// SEO-аудитом 26.07 — ссылки на них молча пропадали, и перелинковка
+// с главной просела с шести материалов до четырёх.
 const FEATURED_SLUGS = [
-  'plitnyy-fundament-cena-za-m2-spb',
   'plitnyy-fundament-10x10-cena-pod-klyuch-spb',
   'plita-ili-lenta-pod-gazobeton',
   'svai-ili-plita-pod-gazobeton-leningradskaya-oblast',
-  'monolitnyy-plitnyy-fundament-spb-pod-klyuch',
   'plitnyy-fundament-pod-gazobeton-tolschina-armirovanie',
+  'cena-plity-fundamenta-12h12-spb',
+  'dom-iz-gazobetona-lsr-pod-klyuch-cena-za-m2',
 ];
 
 export default function BlogIndexBlock() {
