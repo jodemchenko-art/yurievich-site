@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import PriceRowCta from './PriceRowCta';
 import SectionHead from './SectionHead';
 import {
   PRICE_TABLE_COLUMNS,
@@ -65,8 +66,9 @@ export default function PriceBlock() {
 
         {/* Матрица размеров */}
         <div className="mt-10 md:mt-14" data-reveal>
-          <div className="mono mb-2 text-[11px] text-brand-mute md:hidden">
-            ↔ таблицу можно листать вбок
+          <div className="mono mb-2 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-brand-mute">
+            <span className="md:hidden">↔ таблицу можно листать вбок</span>
+            <span>нажмите на свой размер — посчитаем именно его</span>
           </div>
 
           <div className="overflow-x-auto border border-hair">
@@ -90,15 +92,19 @@ export default function PriceBlock() {
               </thead>
               <tbody>
                 {PRICE_TABLE_ROWS.map((size) => (
-                  <tr key={size} className="even:bg-paper/60">
+                  <tr key={size} className="group/row transition-colors even:bg-paper/60 hover:bg-signal/[0.07]">
                     <th
                       scope="row"
-                      className="sticky left-0 z-10 border-r border-hair bg-white px-4 py-3 text-left even:bg-paper"
+                      className="sticky left-0 z-10 border-r border-hair bg-white px-4 py-3 text-left transition-colors even:bg-paper group-hover/row:bg-signal/[0.07]"
                     >
-                      <div className="mono text-sm text-graphite">{size.replace('x', '×')} м</div>
-                      <div className="mono mt-0.5 text-[10px] text-brand-mute">
-                        {SIZE_AREA[size]} м²
-                      </div>
+                      <PriceRowCta size={size} area={SIZE_AREA[size]}>
+                        <span className="mono block text-sm text-graphite">
+                          {size.replace('x', '×')} м
+                        </span>
+                        <span className="mono mt-0.5 block text-[10px] text-brand-mute">
+                          {SIZE_AREA[size]} м²
+                        </span>
+                      </PriceRowCta>
                     </th>
                     {PRICE_TABLE_COLUMNS.map((c) => {
                       const r = calcPlita({

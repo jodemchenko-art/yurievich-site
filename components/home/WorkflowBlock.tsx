@@ -65,7 +65,17 @@ export default function WorkflowBlock() {
           lede="Пять этапов, в каждом видно вашу роль и нашу. Деньги двигаются только вслед за принятой работой — это и есть страховка заказчика на стройке."
         />
 
-        <div className="mt-10 border-t border-hair md:mt-14">
+        {/* Осевая линия этапов заполняется по мере прокрутки: человек физически
+            видит, что процесс конечный и движется к сдаче. Тот же приём, что
+            полоса прогресса в форме, только на всю секцию. */}
+        <div className="relative mt-10 border-t border-hair pl-5 md:mt-14 md:pl-8" data-track="through">
+          <div aria-hidden className="absolute bottom-0 left-0 top-0 w-px bg-hair">
+            <div
+              className="w-px bg-signal"
+              style={{ height: 'calc(var(--p, 0) * 100%)', transition: 'height 0.15s linear' }}
+            />
+          </div>
+
           {STEPS.map((s, i) => (
             <article
               key={s.n}

@@ -16,6 +16,36 @@ import SectionHead from './SectionHead';
  * в Ленобласти это важнее, чем эффектность.
  */
 
+/**
+ * Цвета чертежа держим в одном месте: это «материалы» разреза, и когда меняется
+ * палитра сайта, они должны меняться вместе с ней, а не жить своей жизнью
+ * в тридцати атрибутах fill.
+ */
+const C = {
+  sheet: '#FBFAF7',      // поле чертежа
+  soil: '#E4DED1',       // грунт
+  soilHatch: '#B9AE97',
+  soilLine: '#8C8271',
+  sand: '#F0EADC',       // песчано-щебёночная подушка
+  sandDots: '#C0B49A',
+  membrane: '#25333C',   // геотекстиль + гидроизоляция
+  membraneLine: '#14232B',
+  ins: '#F6E9CE',        // утепление
+  insHatch: '#D8B87A',
+  insLine: '#B99A5F',
+  concrete: '#E6E4DE',   // бетон
+  concreteDots: '#CFCBC1',
+  concreteLine: '#4A5560',
+  rebar: '#2B3945',      // арматура
+  form: '#D8C9A8',       // опалубка
+  pipe: '#EFE3D0',       // выпуски
+  pipeLine: '#B07C2C',
+  pipeCap: '#C9862A',
+  accent: '#E8A33D',     // подсветка активного слоя
+  ink: '#141A1F',        // размерные линии и подписи
+  mute: '#6B7076',
+};
+
 type Layer = {
   n: string;
   title: string;
@@ -91,7 +121,10 @@ export default function SlabAnatomy() {
 
         <div className="mt-10 grid gap-8 lg:mt-14 lg:grid-cols-[minmax(0,1fr)_400px] lg:gap-12">
           {/* ── Чертёж ─────────────────────────────────────────────── */}
-          <div className="plate ticks p-3 sm:p-5" data-reveal>
+          {/* data-track: пока блок проходит через экран, движок кладёт в --p
+              прогресс 0..1, и плита СОБИРАЕТСЯ слой за слоем по мере прокрутки.
+              Человек не читает про технологию — он видит, как её выполняют. */}
+          <div className="plate ticks p-3 sm:p-5" data-reveal data-track>
             <svg
               viewBox="0 0 720 470"
               className="h-auto w-full"
@@ -100,112 +133,112 @@ export default function SlabAnatomy() {
             >
               <defs>
                 <pattern id="pt-soil" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-                  <line x1="0" y1="0" x2="0" y2="14" stroke="#B9AE97" strokeWidth="1.2" />
+                  <line x1="0" y1="0" x2="0" y2="14" stroke={C.soilHatch} strokeWidth="1.2" />
                 </pattern>
                 <pattern id="pt-sand" width="12" height="12" patternUnits="userSpaceOnUse">
-                  <circle cx="3" cy="3" r="1.3" fill="#C0B49A" />
-                  <circle cx="9" cy="8" r="1.1" fill="#C0B49A" />
+                  <circle cx="3" cy="3" r="1.3" fill={C.sandDots} />
+                  <circle cx="9" cy="8" r="1.1" fill={C.sandDots} />
                 </pattern>
                 <pattern id="pt-ins" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-                  <line x1="0" y1="0" x2="0" y2="10" stroke="#D8B87A" strokeWidth="1.1" />
+                  <line x1="0" y1="0" x2="0" y2="10" stroke={C.insHatch} strokeWidth="1.1" />
                 </pattern>
                 <pattern id="pt-concrete" width="16" height="16" patternUnits="userSpaceOnUse">
-                  <circle cx="4" cy="5" r="1.5" fill="#CFCBC1" />
-                  <circle cx="12" cy="11" r="2" fill="#CFCBC1" />
-                  <circle cx="9" cy="3" r="1.1" fill="#CFCBC1" />
+                  <circle cx="4" cy="5" r="1.5" fill={C.concreteDots} />
+                  <circle cx="12" cy="11" r="2" fill={C.concreteDots} />
+                  <circle cx="9" cy="3" r="1.1" fill={C.concreteDots} />
                 </pattern>
               </defs>
 
               {/* небо / воздух */}
-              <rect x="0" y="0" width="720" height="470" fill="#FBFAF7" />
+              <rect x="0" y="0" width="720" height="470" fill={C.sheet} />
 
               {/* грунт по бокам котлована */}
-              <Group dim={active !== null && active !== 0}>
-                <path d="M0 296 H78 V440 H0 Z" fill="#E4DED1" />
+              <Group dim={active !== null && active !== 0} start={0.05}>
+                <path d="M0 296 H78 V440 H0 Z" fill={C.soil} />
                 <path d="M0 296 H78 V440 H0 Z" fill="url(#pt-soil)" />
-                <path d="M642 296 H720 V440 H642 Z" fill="#E4DED1" />
+                <path d="M642 296 H720 V440 H642 Z" fill={C.soil} />
                 <path d="M642 296 H720 V440 H642 Z" fill="url(#pt-soil)" />
-                <path d="M78 440 H642 V400 H78 Z" fill="#E4DED1" />
+                <path d="M78 440 H642 V400 H78 Z" fill={C.soil} />
                 <path d="M78 440 H642 V400 H78 Z" fill="url(#pt-soil)" />
                 <path
                   d="M0 296 H78 V400 H642 V296 H720"
                   fill="none"
-                  stroke="#8C8271"
+                  stroke={C.soilLine}
                   strokeWidth="1.4"
                 />
-                {active === 0 && <rect x="78" y="400" width="564" height="40" fill="none" stroke="#E8A33D" strokeWidth="2.5" />}
+                {active === 0 && <rect x="78" y="400" width="564" height="40" fill="none" stroke={C.accent} strokeWidth="2.5" />}
               </Group>
 
               {/* песчано-щебёночная подушка */}
-              <Group dim={active !== null && active !== 1}>
-                <rect x="78" y="344" width="564" height="56" fill="#F0EADC" />
+              <Group dim={active !== null && active !== 1} start={0.14}>
+                <rect x="78" y="344" width="564" height="56" fill={C.sand} />
                 <rect x="78" y="344" width="564" height="56" fill="url(#pt-sand)" />
-                <rect x="78" y="344" width="564" height="56" fill="none" stroke="#8C8271" strokeWidth="1.2" />
-                {active === 1 && <rect x="78" y="344" width="564" height="56" fill="none" stroke="#E8A33D" strokeWidth="2.5" />}
+                <rect x="78" y="344" width="564" height="56" fill="none" stroke={C.soilLine} strokeWidth="1.2" />
+                {active === 1 && <rect x="78" y="344" width="564" height="56" fill="none" stroke={C.accent} strokeWidth="2.5" />}
               </Group>
 
               {/* геотекстиль + гидроизоляция */}
-              <Group dim={active !== null && active !== 2}>
-                <rect x="78" y="330" width="564" height="14" fill="#25333C" />
-                <rect x="78" y="330" width="564" height="14" fill="none" stroke="#14232B" strokeWidth="1" />
-                {active === 2 && <rect x="76" y="328" width="568" height="18" fill="none" stroke="#E8A33D" strokeWidth="2.5" />}
+              <Group dim={active !== null && active !== 2} start={0.22}>
+                <rect x="78" y="330" width="564" height="14" fill={C.membrane} />
+                <rect x="78" y="330" width="564" height="14" fill="none" stroke={C.membraneLine} strokeWidth="1" />
+                {active === 2 && <rect x="76" y="328" width="568" height="18" fill="none" stroke={C.accent} strokeWidth="2.5" />}
               </Group>
 
               {/* утепление по проекту */}
-              <Group dim={active !== null && active !== 3}>
-                <rect x="78" y="298" width="564" height="32" fill="#F6E9CE" />
+              <Group dim={active !== null && active !== 3} start={0.29}>
+                <rect x="78" y="298" width="564" height="32" fill={C.ins} />
                 <rect x="78" y="298" width="564" height="32" fill="url(#pt-ins)" />
-                <rect x="78" y="298" width="564" height="32" fill="none" stroke="#B99A5F" strokeWidth="1.2" />
-                {active === 3 && <rect x="78" y="298" width="564" height="32" fill="none" stroke="#E8A33D" strokeWidth="2.5" />}
+                <rect x="78" y="298" width="564" height="32" fill="none" stroke={C.insLine} strokeWidth="1.2" />
+                {active === 3 && <rect x="78" y="298" width="564" height="32" fill="none" stroke={C.accent} strokeWidth="2.5" />}
               </Group>
 
               {/* бетонная плита */}
-              <Group dim={active !== null && active !== 5}>
-                <rect x="78" y="170" width="564" height="128" fill="#E6E4DE" />
+              <Group dim={active !== null && active !== 5} start={0.36}>
+                <rect x="78" y="170" width="564" height="128" fill={C.concrete} />
                 <rect x="78" y="170" width="564" height="128" fill="url(#pt-concrete)" />
-                <rect x="78" y="170" width="564" height="128" fill="none" stroke="#4A5560" strokeWidth="1.6" />
-                {active === 5 && <rect x="78" y="170" width="564" height="128" fill="none" stroke="#E8A33D" strokeWidth="3" />}
+                <rect x="78" y="170" width="564" height="128" fill="none" stroke={C.concreteLine} strokeWidth="1.6" />
+                {active === 5 && <rect x="78" y="170" width="564" height="128" fill="none" stroke={C.accent} strokeWidth="3" />}
               </Group>
 
               {/* армокаркас — две сетки в теле плиты */}
-              <Group dim={active !== null && active !== 4}>
-                <line x1="92" y1="204" x2="628" y2="204" stroke="#2B3945" strokeWidth="2" />
-                <line x1="92" y1="264" x2="628" y2="264" stroke="#2B3945" strokeWidth="2" />
+              <Group dim={active !== null && active !== 4} start={0.43}>
+                <line x1="92" y1="204" x2="628" y2="204" stroke={C.rebar} strokeWidth="2" />
+                <line x1="92" y1="264" x2="628" y2="264" stroke={C.rebar} strokeWidth="2" />
                 {Array.from({ length: 18 }).map((_, i) => (
                   <g key={i}>
-                    <circle cx={100 + i * 30} cy="204" r="4.4" fill="#F6F4EF" stroke="#2B3945" strokeWidth="1.6" />
-                    <circle cx={100 + i * 30} cy="264" r="4.4" fill="#F6F4EF" stroke="#2B3945" strokeWidth="1.6" />
+                    <circle cx={100 + i * 30} cy="204" r="4.4" fill={C.sheet} stroke={C.rebar} strokeWidth="1.6" />
+                    <circle cx={100 + i * 30} cy="264" r="4.4" fill={C.sheet} stroke={C.rebar} strokeWidth="1.6" />
                     <line
                       x1={100 + i * 30}
                       y1="204"
                       x2={100 + i * 30}
                       y2="264"
-                      stroke="#2B3945"
+                      stroke={C.rebar}
                       strokeWidth="0.8"
                       opacity="0.45"
                     />
                   </g>
                 ))}
                 {active === 4 && (
-                  <rect x="86" y="190" width="548" height="88" fill="none" stroke="#E8A33D" strokeWidth="2.5" strokeDasharray="8 6" />
+                  <rect x="86" y="190" width="548" height="88" fill="none" stroke={C.accent} strokeWidth="2.5" strokeDasharray="8 6" />
                 )}
               </Group>
 
               {/* опалубка */}
               <g>
-                <rect x="64" y="164" width="14" height="140" fill="#D8C9A8" stroke="#8C8271" strokeWidth="1.2" />
-                <rect x="642" y="164" width="14" height="140" fill="#D8C9A8" stroke="#8C8271" strokeWidth="1.2" />
+                <rect x="64" y="164" width="14" height="140" fill={C.form} stroke={C.soilLine} strokeWidth="1.2" />
+                <rect x="642" y="164" width="14" height="140" fill={C.form} stroke={C.soilLine} strokeWidth="1.2" />
               </g>
 
               {/* выпуски коммуникаций */}
-              <Group dim={active !== null && active !== 6}>
-                <rect x="520" y="120" width="26" height="276" fill="#EFE3D0" stroke="#B07C2C" strokeWidth="1.6" />
-                <rect x="514" y="112" width="38" height="12" fill="#C9862A" />
-                {active === 6 && <rect x="514" y="112" width="38" height="288" fill="none" stroke="#E8A33D" strokeWidth="2.5" />}
+              <Group dim={active !== null && active !== 6} start={0.5}>
+                <rect x="520" y="120" width="26" height="276" fill={C.pipe} stroke={C.pipeLine} strokeWidth="1.6" />
+                <rect x="514" y="112" width="38" height="12" fill={C.pipeCap} />
+                {active === 6 && <rect x="514" y="112" width="38" height="288" fill="none" stroke={C.accent} strokeWidth="2.5" />}
               </Group>
 
               {/* размерная линия толщины плиты */}
-              <g stroke="#141A1F" strokeWidth="1.2" fill="none">
+              <g stroke={C.ink} strokeWidth="1.2" fill="none">
                 <line x1="678" y1="170" x2="678" y2="298" />
                 <line x1="670" y1="170" x2="686" y2="170" />
                 <line x1="670" y1="298" x2="686" y2="298" />
@@ -215,7 +248,7 @@ export default function SlabAnatomy() {
                 y="152"
                 textAnchor="end"
                 fontSize="20"
-                fill="#141A1F"
+                fill={C.ink}
                 style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500 }}
               >
                 250–350 мм
@@ -226,7 +259,7 @@ export default function SlabAnatomy() {
                 x="8"
                 y="288"
                 fontSize="17"
-                fill="#6B7076"
+                fill={C.mute}
                 style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500 }}
               >
                 УРОВЕНЬ ЗЕМЛИ
@@ -313,8 +346,26 @@ export default function SlabAnatomy() {
   );
 }
 
-function Group({ dim, children }: { dim: boolean; children: React.ReactNode }) {
+/**
+ * Слой чертежа.
+ *
+ * Внешняя группа отвечает за СБОРКУ по скроллу (класс .bp-layer читает --p из движка
+ * и свой момент старта --s), внутренняя — за приглушение неактивных слоёв при выборе.
+ * Две группы, а не одна, потому что прозрачности вложенных <g> перемножаются:
+ * иначе подсветка слоя ломала бы анимацию сборки.
+ */
+function Group({
+  dim,
+  start,
+  children,
+}: {
+  dim: boolean;
+  start: number;
+  children: React.ReactNode;
+}) {
   return (
-    <g style={{ opacity: dim ? 0.28 : 1, transition: 'opacity 0.25s ease' }}>{children}</g>
+    <g className="bp-layer" style={{ ['--s' as any]: String(start) }}>
+      <g style={{ opacity: dim ? 0.28 : 1, transition: 'opacity 0.25s ease' }}>{children}</g>
+    </g>
   );
 }

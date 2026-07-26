@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { SITE } from '@/lib/site';
 import SectionHead from './SectionHead';
 
@@ -82,7 +82,7 @@ export default function ObjectsChronicle() {
 
         <div className="mt-10 grid gap-6 md:mt-14 md:grid-cols-2 lg:gap-8">
           {OBJECTS.map((o, i) => (
-            <ObjectCard key={o.loc} {...o} index={i} />
+            <ObjectCard key={o.loc} {...o} index={i} demo={i === 0} />
           ))}
 
           {/* Шестая ячейка — выход на площадки, где объектов больше */}
@@ -137,6 +137,7 @@ function ObjectCard({
   armo,
   plita,
   index,
+  demo = false,
 }: {
   loc: string;
   district: string;
@@ -144,8 +145,50 @@ function ObjectCard({
   armo: string;
   plita: string;
   index: number;
+  demo?: boolean;
 }) {
   const [pos, setPos] = useState(52);
+  const [touched, setTouched] = useState(false);
+  const frameRef = useRef<HTMLDivElement>(null);
+
+  /**
+   * Само-демонстрация первой карточки.
+   *
+   * Люди не догадываются, что картинку можно тянуть, — и весь смысл блока
+   * (проверка «до/после» на одной площадке) проходит мимо. Поэтому когда карточка
+   * впервые попадает в кадр, шторка один раз сама уезжает и возвращается:
+   * зритель видит смену стадии и понимает, что этим можно управлять.
+   * Событие firstview присылает движок анимаций (components/home/Motion.tsx).
+   */
+  useEffect(() => {
+    const el = frameRef.current;
+    if (!el || !demo) return;
+
+    let raf = 0;
+    const run = () => {
+      const from = 52;
+      const to = 16;
+      const dur = 2200;
+      let t0 = 0;
+      const step = (now: number) => {
+        if (!t0) t0 = now;
+        const t = Math.min(1, (now - t0) / dur);
+        // туда и обратно: 0 -> 1 -> 0
+        const wave = Math.sin(t * Math.PI);
+        const eased = wave * wave * (3 - 2 * wave);
+        setPos(from + (to - from) * eased);
+        if (t < 1) raf = requestAnimationFrame(step);
+        else setPos(from);
+      };
+      raf = requestAnimationFrame(step);
+    };
+
+    el.addEventListener('firstview', run as EventListener, { once: true });
+    return () => {
+      el.removeEventListener('firstview', run as EventListener);
+      cancelAnimationFrame(raf);
+    };
+  }, [demo]);
 
   return (
     <figure
@@ -153,7 +196,11 @@ function ObjectCard({
       data-reveal
       style={{ ['--d' as any]: `${(index % 2) * 90}ms` }}
     >
-      <div className="relative aspect-[4/3] select-none overflow-hidden bg-bp-950 sm:aspect-[3/2]">
+      <div
+        ref={frameRef}
+        {...(demo ? { 'data-demo': '' } : {})}
+        className="relative aspect-[4/3] select-none overflow-hidden bg-bp-950 sm:aspect-[3/2]"
+      >
         <img
           src={armo}
           alt={`Армокаркас плиты ${area}, объект в ${loc}`}
@@ -201,13 +248,22 @@ function ObjectCard({
           ПЛИТА ЗАЛИТА
         </span>
 
+        {!touched && (
+          <span className="mono pointer-events-none absolute bottom-2 left-1/2 -translate-x-1/2 bg-bp-950/85 px-2.5 py-1 text-[10px] tracking-wider text-signal">
+            ← ПОТЯНИТЕ →
+          </span>
+        )}
+
         <input
           type="range"
           min={0}
           max={100}
           step={1}
           value={pos}
-          onChange={(e) => setPos(Number(e.target.value))}
+          onChange={(e) => {
+            setPos(Number(e.target.value));
+            if (!touched) setTouched(true);
+          }}
           aria-label={`Объект в ${loc}: сдвиньте, чтобы сравнить армокаркас и залитую плиту`}
           className="stage-range absolute inset-0 h-full w-full opacity-0"
         />

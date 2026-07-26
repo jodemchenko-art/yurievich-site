@@ -13,6 +13,15 @@ import { SITE } from '@/lib/site';
  * то есть платил байтами РФ-клиента за то, что не является доказательством.
  */
 
+/** Цвета выносок держим рядом, чтобы менять вместе с палитрой сайта. */
+const A = {
+  line: '#E8A33D',   // линии-выноски и размерные линии
+  plate: '#071119',  // подложка под подписью
+  text: '#FFFFFF',
+  chipBg: '#E8A33D', // плашка с площадью
+  chipText: '#141A1F',
+};
+
 const SPECS = [
   { k: 'Бетон', v: 'М300 W6 F150' },
   { k: 'Арматура', v: 'А500С' },
@@ -110,7 +119,7 @@ export default function Hero() {
                 className="pointer-events-none absolute inset-0 h-full w-full"
                 aria-hidden
               >
-                <g stroke="#E8A33D" strokeWidth="1.6" fill="none">
+                <g stroke={A.line} strokeWidth="1.6" fill="none">
                   {/* 1 — выпуски канализации */}
                   <g className="anno-line" style={{ ['--d' as any]: '300ms' }}>
                     <path d="M88 344 L88 250 L196 250" />
@@ -135,11 +144,11 @@ export default function Hero() {
                 </g>
 
                 <g className="anno-label" style={{ ['--d' as any]: '300ms' }}>
-                  <rect x="196" y="232" width="290" height="34" fill="#071119" opacity="0.82" />
+                  <rect x="196" y="232" width="290" height="34" fill={A.plate} opacity="0.82" />
                   <text
                     x="208"
                     y="255"
-                    fill="#FFFFFF"
+                    fill={A.text}
                     fontSize="19"
                     letterSpacing="1.4"
                     style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500 }}
@@ -149,11 +158,11 @@ export default function Hero() {
                 </g>
 
                 <g className="anno-label" style={{ ['--d' as any]: '520ms' }}>
-                  <rect x="18" y="378" width="250" height="34" fill="#071119" opacity="0.82" />
+                  <rect x="18" y="378" width="250" height="34" fill={A.plate} opacity="0.82" />
                   <text
                     x="30"
                     y="401"
-                    fill="#FFFFFF"
+                    fill={A.text}
                     fontSize="19"
                     letterSpacing="1.4"
                     style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500 }}
@@ -163,11 +172,11 @@ export default function Hero() {
                 </g>
 
                 <g className="anno-label" style={{ ['--d' as any]: '740ms' }}>
-                  <rect x="326" y="620" width="252" height="34" fill="#071119" opacity="0.82" />
+                  <rect x="326" y="620" width="252" height="34" fill={A.plate} opacity="0.82" />
                   <text
                     x="338"
                     y="643"
-                    fill="#FFFFFF"
+                    fill={A.text}
                     fontSize="19"
                     letterSpacing="1.4"
                     style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500 }}
@@ -177,11 +186,11 @@ export default function Hero() {
                 </g>
 
                 <g className="anno-label" style={{ ['--d' as any]: '900ms' }}>
-                  <rect x="212" y="722" width="176" height="34" fill="#E8A33D" />
+                  <rect x="212" y="722" width="176" height="34" fill={A.chipBg} />
                   <text
                     x="224"
                     y="745"
-                    fill="#141A1F"
+                    fill={A.chipText}
                     fontSize="19"
                     letterSpacing="1.4"
                     style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 500 }}

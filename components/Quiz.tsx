@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { calcPlita, fmtRub, type Ground, type SizeKey, type Storeys } from '@/lib/pricing';
 
 type Answer = string;
 type Answers = Record<number, Answer>;
@@ -33,6 +34,52 @@ const STEPS = [
   },
 ];
 
+/**
+ * Ориентировочная вилка по ответам квиза.
+ *
+ * Показываем её ДО того, как просим телефон. Логика простая: человек и так может
+ * посмотреть таблицу цен выше — прятать порядок суммы в обмен на контакт нечестно
+ * и в крупной покупке работает против нас. Зато видимая вилка снимает главный
+ * стоп-фактор («оставлю номер только чтобы узнать цену») и оставляет квизу
+ * настоящую ценность: точный расчёт по конкретному участку.
+ *
+ * Считаем ТОЛЬКО плиту и той же функцией, что таблица и калькулятор.
+ * Лента и сваи считаются иначе — там честнее промолчать, чем выдумать число.
+ */
+function estimate(answers: Answers): { from: number; to: number; note: string } | null {
+  if (answers[0] && !answers[0].includes('плита')) return null;
+
+  const RANGE: Record<string, [SizeKey, SizeKey]> = {
+    'до 80 м²': ['6x6', '8x10'],
+    '80 – 120 м²': ['8x10', '10x12'],
+    '120 – 180 м²': ['10x12', '12x12'],
+  };
+  const pair = RANGE[answers[1] as string];
+  if (!pair) return null;
+
+  const storeys: Storeys =
+    answers[2] === '1 этаж' ? 1 : answers[2] === '1,5 этажа (мансарда)' ? 1.5 : 2;
+
+  const GROUND: Record<string, Ground> = {
+    'Песок / супесь': 'pesok',
+    'Глина / суглинок': 'suglinok',
+    'Торф / болото': 'torf',
+  };
+  const groundKey = GROUND[answers[3] as string];
+  const ground: Ground = groundKey || 'suglinok';
+
+  const a = calcPlita({ size: pair[0], material: 'gazobeton', ground, storeys });
+  const b = calcPlita({ size: pair[1], material: 'gazobeton', ground, storeys });
+
+  return {
+    from: a.total,
+    to: b.total,
+    note: groundKey
+      ? 'по вашим ответам'
+      : 'грунт взяли типичный для ЛО — суглинок, на замере уточним',
+  };
+}
+
 export default function Quiz() {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
@@ -44,6 +91,27 @@ export default function Quiz() {
   const [loading, setLoading] = useState(false);
 
   const totalSteps = STEPS.length + 1; // +1 for contacts
+
+  /**
+   * Префилл из таблицы цен.
+   *
+   * Человек кликнул «10×10 м» в таблице — значит, тип (плита) и площадь он уже
+   * фактически выбрал. Заставлять его отвечать это ещё раз — терять людей на
+   * ровном месте, поэтому проставляем два первых ответа и открываем третий шаг.
+   */
+  useEffect(() => {
+    const onPrefill = (e: Event) => {
+      const area = (e as CustomEvent).detail?.area as number | undefined;
+      if (!area) return;
+      const bucket =
+        area <= 80 ? 'до 80 м²' : area <= 120 ? '80 – 120 м²' : area <= 180 ? '120 – 180 м²' : '180+ м²';
+      setAnswers((prev) => ({ ...prev, 0: 'Монолитная плита', 1: bucket }));
+      setStep(2);
+      setSubmitted(false);
+    };
+    window.addEventListener('yur:prefill', onPrefill as EventListener);
+    return () => window.removeEventListener('yur:prefill', onPrefill as EventListener);
+  }, []);
   const progress = ((step + (submitted ? 1 : 0)) / totalSteps) * 100;
 
   const pick = (value: string) => {
@@ -158,6 +226,24 @@ export default function Quiz() {
               Юрий перезвонит сам, не колл-центр. Смета — в течение 1 рабочего дня после замера.
             </p>
 
+            {/* Вилка по ответам — до того, как человек оставил телефон */}
+            {(() => {
+              const est = estimate(answers);
+              if (!est) return null;
+              return (
+                <div className="mt-5 border border-hair bg-paper p-4">
+                  <div className="eyebrow text-signal-dark">Ориентир {est.note}</div>
+                  <div className="mono mt-2 text-lg leading-tight text-graphite md:text-xl">
+                    {fmtRub(est.from)} – {fmtRub(est.to)} ₽
+                  </div>
+                  <p className="mt-2 text-xs leading-relaxed text-brand-mute">
+                    Это не смета, а порядок цифр по таблице цен. Точную сумму считаем после
+                    бесплатного замера и фиксируем в договоре — она не меняется без вашей подписи.
+                  </p>
+                </div>
+              );
+            })()}
+
             <div className="mt-6 grid gap-4">
               <label className="block">
                 <span className="eyebrow text-brand-mute">Как к вам обращаться?</span>
@@ -196,9 +282,9 @@ export default function Quiz() {
                           : 'border-hair hover:border-signal/50'
                       }`}
                     >
-                      {t === 'whatsapp' && '💬 WhatsApp'}
-                      {t === 'telegram' && '✈️ Telegram'}
-                      {t === 'call' && '📞 Звонком'}
+                      {t === 'whatsapp' && 'WhatsApp'}
+                      {t === 'telegram' && 'Telegram'}
+                      {t === 'call' && 'Звонком'}
                     </button>
                   ))}
                 </div>

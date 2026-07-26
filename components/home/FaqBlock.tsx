@@ -45,8 +45,14 @@ export default function FaqBlock() {
                   +
                 </span>
               </summary>
-              <div className="pb-5 pl-9 pr-8 md:pl-10">
-                <p className="text-sm leading-relaxed text-brand-mute md:text-[15px]">{f.a}</p>
+              {/* Плавное раскрытие без JS: grid-template-rows 0fr -> 1fr.
+                  Резкий скачок высоты на длинном ответе читается как «сайт дёргается». */}
+              <div className="faq-body">
+                <div className="overflow-hidden">
+                  <p className="pb-5 pl-9 pr-8 text-sm leading-relaxed text-brand-mute md:pl-10 md:text-[15px]">
+                    {f.a}
+                  </p>
+                </div>
               </div>
             </details>
           ))}

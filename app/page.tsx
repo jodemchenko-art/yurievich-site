@@ -1,4 +1,4 @@
-import Reveal from '@/components/home/Reveal';
+import Motion from '@/components/home/Motion';
 import Hero from '@/components/home/Hero';
 import ProofStrip from '@/components/home/ProofStrip';
 import SlabAnatomy from '@/components/home/SlabAnatomy';
@@ -77,7 +77,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_PAGE_SCHEMA) }}
       />
 
-      <Reveal />
+      <Motion />
 
       <Hero />
       <ProofStrip />

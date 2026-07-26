@@ -34,7 +34,7 @@ export default function SectionHead({
           {label}
         </div>
 
-        <h2 className={`display-2 mt-3 md:mt-4 ${dark ? 'text-white' : 'text-graphite'}`}>{title}</h2>
+        <h2 className={`display-2 mask mt-3 md:mt-4 ${dark ? 'text-white' : 'text-graphite'}`}>{title}</h2>
 
         {lede && (
           <p className={`lede mt-4 max-w-2xl ${dark ? 'text-bp-text' : 'text-brand-mute'}`}>{lede}</p>
