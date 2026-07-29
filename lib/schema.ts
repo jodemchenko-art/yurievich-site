@@ -93,9 +93,11 @@ export function buildSiteEntities() {
         SITE.telegramChannel,
         SITE.whatsapp,
         (SITE as any).vk,
-        'https://yandex.ru/maps/org/69393767573',
+        SITE.yandexMapsProfile,
+        SITE.gis2Profile,
+        SITE.avitoProfile,
       ].filter(Boolean),
-      hasMap: 'https://yandex.ru/maps/org/69393767573',
+      hasMap: SITE.yandexMapsProfile,
       knowsAbout: [
         'Монолитный плитный фундамент',
         'Дом из газобетона под ключ',
@@ -299,7 +301,7 @@ export function buildRegionGraph(region: Region, canonicalUrl: string, breadcrum
         '@type': 'AdministrativeArea',
         name: region.name,
       },
-      sameAs: ['https://yandex.ru/maps/org/69393767573'],
+      sameAs: [SITE.yandexMapsProfile, SITE.gis2Profile].filter(Boolean),
       taxID: SITE.inn,
     },
     // Place entity для entity-based SEO (район как географическая локация)

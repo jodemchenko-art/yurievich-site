@@ -21,3 +21,6 @@ sk-yurievich-site.tar.gz
 public/lead.php
 _ARHIV-chatov-raw.txt
 tsconfig.tsbuildinfo
+
+# Журнал заявок: персональные данные клиентов, в репозиторий не попадает (152-ФЗ)
+data/leads.jsonl

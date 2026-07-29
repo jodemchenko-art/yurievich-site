@@ -13,10 +13,16 @@ import SectionHead from './SectionHead';
 
 const PROOFS = [
   {
-    href: 'https://yandex.ru/maps/org/69393767573',
+    href: SITE.yandexMapsProfile,
     label: 'Яндекс.Карты',
     value: 'Карточка компании',
     note: 'Отзывы, фото и маршрут на карте',
+  },
+  {
+    href: SITE.gis2Profile,
+    label: '2ГИС',
+    value: 'Карточка компании',
+    note: 'Справочник: адрес, телефон, отзывы',
   },
   {
     href: SITE.vk,

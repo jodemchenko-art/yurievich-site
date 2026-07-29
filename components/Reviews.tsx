@@ -22,10 +22,16 @@ const PROOFS = [
     note: 'Профиль компании с отзывами заказчиков',
   },
   {
-    href: 'https://yandex.ru/maps/org/69393767573',
+    href: SITE.yandexMapsProfile,
     label: 'Яндекс.Карты',
     value: 'Карточка компании',
     note: 'Отзывы и фото на карте',
+  },
+  {
+    href: SITE.gis2Profile,
+    label: '2ГИС',
+    value: 'Карточка компании',
+    note: 'Адрес, телефон и отзывы в справочнике',
   },
   {
     href: SITE.vk,
