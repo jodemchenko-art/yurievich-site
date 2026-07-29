@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { SITE } from '@/lib/site';
+import { trackLead } from '@/lib/analytics';
 
 // Лид-магнит: «Чек-лист как не попасть на дешёвый фундамент» (8 стр PDF)
 // в обмен на телефон. Реалистичный заход для «прохладных» юзеров
@@ -49,6 +50,7 @@ export default function LeadMagnetBanner({
           comment: 'Скачал PDF: Чек-лист как не попасть на дешёвый фундамент',
         }),
       }).catch(() => null);
+      trackLead('lead-magnet');
       setSubmitted(true);
       // Открыть PDF
       setTimeout(() => {

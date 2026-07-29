@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { SITE } from '@/lib/site';
+import { trackLead } from '@/lib/analytics';
 
 // === Параметры расчёта ===
 // Модель цены живёт в lib/pricing.ts — её же использует таблица цен на /fundament/.
@@ -103,6 +104,7 @@ export default function Calculator({
           contact: { name, phone },
         }),
       }).catch(() => null);
+      trackLead('calculator');
       setSubmitted(true);
     } finally {
       setLoading(false);

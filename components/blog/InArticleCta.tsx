@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { SITE } from '@/lib/site';
+import { trackLead } from '@/lib/analytics';
 
 // In-article CTA: появляется в середине статьи + после.
 // Цель: конверсия читателей в звонки/заявки (читатели блога = горячий трафик).
@@ -37,6 +38,7 @@ export default function InArticleCta({
         }),
       });
       if (!res.ok) throw new Error('fail');
+      trackLead('in-article-cta');
       setSubmitted(true);
     } catch {
       setError('Не удалось отправить. Позвоните: ' + SITE.phone);

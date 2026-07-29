@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { SITE } from '@/lib/site';
+import { trackLead } from '@/lib/analytics';
 
 export default function Contacts() {
   const [name, setName] = useState('');
@@ -25,6 +26,7 @@ export default function Contacts() {
           comment,
         }),
       }).catch(() => null);
+      trackLead('contacts');
       setSubmitted(true);
     } finally {
       setLoading(false);

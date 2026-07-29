@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { SITE } from '@/lib/site';
+import { trackLead } from '@/lib/analytics';
 
 /**
  * ТРЕТЬЯ И ПОСЛЕДНЯЯ ТОЧКА ЗАЯВКИ.
@@ -37,6 +38,7 @@ export default function ContactBlock() {
           comment,
         }),
       }).catch(() => null);
+      trackLead('contacts-block');
       setSubmitted(true);
     } finally {
       setLoading(false);

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { calcPlita, fmtRub, type Ground, type SizeKey, type Storeys } from '@/lib/pricing';
 import { SITE } from '@/lib/site';
+import { trackLead } from '@/lib/analytics';
 
 type Answer = string;
 type Answers = Record<number, Answer>;
@@ -140,6 +141,7 @@ export default function Quiz() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       }).catch(() => null);
+      trackLead('quiz');
       setSubmitted(true);
     } finally {
       setLoading(false);

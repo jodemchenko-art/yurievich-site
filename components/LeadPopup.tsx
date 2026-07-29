@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { SITE } from '@/lib/site';
+import { trackLead } from '@/lib/analytics';
 
 // Lead popup — ТОЛЬКО exit-intent (26.07.2026).
 // Таймер на 35 секунд убран сознательно: он срабатывал ровно тогда, когда человек
@@ -84,6 +85,7 @@ export default function LeadPopup() {
         }),
       });
       if (!res.ok) throw new Error('fail');
+      trackLead('popup');
       setSubmitted(true);
       try {
         sessionStorage.setItem(STORAGE_KEY, '1');
