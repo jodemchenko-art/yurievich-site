@@ -20,11 +20,12 @@ export const metadata: Metadata = {
   },
 };
 
-// Карточки в справочниках живут в SITE — чтобы ссылка правилась в одном месте
-// и совпадала со Schema.org sameAs.
-const MAP_CARDS = [
+// Справочники и сообщество живут в SITE — чтобы ссылка правилась в одном месте
+// и совпадала со Schema.org sameAs. Пустая ссылка просто не выводится.
+const PROFILE_LINKS = [
   { href: SITE.yandexMapsProfile, label: 'Открыть карточку на Я.Картах' },
   { href: SITE.gis2Profile, label: 'Открыть карточку в 2ГИС' },
+  { href: SITE.vk, label: 'Сообщество «Ленбетон78» во ВКонтакте' },
 ].filter((c) => Boolean(c.href));
 
 export default function KontaktyPage() {
@@ -153,7 +154,7 @@ export default function KontaktyPage() {
               </div>
 
               <div className="mt-4 flex flex-col gap-2">
-                {MAP_CARDS.map((card) => (
+                {PROFILE_LINKS.map((card) => (
                   <a
                     key={card.href}
                     href={card.href}
