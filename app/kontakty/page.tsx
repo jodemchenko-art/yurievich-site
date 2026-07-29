@@ -20,7 +20,12 @@ export const metadata: Metadata = {
   },
 };
 
-const YANDEX_CARD_URL = 'https://yandex.ru/maps/org/69393767573';
+// Карточки в справочниках живут в SITE — чтобы ссылка правилась в одном месте
+// и совпадала со Schema.org sameAs.
+const MAP_CARDS = [
+  { href: SITE.yandexMapsProfile, label: 'Открыть карточку на Я.Картах' },
+  { href: SITE.gis2Profile, label: 'Открыть карточку в 2ГИС' },
+].filter((c) => Boolean(c.href));
 
 export default function KontaktyPage() {
   const pageGraph = buildGraph([
@@ -147,14 +152,19 @@ export default function KontaktyPage() {
                 />
               </div>
 
-              <a
-                href={YANDEX_CARD_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center gap-2 text-brand-ink font-semibold hover:underline"
-              >
-                Открыть нашу карточку на Я.Картах →
-              </a>
+              <div className="mt-4 flex flex-col gap-2">
+                {MAP_CARDS.map((card) => (
+                  <a
+                    key={card.href}
+                    href={card.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-brand-ink font-semibold hover:underline"
+                  >
+                    {card.label} →
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
