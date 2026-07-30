@@ -24,14 +24,18 @@ import { gruntovyeVodyBlizkoKakoyFundamentVybrat } from './gruntovye-vody-blizko
 import { kakZalitPlitnyyFundamentZimoy } from './kak-zalit-plitnyy-fundament-zimoy';
 import { kogdaLuchsheZalivatPlitnyyFundamentLeningradskayaOblast } from './kogda-luchshe-zalivat-plitnyy-fundament-leningradskaya-oblast';
 import { korobkaIzGazobetonaPodKryshuSpbCena } from './korobka-iz-gazobetona-pod-kryshu-spb-cena';
+import { monolitnayaPlita12x12CenaSpb } from './monolitnaya-plita-12x12-cena-spb';
 import { monolitnayaPlita250MmCenaZaM2 } from './monolitnaya-plita-250-mm-cena-za-m2';
 import { monolitnayaPlita8x10CenaLenoblast } from './monolitnaya-plita-8x10-cena-lenoblast';
 import { monolitnayaPlitaIliUshpPodGazobeton } from './monolitnaya-plita-ili-ushp-pod-gazobeton';
+import { monolitnayaPlitaTsenaRabotaSpb } from './monolitnaya-plita-tsena-rabota-spb';
+import { monolitnyyPlitnyyFundamentSpbPodKlyuch } from './monolitnyy-plitnyy-fundament-spb-pod-klyuch';
 import { mzlfIliPlitaPodGazobeton } from './mzlf-ili-plita-pod-gazobeton';
 import { osenyuZalivatPlitnyyFundamentIliVesnoy } from './osenyu-zalivat-plitnyy-fundament-ili-vesnoy';
 import { otdelkaDomaIzGazobetona100m2Cena } from './otdelka-doma-iz-gazobetona-100m2-cena';
 import { plita10x10350mmDvoynoeArmirovanieCena } from './plita-10x10-350mm-dvoynoe-armirovanie-cena';
 import { plita10x12PodGazobetonCena300mm } from './plita-10x12-pod-gazobeton-cena-300mm';
+import { plita12x12PodGazobetonCenaPodKlyuch } from './plita-12x12-pod-gazobeton-cena-pod-klyuch';
 import { plita250Ili300MmPodGazobeton2Etazha } from './plita-250-ili-300-mm-pod-gazobeton-2-etazha';
 import { plita6x6PodGazobetonCena } from './plita-6x6-pod-gazobeton-cena';
 import { plita6x8CenaPodKlyuchSpb } from './plita-6x8-cena-pod-klyuch-spb';
@@ -44,14 +48,26 @@ import { plitaPodDomSMansardoyIzGazobetonaCena } from './plita-pod-dom-s-mansard
 import { plitaPodGazobeton100m2CenaPodKlyuch } from './plita-pod-gazobeton-100m2-cena-pod-klyuch';
 import { plitaPoplylaChtoDelat } from './plita-poplyla-chto-delat';
 import { plitaSRebramiPodGazobetonLenoblast } from './plita-s-rebrami-pod-gazobeton-lenoblast';
+import { plitnyiFundamentGazobetonDomLeningradskayaOblastOtzyvy } from './plitnyi-fundament-gazobeton-dom-leningradskaya-oblast-otzyvy';
+import { plitnyiFundamentPodGazobetonCena } from './plitnyi-fundament-pod-gazobeton-cena';
 import { plitnyyFundament10x10CenaPodKlyuchSpb } from './plitnyy-fundament-10x10-cena-pod-klyuch-spb';
 import { plitnyyFundament9x12PodGazobetonCena } from './plitnyy-fundament-9x12-pod-gazobeton-cena';
+import { plitnyyFundamentCenaZaM2Spb } from './plitnyy-fundament-cena-za-m2-spb';
 import { plitnyyFundamentDlyaGazobetonaLenoblastOtzyvy } from './plitnyy-fundament-dlya-gazobetona-lenoblast-otzyvy';
+import { plitnyyFundamentGatchinaCena } from './plitnyy-fundament-gatchina-cena';
+import { plitnyyFundamentKirovskiyRayonLo } from './plitnyy-fundament-kirovskiy-rayon-lo';
+import { plitnyyFundamentKurortnyyRayonSpb } from './plitnyy-fundament-kurortnyy-rayon-spb';
+import { plitnyyFundamentLomonosovskiyRayonCena } from './plitnyy-fundament-lomonosovskiy-rayon-cena';
 import { plitnyyFundamentNaTorfeLeskolovoNaziya } from './plitnyy-fundament-na-torfe-leskolovo-naziya';
+import { plitnyyFundamentPodBrus9x9CenaLenoblast } from './plitnyy-fundament-pod-brus-9x9-cena-lenoblast';
 import { plitnyyFundamentPodGazobeton375MmCena } from './plitnyy-fundament-pod-gazobeton-375-mm-cena';
 import { plitnyyFundamentPodGazobetonLenoblastCena2026 } from './plitnyy-fundament-pod-gazobeton-lenoblast-cena-2026';
 import { plitnyyFundamentPodGazobetonTolschinaArmirovanie } from './plitnyy-fundament-pod-gazobeton-tolschina-armirovanie';
+import { plitnyyFundamentPriozerskiyRayon } from './plitnyy-fundament-priozerskiy-rayon';
+import { plitnyyFundamentTosnoCena } from './plitnyy-fundament-tosno-cena';
+import { plitnyyFundamentVsevolozhskCena } from './plitnyy-fundament-vsevolozhsk-cena';
 import { plitnyyFundamentVsevolozhskNaTorfe } from './plitnyy-fundament-vsevolozhsk-na-torfe';
+import { plitnyyFundamentVyborgskiyRayon } from './plitnyy-fundament-vyborgskiy-rayon';
 import { plyvunNaUchastkeKakStroitDom } from './plyvun-na-uchastke-kak-stroit-dom';
 import { podushkaPgsPodPlituTolschinaIRashod } from './podushka-pgs-pod-plitu-tolschina-i-rashod';
 import { promerzaetFundamentChtoDelat } from './promerzaet-fundament-chto-delat';
@@ -102,14 +118,18 @@ export const ARTICLES: Article[] = [
   kakZalitPlitnyyFundamentZimoy,
   kogdaLuchsheZalivatPlitnyyFundamentLeningradskayaOblast,
   korobkaIzGazobetonaPodKryshuSpbCena,
+  monolitnayaPlita12x12CenaSpb,
   monolitnayaPlita250MmCenaZaM2,
   monolitnayaPlita8x10CenaLenoblast,
   monolitnayaPlitaIliUshpPodGazobeton,
+  monolitnayaPlitaTsenaRabotaSpb,
+  monolitnyyPlitnyyFundamentSpbPodKlyuch,
   mzlfIliPlitaPodGazobeton,
   osenyuZalivatPlitnyyFundamentIliVesnoy,
   otdelkaDomaIzGazobetona100m2Cena,
   plita10x10350mmDvoynoeArmirovanieCena,
   plita10x12PodGazobetonCena300mm,
+  plita12x12PodGazobetonCenaPodKlyuch,
   plita250Ili300MmPodGazobeton2Etazha,
   plita6x6PodGazobetonCena,
   plita6x8CenaPodKlyuchSpb,
@@ -122,14 +142,26 @@ export const ARTICLES: Article[] = [
   plitaPodGazobeton100m2CenaPodKlyuch,
   plitaPoplylaChtoDelat,
   plitaSRebramiPodGazobetonLenoblast,
+  plitnyiFundamentGazobetonDomLeningradskayaOblastOtzyvy,
+  plitnyiFundamentPodGazobetonCena,
   plitnyyFundament10x10CenaPodKlyuchSpb,
   plitnyyFundament9x12PodGazobetonCena,
+  plitnyyFundamentCenaZaM2Spb,
   plitnyyFundamentDlyaGazobetonaLenoblastOtzyvy,
+  plitnyyFundamentGatchinaCena,
+  plitnyyFundamentKirovskiyRayonLo,
+  plitnyyFundamentKurortnyyRayonSpb,
+  plitnyyFundamentLomonosovskiyRayonCena,
   plitnyyFundamentNaTorfeLeskolovoNaziya,
+  plitnyyFundamentPodBrus9x9CenaLenoblast,
   plitnyyFundamentPodGazobeton375MmCena,
   plitnyyFundamentPodGazobetonLenoblastCena2026,
   plitnyyFundamentPodGazobetonTolschinaArmirovanie,
+  plitnyyFundamentPriozerskiyRayon,
+  plitnyyFundamentTosnoCena,
+  plitnyyFundamentVsevolozhskCena,
   plitnyyFundamentVsevolozhskNaTorfe,
+  plitnyyFundamentVyborgskiyRayon,
   plyvunNaUchastkeKakStroitDom,
   podushkaPgsPodPlituTolschinaIRashod,
   promerzaetFundamentChtoDelat,
