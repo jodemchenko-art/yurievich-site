@@ -37,6 +37,7 @@ import { plita10x10350mmDvoynoeArmirovanieCena } from './plita-10x10-350mm-dvoyn
 import { plita10x12PodGazobetonCena300mm } from './plita-10x12-pod-gazobeton-cena-300mm';
 import { plita12x12PodGazobetonCenaPodKlyuch } from './plita-12x12-pod-gazobeton-cena-pod-klyuch';
 import { plita250Ili300MmPodGazobeton2Etazha } from './plita-250-ili-300-mm-pod-gazobeton-2-etazha';
+import { plita300MmPodDvuhetazhnyyDomCena } from './plita-300-mm-pod-dvuhetazhnyy-dom-cena';
 import { plita6x6PodGazobetonCena } from './plita-6x6-pod-gazobeton-cena';
 import { plita6x8CenaPodKlyuchSpb } from './plita-6x8-cena-pod-klyuch-spb';
 import { plita9x9CenaPodKlyuchSpb } from './plita-9x9-cena-pod-klyuch-spb';
@@ -131,6 +132,7 @@ export const ARTICLES: Article[] = [
   plita10x12PodGazobetonCena300mm,
   plita12x12PodGazobetonCenaPodKlyuch,
   plita250Ili300MmPodGazobeton2Etazha,
+  plita300MmPodDvuhetazhnyyDomCena,
   plita6x6PodGazobetonCena,
   plita6x8CenaPodKlyuchSpb,
   plita9x9CenaPodKlyuchSpb,
