@@ -89,6 +89,7 @@ import { uklonNaUchastkeKakoyFundamentVybrat } from './uklon-na-uchastke-kakoy-f
 import { uteplyonnayaShvedskayaPlitaUshpSpb } from './uteplyonnaya-shvedskaya-plita-ushp-spb';
 import { vytorfovkaUchastkaLeskolovoCena } from './vytorfovka-uchastka-leskolovo-cena';
 import { zakazatZalivkuFundamentaPodKlyuchSpbNedorogo } from './zakazat-zalivku-fundamenta-pod-klyuch-spb-nedorogo';
+import { zakladnyeVPliteFundamentaPodGazobetonCenaSpb } from './zakladnye-v-plite-fundamenta-pod-gazobeton-cena-spb';
 
 // Реестр статей блога. Авто-сгенерирован import-articles.js
 // Свежие статьи добавляются сюда автоматически.
@@ -184,6 +185,7 @@ export const ARTICLES: Article[] = [
   uteplyonnayaShvedskayaPlitaUshpSpb,
   vytorfovkaUchastkaLeskolovoCena,
   zakazatZalivkuFundamentaPodKlyuchSpbNedorogo,
+  zakladnyeVPliteFundamentaPodGazobetonCenaSpb,
 ];
 
 export function getArticleBySlug(slug: string): Article | undefined {
