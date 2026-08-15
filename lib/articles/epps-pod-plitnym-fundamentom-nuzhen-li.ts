@@ -4,7 +4,7 @@ import type { Article } from './_types';
 export const eppsPodPlitnymFundamentomNuzhenLi: Article = {
   slug: "epps-pod-plitnym-fundamentom-nuzhen-li",
   title: "ЭППС под плитным фундаментом: нужен или нет — честный разбор",
-  meta_title: "ЭППС под плитным фундаментом: нужен или нет — разбор СК Юрьевич",
+  meta_title: "ЭППС под плитным фундаментом: нужен или нет — разбор по СП",
   meta_description: "Когда ЭППС 100 мм под плитой обязателен, а когда это пустые 55 000 ₽. Расчёт цены, технология укладки, ошибки. Опыт СК «Юрьевич» — 239 плит в СПб и ЛО.",
   publishedAt: "2026-06-19",
   updatedAt: "2026-06-19",

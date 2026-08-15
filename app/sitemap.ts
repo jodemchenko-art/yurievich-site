@@ -5,6 +5,35 @@ import { REGIONS } from '@/lib/regions';
 import { GLOSSARY } from '@/lib/glossary';
 import { LOCALITIES } from '@/lib/localities';
 
+/**
+ * Слаги статей, которые уже склеены 301-редиректом в next.config.js.
+ * Файлы статей остаются в lib/articles (на них ссылаются перелинковка и архив),
+ * но в sitemap.xml их быть не должно: карта сайта обязана вести только на 200,
+ * иначе робот тратит краулинговый бюджет на цепочку редиректов.
+ *
+ * Замер 14.08.2026: 15 таких URL отдавали 308 прямо из sitemap.xml.
+ *
+ * ⚠️ Держать в синхроне с блоком redirects() в next.config.js.
+ * Проверка: `node scripts/check-sitemap.js` — падает, если в карте появился не-200.
+ */
+const REDIRECTED_SLUGS = new Set<string>([
+  'monolitnaya-plita-12x12-cena-spb',
+  'monolitnaya-plita-tsena-rabota-spb',
+  'monolitnyy-plitnyy-fundament-spb-pod-klyuch',
+  'plita-12x12-pod-gazobeton-cena-pod-klyuch',
+  'plitnyi-fundament-gazobeton-dom-leningradskaya-oblast-otzyvy',
+  'plitnyi-fundament-pod-gazobeton-cena',
+  'plitnyy-fundament-cena-za-m2-spb',
+  'plitnyy-fundament-gatchina-cena',
+  'plitnyy-fundament-kirovskiy-rayon-lo',
+  'plitnyy-fundament-kurortnyy-rayon-spb',
+  'plitnyy-fundament-lomonosovskiy-rayon-cena',
+  'plitnyy-fundament-priozerskiy-rayon',
+  'plitnyy-fundament-tosno-cena',
+  'plitnyy-fundament-vsevolozhsk-cena',
+  'plitnyy-fundament-vyborgskiy-rayon',
+]);
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = SITE.url;
   const now = new Date();
@@ -69,7 +98,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }];
 
-  const articlePages: MetadataRoute.Sitemap = ARTICLES.map((a) => ({
+  const articlePages: MetadataRoute.Sitemap = ARTICLES.filter(
+    (a) => !REDIRECTED_SLUGS.has(a.slug),
+  ).map((a) => ({
     url: `${base}/blog/${a.slug}/`,
     lastModified: new Date(a.updatedAt || a.publishedAt),
     changeFrequency: 'monthly' as const,

@@ -5,7 +5,7 @@ import { SITE } from '@/lib/site';
 import { buildBreadcrumb, buildGraph } from '@/lib/schema';
 
 export const metadata: Metadata = {
-  title: 'Вакансии СК «Юрьевич» — работа в стройке СПб и Ленобласти',
+  title: 'Вакансии — работа в стройке СПб и Ленобласти',
   description:
     'Открытые вакансии в СК «Юрьевич»: бетонщик-арматурщик, прораб, разнорабочий. Семейная стройкомпания, 239 объектов с 2018 года. Постоянная работа в СПб и ЛО, оплата вовремя, без субподряда. ул. Пионерстроя 23Б.',
   alternates: { canonical: '/vakansii/' },

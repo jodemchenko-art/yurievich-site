@@ -4,7 +4,7 @@ import type { Article } from './_types';
 export const plitnyyFundamentDlyaGazobetonaLenoblastOtzyvy: Article = {
   slug: "plitnyy-fundament-dlya-gazobetona-lenoblast-otzyvy",
   title: "Плитный фундамент под газобетон в Ленобласти: отзывы и опыт 239 объектов",
-  meta_title: "Плитный фундамент под газобетон Ленобласть: отзывы Юрьевич",
+  meta_title: "Плитный фундамент под газобетон Ленобласть: отзывы заказчиков",
   meta_description: "Плитный фундамент под газобетонный дом в Ленинградской области: реальные отзывы заказчиков СК Юрьевич, 239 объектов, рейтинг 5.0, чек-лист выбора подрядчика и цены.",
   publishedAt: "2026-06-19",
   updatedAt: "2026-06-19",

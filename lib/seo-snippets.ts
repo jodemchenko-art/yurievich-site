@@ -67,6 +67,23 @@ export function enhanceDescription(raw: string, variant: SnippetVariant = 'comme
 }
 
 /**
+ * Убирает брендовый хвост в конце строки: «… · СК Юрьевич», «… — СК «Юрьевич»», «… | Юрьевич».
+ * Повторяет, пока хвосты не кончатся, и подчищает висящий разделитель.
+ * Бренд к Title приклеивает шаблон Next.js — дублировать его в самой строке не нужно.
+ */
+export function stripBrandTail(input: string): string {
+  let s = input.trim();
+  const tail = /\s*[·|—–-]\s*(?:СК\s*)?[«"']?Юрьевич[»"']?\s*$/i;
+  let guard = 0;
+  while (tail.test(s) && guard < 5) {
+    s = s.replace(tail, '');
+    guard += 1;
+  }
+  // висящий разделитель после снятия хвоста: «Текст ★5 ·» → «Текст ★5»
+  return s.replace(/\s*[·|—–-]\s*$/, '').trim();
+}
+
+/**
  * Универсальный enhancer для title:
  *  - Сокращает «Санкт-Петербург» до «СПб», «Ленинградская область» до «ЛО»
  *  - Добавляет «★5» если есть место и нет звёздочек
@@ -75,6 +92,12 @@ export function enhanceDescription(raw: string, variant: SnippetVariant = 'comme
 export function enhanceTitle(raw: string, variant: SnippetVariant = 'commercial'): string {
   if (!raw) return '';
   let title = raw.trim();
+
+  // Снимаем брендовый хвост, если он уже вписан в meta_title.
+  // Бренд добавляет шаблон в app/layout.tsx (`%s · СК Юрьевич`), и без этой очистки
+  // он попадал в Title дважды: «… · СК Юрьевич · СК Юрьевич».
+  // Замер 14.08.2026: так было сломано 93 страницы из 173.
+  title = stripBrandTail(title);
 
   // Сокращения
   title = title.replace(/Санкт-Петербург(?:ской области)?/g, 'СПб');
