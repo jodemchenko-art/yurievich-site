@@ -83,7 +83,7 @@ export default function ContactBlock() {
               </a>
 
               {[
-                { label: 'WhatsApp', value: 'Написать сообщение', href: SITE.whatsapp },
+                { label: 'WhatsApp', value: SITE.whatsappPhone, href: SITE.whatsapp },
                 { label: 'Telegram', value: '@Yurievich_1993', href: SITE.telegram },
                 { label: 'ВКонтакте', value: 'Сообщество «Ленбетон78»', href: SITE.vk },
               ].map((c) => (

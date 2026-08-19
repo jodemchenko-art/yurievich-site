@@ -69,7 +69,7 @@ export default function Contacts() {
                 <div>
                   <div className="text-xs text-brand-mute uppercase tracking-wider">WhatsApp</div>
                   <div className="text-lg font-bold group-hover:text-brand-red transition">
-                    Написать сейчас →
+                    {SITE.whatsappPhone} →
                   </div>
                 </div>
               </a>

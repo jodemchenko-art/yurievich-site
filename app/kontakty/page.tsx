@@ -114,7 +114,7 @@ export default function KontaktyPage() {
                   <span className="text-3xl">📱</span>
                   <div>
                     <div className="text-lg font-extrabold text-brand-ink">WhatsApp</div>
-                    <div className="text-sm text-brand-mute">Тот же номер: {SITE.phone}</div>
+                    <div className="text-sm text-brand-mute">{SITE.whatsappPhone}</div>
                   </div>
                 </a>
               </li>

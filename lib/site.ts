@@ -17,7 +17,8 @@ export const SITE = {
   phone: '+7 911 830-01-10',
   phoneRaw: '+79118300110',
   email: 'info@sk-yurievich.ru', // placeholder — will be configured at Reg.ru
-  whatsapp: 'https://wa.me/79118300110',
+  whatsapp: 'https://wa.me/79010055280', // WhatsApp на отдельном номере
+  whatsappPhone: '+7 901 005-52-80',
   telegram: 'https://t.me/Yurievich_1993',
   telegramChannel: 'https://t.me/sk_yurievich',
   vk: 'https://vk.ru/lenbeton78', // сообщество компании ВКонтакте (Ленбетон78)

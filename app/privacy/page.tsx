@@ -31,7 +31,7 @@ export default function PrivacyPage() {
         Адрес: 198328, г. Санкт-Петербург, ул. Пионерстроя, д. 23Б.<br />
         Телефон: <a href={`tel:${SITE.phoneRaw}`} className="underline">{SITE.phone}</a>.<br />
         Telegram: <a href={SITE.telegram} className="underline">@Yurievich_1993</a>,{' '}
-        WhatsApp: <a href={SITE.whatsapp} className="underline">по номеру телефона</a>.
+        WhatsApp: <a href={SITE.whatsapp} className="underline">{SITE.whatsappPhone}</a>.
       </p>
       <p className="mt-3 text-brand-mute">
         Оставляя свои данные и/или отмечая согласие в форме на Сайте, Пользователь принимает условия
@@ -126,7 +126,7 @@ export default function PrivacyPage() {
       <ul className="mt-3 list-disc pl-6 text-brand-mute space-y-1">
         <li>по телефону <a href={`tel:${SITE.phoneRaw}`} className="underline">{SITE.phone}</a>;</li>
         <li>в Telegram <a href={SITE.telegram} className="underline">@Yurievich_1993</a>;</li>
-        <li>в WhatsApp <a href={SITE.whatsapp} className="underline">по номеру телефона</a>.</li>
+        <li>в WhatsApp <a href={SITE.whatsapp} className="underline">{SITE.whatsappPhone}</a>.</li>
       </ul>
       <p className="mt-3 text-brand-mute">
         Оператор прекращает обработку и удаляет данные в срок, установленный законодательством, с момента
