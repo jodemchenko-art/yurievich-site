@@ -305,7 +305,7 @@ const docDefinition = {
         widths: ['*'],
         body: [
           [{ text: '📞 +7 911 830-01-10\n(звонок, WhatsApp)', style: 'contactCard' }],
-          [{ text: '💬 @YuraDem01\n(Telegram личный)', style: 'contactCard' }],
+          [{ text: '💬 @Yurievich_1993\n(Telegram личный)', style: 'contactCard' }],
           [{ text: '🌐 sk-yurievich.ru\n(онлайн-калькулятор по районам)', style: 'contactCard' }],
         ],
       },

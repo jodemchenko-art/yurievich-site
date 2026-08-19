@@ -81,7 +81,7 @@ export default function Contacts() {
                 <div>
                   <div className="text-xs text-brand-mute uppercase tracking-wider">Telegram</div>
                   <div className="text-lg font-bold group-hover:text-brand-red transition">
-                    @YuraDem01 →
+                    @Yurievich_1993 →
                   </div>
                 </div>
               </a>

@@ -7,7 +7,7 @@ import { buildBreadcrumb, buildGraph, ID } from '@/lib/schema';
 export const metadata: Metadata = {
   title: `Контакты: адрес в СПб, 9 районов ЛО ★5`,
   description:
-    `☎ ${SITE.phone} · Telegram @YuraDem01 · ${SITE.baseLocation}, СПб. ` +
+    `☎ ${SITE.phone} · Telegram @Yurievich_1993 · ${SITE.baseLocation}, СПб. ` +
     `Я.Карты: yandex.ru/maps/org/69393767573. 9 районов ЛО, 239 объектов, ★5 (35 отз).`,
   alternates: { canonical: '/kontakty/' },
   openGraph: {
