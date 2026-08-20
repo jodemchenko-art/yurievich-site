@@ -58,7 +58,7 @@ export default function WorkflowBlock() {
       
       <div className="container-x relative py-16 md:py-24">
         <SectionHead
-          index="06"
+          index="07"
           label="Порядок работ"
           title={<>Что происходит от&nbsp;звонка до&nbsp;готовой плиты</>}
           lede="Пять этапов, в каждом видно вашу роль и нашу. Деньги двигаются только вслед за принятой работой — это и есть страховка заказчика на стройке."

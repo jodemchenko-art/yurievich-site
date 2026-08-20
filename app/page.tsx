@@ -4,6 +4,7 @@ import ProofStrip from '@/components/home/ProofStrip';
 import SlabAnatomy from '@/components/home/SlabAnatomy';
 import TypesBlock from '@/components/home/TypesBlock';
 import ObjectsChronicle from '@/components/home/ObjectsChronicle';
+import HousesGrid from '@/components/home/HousesGrid';
 import PriceBlock from '@/components/home/PriceBlock';
 import LeadBlock from '@/components/home/LeadBlock';
 import WorkflowBlock from '@/components/home/WorkflowBlock';
@@ -60,7 +61,7 @@ const FAQ_PAGE_SCHEMA = {
  *
  * Порядок блоков подчинён не «красоте», а последовательности вопросов в голове
  * человека, который выбирает, кому доверить фундамент:
- *   кто вы → что я вообще покупаю → что мне подойдёт → покажите работы →
+ *   кто вы → что я вообще покупаю → что мне подойдёт → покажите работы (плиты и дома) →
  *   сколько это стоит → [заявка] → как всё будет происходить → кто отвечает →
  *   где вас проверить → остались вопросы → [заявка]
  *
@@ -87,6 +88,7 @@ export default function Home() {
       <SlabAnatomy />
       <TypesBlock />
       <ObjectsChronicle />
+      <HousesGrid />
       <PriceBlock />
       <LeadBlock />
       <WorkflowBlock />

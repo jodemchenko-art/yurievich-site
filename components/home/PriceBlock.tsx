@@ -51,7 +51,7 @@ export default function PriceBlock() {
     <section id="ceny" data-plane="cold" className="relative bg-cold">
       <div className="container-x py-16 md:py-24">
         <SectionHead
-          index="04"
+          index="05"
           label="Цена · монолитная плита"
           title={<>Порядок цифр — до&nbsp;звонка, а&nbsp;не&nbsp;после</>}
           lede={

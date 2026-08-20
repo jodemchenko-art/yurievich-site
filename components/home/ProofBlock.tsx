@@ -54,7 +54,7 @@ export default function ProofBlock() {
 
       <div className="container-x relative py-16 md:py-24">
         <SectionHead
-          index="08"
+          index="09"
           label="Где нас проверить"
           title={<>Отзывов на&nbsp;сайте нет. И&nbsp;это осознанно</>}
           lede={

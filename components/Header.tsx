@@ -13,6 +13,7 @@ const NAV = [
   { href: '/#razrez', label: 'Разрез плиты' },
   { href: '/#uslugi', label: 'Виды и цены' },
   { href: '/#portfolio', label: 'Объекты' },
+  { href: '/#doma', label: 'Наши дома' },
   { href: '/kalkulyator/', label: 'Калькулятор' },
   { href: '/#process', label: 'Как работаем' },
   { href: '/blog/', label: 'Блог' },
@@ -55,7 +56,7 @@ export default function Header() {
           </span>
         </a>
 
-        <nav className="hidden items-center gap-5 lg:flex">
+        <nav className="hidden items-center gap-4 lg:flex xl:gap-5">
           {NAV.map((n) => (
             <a
               key={n.href}

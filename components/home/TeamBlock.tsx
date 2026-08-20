@@ -41,7 +41,7 @@ export default function TeamBlock() {
       
       <div className="container-x relative py-16 md:py-24">
         <SectionHead
-          index="07"
+          index="08"
           label="Кто отвечает"
           title={<>Работают хозяева, а&nbsp;не&nbsp;наёмная бригада</>}
           lede="Три родных брата. Мы не нанимаем прорабов и не передаём объекты субподрядчикам — поэтому у каждой ошибки на площадке есть конкретная фамилия."
