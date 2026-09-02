@@ -283,12 +283,10 @@ export default function LocalityPage({ params }: { params: Params }) {
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
               <a
-                href={SITE.telegram}
-                target="_blank"
-                rel="noopener"
+                href={`tel:${SITE.phoneRaw}`}
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-brand-ink font-semibold hover:bg-white/90 transition"
               >
-                Написать в Telegram →
+                📞 Позвонить
               </a>
               <Link
                 href="/#contacts"

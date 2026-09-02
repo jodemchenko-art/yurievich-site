@@ -77,6 +77,9 @@ export default function LeadBlock() {
             </ol>
 
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <a href={`tel:${SITE.phoneRaw}`} className="mono text-sm text-graphite ulink">
+                Позвонить →
+              </a>
               <a
                 href={SITE.telegram}
                 target="_blank"

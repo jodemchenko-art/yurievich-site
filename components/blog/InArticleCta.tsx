@@ -41,7 +41,7 @@ export default function InArticleCta({
       trackLead('in-article-cta');
       setSubmitted(true);
     } catch {
-      setError('Не удалось отправить. Напишите Юрию в Telegram — @Yurievich_1993');
+      setError('Не удалось отправить. Позвоните нам — телефон в шапке сайта');
     }
   };
 
@@ -56,12 +56,10 @@ export default function InArticleCta({
         </p>
         <div className="flex gap-3 flex-wrap">
           <a
-            href={SITE.telegram}
-            target="_blank"
-            rel="noopener"
+            href={`tel:${SITE.phoneRaw}`}
             className="rounded-xl bg-brand-ink text-white px-5 py-3 font-bold no-underline hover:opacity-90"
           >
-            Написать в Telegram →
+            📞 Позвонить
           </a>
           <button
             onClick={() => setOpen(true)}
@@ -97,12 +95,10 @@ export default function InArticleCta({
         </p>
         <div className="flex gap-3 flex-wrap">
           <a
-            href={SITE.telegram}
-            target="_blank"
-            rel="noopener"
+            href={`tel:${SITE.phoneRaw}`}
             className="rounded-xl bg-white text-brand-ink px-6 py-3 font-bold no-underline hover:bg-brand-sand transition"
           >
-            Написать в Telegram →
+            📞 Позвонить
           </a>
           <button
             onClick={() => setOpen(true)}

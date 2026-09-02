@@ -62,6 +62,14 @@ export default function Footer() {
           <ul className="space-y-3 text-sm">
             <li>
               <a
+                href={`tel:${SITE.phoneRaw}`}
+                className="text-white font-bold text-lg hover:opacity-80 transition"
+              >
+                Позвонить →
+              </a>
+            </li>
+            <li>
+              <a
                 href={SITE.telegram}
                 target="_blank"
                 rel="noopener"

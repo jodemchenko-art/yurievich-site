@@ -29,6 +29,7 @@ export default function PrivacyPage() {
         <strong>Оператор персональных данных:</strong> {SITE.name} (строительная компания «Юрьевич»),
         Индивидуальный предприниматель, ОГРНИП 321010000000886, ИНН 010403581080 (далее — «Оператор»).<br />
         Адрес: 198328, г. Санкт-Петербург, ул. Пионерстроя, д. 23Б.<br />
+        Телефон: <a href={`tel:${SITE.phoneRaw}`} className="underline">{SITE.phone}</a>.<br />
         Электронная почта: <a href={`mailto:${SITE.email}`} className="underline">{SITE.email}</a>.<br />
         Telegram: <a href={SITE.telegram} className="underline">@Yurievich_1993</a>
         {SITE.max && (
@@ -129,6 +130,7 @@ export default function PrivacyPage() {
         Чтобы отозвать согласие, уточнить или удалить свои данные, Пользователь может обратиться к Оператору:
       </p>
       <ul className="mt-3 list-disc pl-6 text-brand-mute space-y-1">
+        <li>по телефону <a href={`tel:${SITE.phoneRaw}`} className="underline">{SITE.phone}</a>;</li>
         <li>по электронной почте <a href={`mailto:${SITE.email}`} className="underline">{SITE.email}</a>;</li>
         <li>в Telegram <a href={SITE.telegram} className="underline">@Yurievich_1993</a>
           {SITE.max ? ';' : '.'}

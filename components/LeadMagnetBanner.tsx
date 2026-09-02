@@ -150,8 +150,8 @@ export default function LeadMagnetBanner({
           <p className="text-xs text-white/50 text-center">
             Юрий свяжется за час. Без спама.
             Или сразу:{' '}
-            <a href={SITE.telegram} target="_blank" rel="noopener" className="text-white underline">
-              написать в Telegram
+            <a href={`tel:${SITE.phoneRaw}`} className="text-white underline">
+              позвонить
             </a>
           </p>
         </form>

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: `Словарь стройтерминов: ${GLOSSARY.length} объяснений ★5`,
   description:
     `${GLOSSARY.length} терминов фундамента простыми словами: бетон М300, А500С, выторфовка, ЭППС. ` +
-    `Практика 239 объектов СПб и ЛО, ★5 (35 отз). Смета в Telegram.`,
+    `Практика 239 объектов СПб и ЛО, ★5 (35 отз). ☎ +7 911 830-01-10`,
   alternates: { canonical: '/slovar/' },
   openGraph: {
     type: 'website',

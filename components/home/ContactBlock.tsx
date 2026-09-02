@@ -59,7 +59,7 @@ export default function ContactBlock() {
                 <span className="mx-2 opacity-40">/</span>
                 Контакты
               </div>
-              <h2 className="display-2 mask mt-4 text-chalk">Напишите Юрию напрямую</h2>
+              <h2 className="display-2 mask mt-4 text-chalk">Позвоните или&nbsp;напишите напрямую</h2>
               <p className="lede mt-4 max-w-lg text-chalkdim">
                 Отвечает Юрий — тот же человек, который приедет на замер и подпишет договор.
                 Не менеджер и не колл-центр.
@@ -68,6 +68,7 @@ export default function ContactBlock() {
 
             <div className="mt-8 border-t border-ruled">
               {[
+                { label: 'Звонок', value: 'Позвонить Юрию →', href: `tel:${SITE.phoneRaw}` },
                 { label: 'Telegram', value: 'Написать Юрию лично →', href: SITE.telegram },
                 ...(SITE.max ? [{ label: 'MAX', value: 'Написать в MAX →', href: SITE.max }] : []),
                 { label: 'Почта', value: SITE.email, href: `mailto:${SITE.email}` },
@@ -110,7 +111,7 @@ export default function ContactBlock() {
                   <h3 className="display-3 mt-3 text-graphite">Спасибо, записали</h3>
                   <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-inkmute">
                     Юрий свяжется с вами в ближайшее рабочее время. Если нужно срочно —
-                    напишите ему в Telegram или MAX, ссылки слева.
+                    нажмите «Позвонить» слева или напишите ему в Telegram.
                   </p>
                 </div>
               ) : (

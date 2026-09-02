@@ -4,10 +4,11 @@ import { useEffect, useState } from 'react';
 import { SITE } from '@/lib/site';
 
 /**
- * Мобильная нижняя панель: Telegram / MAX / расчёт.
+ * Мобильная нижняя панель: звонок / Telegram / MAX / расчёт.
  *
- * 02.09.2026: сегменты «Звонок» и WhatsApp убраны — телефон на сайте больше
- * не показываем, связь идёт только через мессенджеры.
+ * 02.09.2026: WhatsApp убран. Номера на экране не печатаем — они «вшиты»
+ * в значки: значок трубки звонит на рабочий номер, значки мессенджеров
+ * открывают чат.
  *
  * Поведение важнее оформления:
  *  • на первом экране панели НЕТ — она отъедает 56 px у оффера, а человек,
@@ -95,13 +96,30 @@ export default function StickyPhoneBar() {
         style={{
           gridTemplateColumns: SITE.max
             ? wide
-              ? '1fr 1fr 2.6fr'
-              : '1fr 1fr 1fr'
+              ? '1fr 1fr 1fr 2.6fr'
+              : '1fr 1fr 1fr 1fr'
             : wide
-              ? '1fr 2.6fr'
-              : '1fr 1fr',
+              ? '1fr 1fr 2.6fr'
+              : '1fr 1fr 1fr',
         }}
       >
+        <a
+          href={`tel:${SITE.phoneRaw}`}
+          aria-label="Позвонить"
+          tabIndex={shown ? 0 : -1}
+          className="flex flex-col items-center justify-center gap-1 bg-graphite py-2.5 text-white"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+            <path
+              d="M6.5 3h3l1.5 4-2 1.5a12 12 0 006.5 6.5l1.5-2 4 1.5v3a2 2 0 01-2.2 2A17 17 0 014.5 5.2 2 2 0 016.5 3z"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <span className="mono text-[9px] leading-none">ЗВОНОК</span>
+        </a>
+
         <a
           href={SITE.telegram}
           target="_blank"

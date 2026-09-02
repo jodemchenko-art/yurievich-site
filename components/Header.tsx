@@ -75,6 +75,20 @@ export default function Header() {
 
         <div className="flex items-center gap-3">
           <a
+            href={`tel:${SITE.phoneRaw}`}
+            aria-label="Позвонить"
+            className="hidden h-9 w-9 items-center justify-center border border-rule text-graphite transition-colors hover:border-graphite md:inline-flex"
+          >
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden>
+              <path
+                d="M6.5 3h3l1.5 4-2 1.5a12 12 0 006.5 6.5l1.5-2 4 1.5v3a2 2 0 01-2.2 2A17 17 0 014.5 5.2 2 2 0 016.5 3z"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </a>
+          <a
             href={SITE.telegram}
             target="_blank"
             rel="noopener"
@@ -120,11 +134,18 @@ export default function Header() {
               </a>
             ))}
             <a
+              href={`tel:${SITE.phoneRaw}`}
+              onClick={() => setOpen(false)}
+              className="btn-signal mono mt-3 justify-center"
+            >
+              Позвонить
+            </a>
+            <a
               href={SITE.telegram}
               target="_blank"
               rel="noopener"
               onClick={() => setOpen(false)}
-              className="btn-signal mono mt-3 justify-center"
+              className="btn-line mono mt-2 justify-center"
             >
               Написать в Telegram
             </a>

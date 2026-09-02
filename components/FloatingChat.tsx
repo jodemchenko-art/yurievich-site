@@ -1,12 +1,26 @@
 import { SITE } from '@/lib/site';
 
 /**
- * Плавающие кнопки мессенджеров (десктоп).
- * 02.09.2026: WhatsApp убран — на сайте остались только Telegram и MAX.
+ * Плавающие кнопки связи (десктоп): звонок, Telegram, MAX.
+ * Номера цифрами не пишем — они «вшиты» в значки.
  */
 export default function FloatingChat() {
   return (
     <div className="fixed bottom-5 right-5 z-30 hidden flex-col gap-2 md:flex">
+      <a
+        href={`tel:${SITE.phoneRaw}`}
+        aria-label="Позвонить"
+        className="flex h-12 w-12 items-center justify-center bg-graphite transition hover:-translate-y-0.5"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
+          <path
+            d="M6.5 3h3l1.5 4-2 1.5a12 12 0 006.5 6.5l1.5-2 4 1.5v3a2 2 0 01-2.2 2A17 17 0 014.5 5.2 2 2 0 016.5 3z"
+            stroke="white"
+            strokeWidth="1.6"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </a>
       <a
         href={SITE.telegram}
         target="_blank"

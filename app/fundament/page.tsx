@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   description:
     'Монолитный плитный фундамент под ключ в СПб и Ленобласти на пучинистых грунтах — от 5 500 ₽/м². ' +
     'Знаем грунты каждого района, реальные цены. Бетон М300, гарантия 5 лет, договор с фикс-ценой. ' +
-    'Выезд инженера бесплатно. Смета в Telegram.',
+    'Выезд инженера бесплатно. ☎ +7 911 830-01-10',
   keywords: [
     'фундамент по районам Ленинградской области',
     'фундамент под ключ по районам СПб и ЛО',
@@ -178,12 +178,10 @@ export default function FundamentIndexPage() {
             Рассчитать стоимость
           </Link>
           <a
-            href={SITE.telegram}
-                target="_blank"
-                rel="noopener"
+            href={`tel:${SITE.phoneRaw}`}
             className="inline-flex items-center gap-2 rounded-xl border border-brand-ink text-brand-ink px-6 py-3 font-semibold hover:bg-brand-sand transition"
           >
-            Написать в Telegram →
+            📞 Позвонить
           </a>
         </div>
       </section>
@@ -271,12 +269,10 @@ export default function FundamentIndexPage() {
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
               <a
-                href={SITE.telegram}
-                target="_blank"
-                rel="noopener"
+                href={`tel:${SITE.phoneRaw}`}
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-brand-ink font-semibold hover:bg-white/90 transition"
               >
-                Написать в Telegram →
+                📞 Позвонить
               </a>
               <Link
                 href="/#contacts"

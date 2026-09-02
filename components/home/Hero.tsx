@@ -86,6 +86,12 @@ export default function Hero() {
                 </span>
               </a>
               <a
+                href={`tel:${SITE.phoneRaw}`}
+                className="btn-line btn-line-dark mono w-full justify-center border-chalkdim/45 text-chalk sm:w-auto"
+              >
+                Позвонить
+              </a>
+              <a
                 href={SITE.telegram}
                 target="_blank"
                 rel="noopener"

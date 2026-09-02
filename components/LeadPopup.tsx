@@ -91,7 +91,7 @@ export default function LeadPopup() {
         sessionStorage.setItem(STORAGE_KEY, '1');
       } catch {}
     } catch {
-      setError('Не удалось отправить. Напишите Юрию в Telegram — @Yurievich_1993');
+      setError('Не удалось отправить. Позвоните нам — телефон в шапке сайта');
     } finally {
       setLoading(false);
     }
@@ -127,9 +127,7 @@ export default function LeadPopup() {
               Юрий перезвонит в ближайшее рабочее время — обычно в течение часа.
             </p>
             <a
-              href={SITE.telegram}
-              target="_blank"
-              rel="noopener"
+              href={`tel:${SITE.phoneRaw}`}
               className="mono mt-5 inline-block bg-[#1F87BC] px-6 py-3 text-sm font-semibold text-white"
             >
               Написать в Telegram сейчас
@@ -196,9 +194,9 @@ export default function LeadPopup() {
               </button>
 
               <p className="mt-3 text-xs text-inkmute text-center">
-                Или сразу напишите:{' '}
-                <a href={SITE.telegram} target="_blank" rel="noopener" className="mono text-graphite ulink">
-                  Telegram
+                Или сразу позвоните:{' '}
+                <a href={`tel:${SITE.phoneRaw}`} className="mono text-graphite ulink">
+                  по телефону
                 </a>
               </p>
 

@@ -7,7 +7,7 @@ import { buildBreadcrumb, buildGraph, ID } from '@/lib/schema';
 export const metadata: Metadata = {
   title: `Контакты: адрес в СПб, 9 районов ЛО ★5`,
   description:
-    `Telegram @Yurievich_1993 и MAX · ${SITE.baseLocation}, СПб. ` +
+    `☎ ${SITE.phone} · Telegram @Yurievich_1993 и MAX · ${SITE.baseLocation}, СПб. ` +
     `Я.Карты: yandex.ru/maps/org/69393767573. 9 районов ЛО, 239 объектов, ★5 (35 отз).`,
   alternates: { canonical: '/kontakty/' },
   openGraph: {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     locale: 'ru_RU',
     url: `${SITE.url}/kontakty/`,
     title: `Контакты СК «Юрьевич» — СПб + 9 районов ЛО ★5`,
-    description: `Telegram и MAX · ${SITE.baseLocation}, СПб. 239 объектов, ★5.`,
+    description: `☎ ${SITE.phone}, ${SITE.baseLocation}, СПб. 239 объектов, ★5.`,
     siteName: SITE.name,
   },
 };
@@ -66,7 +66,7 @@ export default function KontaktyPage() {
             Связаться с СК «Юрьевич»
           </h1>
           <p className="mt-4 text-lg text-brand-mute max-w-2xl leading-relaxed">
-            Пишите в мессенджеры или оставляйте заявку через сайт — отвечает лично Юрий.
+            Звоните, пишите в мессенджеры или оставляйте заявку через сайт — отвечает лично Юрий.
             Бесплатный выезд инженера на участок в СПб и Ленинградской области.
           </p>
         </div>
@@ -77,6 +77,18 @@ export default function KontaktyPage() {
           <div>
             <h2 className="text-2xl font-extrabold text-brand-ink">Прямые контакты</h2>
             <ul className="mt-6 space-y-5">
+              <li>
+                <a
+                  href={`tel:${SITE.phoneRaw}`}
+                  className="flex items-center gap-4 p-5 bg-white rounded-xl border border-brand-line hover:border-brand-ink hover:shadow-md transition"
+                >
+                  <span className="text-3xl">📞</span>
+                  <div>
+                    <div className="text-2xl font-extrabold text-brand-ink">{SITE.phone}</div>
+                    <div className="text-sm text-brand-mute">Звоним 9:00–21:00 (пн-сб), 10:00–18:00 (вс)</div>
+                  </div>
+                </a>
+              </li>
               <li>
                 <a
                   href={SITE.telegram}
@@ -206,10 +218,16 @@ export default function KontaktyPage() {
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
               <a
+                href={`tel:${SITE.phoneRaw}`}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-brand-ink font-semibold hover:bg-white/90 transition"
+              >
+                📞 Позвонить
+              </a>
+              <a
                 href={SITE.telegram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-brand-ink font-semibold hover:bg-white/90 transition"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/30 hover:bg-white/10 transition"
               >
                 Написать в Telegram →
               </a>

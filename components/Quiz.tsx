@@ -87,7 +87,7 @@ export default function Quiz() {
   const [answers, setAnswers] = useState<Answers>({});
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [contactType, setContactType] = useState<'telegram' | 'max'>('telegram');
+  const [contactType, setContactType] = useState<'call' | 'telegram' | 'max'>('call');
   const [consent, setConsent] = useState(true);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -179,7 +179,7 @@ export default function Quiz() {
 
         <ol className="mt-6 border-t border-hair">
           {[
-            ['01', 'Юрий ответит сам', 'Обычно в течение часа в рабочее время — в том мессенджере, что вы выбрали.'],
+            ['01', 'Юрий ответит сам', 'Обычно в течение часа в рабочее время — тем способом, который вы выбрали.'],
             ['02', 'Бесплатный выезд на участок', 'Согласуем удобное время, замерим пятно застройки.'],
             ['03', 'Смета в течение 1 рабочего дня', 'По позициям. Остаётся у вас в любом случае.'],
           ].map(([n, t, d]) => (
@@ -194,6 +194,9 @@ export default function Quiz() {
         </ol>
 
         <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
+          <a href={`tel:${SITE.phoneRaw}`} className="mono text-sm text-graphite ulink">
+            Позвонить →
+          </a>
           <a
             href={SITE.telegram}
             target="_blank"
@@ -321,8 +324,11 @@ export default function Quiz() {
 
               <div>
                 <span className="eyebrow text-inkmute">Как удобнее связаться?</span>
-                <div className={`mt-2 grid gap-2 ${SITE.max ? 'grid-cols-2' : 'grid-cols-1'}`}>
-                  {(SITE.max ? (['telegram', 'max'] as const) : (['telegram'] as const)).map((t) => (
+                <div className={`mt-2 grid gap-2 ${SITE.max ? 'grid-cols-3' : 'grid-cols-2'}`}>
+                  {(SITE.max
+                    ? (['call', 'telegram', 'max'] as const)
+                    : (['call', 'telegram'] as const)
+                  ).map((t) => (
                     <button
                       type="button"
                       key={t}
@@ -333,6 +339,7 @@ export default function Quiz() {
                           : 'border-rule hover:border-signal/60'
                       }`}
                     >
+                      {t === 'call' && 'Звонком'}
                       {t === 'telegram' && 'Telegram'}
                       {t === 'max' && 'MAX'}
                     </button>
