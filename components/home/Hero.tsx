@@ -86,10 +86,12 @@ export default function Hero() {
                 </span>
               </a>
               <a
-                href={`tel:${SITE.phoneRaw}`}
+                href={SITE.telegram}
+                target="_blank"
+                rel="noopener"
                 className="btn-line btn-line-dark mono w-full justify-center border-chalkdim/45 text-chalk sm:w-auto"
               >
-                {SITE.phone}
+                Написать в Telegram
               </a>
             </div>
 
@@ -220,12 +222,12 @@ export default function Hero() {
             <figcaption className="mono flex flex-wrap items-center justify-between gap-x-3 gap-y-1 px-1 pt-3 text-[10px] leading-tight text-chalkdim sm:text-[11px]">
               <span>ОБЪЕКТ · РОПША, ЛОМОНОСОВСКИЙ Р-Н</span>
               <a
-                href={SITE.vk}
+                href={SITE.telegramChannel}
                 target="_blank"
                 rel="noopener"
                 className="ulink text-sand"
               >
-                фото объекта · ВК →
+                фото объекта · канал стройки →
               </a>
             </figcaption>
           </figure>

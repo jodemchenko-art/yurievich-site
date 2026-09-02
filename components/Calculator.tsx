@@ -36,15 +36,18 @@ export default function Calculator({
 
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [messenger, setMessenger] = useState<'whatsapp' | 'telegram' | 'call'>('whatsapp');
+  const [messenger, setMessenger] = useState<'telegram' | 'max'>('telegram');
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const MESSENGERS = {
-    whatsapp: { label: 'WhatsApp', url: SITE.whatsapp },
     telegram: { label: 'Telegram', url: SITE.telegram },
-    call: { label: 'Звонок', url: `tel:${SITE.phoneRaw}` },
+    max: { label: 'MAX', url: SITE.max },
   } as const;
+  // MAX показываем только когда ссылка на профиль реально заполнена в lib/site.ts
+  const MESSENGER_KEYS: ReadonlyArray<keyof typeof MESSENGERS> = SITE.max
+    ? (['telegram', 'max'] as const)
+    : (['telegram'] as const);
   const storeyLabel = storeys === 1 ? '1 этаж' : storeys === 1.5 ? '1,5 этажа' : '2 этажа';
 
   const result = useMemo(() => {
@@ -118,11 +121,9 @@ export default function Calculator({
         <div className="text-6xl mb-4">✅</div>
         <h3 className="text-2xl font-extrabold">Заявка принята!</h3>
         <p className="mt-3 text-brand-mute">
-          {messenger === 'call'
-            ? `Юрий перезвонит по номеру ${phone} в ближайший час и назовёт точную смету по вашему участку.`
-            : `Готовим точную смету по позициям под ваш участок — пришлём её в ${m.label} и перезвоним в ближайший час.`}
+          {`Готовим точную смету по позициям под ваш участок — пришлём её в ${m.label} и свяжемся в ближайший час.`}
         </p>
-        {messenger !== 'call' && (
+        {m.url && (
           <a
             href={m.url}
             target="_blank"
@@ -271,8 +272,8 @@ export default function Calculator({
             {/* выбор мессенджера */}
             <div className="mb-3">
               <div className="text-xs text-white/60 mb-2">Куда прислать смету:</div>
-              <div className="grid grid-cols-3 gap-2">
-                {(['whatsapp', 'telegram', 'call'] as const).map((mk) => (
+              <div className={`grid gap-2 ${SITE.max ? 'grid-cols-2' : 'grid-cols-1'}`}>
+                {MESSENGER_KEYS.map((mk) => (
                   <button
                     key={mk}
                     type="button"
@@ -305,14 +306,16 @@ export default function Calculator({
           <div className="mt-4 pt-4 border-t border-white/20 text-center">
             <div className="text-xs text-white/50 mb-2">или напишите нам прямо сейчас:</div>
             <div className="flex gap-2 justify-center">
-              <a
-                href={SITE.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 rounded-xl border border-white/30 py-2.5 text-sm font-bold no-underline text-white hover:bg-white/10 transition"
-              >
-                WhatsApp
-              </a>
+              {SITE.max && (
+                <a
+                  href={SITE.max}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 rounded-xl border border-white/30 py-2.5 text-sm font-bold no-underline text-white hover:bg-white/10 transition"
+                >
+                  MAX
+                </a>
+              )}
               <a
                 href={SITE.telegram}
                 target="_blank"

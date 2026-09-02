@@ -91,8 +91,7 @@ export function buildSiteEntities() {
       sameAs: [
         SITE.telegram,
         SITE.telegramChannel,
-        SITE.whatsapp,
-        (SITE as any).vk,
+        SITE.max,
         SITE.yandexMapsProfile,
         SITE.gis2Profile,
         SITE.avitoProfile,
@@ -129,7 +128,7 @@ export function buildSiteEntities() {
       ],
       url: SITE.url,
       telephone: SITE.phone,
-      sameAs: [SITE.telegram, SITE.whatsapp].filter(Boolean),
+      sameAs: [SITE.telegram, SITE.max].filter(Boolean),
     },
 
     // Person — Валерий

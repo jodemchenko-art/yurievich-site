@@ -29,9 +29,14 @@ export default function PrivacyPage() {
         <strong>Оператор персональных данных:</strong> {SITE.name} (строительная компания «Юрьевич»),
         Индивидуальный предприниматель, ОГРНИП 321010000000886, ИНН 010403581080 (далее — «Оператор»).<br />
         Адрес: 198328, г. Санкт-Петербург, ул. Пионерстроя, д. 23Б.<br />
-        Телефон: <a href={`tel:${SITE.phoneRaw}`} className="underline">{SITE.phone}</a>.<br />
-        Telegram: <a href={SITE.telegram} className="underline">@Yurievich_1993</a>,{' '}
-        WhatsApp: <a href={SITE.whatsapp} className="underline">{SITE.whatsappPhone}</a>.
+        Электронная почта: <a href={`mailto:${SITE.email}`} className="underline">{SITE.email}</a>.<br />
+        Telegram: <a href={SITE.telegram} className="underline">@Yurievich_1993</a>
+        {SITE.max && (
+          <>
+            , MAX: <a href={SITE.max} className="underline">написать в MAX</a>
+          </>
+        )}
+        .
       </p>
       <p className="mt-3 text-brand-mute">
         Оставляя свои данные и/или отмечая согласие в форме на Сайте, Пользователь принимает условия
@@ -44,7 +49,7 @@ export default function PrivacyPage() {
       <ul className="mt-3 list-disc pl-6 text-brand-mute space-y-1">
         <li>имя (как к вам обращаться);</li>
         <li>номер телефона;</li>
-        <li>контакты в мессенджерах (Telegram, WhatsApp), если Пользователь их указывает;</li>
+        <li>контакты в мессенджерах (Telegram, MAX), если Пользователь их указывает;</li>
         <li>текст комментария/вопроса и данные о проекте, которые Пользователь сообщает сам;</li>
         <li>
           технические данные, автоматически передаваемые браузером: IP-адрес, файлы cookie, данные
@@ -97,7 +102,7 @@ export default function PrivacyPage() {
       <ul className="mt-3 list-disc pl-6 text-brand-mute space-y-1">
         <li>система веб-аналитики Яндекс.Метрика (ООО «ЯНДЕКС») — обезличенная статистика посещений;</li>
         <li>CRM-система для учёта и обработки заявок;</li>
-        <li>сервисы обмена сообщениями (Telegram, WhatsApp) — для получения и обработки заявок.</li>
+        <li>сервисы обмена сообщениями (Telegram, MAX) — для получения и обработки заявок.</li>
       </ul>
 
       {/* 7 */}
@@ -124,9 +129,15 @@ export default function PrivacyPage() {
         Чтобы отозвать согласие, уточнить или удалить свои данные, Пользователь может обратиться к Оператору:
       </p>
       <ul className="mt-3 list-disc pl-6 text-brand-mute space-y-1">
-        <li>по телефону <a href={`tel:${SITE.phoneRaw}`} className="underline">{SITE.phone}</a>;</li>
-        <li>в Telegram <a href={SITE.telegram} className="underline">@Yurievich_1993</a>;</li>
-        <li>в WhatsApp <a href={SITE.whatsapp} className="underline">{SITE.whatsappPhone}</a>.</li>
+        <li>по электронной почте <a href={`mailto:${SITE.email}`} className="underline">{SITE.email}</a>;</li>
+        <li>в Telegram <a href={SITE.telegram} className="underline">@Yurievich_1993</a>
+          {SITE.max ? ';' : '.'}
+        </li>
+        {SITE.max && (
+          <li>
+            в MAX <a href={SITE.max} className="underline">по ссылке на профиль</a>.
+          </li>
+        )}
       </ul>
       <p className="mt-3 text-brand-mute">
         Оператор прекращает обработку и удаляет данные в срок, установленный законодательством, с момента

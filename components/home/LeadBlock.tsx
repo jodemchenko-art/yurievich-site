@@ -78,12 +78,6 @@ export default function LeadBlock() {
 
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
               <a
-                href={`tel:${SITE.phoneRaw}`}
-                className="mono text-sm text-graphite ulink"
-              >
-                {SITE.phone}
-              </a>
-              <a
                 href={SITE.telegram}
                 target="_blank"
                 rel="noopener"
@@ -91,14 +85,16 @@ export default function LeadBlock() {
               >
                 Telegram Юрия →
               </a>
-              <a
-                href={SITE.whatsapp}
-                target="_blank"
-                rel="noopener"
-                className="mono text-sm text-signal ulink"
-              >
-                WhatsApp →
-              </a>
+              {SITE.max && (
+                <a
+                  href={SITE.max}
+                  target="_blank"
+                  rel="noopener"
+                  className="mono text-sm text-signal ulink"
+                >
+                  MAX →
+                </a>
+              )}
             </div>
           </div>
 

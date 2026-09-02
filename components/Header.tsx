@@ -31,8 +31,13 @@ export default function Header() {
           <span className="mono text-[11px] tracking-wider text-chalkdim">
             ДОГОВОР С ФИКС-ЦЕНОЙ · ГАРАНТИЯ {SITE.warrantyYears} ЛЕТ · ВЫЕЗД ИНЖЕНЕРА БЕСПЛАТНО
           </span>
-          <a href={`tel:${SITE.phoneRaw}`} className="mono text-[11px] tracking-wider text-sand ulink">
-            {SITE.phone}
+          <a
+            href={SITE.telegram}
+            target="_blank"
+            rel="noopener"
+            className="mono text-[11px] tracking-wider text-sand ulink"
+          >
+            НАПИСАТЬ В TELEGRAM
           </a>
         </div>
       </div>
@@ -70,10 +75,12 @@ export default function Header() {
 
         <div className="flex items-center gap-3">
           <a
-            href={`tel:${SITE.phoneRaw}`}
+            href={SITE.telegram}
+            target="_blank"
+            rel="noopener"
             className="mono hidden text-sm text-graphite ulink md:inline-flex"
           >
-            {SITE.phone}
+            Telegram
           </a>
           <a href="/#calc" className="btn-signal hidden !px-4 !py-2.5 text-sm sm:inline-flex">
             Рассчитать
@@ -113,11 +120,13 @@ export default function Header() {
               </a>
             ))}
             <a
-              href={`tel:${SITE.phoneRaw}`}
+              href={SITE.telegram}
+              target="_blank"
+              rel="noopener"
               onClick={() => setOpen(false)}
               className="btn-signal mono mt-3 justify-center"
             >
-              {SITE.phone}
+              Написать в Telegram
             </a>
           </div>
         </div>

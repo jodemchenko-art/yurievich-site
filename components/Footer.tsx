@@ -61,19 +61,35 @@ export default function Footer() {
           <h4 className="text-white font-bold mb-4">Контакты</h4>
           <ul className="space-y-3 text-sm">
             <li>
-              <a href={`tel:${SITE.phoneRaw}`} className="text-white font-bold text-lg hover:text-brand-red transition">
-                {SITE.phone}
+              <a
+                href={SITE.telegram}
+                target="_blank"
+                rel="noopener"
+                className="text-white font-bold text-lg hover:opacity-80 transition"
+              >
+                Написать в Telegram →
               </a>
             </li>
+            {SITE.max && (
+              <li>
+                <a
+                  href={SITE.max}
+                  target="_blank"
+                  rel="noopener"
+                  className="text-white font-bold text-lg hover:opacity-80 transition"
+                >
+                  Написать в MAX →
+                </a>
+              </li>
+            )}
             <li>База: {SITE.baseLocation}</li>
+            <li>
+              <a href={`mailto:${SITE.email}`} className="hover:text-white transition">
+                {SITE.email}
+              </a>
+            </li>
             <li className="flex flex-wrap gap-3 pt-2">
-              <a href={SITE.whatsapp} target="_blank" rel="noopener" className="hover:text-white transition">WhatsApp</a>
-              <span>·</span>
-              <a href={SITE.telegram} target="_blank" rel="noopener" className="hover:text-white transition">Telegram</a>
-              <span>·</span>
               <a href={SITE.telegramChannel} target="_blank" rel="noopener" className="hover:text-white transition">Канал стройки</a>
-              <span>·</span>
-              <a href={SITE.vk} target="_blank" rel="noopener" className="hover:text-white transition">ВКонтакте</a>
             </li>
           </ul>
         </div>

@@ -3,7 +3,7 @@
 //
 // Логика выведена из эксперимента:
 //   - Title 50-60 симв: цифра + ключ + соц.доказательство (★5) + короткий бренд
-//   - Description 150-170 симв: прямой ответ + 2 power-words + цена + телефон
+//   - Description 150-170 симв: прямой ответ + 2 power-words + цена + канал связи
 //
 // Power-words для нашей ниши: «бесплатно», «выезд», «гарантия 5 лет»,
 // «239 объектов», «★5 (35 отз)», «фикс-цена», «без предоплаты».
@@ -12,7 +12,7 @@
 //   - ★ (звёздочки) — да, повышают CTR на 1-3%
 //   - 🔥 и эмодзи — да, но не больше 1 на title
 //   - Цены в ₽ — да, увеличивают коммерческий CTR
-//   - Телефон в description — да, дают «звонок прямо из выдачи»
+//   - Телефон в description НЕ ставим: с 02.09.2026 связь только через мессенджеры
 
 import { SITE } from './site';
 
@@ -22,7 +22,7 @@ export type SnippetVariant = 'commercial' | 'informational' | 'geo' | 'service';
  * Универсальный enhancer для description:
  *  - Если в description нет ★ — добавляем «★5 (35 отз)»
  *  - Если нет «бесплат» — добавляем «выезд бесплатно»
- *  - Если нет телефона — добавляем «☎ +7 911 830-01-10»
+ *  - Если нет канала связи — добавляем «пишите в Telegram»
  *  - Усекаем до 175 символов чтобы не обрезалось Яндексом
  */
 export function enhanceDescription(raw: string, variant: SnippetVariant = 'commercial'): string {
@@ -31,7 +31,7 @@ export function enhanceDescription(raw: string, variant: SnippetVariant = 'comme
 
   const hasStars = /★|⭐|5\.0|5\/5/.test(desc);
   const hasFree = /бесплат|выезд/i.test(desc);
-  const hasPhone = /\+7|911|830-01-10/.test(desc);
+  const hasContact = /Telegram|MAX|мессенджер/i.test(desc);
 
   // Добавки идут в конце, если не хватает «силы»
   const additions: string[] = [];
@@ -48,8 +48,8 @@ export function enhanceDescription(raw: string, variant: SnippetVariant = 'comme
     additions.push('выезд бесплатно');
   }
 
-  if (!hasPhone && desc.length + 20 < 170) {
-    additions.push(`☎ ${SITE.phone}`);
+  if (!hasContact && desc.length + 22 < 170) {
+    additions.push('смета в Telegram');
   }
 
   if (additions.length > 0) {
@@ -141,7 +141,7 @@ export function buildRegionSnippet(region: {
   const description =
     `Монолитный фундамент под ключ в ${region.prepositional} на пучинистых грунтах: плита, лента, сваи. ` +
     `Цена от ${priceK} тыс ₽/м². ` +
-    `Выезд инженера бесплатно, гарантия 5 лет. ☎ ${SITE.phone}`;
+    'Выезд инженера бесплатно, гарантия 5 лет. Смета в Telegram.';
 
   return {
     title: enhanceTitle(title, 'geo'),
@@ -163,7 +163,7 @@ export function buildLocalitySnippet(locality: {
   const description =
     `Монолитный фундамент под ключ в ${locality.prepositional} на пучинистых грунтах, под газобетон. ` +
     `Цена от ${priceK} тыс ₽/м². ` +
-    `Геология грунтов, выезд инженера бесплатно. ★5 на Авито. ☎ ${SITE.phone}`;
+    'Геология грунтов, выезд инженера бесплатно. ★5 на Авито. Смета в Telegram.';
 
   return {
     title: enhanceTitle(title, 'geo'),

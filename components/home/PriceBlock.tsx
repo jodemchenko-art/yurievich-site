@@ -116,10 +116,10 @@ export default function PriceBlock() {
                       return (
                         <td key={c.key} className="border-t border-hairc px-4 py-3">
                           <div className="mono text-[15px] leading-tight text-graphite">
-                            {fmtRub(r.total)} ₽
+                            от {fmtRub(r.total)} ₽
                           </div>
                           <div className="mono mt-0.5 text-[10px] leading-tight text-inkcold">
-                            {fmtRub(r.pricePerM2)} ₽/м²
+                            от {fmtRub(r.pricePerM2)} ₽/м²
                           </div>
                         </td>
                       );

@@ -59,7 +59,7 @@ export default function ContactBlock() {
                 <span className="mx-2 opacity-40">/</span>
                 Контакты
               </div>
-              <h2 className="display-2 mask mt-4 text-chalk">Позвоните или&nbsp;напишите напрямую</h2>
+              <h2 className="display-2 mask mt-4 text-chalk">Напишите Юрию напрямую</h2>
               <p className="lede mt-4 max-w-lg text-chalkdim">
                 Отвечает Юрий — тот же человек, который приедет на замер и подпишет договор.
                 Не менеджер и не колл-центр.
@@ -67,25 +67,10 @@ export default function ContactBlock() {
             </div>
 
             <div className="mt-8 border-t border-ruled">
-              <a
-                href={`tel:${SITE.phoneRaw}`}
-                className="group flex items-center justify-between gap-4 border-b border-ruled py-5"
-              >
-                <span>
-                  <span className="eyebrow block text-chalkdim">Телефон</span>
-                  <span className="mono mt-2 block text-xl text-chalk md:text-2xl">
-                    {SITE.phone}
-                  </span>
-                </span>
-                <span className="arw mono text-sand transition-transform group-hover:translate-x-1">
-                  →
-                </span>
-              </a>
-
               {[
-                { label: 'WhatsApp', value: SITE.whatsappPhone, href: SITE.whatsapp },
-                { label: 'Telegram', value: '@Yurievich_1993', href: SITE.telegram },
-                { label: 'ВКонтакте', value: 'Сообщество «Ленбетон78»', href: SITE.vk },
+                { label: 'Telegram', value: 'Написать Юрию лично →', href: SITE.telegram },
+                ...(SITE.max ? [{ label: 'MAX', value: 'Написать в MAX →', href: SITE.max }] : []),
+                { label: 'Почта', value: SITE.email, href: `mailto:${SITE.email}` },
               ].map((c) => (
                 <a
                   key={c.label}
@@ -124,8 +109,8 @@ export default function ContactBlock() {
                   <div className="mono text-xs tracking-widest text-inkmute">ЗАЯВКА ПРИНЯТА</div>
                   <h3 className="display-3 mt-3 text-graphite">Спасибо, записали</h3>
                   <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-inkmute">
-                    Юрий перезвонит в ближайшее рабочее время. Если нужно срочно — звоните по
-                    номеру слева, это его личный телефон.
+                    Юрий свяжется с вами в ближайшее рабочее время. Если нужно срочно —
+                    напишите ему в Telegram или MAX, ссылки слева.
                   </p>
                 </div>
               ) : (

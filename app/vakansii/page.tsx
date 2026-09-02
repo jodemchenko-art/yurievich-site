@@ -131,10 +131,12 @@ export default function VakansiiPage() {
               </details>
 
               <a
-                href={`tel:${SITE.phoneRaw}`}
+                href={SITE.telegram}
+                target="_blank"
+                rel="noopener"
                 className="mt-6 inline-block rounded-xl bg-brand-ink text-white px-6 py-3 font-bold no-underline w-full text-center"
               >
-                Откликнуться: {SITE.phone}
+                Откликнуться в Telegram →
               </a>
             </article>
           ))}

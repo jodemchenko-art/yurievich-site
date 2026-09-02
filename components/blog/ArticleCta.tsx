@@ -27,10 +27,12 @@ export default function ArticleCta() {
               Получить расчёт →
             </Link>
             <a
-              href={`tel:${SITE.phoneRaw}`}
+              href={SITE.telegram}
+              target="_blank"
+              rel="noopener"
               className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-white/30 px-7 py-4 font-bold text-base md:text-lg hover:bg-white/10 transition"
             >
-              📞 {SITE.phone}
+              Написать в Telegram →
             </a>
           </div>
 

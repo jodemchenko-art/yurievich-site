@@ -42,38 +42,11 @@ export default function Contacts() {
             <span className="text-brand-red font-bold text-sm uppercase tracking-wide">Контакты</span>
             <h2 className="section-title mt-2">Свяжитесь напрямую</h2>
             <p className="section-sub max-w-lg">
-              Юрий отвечает лично — по телефону, в WhatsApp и Telegram.
+              Юрий отвечает лично — в Telegram и MAX.
               Все вопросы по проекту, смете и срокам — напрямую с хозяином.
             </p>
 
             <div className="mt-8 space-y-5">
-              <a
-                href={`tel:${SITE.phoneRaw}`}
-                className="flex items-center gap-4 group"
-              >
-                <div className="h-14 w-14 rounded-2xl bg-brand-red flex items-center justify-center text-white text-xl">
-                  📞
-                </div>
-                <div>
-                  <div className="text-xs text-brand-mute uppercase tracking-wider">Звонок</div>
-                  <div className="text-xl md:text-2xl font-extrabold group-hover:text-brand-red transition">
-                    {SITE.phone}
-                  </div>
-                </div>
-              </a>
-
-              <a href={SITE.whatsapp} target="_blank" rel="noopener" className="flex items-center gap-4 group">
-                <div className="h-14 w-14 rounded-2xl bg-[#25D366] flex items-center justify-center text-white text-xl">
-                  💬
-                </div>
-                <div>
-                  <div className="text-xs text-brand-mute uppercase tracking-wider">WhatsApp</div>
-                  <div className="text-lg font-bold group-hover:text-brand-red transition">
-                    {SITE.whatsappPhone} →
-                  </div>
-                </div>
-              </a>
-
               <a href={SITE.telegram} target="_blank" rel="noopener" className="flex items-center gap-4 group">
                 <div className="h-14 w-14 rounded-2xl bg-[#229ED9] flex items-center justify-center text-white text-xl">
                   ✈️
@@ -86,17 +59,19 @@ export default function Contacts() {
                 </div>
               </a>
 
-              <a href={SITE.vk} target="_blank" rel="noopener" className="flex items-center gap-4 group">
-                <div className="h-14 w-14 rounded-2xl bg-[#0077FF] flex items-center justify-center text-white text-xl font-extrabold">
-                  VK
-                </div>
-                <div>
-                  <div className="text-xs text-brand-mute uppercase tracking-wider">ВКонтакте</div>
-                  <div className="text-lg font-bold group-hover:text-brand-red transition">
-                    Сообщество компании →
+              {SITE.max && (
+                <a href={SITE.max} target="_blank" rel="noopener" className="flex items-center gap-4 group">
+                  <div className="h-14 w-14 rounded-2xl bg-[#5B2FE5] flex items-center justify-center text-white text-lg font-extrabold">
+                    MAX
                   </div>
-                </div>
-              </a>
+                  <div>
+                    <div className="text-xs text-brand-mute uppercase tracking-wider">MAX</div>
+                    <div className="text-lg font-bold group-hover:text-brand-red transition">
+                      Написать в MAX →
+                    </div>
+                  </div>
+                </a>
+              )}
 
               <div className="flex items-center gap-4">
                 <div className="h-14 w-14 rounded-2xl bg-brand-ink flex items-center justify-center text-white text-xl">

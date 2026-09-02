@@ -31,13 +31,7 @@ const PROOFS = [
     href: SITE.gis2Profile,
     label: '2ГИС',
     value: 'Карточка компании',
-    note: 'Адрес, телефон и отзывы в справочнике',
-  },
-  {
-    href: SITE.vk,
-    label: 'ВКонтакте',
-    value: 'Сообщество «Ленбетон78»',
-    note: 'Фото объектов с площадок',
+    note: 'Адрес, маршрут и отзывы в справочнике',
   },
   {
     href: SITE.telegramChannel,

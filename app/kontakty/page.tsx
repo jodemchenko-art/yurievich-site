@@ -7,7 +7,7 @@ import { buildBreadcrumb, buildGraph, ID } from '@/lib/schema';
 export const metadata: Metadata = {
   title: `Контакты: адрес в СПб, 9 районов ЛО ★5`,
   description:
-    `☎ ${SITE.phone} · Telegram @Yurievich_1993 · ${SITE.baseLocation}, СПб. ` +
+    `Telegram @Yurievich_1993 и MAX · ${SITE.baseLocation}, СПб. ` +
     `Я.Карты: yandex.ru/maps/org/69393767573. 9 районов ЛО, 239 объектов, ★5 (35 отз).`,
   alternates: { canonical: '/kontakty/' },
   openGraph: {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     locale: 'ru_RU',
     url: `${SITE.url}/kontakty/`,
     title: `Контакты СК «Юрьевич» — СПб + 9 районов ЛО ★5`,
-    description: `☎ ${SITE.phone}, ${SITE.baseLocation}, СПб. 239 объектов, ★5.`,
+    description: `Telegram и MAX · ${SITE.baseLocation}, СПб. 239 объектов, ★5.`,
     siteName: SITE.name,
   },
 };
@@ -25,7 +25,6 @@ export const metadata: Metadata = {
 const PROFILE_LINKS = [
   { href: SITE.yandexMapsProfile, label: 'Открыть карточку на Я.Картах' },
   { href: SITE.gis2Profile, label: 'Открыть карточку в 2ГИС' },
-  { href: SITE.vk, label: 'Сообщество «Ленбетон78» во ВКонтакте' },
 ].filter((c) => Boolean(c.href));
 
 export default function KontaktyPage() {
@@ -67,7 +66,7 @@ export default function KontaktyPage() {
             Связаться с СК «Юрьевич»
           </h1>
           <p className="mt-4 text-lg text-brand-mute max-w-2xl leading-relaxed">
-            Звоните, пишите в мессенджеры или оставляйте заявку через сайт.
+            Пишите в мессенджеры или оставляйте заявку через сайт — отвечает лично Юрий.
             Бесплатный выезд инженера на участок в СПб и Ленинградской области.
           </p>
         </div>
@@ -80,18 +79,6 @@ export default function KontaktyPage() {
             <ul className="mt-6 space-y-5">
               <li>
                 <a
-                  href={`tel:${SITE.phoneRaw}`}
-                  className="flex items-center gap-4 p-5 bg-white rounded-xl border border-brand-line hover:border-brand-ink hover:shadow-md transition"
-                >
-                  <span className="text-3xl">📞</span>
-                  <div>
-                    <div className="text-2xl font-extrabold text-brand-ink">{SITE.phone}</div>
-                    <div className="text-sm text-brand-mute">Звоним 9:00–21:00 (пн-сб), 10:00–18:00 (вс)</div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a
                   href={SITE.telegram}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -100,21 +87,37 @@ export default function KontaktyPage() {
                   <span className="text-3xl">💬</span>
                   <div>
                     <div className="text-lg font-extrabold text-brand-ink">Telegram личный</div>
-                    <div className="text-sm text-brand-mute">{SITE.telegram.replace('https://t.me/', '@')}</div>
+                    <div className="text-sm text-brand-mute">
+                      {SITE.telegram.replace('https://t.me/', '@')} · отвечаем 9:00–21:00 (пн-сб), 10:00–18:00 (вс)
+                    </div>
                   </div>
                 </a>
               </li>
+              {SITE.max && (
+                <li>
+                  <a
+                    href={SITE.max}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 p-5 bg-white rounded-xl border border-brand-line hover:border-brand-ink hover:shadow-md transition"
+                  >
+                    <span className="text-3xl">📱</span>
+                    <div>
+                      <div className="text-lg font-extrabold text-brand-ink">MAX</div>
+                      <div className="text-sm text-brand-mute">Написать в мессенджере MAX</div>
+                    </div>
+                  </a>
+                </li>
+              )}
               <li>
                 <a
-                  href={SITE.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={`mailto:${SITE.email}`}
                   className="flex items-center gap-4 p-5 bg-white rounded-xl border border-brand-line hover:border-brand-ink hover:shadow-md transition"
                 >
-                  <span className="text-3xl">📱</span>
+                  <span className="text-3xl">✉️</span>
                   <div>
-                    <div className="text-lg font-extrabold text-brand-ink">WhatsApp</div>
-                    <div className="text-sm text-brand-mute">{SITE.whatsappPhone}</div>
+                    <div className="text-lg font-extrabold text-brand-ink">Почта</div>
+                    <div className="text-sm text-brand-mute">{SITE.email}</div>
                   </div>
                 </a>
               </li>
@@ -203,10 +206,12 @@ export default function KontaktyPage() {
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
               <a
-                href={`tel:${SITE.phoneRaw}`}
+                href={SITE.telegram}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-brand-ink font-semibold hover:bg-white/90 transition"
               >
-                📞 {SITE.phone}
+                Написать в Telegram →
               </a>
               <Link
                 href="/#contacts"

@@ -25,10 +25,12 @@ export default function OrderCta({ place, priceFrom }: { place: string; priceFro
             Заказать расчёт фундамента →
           </Link>
           <a
-            href={`tel:${SITE.phoneRaw}`}
+            href={SITE.telegram}
+            target="_blank"
+            rel="noopener"
             className="rounded-xl border border-white/40 px-7 py-4 font-bold no-underline hover:bg-white/10 transition"
           >
-            ☎ {SITE.phone}
+            Написать в Telegram →
           </a>
         </div>
       </div>

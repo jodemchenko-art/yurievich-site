@@ -105,15 +105,6 @@ export default function ObjectsChronicle() {
 
             <div className="mt-6 grid gap-2 sm:grid-cols-2">
               <a
-                href={SITE.vk}
-                target="_blank"
-                rel="noopener"
-                className="btn-line btn-line-dark mono justify-center border-chalkdim/45 text-xs text-chalk"
-              >
-                ВКонтакте
-                <span className="arw" aria-hidden>→</span>
-              </a>
-              <a
                 href={SITE.telegramChannel}
                 target="_blank"
                 rel="noopener"

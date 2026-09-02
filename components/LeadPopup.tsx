@@ -91,7 +91,7 @@ export default function LeadPopup() {
         sessionStorage.setItem(STORAGE_KEY, '1');
       } catch {}
     } catch {
-      setError('Не удалось отправить. Позвоните: ' + SITE.phone);
+      setError('Не удалось отправить. Напишите Юрию в Telegram — @Yurievich_1993');
     } finally {
       setLoading(false);
     }
@@ -196,9 +196,9 @@ export default function LeadPopup() {
               </button>
 
               <p className="mt-3 text-xs text-inkmute text-center">
-                Или сразу позвоните:{' '}
-                <a href={`tel:${SITE.phoneRaw}`} className="mono text-graphite ulink">
-                  {SITE.phone}
+                Или сразу напишите:{' '}
+                <a href={SITE.telegram} target="_blank" rel="noopener" className="mono text-graphite ulink">
+                  Telegram
                 </a>
               </p>
 

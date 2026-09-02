@@ -81,8 +81,8 @@ export default function PriceTable() {
                   });
                   return (
                     <td key={c.key} className="px-4 py-3 border-b border-brand-line whitespace-nowrap">
-                      <span className="font-extrabold text-brand-ink">{fmtRub(r.total)} ₽</span>
-                      <span className="block text-xs text-brand-mute">{fmtRub(r.pricePerM2)} ₽/м²</span>
+                      <span className="font-extrabold text-brand-ink">от {fmtRub(r.total)} ₽</span>
+                      <span className="block text-xs text-brand-mute">от {fmtRub(r.pricePerM2)} ₽/м²</span>
                     </td>
                   );
                 })}

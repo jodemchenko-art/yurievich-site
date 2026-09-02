@@ -148,10 +148,10 @@ export default function LeadMagnetBanner({
             {loading ? 'Готовим...' : '📥 Скачать чек-лист'}
           </button>
           <p className="text-xs text-white/50 text-center">
-            Юрий перезвонит за час. Без спама.
+            Юрий свяжется за час. Без спама.
             Или сразу:{' '}
-            <a href={`tel:${SITE.phoneRaw}`} className="text-white underline">
-              {SITE.phone}
+            <a href={SITE.telegram} target="_blank" rel="noopener" className="text-white underline">
+              написать в Telegram
             </a>
           </p>
         </form>
