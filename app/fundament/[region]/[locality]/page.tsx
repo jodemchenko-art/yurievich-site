@@ -155,7 +155,7 @@ export default function LocalityPage({ params }: { params: Params }) {
             Плитный фундамент в {locality.prepositional} ({region.shortName})
           </h1>
           <p className="mt-4 text-lg text-brand-mute max-w-3xl leading-relaxed">
-            Монолитные плиты под газобетонный дом в {locality.prepositional}. Цена под ключ от {locality.priceFrom.toLocaleString('ru-RU')} до {locality.priceTo.toLocaleString('ru-RU')} ₽/м² — зависит от размера, толщины и грунта. Бесплатный выезд инженера, договор с фикс-ценой, гарантия 5 лет.
+            Монолитные плиты под газобетонный дом в {locality.prepositional}. Цена под ключ от {locality.priceFrom.toLocaleString('ru-RU')} ₽/м² — зависит от размера, толщины и грунта. Бесплатный выезд инженера, договор с фикс-ценой, гарантия 5 лет.
           </p>
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl">

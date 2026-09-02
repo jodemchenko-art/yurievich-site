@@ -37,7 +37,7 @@ const STEPS = [
 ];
 
 /**
- * Ориентировочная вилка по ответам квиза.
+ * Ориентировочная цена «от» по ответам квиза.
  *
  * Показываем её ДО того, как просим телефон. Логика простая: человек и так может
  * посмотреть таблицу цен выше — прятать порядок суммы в обмен на контакт нечестно
@@ -280,7 +280,7 @@ export default function Quiz() {
               Юрий перезвонит сам, не колл-центр. Смета — в течение 1 рабочего дня после замера.
             </p>
 
-            {/* Вилка по ответам — до того, как человек оставил телефон */}
+            {/* Цена «от» по ответам — до того, как человек оставил телефон */}
             {(() => {
               const est = estimate(answers);
               if (!est) return null;
@@ -288,10 +288,10 @@ export default function Quiz() {
                 <div className="mt-5 border border-rule bg-paper p-4">
                   <div className="eyebrow text-signal-dark">Ориентир {est.note}</div>
                   <div className="mono mt-2 text-lg leading-tight text-graphite md:text-xl">
-                    {fmtRub(est.from)} – {fmtRub(est.to)} ₽
+                    от {fmtRub(est.from)} ₽
                   </div>
                   <p className="mt-2 text-xs leading-relaxed text-inkmute">
-                    Это не смета, а порядок цифр по таблице цен. Точную сумму считаем после
+                    Это не смета, а нижняя граница по таблице цен. Точную сумму считаем после
                     бесплатного замера и фиксируем в договоре — она не меняется без вашей подписи.
                   </p>
                 </div>
