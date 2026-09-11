@@ -10,14 +10,15 @@ import { SITE } from '@/lib/site';
  */
 
 const NAV = [
-  { href: '/#razrez', label: 'Разрез плиты' },
-  { href: '/#uslugi', label: 'Виды и цены' },
-  { href: '/#portfolio', label: 'Объекты' },
-  { href: '/#doma', label: 'Наши дома' },
-  { href: '/kalkulyator/', label: 'Калькулятор' },
-  { href: '/#process', label: 'Как работаем' },
+  { href: '/fundament/plita/', label: 'Плита' },
+  { href: '/fundament/lenta/', label: 'Лента' },
+  { href: '/fundament/svai/', label: 'Сваи' },
+  { href: '/ceny/', label: 'Цены' },
+  { href: '/obekty/', label: 'Объекты' },
+  { href: '/doma/', label: 'Дома' },
+  { href: '/o-kompanii/', label: 'О нас' },
   { href: '/blog/', label: 'Блог' },
-  { href: '/#contacts', label: 'Контакты' },
+  { href: '/kontakty/', label: 'Контакты' },
 ];
 
 export default function Header() {

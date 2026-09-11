@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { REGIONS } from '@/lib/regions';
+import { FOUNDATION_TYPES } from '@/lib/foundation-types';
 import { LOCALITIES, getLocalitiesByRegion } from '@/lib/localities';
 import { SITE } from '@/lib/site';
 import { inPrep, ogDefaults } from '@/lib/seo-snippets';
@@ -186,6 +187,19 @@ export default function FundamentIndexPage() {
       </section>
 
       <PriceTable />
+
+      {/* Виды фундамента — типовые посадочные (11.09.2026) */}
+      <section className="container-x pb-12">
+        <h2 className="text-2xl md:text-3xl font-extrabold mb-4">Виды фундамента: цены и когда какой подходит</h2>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {FOUNDATION_TYPES.map((ft) => (
+            <Link key={ft.slug} href={`/fundament/${ft.slug}/`} className="block bg-white rounded-xl border border-brand-line p-4 hover:border-brand-ink hover:shadow-md transition">
+              <div className="font-bold text-brand-ink">{ft.name}</div>
+              <div className="text-sm text-brand-mute mt-1">{ft.priceLabel}</div>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       <section className="container-x pb-10">
         <h2 className="text-2xl md:text-3xl font-extrabold mb-6">Выберите район работ</h2>

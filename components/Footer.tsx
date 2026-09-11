@@ -39,19 +39,22 @@ export default function Footer() {
         <div>
           <h4 className="text-white font-bold mb-4">Услуги</h4>
           <ul className="space-y-2 text-sm">
-            <li><a href="#uslugi" className="hover:text-white transition">Монолитная плита</a></li>
-            <li><a href="#uslugi" className="hover:text-white transition">Ленточный фундамент</a></li>
-            <li><a href="#uslugi" className="hover:text-white transition">Дом из газобетона</a></li>
-            <li><a href="#uslugi" className="hover:text-white transition">Подъём фундаментов</a></li>
+            <li><a href="/fundament/plita/" className="hover:text-white transition">Монолитная плита</a></li>
+            <li><a href="/fundament/lenta/" className="hover:text-white transition">Ленточный фундамент</a></li>
+            <li><a href="/fundament/svai/" className="hover:text-white transition">Свайный фундамент</a></li>
+            <li><a href="/fundament/ushp/" className="hover:text-white transition">УШП</a></li>
+            <li><a href="/ceny/" className="hover:text-white transition">Цены</a></li>
+            <li><a href="/doma/" className="hover:text-white transition">Дом из газобетона</a></li>
+            <li><a href="/fundament/pod-banyu/" className="hover:text-white transition">Фундамент под баню</a></li>
           </ul>
         </div>
 
         <div>
           <h4 className="text-white font-bold mb-4">Компания</h4>
           <ul className="space-y-2 text-sm">
-            <li><a href="#brothers" className="hover:text-white transition">О братьях</a></li>
-            <li><a href="#portfolio" className="hover:text-white transition">Объекты (239)</a></li>
-            <li><a href="#otzyvy" className="hover:text-white transition">Отзывы (35)</a></li>
+            <li><a href="/o-kompanii/" className="hover:text-white transition">О компании</a></li>
+            <li><a href="/obekty/" className="hover:text-white transition">Объекты (239)</a></li>
+            <li><a href="/otzyvy/" className="hover:text-white transition">Отзывы (35)</a></li>
             <li><a href="#faq" className="hover:text-white transition">FAQ</a></li>
             <li><a href="/privacy" className="hover:text-white transition">Политика данных</a></li>
           </ul>

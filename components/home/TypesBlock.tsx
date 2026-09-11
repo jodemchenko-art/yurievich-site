@@ -84,7 +84,7 @@ const HOUSES = [
   },
   {
     title: 'Дом из газобетона под ключ',
-    price: `от ${PRICES.dom.from.toLocaleString('ru-RU')} ${PRICES.dom.unit}`,
+    price: `от ${PRICES.holodnyy.from.toLocaleString('ru-RU')} ${PRICES.holodnyy.unit} — холодный контур`,
     desc:
       'Полный цикл: фундамент → коробка → кровля → инженерия → черновая отделка. ' +
       'Один договор и один ответственный за результат, без субподряда.',
@@ -111,7 +111,7 @@ export default function TypesBlock() {
               style={{ ['--d' as any]: `${i * 90}ms` }}
             >
               <div className="eyebrow text-inkmute">{t.intent}</div>
-              <h3 className="display-3 mt-3 text-graphite">{t.title}</h3>
+              <h3 className="display-3 mt-3 text-graphite"><Link href={`/fundament/${t.id}/`} className="hover:underline">{t.title}</Link></h3>
               <p className="mt-3 flex-1 text-sm leading-relaxed text-inkmute">{t.body}</p>
 
               <dl className="mt-5 border-t border-hair">
@@ -125,12 +125,12 @@ export default function TypesBlock() {
 
               <div className="mt-5 flex items-center justify-between gap-3">
                 <div className="text-base font-extrabold text-graphite">{t.price}</div>
-                <a
-                  href="#calc"
+                <Link
+                  href={`/fundament/${t.id}/`}
                   className="mono text-xs text-signal ulink whitespace-nowrap"
                 >
-                  рассчитать →
-                </a>
+                  подробнее и цены →
+                </Link>
               </div>
             </article>
           ))}
@@ -143,7 +143,7 @@ export default function TypesBlock() {
           <Link href="/fundament/vsevolozhsk/" className="ulink text-graphite">Всеволожский</Link>,{' '}
           <Link href="/fundament/gatchina/" className="ulink text-graphite">Гатчинский</Link>,{' '}
           <Link href="/fundament/vyborg/" className="ulink text-graphite">Выборгский</Link> и{' '}
-          <Link href="/fundament/" className="ulink text-graphite">другие районы</Link>.
+          <Link href="/fundament/" className="ulink text-graphite">другие районы</Link>. Также: <Link href="/fundament/ushp/" className="ulink text-graphite">УШП</Link>, <Link href="/fundament/plita-s-rebrami/" className="ulink text-graphite">плита с рёбрами</Link>, фундамент <Link href="/fundament/pod-banyu/" className="ulink text-graphite">под баню</Link> и <Link href="/fundament/pod-garazh/" className="ulink text-graphite">под гараж</Link>. Все цены — на <Link href="/ceny/" className="ulink text-graphite">одной странице</Link>.
         </p>
 
         {/* Дома из газобетона — второй продукт, без «продающего» давления */}
@@ -161,6 +161,7 @@ export default function TypesBlock() {
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-inkmute">{h.desc}</p>
               <div className="mono mt-4 text-sm text-graphite">{h.price}</div>
+              <Link href="/doma/" className="mono mt-3 inline-block text-xs text-signal ulink">комплектации и цены →</Link>
             </div>
           ))}
         </div>

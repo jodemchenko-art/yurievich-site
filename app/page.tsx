@@ -1,17 +1,13 @@
 import Motion from '@/components/home/Motion';
 import Hero from '@/components/home/Hero';
 import ProofStrip from '@/components/home/ProofStrip';
-import SlabAnatomy from '@/components/home/SlabAnatomy';
 import TypesBlock from '@/components/home/TypesBlock';
 import ObjectsChronicle from '@/components/home/ObjectsChronicle';
 import HousesGrid from '@/components/home/HousesGrid';
 import PriceBlock from '@/components/home/PriceBlock';
 import LeadBlock from '@/components/home/LeadBlock';
 import WorkflowBlock from '@/components/home/WorkflowBlock';
-import TeamBlock from '@/components/home/TeamBlock';
-import ProofBlock from '@/components/home/ProofBlock';
 import FaqBlock from '@/components/home/FaqBlock';
-import BlogIndexBlock from '@/components/home/BlogIndexBlock';
 import ContactBlock from '@/components/home/ContactBlock';
 import { SITE } from '@/lib/site';
 import { HOME_FAQ } from '@/lib/faq';
@@ -62,6 +58,9 @@ const FAQ_PAGE_SCHEMA = {
 
 /**
  * ГЛАВНАЯ — редизайн 26.07.2026, система «инженерный чертёж».
+ * 11.09.2026: страница укорочена — разрез плиты, команда, «где проверить» и лента блога
+ * переехали на /fundament/plita/, /o-kompanii/, /otzyvy/ и /blog/. На мобильном главная
+ * была 27 000 px высотой: 12 экранов до контактов — это не продаёт, а утомляет.
  *
  * Порядок блоков подчинён не «красоте», а последовательности вопросов в голове
  * человека, который выбирает, кому доверить фундамент:
@@ -69,6 +68,8 @@ const FAQ_PAGE_SCHEMA = {
  *   сколько это стоит → [заявка] → как всё будет происходить → кто отвечает →
  *   где вас проверить → остались вопросы → [заявка]
  *
+ * 11.09.2026: разрез плиты, команда, пруфы и блог вынесены на свои страницы
+ * (/fundament/plita/, /o-kompanii/, /otzyvy/, /blog/) — главная стала вдвое короче.
  * Точек заявки ровно три: первый экран (кнопка-якорь), расчёт после цены (#calc)
  * и контакты внизу. Между ними — только объяснение и доказательства: на крупной
  * покупке давление в каждом экране читается как «мне впаривают».
@@ -89,17 +90,13 @@ export default function Home() {
 
       <Hero />
       <ProofStrip />
-      <SlabAnatomy />
       <TypesBlock />
       <ObjectsChronicle />
       <HousesGrid />
       <PriceBlock />
       <LeadBlock />
       <WorkflowBlock />
-      <TeamBlock />
-      <ProofBlock />
       <FaqBlock />
-      <BlogIndexBlock />
       <ContactBlock />
     </>
   );

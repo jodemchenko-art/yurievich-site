@@ -1,9 +1,11 @@
 import type { MetadataRoute } from 'next';
 import { SITE } from '@/lib/site';
-import { ARTICLES } from '@/lib/articles';
+import { ARTICLES, REDIRECTED_ARTICLE_SLUGS } from '@/lib/articles';
+import { REDIRECTED_TERM_SLUGS } from '@/lib/glossary';
 import { REGIONS } from '@/lib/regions';
 import { GLOSSARY } from '@/lib/glossary';
 import { LOCALITIES } from '@/lib/localities';
+import { FOUNDATION_TYPES } from '@/lib/foundation-types';
 
 /**
  * Слаги статей, которые уже склеены 301-редиректом в next.config.js.
@@ -32,6 +34,39 @@ const REDIRECTED_SLUGS = new Set<string>([
   'plitnyy-fundament-tosno-cena',
   'plitnyy-fundament-vsevolozhsk-cena',
   'plitnyy-fundament-vyborgskiy-rayon',
+  // 11.09.2026 — малоценные и дубли, склеены в типовые страницы / цены / дома
+  'fundament-pod-banyu-iz-gazobetona-spb',
+  'fundament-plita-pod-garazh-spb',
+  'uteplyonnaya-shvedskaya-plita-ushp-spb',
+  'plita-s-rebrami-pod-gazobeton-lenoblast',
+  'svayno-rostverkovyy-fundament-pod-klyuch-cena-leningradskaya-oblast',
+  'dom-iz-gazobetona-lsr-pod-klyuch-cena-za-m2',
+  'korobka-iz-gazobetona-pod-kryshu-spb-cena',
+  'dom-pod-klyuch-ili-korobka-pod-krysu-gazobeton-spb',
+  'skolko-stoit-fundament-pod-dom-pod-klyuch-leningradskaya-oblast',
+  'zakazat-zalivku-fundamenta-pod-klyuch-spb-nedorogo',
+  'smeta-na-monolitnuyu-plitu-fundamenta-obrazec-spb',
+  'cena-plity-fundamenta-12h12-spb',
+  'plita-pod-gazobeton-100m2-cena-pod-klyuch',
+  'plitnyy-fundament-dlya-gazobetona-lenoblast-otzyvy',
+  'plita-na-svayah-leskolovo',
+  'plitnyy-fundament-pod-gazobeton-lenoblast-cena-2026',
+  'plitnyy-fundament-pod-brus-9x9-cena-lenoblast',
+  'plita-250-ili-300-mm-pod-gazobeton-2-etazha',
+  'plita-ili-lenta-pod-gazobeton',
+  'plita-6x6-pod-gazobeton-cena',
+  'plita-6x8-cena-pod-klyuch-spb',
+  'plita-9x9-cena-pod-klyuch-spb',
+  'plitnyy-fundament-9x12-pod-gazobeton-cena',
+  'monolitnaya-plita-8x10-cena-lenoblast',
+  'plita-10x12-pod-gazobeton-cena-300mm',
+  'plita-300-mm-pod-dvuhetazhnyy-dom-cena',
+  'plita-10x10-350mm-dvoynoe-armirovanie-cena',
+  'monolitnaya-plita-250-mm-cena-za-m2',
+  'plitnyy-fundament-pod-gazobeton-375-mm-cena',
+  'plita-pod-dom-s-mansardoy-iz-gazobetona-cena',
+  'fundament-pod-dvuhetazhnyy-dom-iz-gazobetona-cena',
+  'fundament-pod-karkasnyy-dom-spb',
 ]);
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -63,6 +98,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.85,
     },
+    ...['/ceny/', '/obekty/', '/otzyvy/', '/o-kompanii/', '/doma/', '/doma/ceny/', '/doma/etapy/'].map((path) => ({
+      url: `${base}${path}`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: path === '/ceny/' || path === '/doma/' ? 0.95 : 0.8,
+    })),
+    ...FOUNDATION_TYPES.map((t) => ({
+      url: `${base}/fundament/${t.slug}/`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.95,
+    })),
     {
       url: `${base}/vakansii/`,
       lastModified: now,
@@ -99,7 +146,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }];
 
   const articlePages: MetadataRoute.Sitemap = ARTICLES.filter(
-    (a) => !REDIRECTED_SLUGS.has(a.slug),
+    (a) => !REDIRECTED_SLUGS.has(a.slug) && !REDIRECTED_ARTICLE_SLUGS.has(a.slug),
   ).map((a) => ({
     url: `${base}/blog/${a.slug}/`,
     lastModified: new Date(a.updatedAt || a.publishedAt),
@@ -114,7 +161,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'weekly' as const,
     priority: 0.7,
   }];
-  const slovarTerms: MetadataRoute.Sitemap = GLOSSARY.map((t) => ({
+  const slovarTerms: MetadataRoute.Sitemap = GLOSSARY.filter((t) => !REDIRECTED_TERM_SLUGS.has(t.slug)).map((t) => ({
     url: `${base}/slovar/${t.slug}/`,
     lastModified: now,
     changeFrequency: 'monthly' as const,

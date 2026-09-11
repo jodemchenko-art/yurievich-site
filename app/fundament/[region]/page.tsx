@@ -65,7 +65,7 @@ export default function RegionPage({ params }: { params: Params }) {
           <ol className="flex items-center gap-2 flex-wrap">
             <li><Link href="/" className="hover:text-brand-ink transition">Главная</Link></li>
             <li aria-hidden="true">›</li>
-            <li><Link href="/fundament/" className="hover:text-brand-ink transition">Фундаменты по районам</Link></li>
+            <li><Link href="/fundament/" className="hover:text-brand-ink transition">Фундаменты</Link></li>
             <li aria-hidden="true">›</li>
             <li className="text-brand-ink">{region.name}</li>
           </ol>
@@ -126,17 +126,20 @@ export default function RegionPage({ params }: { params: Params }) {
           </tbody>
         </table>
 
-        <h2>Почему именно СК «Юрьевич» {inPrep(region.prepositional)}</h2>
-        <ul>
-          <li><strong>Локальный опыт.</strong> Наша бригада знает грунты {region.shortName} лично — мы вышли из этих 8 районов ЛО, а не «обслуживаем всё подряд».</li>
-          <li><strong>Договор с фикс-ценой.</strong> Никаких «доплат после вскрытия котлована». Если что-то меняется по вашему желанию — допсоглашение с вашей подписью.</li>
-          <li><strong>Оплата только по этапам.</strong> Аванс на материалы по чекам с завода ЛСР, основной расчёт — после приёмки этапов. На работы предоплат нет.</li>
-          <li><strong>Бетон М300 W6 F150, арматура А500С.</strong> Заводской паспорт качества на каждую машину — показываем на объекте.</li>
-          <li><strong>Бригада с прорабом</strong> (Валера) на объекте, плюс технадзор (Евгений) на снабжении. 239 объектов — это наша личная статистика.</li>
-        </ul>
+        <h2>Как мы работаем {inPrep(region.prepositional)}</h2>
+        <p>{region.whyHere || `Работаем ${inPrep(region.prepositional)} с ${SITE.foundedYear} года. Договор с фиксированной ценой, оплата по принятым этапам, гарантия ${SITE.warrantyYears} лет — подробнее на странице о компании.`}</p>
+        {region.typicalSolution && (
+          <>
+            <h2>Типовое решение для грунтов {region.shortName}</h2>
+            <p>{region.typicalSolution}</p>
+          </>
+        )}
+        <p className="text-sm">
+          Виды фундамента подробно: <Link href="/fundament/plita/">монолитная плита</Link>, <Link href="/fundament/lenta/">лента</Link>, <Link href="/fundament/svai/">сваи</Link>, <Link href="/fundament/ushp/">УШП</Link>. Цены по размерам — на странице <Link href="/ceny/">цен</Link>, кто мы — на странице <Link href="/o-kompanii/">о компании</Link>.
+        </p>
 
-        <h2>Сроки и логистика</h2>
-        <p>Дорога от нашей базы (пос. Песочный) до {region.shortName}: <strong>{region.drivingTime}</strong>. Замер участка — бесплатно, выезд инженера в течение 1-3 дней. Сама заливка плиты 100 м² занимает 10-14 рабочих дней. Зимняя заливка работает — у нас отлажена технология (противоморозные добавки, прогрев, утепление опалубки).</p>
+        <h2>Дорога и сроки</h2>
+        <p>От базы в Песочном до {region.shortName}: <strong>{region.drivingTime}</strong>. Выезд инженера — бесплатно, в течение 1–3 дней. Плита 100 м² — 10–14 рабочих дней, зимой работаем с добавками и прогревом.</p>
 
         <p>
           <Link href="/#calc" className="inline-block mt-4 rounded-xl bg-brand-ink text-white px-7 py-4 font-bold no-underline">

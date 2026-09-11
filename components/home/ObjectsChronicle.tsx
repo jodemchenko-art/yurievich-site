@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { SITE } from '@/lib/site';
 import SectionHead from './SectionHead';
+import Link from 'next/link';
+import { SLAB_OBJECTS } from '@/lib/objects';
 
 /**
  * ОБЪЕКТЫ.
@@ -17,43 +19,7 @@ import SectionHead from './SectionHead';
  * в проверку: одна и та же площадка, до и после, ничего не подменено.
  */
 
-const OBJECTS = [
-  {
-    loc: 'Ропша',
-    district: 'Ломоносовский р-н, ЛО',
-    area: '120 м²',
-    armo: '/images/objects/ropsha-120-armo.jpg',
-    plita: '/images/objects/ropsha-120-plita.jpg',
-  },
-  {
-    loc: 'СНТ «Красный Октябрь»',
-    district: 'Ленинградская область',
-    area: '150 м²',
-    armo: '/images/objects/krasny-oktyabr-150-armo.jpg',
-    plita: '/images/objects/krasny-oktyabr-150-plita.jpg',
-  },
-  {
-    loc: 'дер. Торики',
-    district: 'Ленинградская область',
-    area: '144 м²',
-    armo: '/images/objects/toriki-144-armo.jpg',
-    plita: '/images/objects/toriki-144-plita.jpg',
-  },
-  {
-    loc: 'Низино',
-    district: 'Ломоносовский р-н, ЛО',
-    area: '100 м²',
-    armo: '/images/objects/nizino-100-armo.jpg',
-    plita: '/images/objects/nizino-100-plita.jpg',
-  },
-  {
-    loc: 'Пеники',
-    district: 'Ломоносовский р-н, ЛО',
-    area: '104 м²',
-    armo: '/images/objects/peniki-104-armo.jpg',
-    plita: '/images/objects/peniki-104-plita.jpg',
-  },
-];
+const OBJECTS = SLAB_OBJECTS;
 
 export default function ObjectsChronicle() {
   return (
@@ -104,6 +70,13 @@ export default function ObjectsChronicle() {
             </div>
 
             <div className="mt-6 grid gap-2 sm:grid-cols-2">
+              <Link
+                href="/obekty/"
+                className="btn-line btn-line-dark mono justify-center border-chalkdim/45 text-xs text-chalk"
+              >
+                Все объекты
+                <span className="arw" aria-hidden>→</span>
+              </Link>
               <a
                 href={SITE.telegramChannel}
                 target="_blank"

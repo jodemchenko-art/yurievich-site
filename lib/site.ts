@@ -114,7 +114,17 @@ export const SITE = {
 export const PRICES = {
   plita: { from: 5500, unit: '₽/м²' },
   korobka: { from: null, unit: 'расчёт по проекту' },
-  dom: { from: 38000, unit: '₽/м²' },
+  // Дома из газобетона — ставки комплектаций, утверждены 05.09.2026 (за м² застройки,
+  // 1-й этаж; 2-й этаж минус 10 000; при жилой площади свыше 150 м² White Box и
+  // «под ключ» минус 5 000). Источник: 01-stroyka/KOMPLEKTACII-I-MATERIALY.md
+  dom: { from: 70000, unit: '₽/м²' },
+  domHolodnyy: { from: 35000, unit: '₽/м²' },
+  domTeplyy: { from: 42000, unit: '₽/м²' },
+  domWhiteBox: { from: 60000, unit: '₽/м²' },
+  // короткие алиасы тех же ставок
+  holodnyy: { from: 35000, unit: '₽/м²' },
+  teplyy: { from: 42000, unit: '₽/м²' },
+  whitebox: { from: 60000, unit: '₽/м²' },
 } as const;
 
 // Main services for Schema.org Service[] and sitemap
@@ -146,7 +156,7 @@ export const SERVICES_LIST = [
     shortName: 'Дом под ключ',
     description:
       'Полный цикл строительства дома из газобетона ЛСР в СПб и Ленобласти: фундамент, коробка, кровля, инженерия, черновая отделка. Один договор, фикс-цена.',
-    price: PRICES.dom,
+    price: PRICES.holodnyy,
     category: 'Строительство домов под ключ',
   },
 ] as const;
