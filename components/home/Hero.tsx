@@ -49,14 +49,15 @@ export default function Hero() {
           <div>
             <div className="eyebrow flex flex-wrap items-center gap-x-2 gap-y-1 text-sand">
               <span className="inline-block h-px w-6 bg-sand align-middle" />
-              Санкт-Петербург · Ленинградская область
+              Санкт-Петербург · Ленинградская область{' '}
               <span className="text-bp-text opacity-60">— монолитные фундаменты</span>
             </div>
 
+            {/* H1 одной строкой текста: <br> внутри h1 склеивал слова («ключв СПб») в сниппете и у SEO-парсеров.
+                Перенос делает block-span, между словами живой пробел. */}
             <h1 className="display-1 mt-5 text-chalk">
-              Фундамент под&nbsp;ключ
-              <br />
-              <span className="text-sand">в&nbsp;СПб и&nbsp;Ленобласти</span>
+              Фундамент под&nbsp;ключ{' '}
+              <span className="block text-sand">в&nbsp;Санкт-Петербурге и&nbsp;Ленобласти</span>
             </h1>
 
             <p className="lede mt-6 max-w-xl text-chalkdim">

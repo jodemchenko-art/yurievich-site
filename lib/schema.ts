@@ -13,6 +13,7 @@
 //   <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(graph)}}/>
 
 import { SITE, SERVICES_LIST } from './site';
+import { inPrep } from './seo-snippets';
 import type { Article } from './articles/_types';
 import type { Region } from './regions';
 import { buildRegionFaq } from './regions';
@@ -259,7 +260,7 @@ export function buildRegionGraph(region: Region, canonicalUrl: string, breadcrum
     {
       '@type': 'Service',
       '@id': ID.regionService(region.slug),
-      name: `Плитный фундамент под ключ в ${region.prepositional}`,
+      name: `Плитный фундамент под ключ ${inPrep(region.prepositional)}`,
       description: region.groundDescription.slice(0, 240),
       provider: { '@id': ID.org },
       areaServed: {
@@ -289,8 +290,8 @@ export function buildRegionGraph(region: Region, canonicalUrl: string, breadcrum
     {
       '@type': 'LocalBusiness',
       '@id': `${canonicalUrl}#localbusiness`,
-      name: `СК «Юрьевич» — фундаменты в ${region.prepositional}`,
-      description: `Строительство монолитных плитных фундаментов под ключ в ${region.prepositional}. ${region.groundDescription.slice(0, 180)}`,
+      name: `СК «Юрьевич» — фундаменты ${inPrep(region.prepositional)}`,
+      description: `Строительство монолитных плитных фундаментов под ключ ${inPrep(region.prepositional)}. ${region.groundDescription.slice(0, 180)}`,
       url: canonicalUrl,
       telephone: SITE.phone,
       priceRange: '₽₽',
@@ -314,7 +315,7 @@ export function buildRegionGraph(region: Region, canonicalUrl: string, breadcrum
     buildBreadcrumb(breadcrumbPath, [
       { name: 'Главная', url: SITE.url },
       { name: 'Фундаменты по районам', url: `${SITE.url}/fundament/` },
-      { name: `Плитный фундамент в ${region.prepositional}`, url: canonicalUrl },
+      { name: `Плитный фундамент ${inPrep(region.prepositional)}`, url: canonicalUrl },
     ]),
     buildFaqPage(breadcrumbPath, faqItems)!,
   ];

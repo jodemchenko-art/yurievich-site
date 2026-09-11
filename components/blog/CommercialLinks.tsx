@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { inPrep } from '@/lib/seo-snippets';
 import { REGIONS } from '@/lib/regions';
 
 // Внутренняя перелинковка: из каждой статьи блога ведём ссылки на
@@ -36,7 +37,7 @@ export default function CommercialLinks() {
                 href={`/fundament/${r.slug}/`}
                 className="text-brand-ink underline decoration-brand-line underline-offset-4 hover:decoration-brand-ink transition"
               >
-                Фундамент в {r.prepositional}
+                Фундамент {inPrep(r.prepositional)}
               </Link>
             </li>
           ))}

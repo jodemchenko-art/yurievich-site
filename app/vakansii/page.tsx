@@ -2,22 +2,18 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { VACANCIES, buildJobPostingSchema } from '@/lib/vacancies';
 import { SITE } from '@/lib/site';
+import { ogDefaults } from '@/lib/seo-snippets';
 import { buildBreadcrumb, buildGraph } from '@/lib/schema';
 
+const PAGE_TITLE = 'Вакансии — работа в стройке СПб и Ленобласти';
+const PAGE_DESC =
+  'Вакансии в СК «Юрьевич»: бетонщик-арматурщик, прораб, разнорабочий. Семейная стройкомпания, 239 объектов с 2018 года. Работа в Санкт-Петербурге и Ленобласти, оплата вовремя, без субподряда.';
+
 export const metadata: Metadata = {
-  title: 'Вакансии — работа в стройке СПб и Ленобласти',
-  description:
-    'Открытые вакансии в СК «Юрьевич»: бетонщик-арматурщик, прораб, разнорабочий. Семейная стройкомпания, 239 объектов с 2018 года. Постоянная работа в СПб и ЛО, оплата вовремя, без субподряда. ул. Пионерстроя 23Б.',
+  title: PAGE_TITLE,
+  description: PAGE_DESC,
   alternates: { canonical: '/vakansii/' },
-  openGraph: {
-    type: 'website',
-    locale: 'ru_RU',
-    url: `${SITE.url}/vakansii/`,
-    title: 'Вакансии СК «Юрьевич» — фундаменты, СПб и Ленобласть',
-    description:
-      'Открытые вакансии: бетонщик, прораб, разнорабочий. Семейная стройкомпания. Оплата вовремя, без задержек.',
-    siteName: SITE.name,
-  },
+  openGraph: ogDefaults('/vakansii/', `${PAGE_TITLE} · ${SITE.name}`, PAGE_DESC, 'website'),
 };
 
 export default function VakansiiPage() {

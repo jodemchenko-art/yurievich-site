@@ -7,7 +7,7 @@ import { getArticleBySlug } from '@/lib/articles';
 import { getArticleSlugsForRegion } from '@/lib/articleRegion';
 import { SITE } from '@/lib/site';
 import { buildGraph, buildBreadcrumb, buildFaqPage, ID } from '@/lib/schema';
-import { buildLocalitySnippet } from '@/lib/seo-snippets';
+import { buildLocalitySnippet, inPrep, ogDefaults } from '@/lib/seo-snippets';
 
 type Params = { region: string; locality: string };
 
@@ -20,29 +20,14 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const locality = getLocalityBySlug(params.region, params.locality);
   if (!region || !locality) return {};
 
-  const { title, description } = buildLocalitySnippet(locality, region);
+  const { title, description } = buildLocalitySnippet(locality);
+  const path = `/fundament/${region.slug}/${locality.slug}/`;
 
   return {
     title,
     description,
-    keywords: [
-      `фундамент ${locality.name}`,
-      `плита ${locality.name}`,
-      `плитный фундамент ${locality.name}`,
-      `монолитная плита ${locality.name}`,
-      `строительство в ${locality.prepositional}`,
-      `цена плиты ${locality.name}`,
-      `фундамент ${region.shortName} ${locality.name}`,
-    ],
-    alternates: { canonical: `/fundament/${region.slug}/${locality.slug}/` },
-    openGraph: {
-      type: 'website',
-      locale: 'ru_RU',
-      url: `${SITE.url}/fundament/${region.slug}/${locality.slug}/`,
-      title,
-      description,
-      siteName: SITE.name,
-    },
+    alternates: { canonical: path },
+    openGraph: ogDefaults(path, `${title} · ${SITE.name}`, description, 'website'),
   };
 }
 
@@ -66,7 +51,7 @@ export default function LocalityPage({ params }: { params: Params }) {
       {
         '@type': 'Service',
         '@id': `${canonicalUrl}#service`,
-        name: `Плитный фундамент в ${locality.prepositional}`,
+        name: `Фундамент под ключ ${inPrep(locality.prepositional)}`,
         description: locality.groundNote.slice(0, 240),
         provider: { '@id': ID.org },
         areaServed: {
@@ -93,8 +78,8 @@ export default function LocalityPage({ params }: { params: Params }) {
       {
         '@type': 'LocalBusiness',
         '@id': `${canonicalUrl}#localbusiness`,
-        name: `СК «Юрьевич» — фундаменты в ${locality.prepositional}`,
-        description: `Монолитные плитные фундаменты под ключ в ${locality.prepositional} (${region.name}, ЛО). ${locality.groundNote.slice(0, 160)}`,
+        name: `СК «Юрьевич» — фундаменты ${inPrep(locality.prepositional)}`,
+        description: `Монолитные плитные фундаменты под ключ ${inPrep(locality.prepositional)} (${region.name}, ЛО). ${locality.groundNote.slice(0, 160)}`,
         url: canonicalUrl,
         telephone: SITE.phone,
         priceRange: '₽₽',
@@ -152,10 +137,10 @@ export default function LocalityPage({ params }: { params: Params }) {
           </nav>
 
           <h1 className="text-3xl md:text-5xl font-extrabold text-brand-ink leading-tight max-w-4xl">
-            Плитный фундамент в {locality.prepositional} ({region.shortName})
+            Фундамент под ключ {inPrep(locality.prepositional)}: монолитная плита, лента, сваи
           </h1>
           <p className="mt-4 text-lg text-brand-mute max-w-3xl leading-relaxed">
-            Монолитные плиты под газобетонный дом в {locality.prepositional}. Цена под ключ от {locality.priceFrom.toLocaleString('ru-RU')} ₽/м² — зависит от размера, толщины и грунта. Бесплатный выезд инженера, договор с фикс-ценой, гарантия 5 лет.
+            Монолитные плиты под газобетонный дом {inPrep(locality.prepositional)}. Цена под ключ от {locality.priceFrom.toLocaleString('ru-RU')} ₽/м² — зависит от размера, толщины и грунта. Бесплатный выезд инженера, договор с фикс-ценой, гарантия 5 лет.
           </p>
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl">
@@ -191,7 +176,7 @@ export default function LocalityPage({ params }: { params: Params }) {
             </Link>
           </div>
           <div>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-brand-ink">Реальные объекты в {locality.prepositional}</h2>
+            <h2 className="text-2xl md:text-3xl font-extrabold text-brand-ink">Реальные объекты {inPrep(locality.prepositional)}</h2>
             <ul className="mt-4 space-y-3">
               {locality.examples.map((ex, i) => (
                 <li key={i} className="flex gap-3 text-brand-mute leading-relaxed">
@@ -209,7 +194,7 @@ export default function LocalityPage({ params }: { params: Params }) {
 
       <section className="section bg-brand-sand">
         <div className="container-x max-w-4xl">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-brand-ink">Вопросы по фундаменту в {locality.prepositional}</h2>
+          <h2 className="text-2xl md:text-3xl font-extrabold text-brand-ink">Вопросы по фундаменту {inPrep(locality.prepositional)}</h2>
           <div className="mt-8 space-y-6">
             {locality.faq.map((item, i) => (
               <details key={i} className="bg-white rounded-xl border border-brand-line p-5 md:p-6 group">
@@ -239,7 +224,7 @@ export default function LocalityPage({ params }: { params: Params }) {
                       href={`/fundament/${region.slug}/${l.slug}/`}
                       className="block bg-white rounded-xl border border-brand-line p-4 hover:border-brand-ink hover:shadow-md transition"
                     >
-                      <div className="font-bold text-brand-ink">Фундамент в {l.prepositional}</div>
+                      <div className="font-bold text-brand-ink">Фундамент {inPrep(l.prepositional)}</div>
                       <div className="text-sm text-brand-mute mt-1">
                         от {l.priceFrom.toLocaleString('ru-RU')} ₽/м² · {l.driveTime}
                       </div>
@@ -277,7 +262,7 @@ export default function LocalityPage({ params }: { params: Params }) {
       <section className="section">
         <div className="container-x">
           <div className="bg-brand-ink text-white rounded-2xl p-8 md:p-12 max-w-4xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl font-extrabold">Бесплатный расчёт фундамента в {locality.prepositional}</h2>
+            <h2 className="text-2xl md:text-3xl font-extrabold">Бесплатный расчёт фундамента {inPrep(locality.prepositional)}</h2>
             <p className="mt-4 text-white/80 max-w-2xl mx-auto">
               Позвоните или оставьте заявку — инженер приедет на участок, сделает замеры, подберёт грунт и пришлёт смету за 1-2 дня. Без обязательств и предоплаты.
             </p>

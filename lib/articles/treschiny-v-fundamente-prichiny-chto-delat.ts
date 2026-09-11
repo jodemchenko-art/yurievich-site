@@ -4,7 +4,7 @@ import type { Article } from './_types';
 export const treschinyVFundamentePrichinyChtoDelat: Article = {
   slug: "treschiny-v-fundamente-prichiny-chto-delat",
   title: "Трещина в фундаменте: причины, что делать и допустимая ширина",
-  meta_title: "Трещина в фундаменте: причины, что делать и допустимая ширина",
+  meta_title: "Трещина в фундаменте: причины, что делать, допустимая ширина",
   meta_description: "Трещина в фундаменте: причины и что делать. Допустимая ширина по СП 63.13330.2018, цены экспертизы и ремонта в СПб и ЛО — узнайте за 3 минуты.",
   publishedAt: "2026-06-16",
   updatedAt: "2026-06-19",

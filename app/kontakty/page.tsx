@@ -1,23 +1,19 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { SITE } from '@/lib/site';
+import { ogDefaults } from '@/lib/seo-snippets';
 import { REGIONS } from '@/lib/regions';
 import { buildBreadcrumb, buildGraph, ID } from '@/lib/schema';
 
+const PAGE_TITLE = 'Контакты: телефон, Telegram, MAX, адрес в Санкт-Петербурге';
+const PAGE_DESC =
+  'Связаться с СК «Юрьевич»: телефон +7 911 830-01-10, Telegram, MAX, почта. Адрес: ул. Пионерстроя, 23Б, Санкт-Петербург. Строим фундаменты под ключ в СПб и Ленобласти, выезд инженера бесплатно.';
+
 export const metadata: Metadata = {
-  title: `Контакты: адрес в СПб, 9 районов ЛО ★5`,
-  description:
-    `☎ ${SITE.phone} · Telegram @Yurievich_1993 и MAX · ${SITE.baseLocation}, СПб. ` +
-    `Я.Карты: yandex.ru/maps/org/69393767573. 9 районов ЛО, 239 объектов, ★5 (35 отз).`,
+  title: PAGE_TITLE,
+  description: PAGE_DESC,
   alternates: { canonical: '/kontakty/' },
-  openGraph: {
-    type: 'website',
-    locale: 'ru_RU',
-    url: `${SITE.url}/kontakty/`,
-    title: `Контакты СК «Юрьевич» — СПб + 9 районов ЛО ★5`,
-    description: `☎ ${SITE.phone}, ${SITE.baseLocation}, СПб. 239 объектов, ★5.`,
-    siteName: SITE.name,
-  },
+  openGraph: ogDefaults('/kontakty/', `${PAGE_TITLE} · ${SITE.name}`, PAGE_DESC, 'website'),
 };
 
 // Справочники и сообщество живут в SITE — чтобы ссылка правилась в одном месте

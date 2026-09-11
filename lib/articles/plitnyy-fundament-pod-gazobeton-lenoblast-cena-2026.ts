@@ -4,7 +4,7 @@ import type { Article } from './_types';
 export const plitnyyFundamentPodGazobetonLenoblastCena2026: Article = {
   slug: "plitnyy-fundament-pod-gazobeton-lenoblast-cena-2026",
   title: "Плитный фундамент под газобетон в Ленобласти: цена за м² в 2026",
-  meta_title: "Плитный фундамент под газобетон Ленобласть: цена за м2 в 2026",
+  meta_title: "Плитный фундамент под газобетон в Ленобласти: цена 2026",
   meta_description: "Плитный фундамент под газобетон в Ленобласти 2026: от 5500 ₽/м² под ключ. Цены по районам, бетон М300, арматура А500С, фикс-цена. СК «Юрьевич», гарантия 5 лет.",
   publishedAt: "2026-06-19",
   updatedAt: "2026-06-19",

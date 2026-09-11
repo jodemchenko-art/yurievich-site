@@ -2,22 +2,19 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { GLOSSARY, CATEGORY_LABELS, GlossaryTerm } from '@/lib/glossary';
 import { SITE } from '@/lib/site';
+import { ogDefaults } from '@/lib/seo-snippets';
 import { buildBreadcrumb, buildGraph } from '@/lib/schema';
 
+const PAGE_TITLE = `Словарь стройтерминов: ${GLOSSARY.length} понятий простыми словами`;
+const PAGE_DESC =
+  `${GLOSSARY.length} терминов про фундамент и стройку дома простыми словами: бетон М300, арматура А500С, выторфовка, ЭППС, УШП. ` +
+  `Объясняем на практике 239 объектов в Санкт-Петербурге и Ленобласти.`;
+
 export const metadata: Metadata = {
-  title: `Словарь стройтерминов: ${GLOSSARY.length} объяснений ★5`,
-  description:
-    `${GLOSSARY.length} терминов фундамента простыми словами: бетон М300, А500С, выторфовка, ЭППС. ` +
-    `Практика 239 объектов СПб и ЛО, ★5 (35 отз). ☎ +7 911 830-01-10`,
+  title: PAGE_TITLE,
+  description: PAGE_DESC,
   alternates: { canonical: '/slovar/' },
-  openGraph: {
-    type: 'website',
-    locale: 'ru_RU',
-    url: `${SITE.url}/slovar/`,
-    title: `Словарь стройтерминов ★5 — СК «Юрьевич»`,
-    description: `${GLOSSARY.length} терминов фундамента с практикой 239 объектов СПб и ЛО. ★5.`,
-    siteName: SITE.name,
-  },
+  openGraph: ogDefaults('/slovar/', `${PAGE_TITLE} · ${SITE.name}`, PAGE_DESC, 'website'),
 };
 
 export default function SlovarIndexPage() {

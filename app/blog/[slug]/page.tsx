@@ -8,7 +8,7 @@ import {
 import { CATEGORY_LABELS } from '@/lib/articles/_types';
 import { SITE } from '@/lib/site';
 import { buildArticleGraph, buildGraph } from '@/lib/schema';
-import { enhanceTitle, enhanceDescription } from '@/lib/seo-snippets';
+import { buildTitle, buildDescription, inPrep, ogDefaults } from '@/lib/seo-snippets';
 import { getHowToForArticle, buildHowToSchema } from '@/lib/howto';
 import ArticleHeader from '@/components/blog/ArticleHeader';
 import ArticleBody from '@/components/blog/ArticleBody';
@@ -35,47 +35,25 @@ export async function generateMetadata(
   if (!article) return {};
 
   const canonical = `/blog/${article.slug}/`;
-
-  // CTR-оптимизация: ★5, выезд бесплатно, телефон в description
-  const variant = article.category === 'plitnyi-fundament' || article.category === 'gazobeton'
-    ? 'commercial'
-    : 'informational';
-  const enhTitle = enhanceTitle(article.meta_title, variant);
-  const enhDesc = enhanceDescription(article.meta_description, variant);
+  // Без ★/☎ и без усечения «…»: замер выдачи 11.09.2026 — такие сниппеты Яндекс не показывает.
+  const title = buildTitle(article.meta_title);
+  const description = buildDescription(article.meta_description);
 
   return {
-    title: enhTitle,
-    description: enhDesc,
-    keywords: article.keywords,
+    title,
+    description,
     alternates: { canonical },
     openGraph: {
-      type: 'article',
-      locale: 'ru_RU',
-      url: `${SITE.url}${canonical}`,
-      title: enhTitle,
-      description: enhDesc,
-      siteName: SITE.name,
+      ...ogDefaults(canonical, `${title} · ${SITE.name}`, description, 'article', article.cover_image),
       publishedTime: article.publishedAt,
       modifiedTime: article.updatedAt || article.publishedAt,
       authors: [SITE.fullName],
-      images: article.cover_image
-        ? [
-            {
-              url: article.cover_image.startsWith('http')
-                ? article.cover_image
-                : `${SITE.url}${article.cover_image}`,
-              width: 1200,
-              height: 630,
-              alt: article.cover_alt,
-            },
-          ]
-        : undefined,
     },
     twitter: {
       card: 'summary_large_image',
-      title: article.meta_title,
-      description: article.meta_description,
-      images: article.cover_image ? [article.cover_image] : undefined,
+      title: `${title} · ${SITE.name}`,
+      description,
+      images: [article.cover_image || SITE.defaultOgImage],
     },
   };
 }
@@ -119,7 +97,7 @@ export default function ArticlePage({ params }: { params: Params }) {
           >
             <div className="text-sm font-semibold uppercase tracking-wider text-brand-mute mb-1">📍 Ваш район</div>
             <div className="text-xl md:text-2xl font-extrabold text-brand-ink">
-              Строите фундамент в {region.prepositional}? →
+              Строите фундамент {inPrep(region.prepositional)}? →
             </div>
             <p className="mt-2 text-brand-mute">
               Цены, грунты и онлайн-калькулятор специально для {region.prepositional} — от {region.priceFrom.toLocaleString('ru-RU')} ₽/м².

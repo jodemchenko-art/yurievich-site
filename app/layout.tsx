@@ -22,7 +22,6 @@ export const metadata: Metadata = {
     template: `%s · ${SITE.name}`,
   },
   description: SITE.shortDesc,
-  keywords: [...SITE.keywords],
   authors: [{ name: SITE.fullName }],
   creator: SITE.fullName,
   publisher: SITE.fullName,

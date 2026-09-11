@@ -4,7 +4,7 @@ import type { Article } from './_types';
 export const uchastokBolotistyyPodFundamentChtoDelat: Article = {
   slug: "uchastok-bolotistyy-pod-fundament-chto-delat",
   title: "Болотистый участок под фундамент: что делать — диагноз и 3 рабочих решения",
-  meta_title: "Болотистый участок под фундамент: что делать — 3 решения и цены",
+  meta_title: "Болотистый участок под фундамент: что делать, 3 решения",
   meta_description: "Болотистый участок под фундамент: диагностика торфа, 3 решения (выторфовка+плита, сваи до материка, плита-поплавок), цены ₽/м², глубины торфа в Лесколово и Назия.",
   publishedAt: "2026-06-19",
   updatedAt: "2026-06-19",

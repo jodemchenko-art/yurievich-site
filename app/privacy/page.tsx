@@ -1,10 +1,12 @@
 import { SITE } from '@/lib/site';
+import { ogDefaults } from '@/lib/seo-snippets';
 
 export const metadata = {
   title: `Политика обработки персональных данных`,
   description:
     'Как СК «Юрьевич» обрабатывает и защищает персональные данные пользователей сайта: цели, состав данных, сроки, права субъекта и порядок отзыва согласия.',
   alternates: { canonical: '/privacy/' },
+  openGraph: ogDefaults('/privacy/', `Политика обработки персональных данных · ${SITE.name}`, 'Как СК «Юрьевич» обрабатывает персональные данные пользователей сайта.', 'website'),
 };
 
 const UPDATED = '17 июля 2026 г.';

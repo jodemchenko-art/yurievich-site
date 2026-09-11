@@ -4,19 +4,17 @@ import { ARTICLES } from '@/lib/articles';
 import { CATEGORY_LABELS } from '@/lib/articles/_types';
 import BlogCard from '@/components/blog/BlogCard';
 import { SITE } from '@/lib/site';
+import { ogDefaults } from '@/lib/seo-snippets';
+
+const PAGE_TITLE = 'Блог о фундаментах и домах из газобетона: цены 2026, грунты';
+const PAGE_DESC =
+  'Статьи о плитных фундаментах и домах из газобетона в Санкт-Петербурге и Ленобласти: цены 2026, грунты по районам, армирование, бетон, сметы. Опыт 239 объектов СК «Юрьевич», без воды.';
 
 export const metadata: Metadata = {
-  title: 'Блог о фундаментах: цены 2026, грунты ЛО ★5',
-  description:
-    'Экспертные статьи о плитных фундаментах и домах из газобетона: цены 2026, грунты Ленобласти, ' +
-    '50+ кейсов из 239 объектов. ★5 (35 отз). Без воды. ☎ +7 911 830-01-10',
+  title: PAGE_TITLE,
+  description: PAGE_DESC,
   alternates: { canonical: '/blog/' },
-  openGraph: {
-    title: 'Блог о фундаментах и газобетоне — цены 2026 ★5',
-    description: 'Цены 2026, грунты ЛО, 50+ статей из 239 объектов СК «Юрьевич». ★5.',
-    url: `${SITE.url}/blog/`,
-    type: 'website',
-  },
+  openGraph: ogDefaults('/blog/', `${PAGE_TITLE} · ${SITE.name}`, PAGE_DESC, 'website'),
 };
 
 const BREADCRUMB_SCHEMA = {

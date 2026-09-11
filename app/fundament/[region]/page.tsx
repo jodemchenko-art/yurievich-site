@@ -10,7 +10,7 @@ import { getArticleBySlug } from '@/lib/articles';
 import { getArticleSlugsForRegion } from '@/lib/articleRegion';
 import { SITE } from '@/lib/site';
 import { buildRegionGraph, buildGraph } from '@/lib/schema';
-import { buildRegionSnippet } from '@/lib/seo-snippets';
+import { buildRegionSnippet, inPrep, ogDefaults } from '@/lib/seo-snippets';
 
 type Params = { region: string };
 
@@ -23,33 +23,13 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   if (!region) return {};
 
   const { title, description } = buildRegionSnippet(region);
+  const path = `/fundament/${region.slug}/`;
 
   return {
     title,
     description,
-    keywords: [
-      `фундамент под ключ ${region.shortName}`,
-      `фундамент ${region.shortName} цена`,
-      `заказать фундамент ${region.shortName}`,
-      `плитный фундамент ${region.shortName}`,
-      `монолитная плита ${region.shortName}`,
-      `ленточный фундамент ${region.shortName}`,
-      `ленточный фундамент ${region.shortName} цена`,
-      `свайный фундамент ${region.shortName}`,
-      `свайный фундамент ${region.shortName} цена`,
-      `цена фундамента ${region.shortName}`,
-      `сколько стоит фундамент ${region.shortName}`,
-      `калькулятор фундамента ${region.shortName}`,
-    ],
-    alternates: { canonical: `/fundament/${region.slug}/` },
-    openGraph: {
-      type: 'website',
-      locale: 'ru_RU',
-      url: `${SITE.url}/fundament/${region.slug}/`,
-      title,
-      description,
-      siteName: SITE.name,
-    },
+    alternates: { canonical: path },
+    openGraph: ogDefaults(path, `${title} · ${SITE.name}`, description, 'website'),
   };
 }
 
@@ -93,11 +73,11 @@ export default function RegionPage({ params }: { params: Params }) {
 
         <h1 className="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight max-w-4xl">
           {region.slug === 'spb'
-            ? 'Фундамент под ключ в Санкт-Петербурге — по районам города: плита, лента, сваи'
-            : `Фундамент под ключ в ${region.prepositional}: плита, лента, сваи — цена и расчёт`}
+            ? 'Фундамент под ключ в районах Санкт-Петербурга: плита, лента, сваи'
+            : `Фундамент под ключ ${inPrep(region.prepositional)}: плита, лента, сваи`}
         </h1>
         <p className="mt-5 text-lg text-brand-mute max-w-3xl leading-relaxed">
-          СК «Юрьевич» строит фундаменты под ключ в {region.prepositional}{region.localitiesText} — монолитную плиту, ленточный и свайный фундамент. Цена от <strong className="text-brand-ink">{region.priceFrom.toLocaleString('ru-RU')} ₽/м²</strong> в зависимости от грунта и типа фундамента. Дорога от базы: {region.drivingTime}.
+          СК «Юрьевич» строит фундаменты под ключ {inPrep(region.prepositional)}{region.localitiesText} — монолитную плиту, ленточный и свайный фундамент. Цена от <strong className="text-brand-ink">{region.priceFrom.toLocaleString('ru-RU')} ₽/м²</strong> в зависимости от грунта и типа фундамента. Дорога от базы: {region.drivingTime}.
         </p>
 
         <div className="mt-6 flex flex-wrap gap-3 text-sm">
@@ -125,8 +105,8 @@ export default function RegionPage({ params }: { params: Params }) {
         <h2>Грунты {region.shortName}: что важно знать</h2>
         <p>{region.groundDescription}</p>
 
-        <h2>Реальные сметы наших объектов в {region.prepositional}</h2>
-        <p>Ниже — последние объекты СК «Юрьевич» в {region.prepositional}. Цены 2025-2026 г., с разбивкой по позициям предоставляем после замера участка.</p>
+        <h2>Реальные сметы наших объектов {inPrep(region.prepositional)}</h2>
+        <p>Ниже — последние объекты СК «Юрьевич» {inPrep(region.prepositional)}. Цены 2025-2026 г., с разбивкой по позициям предоставляем после замера участка.</p>
         <table>
           <thead>
             <tr>
@@ -146,7 +126,7 @@ export default function RegionPage({ params }: { params: Params }) {
           </tbody>
         </table>
 
-        <h2>Почему именно СК «Юрьевич» в {region.prepositional}</h2>
+        <h2>Почему именно СК «Юрьевич» {inPrep(region.prepositional)}</h2>
         <ul>
           <li><strong>Локальный опыт.</strong> Наша бригада знает грунты {region.shortName} лично — мы вышли из этих 8 районов ЛО, а не «обслуживаем всё подряд».</li>
           <li><strong>Договор с фикс-ценой.</strong> Никаких «доплат после вскрытия котлована». Если что-то меняется по вашему желанию — допсоглашение с вашей подписью.</li>
@@ -171,7 +151,7 @@ export default function RegionPage({ params }: { params: Params }) {
             Фундамент в населённых пунктах {region.shortName}
           </h2>
           <p className="text-brand-mute mb-6">
-            Мы знаем грунты конкретных посёлков {region.prepositional}. Выберите свой — цена и решение под местную геологию:
+            Мы знаем грунты конкретных посёлко{inPrep(region.prepositional)}. Выберите свой — цена и решение под местную геологию:
           </p>
           <div className="grid gap-3 sm:grid-cols-2">
             {localities.map((l) => (
@@ -180,7 +160,7 @@ export default function RegionPage({ params }: { params: Params }) {
                 href={`/fundament/${region.slug}/${l.slug}/`}
                 className="block bg-white rounded-xl border border-brand-line p-4 hover:border-brand-ink hover:shadow-md transition"
               >
-                <div className="font-bold text-brand-ink">Фундамент в {l.prepositional}</div>
+                <div className="font-bold text-brand-ink">Фундамент {inPrep(l.prepositional)}</div>
                 <div className="text-sm text-brand-mute mt-1">
                   от {l.priceFrom.toLocaleString('ru-RU')} ₽/м² · {l.driveTime}
                 </div>

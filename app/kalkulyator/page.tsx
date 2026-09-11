@@ -2,18 +2,17 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Calculator from '@/components/Calculator';
 import { SITE } from '@/lib/site';
+import { ogDefaults } from '@/lib/seo-snippets';
+
+const PAGE_TITLE = 'Калькулятор фундамента: цена плиты под ключ за 30 секунд';
+const PAGE_DESC =
+  'Калькулятор фундамента онлайн: цена монолитной плиты под ваш дом за 30 секунд по размеру, этажности и грунту. Реальные цены 2026 года в Санкт-Петербурге и Ленобласти, без приманок.';
 
 export const metadata: Metadata = {
-  title: 'Калькулятор фундамента: цена за 30 сек СПб 2026 ★5',
-  description:
-    'Цена плиты под ваш дом за 30 секунд: размер, этажность, грунт. Реальные цены 2026 СПб и ЛО, ' +
-    'без приманок. 239 объектов, ★5 (35 отз). Выезд бесплатно. ☎ +7 911 830-01-10',
+  title: PAGE_TITLE,
+  description: PAGE_DESC,
   alternates: { canonical: '/kalkulyator/' },
-  openGraph: {
-    title: 'Калькулятор плитного фундамента — расчёт цены 2026 ★5',
-    description: 'Считаем плиту под ваш дом за 30 секунд по реальным ценам СПб и ЛО. ★5.',
-    type: 'website',
-  },
+  openGraph: ogDefaults('/kalkulyator/', `${PAGE_TITLE} · ${SITE.name}`, PAGE_DESC, 'website'),
 };
 
 const BREADCRUMB_SCHEMA = {

@@ -1,76 +1,24 @@
 // lib/seo-snippets.ts
-// Шаблоны «кликабельных» сниппетов для Яндекса (CTR-оптимизация).
+// Title / Description для сниппета выдачи. Единые правила для всего сайта.
 //
-// Логика выведена из эксперимента:
-//   - Title 50-60 симв: цифра + ключ + соц.доказательство (★5) + короткий бренд
-//   - Description 150-170 симв: прямой ответ + 2 power-words + цена + канал связи
-//
-// Power-words для нашей ниши: «бесплатно», «выезд», «гарантия 5 лет»,
-// «239 объектов», «★5 (35 отз)», «фикс-цена», «без предоплаты».
-//
-// Что Яндекс показывает в snippet:
-//   - ★ (звёздочки) — да, повышают CTR на 1-3%
-//   - 🔥 и эмодзи — да, но не больше 1 на title
-//   - Цены в ₽ — да, увеличивают коммерческий CTR
-//   - Телефон в description — да, дают «звонок прямо из выдачи»
+// ⛔ Замер живой выдачи Яндекса 11.09.2026 (регион СПб, 12 запросов):
+//   - ★ из Title Яндекс вырезает, в выдаче остаётся голая «5»: «…от 5 500 ₽/м² 5».
+//   - Description с ☎ / ★ / «…» Яндекс игнорировал на ВСЕХ коммерческих страницах
+//     и подставлял текст со страницы. «CTR-сниппет» с телефоном никто не видел.
+//   - Title длиннее ~58 символов обрезается многоточием, бренд в хвосте не виден.
+// Правила (ресёрч 01-stroyka/seo/RESERCH-METADANNYE-11-09-2026.md):
+//   без спецсимволов, без усечений «…», ключ и топоним в начале, важное — в начале
+//   description, Title без бренда ≤ 60 (жёстко 62), Description 120–200 живыми фразами.
+// Проверяет код: `npm run check:meta` (scripts/check-meta.js, валит при нарушении).
 
 import { SITE } from './site';
 
-export type SnippetVariant = 'commercial' | 'informational' | 'geo' | 'service';
-
-/**
- * Универсальный enhancer для description:
- *  - Если в description нет ★ — добавляем «★5 (35 отз)»
- *  - Если нет «бесплат» — добавляем «выезд бесплатно»
- *  - Если нет телефона — добавляем «☎ +7 911 830-01-10»
- *  - Усекаем до 175 символов чтобы не обрезалось Яндексом
- */
-export function enhanceDescription(raw: string, variant: SnippetVariant = 'commercial'): string {
-  if (!raw) return '';
-  let desc = raw.trim();
-
-  const hasStars = /★|⭐|5\.0|5\/5/.test(desc);
-  const hasFree = /бесплат|выезд/i.test(desc);
-  const hasPhone = /\+7|911|830-01-10/.test(desc);
-
-  // Добавки идут в конце, если не хватает «силы»
-  const additions: string[] = [];
-
-  if (!hasStars) {
-    if (variant === 'commercial' || variant === 'geo' || variant === 'service') {
-      additions.push('★5 (35 отз)');
-    } else {
-      additions.push('239 объектов');
-    }
-  }
-
-  if (!hasFree && (variant === 'commercial' || variant === 'geo' || variant === 'service')) {
-    additions.push('выезд бесплатно');
-  }
-
-  if (!hasPhone && desc.length + 20 < 170) {
-    additions.push(`☎ ${SITE.phone}`);
-  }
-
-  if (additions.length > 0) {
-    // Удалим точку в конце если есть
-    desc = desc.replace(/[.!?]+\s*$/, '');
-    desc = `${desc}. ${additions.join(', ')}.`;
-  }
-
-  // Усечение
-  if (desc.length > 175) {
-    desc = desc.slice(0, 172).replace(/\s+\S*$/, '') + '…';
-  }
-
-  return desc;
+/** Предлог «в/во» перед топонимом: «во Всеволожском», «во Фрунзенском», но «в Выборгском», «в Вырице». */
+export function inPrep(toponym: string): string {
+  return /^[ВФвф][^аеёиоуыэюяАЕЁИОУЫЭЮЯ]/.test(toponym) ? `во ${toponym}` : `в ${toponym}`;
 }
 
-/**
- * Убирает брендовый хвост в конце строки: «… · СК Юрьевич», «… — СК «Юрьевич»», «… | Юрьевич».
- * Повторяет, пока хвосты не кончатся, и подчищает висящий разделитель.
- * Бренд к Title приклеивает шаблон Next.js — дублировать его в самой строке не нужно.
- */
+/** Снимает брендовый хвост «… · СК Юрьевич» — его приклеивает шаблон в app/layout.tsx. */
 export function stripBrandTail(input: string): string {
   let s = input.trim();
   const tail = /\s*[·|—–-]\s*(?:СК\s*)?[«"']?Юрьевич[»"']?\s*$/i;
@@ -79,94 +27,85 @@ export function stripBrandTail(input: string): string {
     s = s.replace(tail, '');
     guard += 1;
   }
-  // висящий разделитель после снятия хвоста: «Текст ★5 ·» → «Текст ★5»
   return s.replace(/\s*[·|—–-]\s*$/, '').trim();
 }
 
-/**
- * Универсальный enhancer для title:
- *  - Сокращает «Санкт-Петербург» до «СПб», «Ленинградская область» до «ЛО»
- *  - Добавляет «★5» если есть место и нет звёздочек
- *  - Усекает до 65 символов чтобы не обрезалось Яндексом
- */
-export function enhanceTitle(raw: string, variant: SnippetVariant = 'commercial'): string {
-  if (!raw) return '';
-  let title = raw.trim();
-
-  // Снимаем брендовый хвост, если он уже вписан в meta_title.
-  // Бренд добавляет шаблон в app/layout.tsx (`%s · СК Юрьевич`), и без этой очистки
-  // он попадал в Title дважды: «… · СК Юрьевич · СК Юрьевич».
-  // Замер 14.08.2026: так было сломано 93 страницы из 173.
-  title = stripBrandTail(title);
-
-  // Сокращения
-  title = title.replace(/Санкт-Петербург(?:ской области)?/g, 'СПб');
-  title = title.replace(/Ленинградск(?:ой|ая) област(?:и|ь)/gi, 'ЛО');
-  title = title.replace(/Ленобласт(?:ь|и)/gi, 'ЛО');
-
-  // Добавляем ★5 если есть место и это коммерческий запрос
-  const hasStars = /★|⭐/.test(title);
-  if (!hasStars && (variant === 'commercial' || variant === 'geo' || variant === 'service')) {
-    // Найдём место перед последним «·» или «|» (это разделители брендового хвоста)
-    if (title.length + 4 < 60) {
-      title = title.replace(/\s*([·|])\s*/, ' ★5 $1 ');
-      // Если разделителя нет, добавим в конец
-      if (!/★5/.test(title)) {
-        title = `${title} ★5`;
-      }
-    }
-  }
-
-  // Усечение
-  if (title.length > 65) {
-    title = title.slice(0, 62).replace(/\s+\S*$/, '') + '…';
-  }
-
-  return title;
+/** Убирает символы, которые поисковики режут или считают спамом. Ничего не усекает. */
+export function cleanSnippetText(input: string): string {
+  return input
+    .replace(/[★☆⭐☎✓✔🔥•→]/g, ' ')
+    .replace(/…/g, '')
+    .replace(/\s{2,}/g, ' ')
+    .replace(/\s+([,.;:!?])/g, '$1')
+    .trim();
 }
 
-/**
- * Готовый сниппет для /fundament/[region]/ страницы.
- * Заменяет код в generateMetadata.
- */
+/** Title статьи/термина: без бренда в строке (его даёт шаблон), без спецсимволов. */
+export function buildTitle(raw: string): string {
+  return cleanSnippetText(stripBrandTail(raw));
+}
+
+/** Description статьи/термина: чистый текст с точкой в конце, без «добавок силы». */
+export function buildDescription(raw: string): string {
+  const s = cleanSnippetText(raw);
+  return /[.!?]$/.test(s) ? s : `${s}.`;
+}
+
+/** Сниппет страницы района /fundament/[region]/ */
 export function buildRegionSnippet(region: {
+  slug: string;
   prepositional: string;
-  shortName: string;
   priceFrom: number;
-  drivingTime?: string;
 }) {
-  const priceK = Math.round(region.priceFrom / 100) / 10; // 7500 → 7.5
-  const title = `Фундамент под ключ в ${region.prepositional} от ${region.priceFrom.toLocaleString('ru-RU')} ₽/м² ★5`;
+  const price = region.priceFrom.toLocaleString('ru-RU');
 
-  const description =
-    `Монолитный фундамент под ключ в ${region.prepositional} на пучинистых грунтах: плита, лента, сваи. ` +
-    `Цена от ${priceK} тыс ₽/м². ` +
-    `Выезд инженера бесплатно, гарантия 5 лет. ☎ ${SITE.phone}`;
+  if (region.slug === 'spb') {
+    return {
+      title: `Фундамент под ключ в районах Санкт-Петербурга от ${price} ₽/м²`,
+      description:
+        `Фундамент под ключ в Санкт-Петербурге по районам города от ${price} ₽/м²: монолитная плита, лента, сваи. ` +
+        `Договор с фиксированной ценой, гарантия 5 лет, выезд инженера на участок бесплатно.`,
+    };
+  }
 
+  const where = inPrep(region.prepositional);
   return {
-    title: enhanceTitle(title, 'geo'),
-    description: enhanceDescription(description, 'geo'),
+    title: `Фундамент под ключ ${where}: цена от ${price} ₽/м²`,
+    description:
+      `Фундамент под ключ ${where} от ${price} ₽/м² с материалами: монолитная плита, лента, сваи под дом из газобетона. ` +
+      `Договор с фиксированной ценой, гарантия 5 лет, выезд инженера бесплатно.`,
   };
 }
 
-/**
- * Готовый сниппет для /fundament/[region]/[locality]/ страницы.
- */
-export function buildLocalitySnippet(locality: {
-  prepositional: string;
-  name: string;
-  priceFrom: number;
-}, region: { shortName: string }) {
-  const priceK = Math.round(locality.priceFrom / 100) / 10;
-  const title = `Фундамент под ключ в ${locality.prepositional} от ${locality.priceFrom.toLocaleString('ru-RU')} ₽/м² ★5`;
-
-  const description =
-    `Монолитный фундамент под ключ в ${locality.prepositional} на пучинистых грунтах, под газобетон. ` +
-    `Цена от ${priceK} тыс ₽/м². ` +
-    `Геология грунтов, выезд инженера бесплатно. ★5 на Авито. ☎ ${SITE.phone}`;
-
+/** Сниппет страницы посёлка /fundament/[region]/[locality]/ */
+export function buildLocalitySnippet(locality: { prepositional: string; priceFrom: number }) {
+  const price = locality.priceFrom.toLocaleString('ru-RU');
+  const where = inPrep(locality.prepositional);
   return {
-    title: enhanceTitle(title, 'geo'),
-    description: enhanceDescription(description, 'geo'),
+    title: `Фундамент под ключ ${where}: цена от ${price} ₽/м²`,
+    description:
+      `Фундамент под ключ ${where} от ${price} ₽/м² с материалами: монолитная плита под дом из газобетона, лента, сваи. ` +
+      `Расчёт по грунту участка, договор с фиксированной ценой, гарантия 5 лет.`,
+  };
+}
+
+type OgType = 'website' | 'article';
+
+/**
+ * Единый OpenGraph-блок с картинкой. Next.js сливает metadata поверхностно:
+ * стоит дочерней странице задать любое поле openGraph — родительские `images`
+ * из layout пропадают. Так 55 страниц остались без og:image (замер 11.09.2026).
+ */
+export function ogDefaults<T extends OgType>(path: string, title: string, description: string, type: T, image?: string) {
+  const src = image || SITE.defaultOgImage;
+  const url = src.startsWith('http') ? src : `${SITE.url}${src}`;
+  return {
+    type,
+    locale: 'ru_RU',
+    url: `${SITE.url}${path}`,
+    title,
+    description,
+    siteName: SITE.name,
+    images: [{ url, width: 1200, height: 630, alt: title }],
   };
 }

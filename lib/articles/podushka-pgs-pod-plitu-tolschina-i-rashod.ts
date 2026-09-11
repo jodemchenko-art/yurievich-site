@@ -4,7 +4,7 @@ import type { Article } from './_types';
 export const podushkaPgsPodPlituTolschinaIRashod: Article = {
   slug: "podushka-pgs-pod-plitu-tolschina-i-rashod",
   title: "Подушка ПГС под плиту фундамента: толщина, расход, технология уплотнения",
-  meta_title: "Подушка ПГС под плиту фундамента: толщина 300 мм, расход и цена | СК Юрьевич",
+  meta_title: "Подушка ПГС под плиту фундамента: толщина, расход, цена | СК Юрьевич",
   meta_description: "Подушка ПГС под плитный фундамент: 300 мм в 2-3 слоя, уплотнение виброплитой 50-150 кН, геотекстиль 200 г/м². Расход и цена на 10×10. СК «Юрьевич», ЛО.",
   publishedAt: "2026-06-19",
   updatedAt: "2026-06-19",

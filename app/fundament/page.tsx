@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { REGIONS } from '@/lib/regions';
 import { LOCALITIES, getLocalitiesByRegion } from '@/lib/localities';
 import { SITE } from '@/lib/site';
+import { inPrep, ogDefaults } from '@/lib/seo-snippets';
 import PriceTable from '@/components/PriceTable';
 import {
   PRICE_TABLE_COLUMNS,
@@ -11,21 +12,19 @@ import {
   calcPlita,
 } from '@/lib/pricing';
 
+// Хаб районов. Тайтл начинается с той же фразы, что и главная, но с «по районам»:
+// это страница-развилка, а не дубль главной. Без «пучинистых грунтов» в title —
+// фразу ищут в 27 раз реже (Wordstat 14.08.2026), а тайтл из-за неё резался.
+const HUB_TITLE = 'Фундамент под ключ по районам Ленобласти и Санкт-Петербурга';
+const HUB_DESC =
+  'Фундамент под ключ по районам Ленобласти и Санкт-Петербурга: Всеволожский, Гатчинский, Выборгский, Тосненский, Кировский, Приозерский. ' +
+  'Монолитная плита от 5 500 ₽/м², цены по грунтам района.';
+
 export const metadata: Metadata = {
-  title: 'Фундамент под ключ в СПб и ЛО на пучинистых грунтах — монолитный',
-  description:
-    'Монолитный плитный фундамент под ключ в СПб и Ленобласти на пучинистых грунтах — от 5 500 ₽/м². ' +
-    'Знаем грунты каждого района, реальные цены. Бетон М300, гарантия 5 лет, договор с фикс-ценой. ' +
-    'Выезд инженера бесплатно. ☎ +7 911 830-01-10',
-  keywords: [
-    'фундамент по районам Ленинградской области',
-    'фундамент под ключ по районам СПб и ЛО',
-    'цена фундамента по районам',
-    'монолитная плита по районам ЛО',
-    'плитный фундамент Ленинградская область районы',
-    'фундамент Всеволожск Гатчина Выборг Тосно',
-  ],
+  title: HUB_TITLE,
+  description: HUB_DESC,
   alternates: { canonical: '/fundament/' },
+  openGraph: ogDefaults('/fundament/', `${HUB_TITLE} · ${SITE.name}`, HUB_DESC, 'website'),
 };
 
 // Коммерческий FAQ хаба — под сниппет и Нейро-цитирование (FAQPage)
@@ -142,7 +141,7 @@ export default function FundamentIndexPage() {
         </nav>
 
         <h1 className="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight max-w-3xl">
-          Фундамент под ключ по районам СПб и Ленобласти
+          Фундамент под ключ по районам Ленобласти и Санкт-Петербурга
         </h1>
         <p className="mt-5 text-lg text-brand-mute max-w-2xl leading-relaxed">
           Монолитный плитный фундамент под ключ <strong className="text-brand-ink">от 5 500 ₽/м²</strong> с материалами.
@@ -203,7 +202,7 @@ export default function FundamentIndexPage() {
                 </div>
                 <Link href={`/fundament/${r.slug}/`}>
                   <h3 className="text-xl md:text-2xl font-extrabold leading-tight text-brand-ink group-hover:underline">
-                    Фундамент в {r.prepositional}
+                    Фундамент {inPrep(r.prepositional)}
                   </h3>
                 </Link>
                 <p className="mt-3 text-sm text-brand-mute leading-relaxed line-clamp-3">
@@ -230,7 +229,7 @@ export default function FundamentIndexPage() {
                       {r.priceFrom.toLocaleString('ru-RU')} <span className="text-sm text-brand-mute">₽/м²</span>
                     </div>
                   </div>
-                  <Link href={`/fundament/${r.slug}/`} className="text-brand-ink font-bold" aria-label={`Фундамент в ${r.prepositional}`}>→</Link>
+                  <Link href={`/fundament/${r.slug}/`} className="text-brand-ink font-bold" aria-label={`Фундамент ${inPrep(r.prepositional)}`}>→</Link>
                 </div>
               </div>
             );

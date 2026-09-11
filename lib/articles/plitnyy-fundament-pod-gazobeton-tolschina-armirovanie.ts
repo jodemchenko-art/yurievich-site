@@ -4,7 +4,7 @@ import type { Article } from './_types';
 export const plitnyyFundamentPodGazobetonTolschinaArmirovanie: Article = {
   slug: "plitnyy-fundament-pod-gazobeton-tolschina-armirovanie",
   title: "Толщина монолитной плиты под газобетон 2 этажа: 250, 300, 350 мм",
-  meta_title: "Толщина монолитной плиты под газобетон 2 этажа: 250, 300, 350 мм",
+  meta_title: "Толщина плиты под газобетон 2 этажа: 250, 300 или 350 мм",
   meta_description: "Толщина монолитной плиты под газобетон 2 этажа: расчёт по СП 22.13330 и СП 63.13330, армирование, нагрузки, цены 2026 в СПб и ЛО. Проверим вашу смету бесплатно.",
   publishedAt: "2026-06-16",
   updatedAt: "2026-06-19",

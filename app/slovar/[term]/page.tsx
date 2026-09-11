@@ -5,7 +5,7 @@ import { GLOSSARY, getTermBySlug, getAllTermSlugs, getRelatedTerms, CATEGORY_LAB
 import { getArticleBySlug } from '@/lib/articles';
 import { SITE } from '@/lib/site';
 import { buildBreadcrumb, buildGraph } from '@/lib/schema';
-import { enhanceTitle, enhanceDescription } from '@/lib/seo-snippets';
+import { buildTitle, buildDescription, ogDefaults } from '@/lib/seo-snippets';
 
 type Params = { term: string };
 
@@ -16,23 +16,21 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const t = getTermBySlug(params.term);
   if (!t) return {};
-  const rawTitle = `${t.term} — что это, простыми словами · СК Юрьевич`;
-  const rawDesc = `${t.shortDef} Практика 239 объектов СПб и ЛО.`;
-  const title = enhanceTitle(rawTitle, 'informational');
-  const description = enhanceDescription(rawDesc, 'informational');
+  // Title без бренда ≤ 60: у длинных терминов (УШП с расшифровкой) — короткая форма.
+  const long = `${t.term} — что это, простыми словами`;
+  const title = buildTitle(long.length <= 60 ? long : `${t.term} — что это`);
+  // Короткое определение дотягиваем до 120+ знаков живой фразой, а не «239 объектов ★5».
+  const description = buildDescription(
+    t.shortDef.length >= 120
+      ? t.shortDef
+      : `${t.shortDef} Объясняем на практике фундаментов в Санкт-Петербурге и Ленобласти.`,
+  );
+  const path = `/slovar/${t.slug}/`;
   return {
     title,
     description,
-    keywords: [t.term, `${t.term} что это`, `${t.term} определение`, `${t.term} простыми словами`],
-    alternates: { canonical: `/slovar/${t.slug}/` },
-    openGraph: {
-      type: 'article',
-      locale: 'ru_RU',
-      url: `${SITE.url}/slovar/${t.slug}/`,
-      title,
-      description,
-      siteName: SITE.name,
-    },
+    alternates: { canonical: path },
+    openGraph: ogDefaults(path, `${title} · ${SITE.name}`, description, 'article'),
   };
 }
 
