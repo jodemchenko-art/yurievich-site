@@ -17,6 +17,7 @@ import {
   fmtRub,
 } from '@/lib/pricing';
 import { SLAB_OBJECTS } from '@/lib/objects';
+import { byTag } from '@/lib/gallery';
 
 /**
  * Типовая посадочная /fundament/<slug>/ — плита, лента, сваи, УШП, плита с рёбрами,
@@ -90,6 +91,8 @@ export default function TypePage({ slug }: { slug: string }) {
   );
 
   const ground = GROUND_LABEL[PRICE_TABLE_GROUND];
+  // Живые фото под тип работ: без них страница выглядит как текст без доказательств.
+  const photos = (t.galleryTags || []).flatMap((tag) => byTag(tag)).filter((p, i, a) => a.findIndex((x) => x.src === p.src) === i).slice(0, 6);
 
   return (
     <>
@@ -220,6 +223,51 @@ export default function TypePage({ slug }: { slug: string }) {
         <section className="container-x pb-12" id="calc">
           <h2 className="text-2xl md:text-3xl font-extrabold mb-6">Рассчитайте {t.slug === 'plita' ? 'свою плиту' : 'плиту под ваш размер'}</h2>
           <Calculator regionLabel={t.name} />
+        </section>
+      )}
+
+      {/* ── Таблица размеров (баня, гараж) ───────────────────────────── */}
+      {t.sizeTable && (
+        <section className="container-x pb-12" id="ceny">
+          <h2 className="text-2xl md:text-3xl font-extrabold mb-3">Цена по размерам</h2>
+          <p className="text-brand-mute mb-6 max-w-3xl leading-relaxed">{t.sizeTable.note}</p>
+          <div className="overflow-x-auto rounded-2xl border border-brand-line bg-white">
+            <table className="w-full min-w-[560px] text-left text-sm">
+              <thead>
+                <tr className="bg-brand-sand">
+                  {t.sizeTable.head.map((h) => (
+                    <th key={h} className="px-4 py-3 font-extrabold">{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {t.sizeTable.rows.map((r) => (
+                  <tr key={r[0]} className="border-t border-brand-line">
+                    {r.map((c, i) => (
+                      <td key={i} className={i === 0 ? 'px-4 py-3 font-bold whitespace-nowrap' : 'px-4 py-3 whitespace-nowrap'}>{c}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-3 text-xs text-brand-mute">Ориентир до выезда инженера. Точная сумма — после замера и бурения, фиксируется в договоре.</p>
+        </section>
+      )}
+
+      {/* ── Живые фото с площадок ────────────────────────────────────── */}
+      {photos.length > 0 && (
+        <section className="container-x pb-12">
+          <h2 className="text-2xl md:text-3xl font-extrabold mb-2">Как это выглядит у нас на площадке</h2>
+          <p className="text-brand-mute mb-6 max-w-3xl">Фото с наших объектов в Ленобласти — без стока и обработки.</p>
+          <div className="grid gap-3 grid-cols-2 md:grid-cols-3">
+            {photos.map((ph) => (
+              <figure key={ph.src}>
+                <img src={ph.thumb} alt={ph.alt} className="aspect-[4/3] w-full rounded-2xl object-cover border border-brand-line" loading="lazy" />
+                <figcaption className="mt-1 text-xs text-brand-mute">{ph.alt}</figcaption>
+              </figure>
+            ))}
+          </div>
         </section>
       )}
 

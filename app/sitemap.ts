@@ -98,7 +98,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.85,
     },
-    ...['/ceny/', '/obekty/', '/otzyvy/', '/o-kompanii/', '/doma/', '/doma/ceny/', '/doma/etapy/'].map((path) => ({
+    ...['/ceny/', '/obekty/', '/otzyvy/', '/o-kompanii/', '/doma/', '/doma/ceny/', '/doma/etapy/', '/doma/odnoetazhnye/', '/doma/dvuhetazhnye/'].map((path) => ({
       url: `${base}${path}`,
       lastModified: now,
       changeFrequency: 'monthly' as const,

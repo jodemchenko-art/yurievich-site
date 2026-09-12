@@ -11,6 +11,7 @@ import { getArticleSlugsForRegion } from '@/lib/articleRegion';
 import { SITE } from '@/lib/site';
 import { buildRegionGraph, buildGraph } from '@/lib/schema';
 import { buildRegionSnippet, inPrep, ogDefaults } from '@/lib/seo-snippets';
+import { byTag } from '@/lib/gallery';
 
 type Params = { region: string };
 
@@ -47,6 +48,8 @@ export default function RegionPage({ params }: { params: Params }) {
     .map((s) => getArticleBySlug(s))
     .filter(Boolean) as NonNullable<ReturnType<typeof getArticleBySlug>>[];
   const localities = getLocalitiesByRegion(region.slug);
+  // Живые фото с площадок: гео-страница без единого кадра читается как шаблон.
+  const photos = [...byTag('plita'), ...byTag('armo')].filter((p, i, a) => a.findIndex((x) => x.src === p.src) === i).slice(0, 6);
 
   // FAQ под Нейро-цитирование Алисы (#27)
   const faq = region.faq && region.faq.length > 0 ? region.faq : buildRegionFaq(region);
@@ -138,6 +141,15 @@ export default function RegionPage({ params }: { params: Params }) {
           Виды фундамента подробно: <Link href="/fundament/plita/">монолитная плита</Link>, <Link href="/fundament/lenta/">лента</Link>, <Link href="/fundament/svai/">сваи</Link>, <Link href="/fundament/ushp/">УШП</Link>. Цены по размерам — на странице <Link href="/ceny/">цен</Link>, кто мы — на странице <Link href="/o-kompanii/">о компании</Link>.
         </p>
 
+        {region.localNotes?.map((n) => (
+          <div key={n.h2}>
+            <h2>{n.h2}</h2>
+            {n.paragraphs.map((x, i) => (
+              <p key={i}>{x}</p>
+            ))}
+          </div>
+        ))}
+
         <h2>Дорога и сроки</h2>
         <p>От базы в Песочном до {region.shortName}: <strong>{region.drivingTime}</strong>. Выезд инженера — бесплатно, в течение 1–3 дней. Плита 100 м² — 10–14 рабочих дней, зимой работаем с добавками и прогревом.</p>
 
@@ -168,6 +180,21 @@ export default function RegionPage({ params }: { params: Params }) {
                   от {l.priceFrom.toLocaleString('ru-RU')} ₽/м² · {l.driveTime}
                 </div>
               </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {photos.length > 0 && (
+        <section className="container-x pb-16">
+          <h2 className="text-2xl md:text-3xl font-extrabold mb-2">Наши фундаменты в Ленобласти</h2>
+          <p className="text-brand-mute mb-6 max-w-3xl">Армокаркасы, заливка и готовые плиты — кадры с наших площадок, без стока.</p>
+          <div className="grid gap-3 grid-cols-2 md:grid-cols-3">
+            {photos.map((ph) => (
+              <figure key={ph.src}>
+                <img src={ph.thumb} alt={ph.alt} className="aspect-[4/3] w-full rounded-2xl object-cover border border-brand-line" loading="lazy" />
+                <figcaption className="mt-1 text-xs text-brand-mute">{ph.alt}</figcaption>
+              </figure>
             ))}
           </div>
         </section>
