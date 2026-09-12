@@ -20,13 +20,13 @@ export const metadata: Metadata = {
   openGraph: ogDefaults('/otzyvy/', `${TITLE} · ${SITE.name}`, DESC, 'website'),
 };
 
-const PLATFORMS = [
+const PLATFORMS: Array<{ name: string; value: string; note: string; href: string; cta: string }> = [
   {
     name: 'Авито',
     value: `${SITE.rating} из 5 · ${SITE.reviewsCount} отзывов`,
-    note: 'Основной канал заявок с 2018 года. Каждый отзыв привязан к сделке — Авито не даёт написать отзыв без заказа.',
+    note: 'Основной канал заявок с 2018 года. Каждый отзыв привязан к сделке — Авито не даёт написать отзыв без заказа. По ссылке наше объявление, рейтинг и отзывы открываются в карточке продавца.',
     href: SITE.avitoProfile,
-    cta: 'Найти нас на Авито: «Юрьевич», Санкт-Петербург',
+    cta: 'Открыть объявление и отзывы',
   },
   {
     name: 'Яндекс Карты',

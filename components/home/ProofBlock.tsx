@@ -34,7 +34,7 @@ const PROOFS = [
     href: SITE.avitoProfile,
     label: 'Авито',
     value: `${SITE.rating} ★ · ${SITE.reviewsCount} отзывов`,
-    note: 'Профиль компании с отзывами заказчиков',
+    note: 'Объявление и карточка продавца: рейтинг и отзывы заказчиков',
   },
 ];
 

@@ -409,6 +409,186 @@ export const LIVE_PHOTOS: LivePhoto[] = [
     "alt": "Юрий Демченко — руководитель проекта",
     "w": 1024,
     "h": 1024
+  },
+  {
+    "src": "/images/live/tg-232.jpg",
+    "thumb": "/images/live/t/tg-232.jpg",
+    "group": "slab",
+    "stage": "Готовая плита",
+    "alt": "Свежезалитая плита, опалубка ещё стоит",
+    "w": 1280,
+    "h": 960
+  },
+  {
+    "src": "/images/live/tg-228.jpg",
+    "thumb": "/images/live/t/tg-228.jpg",
+    "group": "slab",
+    "stage": "Армокаркас",
+    "alt": "Двойная сетка А500С на фиксаторах, вид вдоль плиты",
+    "w": 1280,
+    "h": 960
+  },
+  {
+    "src": "/images/live/tg-221.jpg",
+    "thumb": "/images/live/t/tg-221.jpg",
+    "group": "slab",
+    "stage": "Готовая плита",
+    "alt": "Готовая плита с закладными и ЭППС по периметру",
+    "w": 1280,
+    "h": 960
+  },
+  {
+    "src": "/images/live/tg-222.jpg",
+    "thumb": "/images/live/t/tg-222.jpg",
+    "group": "slab",
+    "stage": "Армокаркас",
+    "alt": "Шаг арматуры 200 мм, фиксаторы защитного слоя",
+    "w": 1280,
+    "h": 960
+  },
+  {
+    "src": "/images/live/tg-198.jpg",
+    "thumb": "/images/live/t/tg-198.jpg",
+    "group": "slab",
+    "stage": "Плита с рёбрами",
+    "alt": "Рёбра жёсткости в опалубке, зимняя заливка",
+    "w": 1280,
+    "h": 960
+  },
+  {
+    "src": "/images/live/tg-178.jpg",
+    "thumb": "/images/live/t/tg-178.jpg",
+    "group": "house",
+    "stage": "Дом под кровлей",
+    "alt": "Двухэтажная коробка из газобетона, съёмка с дрона",
+    "w": 1280,
+    "h": 720
+  },
+  {
+    "src": "/images/live/tg-177.jpg",
+    "thumb": "/images/live/t/tg-177.jpg",
+    "group": "house",
+    "stage": "Кладка стен",
+    "alt": "Двухэтажный дом из газобетона, оконные проёмы",
+    "w": 1280,
+    "h": 720
+  },
+  {
+    "src": "/images/live/tg-174.jpg",
+    "thumb": "/images/live/t/tg-174.jpg",
+    "group": "slab",
+    "stage": "Армокаркас",
+    "alt": "Плита в опалубке перед заливкой",
+    "w": 1280,
+    "h": 960
+  },
+  {
+    "src": "/images/live/tg-162.jpg",
+    "thumb": "/images/live/t/tg-162.jpg",
+    "group": "slab",
+    "stage": "Готовая плита",
+    "alt": "Готовая плита на щебёночной подготовке",
+    "w": 1280,
+    "h": 960
+  },
+  {
+    "src": "/images/live/tg-159.jpg",
+    "thumb": "/images/live/t/tg-159.jpg",
+    "group": "house",
+    "stage": "Кровля",
+    "alt": "Одноэтажный дом с кровлей, монтаж водостока",
+    "w": 1280,
+    "h": 960
+  },
+  {
+    "src": "/images/live/tg-154.jpg",
+    "thumb": "/images/live/t/tg-154.jpg",
+    "group": "slab",
+    "stage": "Заливка",
+    "alt": "Заливка плиты, разравнивание бетона",
+    "w": 1280,
+    "h": 960
+  },
+  {
+    "src": "/images/live/tg-144.jpg",
+    "thumb": "/images/live/t/tg-144.jpg",
+    "group": "slab",
+    "stage": "Подготовка основания",
+    "alt": "Геотекстиль на подготовленном основании",
+    "w": 1179,
+    "h": 664
+  },
+  {
+    "src": "/images/live/tg-81.jpg",
+    "thumb": "/images/live/t/tg-81.jpg",
+    "group": "house",
+    "stage": "Дом под кровлей",
+    "alt": "Дом под кровлей зимой",
+    "w": 960,
+    "h": 1280
+  },
+  {
+    "src": "/images/live/tg-75.jpg",
+    "thumb": "/images/live/t/tg-75.jpg",
+    "group": "slab",
+    "stage": "Плита с рёбрами",
+    "alt": "Утеплённый цоколь на плите, зима",
+    "w": 960,
+    "h": 1280
+  },
+  {
+    "src": "/images/live/tg-61.jpg",
+    "thumb": "/images/live/t/tg-61.jpg",
+    "group": "house",
+    "stage": "Зимняя стройка",
+    "alt": "Стены из газобетона зимой",
+    "w": 1280,
+    "h": 960
+  },
+  {
+    "src": "/images/live/tg-34.jpg",
+    "thumb": "/images/live/t/tg-34.jpg",
+    "group": "slab",
+    "stage": "Ленточный фундамент",
+    "alt": "Ленточный фундамент: опалубка снята, обратная засыпка",
+    "w": 1280,
+    "h": 960
+  },
+  {
+    "src": "/images/live/tg-33.jpg",
+    "thumb": "/images/live/t/tg-33.jpg",
+    "group": "slab",
+    "stage": "Ленточный фундамент",
+    "alt": "Монолитная лента под дом",
+    "w": 1280,
+    "h": 960
+  },
+  {
+    "src": "/images/live/tg-13.jpg",
+    "thumb": "/images/live/t/tg-13.jpg",
+    "group": "house",
+    "stage": "Дом под кровлей",
+    "alt": "Двухэтажный дом: фасад, окна, кровля",
+    "w": 1280,
+    "h": 960
+  },
+  {
+    "src": "/images/live/tg-12.jpg",
+    "thumb": "/images/live/t/tg-12.jpg",
+    "group": "house",
+    "stage": "Дом под кровлей",
+    "alt": "Входная группа с навесом",
+    "w": 1280,
+    "h": 1085
+  },
+  {
+    "src": "/images/live/tg-5.jpg",
+    "thumb": "/images/live/t/tg-5.jpg",
+    "group": "house",
+    "stage": "Кладка стен",
+    "alt": "Кладка стен, армопояс",
+    "w": 960,
+    "h": 1280
   }
 ];
 
