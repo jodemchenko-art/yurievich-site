@@ -8,13 +8,14 @@ import { SITE } from '@/lib/site';
 import { buildGraph, buildBreadcrumb, buildFaqPage, ID } from '@/lib/schema';
 import { inPrep, ogDefaults } from '@/lib/seo-snippets';
 import {
-  PRICE_TABLE_COLUMNS,
-  PRICE_TABLE_GROUND,
+  PRICE_TABLE_GROUNDS,
   PRICE_TABLE_ROWS,
   GROUND_LABEL,
+  MATERIAL_LOAD,
   SIZE_AREA,
   calcPlita,
   fmtRub,
+  type Material,
 } from '@/lib/pricing';
 import { SLAB_OBJECTS } from '@/lib/objects';
 import { byTag } from '@/lib/gallery';
@@ -90,7 +91,6 @@ export default function TypePage({ slug }: { slug: string }) {
     ]
   );
 
-  const ground = GROUND_LABEL[PRICE_TABLE_GROUND];
   // Живые фото под тип работ: без них страница выглядит как текст без доказательств.
   const photos = (t.galleryTags || []).flatMap((tag) => byTag(tag)).filter((p, i, a) => a.findIndex((x) => x.src === p.src) === i).slice(0, 6);
 
@@ -174,25 +174,65 @@ export default function TypePage({ slug }: { slug: string }) {
         ))}
       </section>
 
-      {/* ── Таблица цен (только там, где есть прайс) ─────────────────── */}
+      {/* ── Цена за м² и по размерам (только плита) ─────────────────── */}
+      {/* Две таблицы, которых нет больше нигде на сайте: ставка за м² по материалу стен
+          и грунту, и полная стоимость по размерам и грунтам (переехала с /ceny/ 23.09.2026,
+          чтобы кластер «монолитная плита цена» ранжировался этой страницей, а не общим прайсом). */}
       {t.hasPriceTable && (
         <section className="container-x pb-12" id="ceny">
-          <h2 className="text-2xl md:text-3xl font-extrabold mb-3">Цена монолитной плиты по размерам</h2>
+          <h2 className="text-2xl md:text-3xl font-extrabold mb-3">Цена монолитной плиты фундамента за м²</h2>
           <p className="text-brand-mute mb-6 max-w-3xl leading-relaxed">
-            Считается по той же формуле, что и калькулятор: грунт — {ground.name.toLowerCase()} (самый частый в Ленобласти),
-            цена включает работу и материалы. Это ориентир до выезда инженера, точная сумма фиксируется в договоре.
-            Полная матрица по грунтам — на странице <Link href="/ceny/">цен</Link>.
+            Ставка за квадратный метр плиты с работой и материалами, один этаж. Считается по той же формуле,
+            что и калькулятор: материал стен задаёт толщину плиты, грунт — состав подушки и объём земляных
+            работ. Второй этаж добавляет 18 %, полтора — 8 %. Это ориентир до выезда инженера, точная сумма
+            фиксируется в договоре.
           </p>
           <div className="overflow-x-auto rounded-2xl border border-brand-line bg-white">
             <table className="w-full min-w-[620px] text-left text-sm">
               <thead>
                 <tr className="bg-brand-sand">
-                  <th className="px-4 py-3">Размер</th>
-                  {PRICE_TABLE_COLUMNS.map((c) => (
-                    <th key={c.key} className="px-4 py-3">
-                      <div className="font-extrabold">{c.label}</div>
-                      <div className="text-xs font-normal text-brand-mute">{c.sub}</div>
+                  <th className="px-4 py-3">Стены дома</th>
+                  {PRICE_TABLE_GROUNDS.map((g) => (
+                    <th key={g} className="px-4 py-3">
+                      <div className="font-extrabold">{GROUND_LABEL[g].name}</div>
+                      <div className="text-xs font-normal text-brand-mute">{GROUND_LABEL[g].note}</div>
                     </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {(Object.keys(MATERIAL_LOAD) as Material[]).map((m) => (
+                  <tr key={m} className="border-t border-brand-line">
+                    <td className="px-4 py-3 font-bold whitespace-nowrap">
+                      {MATERIAL_LOAD[m].name} <span className="text-brand-mute font-normal">· плита {MATERIAL_LOAD[m].thicknessMM} мм</span>
+                    </td>
+                    {PRICE_TABLE_GROUNDS.map((g) => {
+                      const r = calcPlita({ size: '10x10', material: m, ground: g, storeys: 1 });
+                      return (
+                        <td key={g} className="px-4 py-3 whitespace-nowrap font-extrabold text-brand-ink">
+                          {fmtRub(r.pricePerM2)} ₽/м²
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <h2 className="text-2xl md:text-3xl font-extrabold mt-12 mb-3">Цена монолитной плиты по размерам и грунтам</h2>
+          <p className="text-brand-mute mb-6 max-w-3xl leading-relaxed">
+            Полная стоимость плиты 300 мм под одноэтажный дом из газобетона. Для двухэтажного — множитель 1,18,
+            для каркасного — плита 250 мм и ставка ниже; свой вариант считайте в калькуляторе ниже.
+            Лента, сваи, УШП и дома из газобетона — на странице <Link href="/ceny/">цен</Link>.
+          </p>
+          <div className="overflow-x-auto rounded-2xl border border-brand-line bg-white">
+            <table className="w-full min-w-[720px] text-left text-sm">
+              <thead>
+                <tr className="bg-brand-sand">
+                  <th className="px-4 py-3">Размер плиты</th>
+                  {PRICE_TABLE_GROUNDS.map((g) => (
+                    <th key={g} className="px-4 py-3 font-extrabold">{GROUND_LABEL[g].name}</th>
                   ))}
                 </tr>
               </thead>
@@ -202,10 +242,10 @@ export default function TypePage({ slug }: { slug: string }) {
                     <td className="px-4 py-3 font-bold whitespace-nowrap">
                       {size.replace('x', '×')} м <span className="text-brand-mute font-normal">· {SIZE_AREA[size]} м²</span>
                     </td>
-                    {PRICE_TABLE_COLUMNS.map((c) => {
-                      const r = calcPlita({ size, material: c.material, ground: PRICE_TABLE_GROUND, storeys: c.storeys });
+                    {PRICE_TABLE_GROUNDS.map((g) => {
+                      const r = calcPlita({ size, material: 'gazobeton', ground: g, storeys: 1 });
                       return (
-                        <td key={c.key} className="px-4 py-3 whitespace-nowrap">
+                        <td key={g} className="px-4 py-3 whitespace-nowrap">
                           <div className="font-extrabold text-brand-ink">{fmtRub(r.total)} ₽</div>
                           <div className="text-xs text-brand-mute">{fmtRub(r.pricePerM2)} ₽/м²</div>
                         </td>
@@ -216,6 +256,10 @@ export default function TypePage({ slug }: { slug: string }) {
               </tbody>
             </table>
           </div>
+          <p className="mt-3 text-xs text-brand-mute">
+            Болото и торф глубже 2 м — расчёт только после бурения: там часто выгоднее свайно-плитная схема.
+            Плиты до 40 м² (баня, гараж) считаются по объёму — ставка за м2 у них выше из-за минимального выезда техники.
+          </p>
         </section>
       )}
 

@@ -94,6 +94,9 @@ export const PRICE_TABLE_COLUMNS: Array<{
   { key: 'kirpich-2', label: 'Кирпич / монолит', sub: '2 этажа · плита 350 мм', material: 'kirpich', storeys: 2 },
 ];
 
+/** Грунты в таблице цен плиты. Без «болота»: там расчёт только после бурения. */
+export const PRICE_TABLE_GROUNDS: Ground[] = ['pesok', 'suglinok', 'glina', 'torf'];
+
 export const PRICE_TABLE_ROWS: SizeKey[] = [
   '6x6',
   '7x8',

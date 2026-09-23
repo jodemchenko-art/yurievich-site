@@ -136,6 +136,10 @@ export default function PriceBlock() {
             <Link href="/kalkulyator/" className="ulink text-signal">
               калькуляторе
             </Link>
+            . Ставка за м² по материалу стен и полная таблица по грунтам — на странице{' '}
+            <Link href="/fundament/plita/#ceny" className="ulink text-signal">
+              монолитная плита под ключ: цена за м²
+            </Link>
             .
           </p>
         </div>

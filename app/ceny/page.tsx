@@ -8,12 +8,10 @@ import { inPrep, ogDefaults } from '@/lib/seo-snippets';
 import { byTag } from '@/lib/gallery';
 import {
   PRICE_TABLE_COLUMNS,
-  PRICE_TABLE_ROWS,
-  GROUND_LABEL,
   SIZE_AREA,
   calcPlita,
   fmtRub,
-  type Ground,
+  type SizeKey,
 } from '@/lib/pricing';
 
 /**
@@ -33,7 +31,9 @@ export const metadata: Metadata = {
   openGraph: ogDefaults('/ceny/', `${TITLE} · ${SITE.name}`, DESC, 'website'),
 };
 
-const GROUNDS: Ground[] = ['pesok', 'suglinok', 'glina', 'torf'];
+// На странице цен плита показана коротко: 4 размера × газобетон 1/2 этажа на суглинке.
+const CENY_SIZES: SizeKey[] = ['6x6', '8x10', '10x10', '12x12'];
+const CENY_COLUMNS = PRICE_TABLE_COLUMNS.filter((c) => c.key === 'gazo-1' || c.key === 'gazo-2');
 
 const FAQ = [
   {
@@ -64,7 +64,7 @@ const GRAPH = buildGraph(
       '@type': 'OfferCatalog',
       '@id': `${SITE.url}/ceny/#catalog`,
       name: 'Цены на фундаменты и дома из газобетона — СК Юрьевич',
-      itemListElement: PRICE_TABLE_ROWS.map((size) => {
+      itemListElement: CENY_SIZES.map((size) => {
         const col = PRICE_TABLE_COLUMNS.find((c) => c.key === 'gazo-1')!;
         const r = calcPlita({ size, material: col.material, ground: 'suglinok', storeys: col.storeys });
         return {
@@ -104,9 +104,9 @@ export default function PricesPage() {
           Цены на фундамент под ключ в Санкт-Петербурге и Ленобласти
         </h1>
         <p className="mt-5 text-lg text-brand-mute max-w-3xl leading-relaxed">
-          Порядок цифр — до звонка. Ниже таблица по размерам и грунтам для монолитной плиты, условия по ленте
-          и сваям и ставки по домам из газобетона. Все суммы включают работу и материалы; точная смета —
-          в течение рабочего дня после бесплатного замера, цена фиксируется в договоре.
+          Порядок цифр — до звонка. Ниже ориентир по монолитной плите, условия по ленте и сваям и ставки
+          по домам из газобетона. Все суммы включают работу и материалы; точная смета — в течение рабочего
+          дня после бесплатного замера, цена фиксируется в договоре.
         </p>
 
         <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -120,62 +120,23 @@ export default function PricesPage() {
         </div>
       </section>
 
-      {/* Матрица по грунтам */}
+      {/* Плита: короткий ориентир. Полная матрица по грунтам и цена за м² живут на
+          /fundament/plita/. 23.09.2026 Topvisor показал: по всему кластеру «монолитная плита
+          цена» Яндекс выбирал эту страницу вместо посадочной, и кластер просел с 22–30 на 71–75.
+          Одна цена плиты — одна страница; здесь остаётся сводка по всем типам. */}
       <section className="container-x pb-12">
-        <h2 className="text-2xl md:text-3xl font-extrabold mb-2">Монолитная плита: цена по размерам и грунтам</h2>
+        <h2 className="text-2xl md:text-3xl font-extrabold mb-2">Плитный фундамент: ориентир по размерам</h2>
         <p className="text-brand-mute mb-6 max-w-3xl">
-          Одноэтажный дом из газобетона, плита 300 мм. Для двухэтажного дома — множитель 1,18, для каркасного —
-          плита 250 мм и ставка ниже. Проверьте свой вариант в <Link href="/kalkulyator/" className="font-semibold text-brand-ink hover:underline">калькуляторе</Link>.
+          Дом из газобетона на суглинке — самом частом грунте Ленобласти. Ставка за м² по материалу стен,
+          полная таблица по грунтам и калькулятор — на странице{' '}
+          <Link href="/fundament/plita/#ceny" className="font-semibold text-brand-ink hover:underline">монолитная плита под ключ: цена за м²</Link>.
         </p>
         <div className="overflow-x-auto rounded-2xl border border-brand-line bg-white">
-          <table className="w-full min-w-[720px] text-left text-sm">
+          <table className="w-full min-w-[520px] text-left text-sm">
             <thead>
               <tr className="bg-brand-sand">
                 <th className="px-4 py-3">Размер плиты</th>
-                {GROUNDS.map((g) => (
-                  <th key={g} className="px-4 py-3">
-                    <div className="font-extrabold">{GROUND_LABEL[g].name}</div>
-                    <div className="text-xs font-normal text-brand-mute">{GROUND_LABEL[g].note}</div>
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {PRICE_TABLE_ROWS.map((size) => (
-                <tr key={size} className="border-t border-brand-line">
-                  <td className="px-4 py-3 font-bold whitespace-nowrap">
-                    {size.replace('x', '×')} м <span className="font-normal text-brand-mute">· {SIZE_AREA[size]} м²</span>
-                  </td>
-                  {GROUNDS.map((g) => {
-                    const r = calcPlita({ size, material: 'gazobeton', ground: g, storeys: 1 });
-                    return (
-                      <td key={g} className="px-4 py-3 whitespace-nowrap">
-                        <div className="font-extrabold text-brand-ink">{fmtRub(r.total)} ₽</div>
-                        <div className="text-xs text-brand-mute">{fmtRub(r.pricePerM2)} ₽/м²</div>
-                      </td>
-                    );
-                  })}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p className="mt-3 text-xs text-brand-mute">
-          Болото и торф глубже 2 м — расчёт только после бурения: там часто выгоднее свайно-плитная схема. Плиты
-          до 40 м² (баня, гараж) считаются по объёму — ставка за метр у них выше из-за минимального выезда техники.
-        </p>
-      </section>
-
-      {/* По типам дома */}
-      <section className="container-x pb-12">
-        <h2 className="text-2xl md:text-3xl font-extrabold mb-2">Та же плита под разные дома</h2>
-        <p className="text-brand-mute mb-6 max-w-3xl">Грунт — суглинок, самый частый в Ленобласти. Толщина плиты и цена растут с весом стен и этажностью.</p>
-        <div className="overflow-x-auto rounded-2xl border border-brand-line bg-white">
-          <table className="w-full min-w-[640px] text-left text-sm">
-            <thead>
-              <tr className="bg-brand-sand">
-                <th className="px-4 py-3">Размер</th>
-                {PRICE_TABLE_COLUMNS.map((c) => (
+                {CENY_COLUMNS.map((c) => (
                   <th key={c.key} className="px-4 py-3">
                     <div className="font-extrabold">{c.label}</div>
                     <div className="text-xs font-normal text-brand-mute">{c.sub}</div>
@@ -184,18 +145,23 @@ export default function PricesPage() {
               </tr>
             </thead>
             <tbody>
-              {PRICE_TABLE_ROWS.map((size) => (
+              {CENY_SIZES.map((size) => (
                 <tr key={size} className="border-t border-brand-line">
-                  <td className="px-4 py-3 font-bold whitespace-nowrap">{size.replace('x', '×')} м</td>
-                  {PRICE_TABLE_COLUMNS.map((c) => {
+                  <td className="px-4 py-3 font-bold whitespace-nowrap">
+                    {size.replace('x', '×')} м <span className="font-normal text-brand-mute">· {SIZE_AREA[size]} м²</span>
+                  </td>
+                  {CENY_COLUMNS.map((c) => {
                     const r = calcPlita({ size, material: c.material, ground: 'suglinok', storeys: c.storeys });
-                    return <td key={c.key} className="px-4 py-3 font-extrabold text-brand-ink whitespace-nowrap">{fmtRub(r.total)} ₽</td>;
+                    return <td key={c.key} className="px-4 py-3 font-extrabold text-brand-ink whitespace-nowrap">от {fmtRub(r.total)} ₽</td>;
                   })}
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+        <p className="mt-3 text-xs text-brand-mute">
+          Плиты до 40 м² (баня, гараж) считаются по объёму — ставка за метр у них выше из-за минимального выезда техники.
+        </p>
       </section>
 
       {/* Лента, сваи, УШП */}
@@ -212,7 +178,7 @@ export default function PricesPage() {
           <li><strong>УШП</strong> дороже обычной плиты за счёт ЭППС и тёплого пола, но заменяет три этапа: фундамент, утепление и отопление пола. <Link href="/fundament/ushp/">Подробнее об УШП</Link>.</li>
         </ul>
 
-        <h2>Что входит в цену плиты и что считается отдельно</h2>
+        <h2>Что входит в цену фундамента и что считается отдельно</h2>
         <p>
           В ставку входит всё, без чего плиту нельзя сдать: выезд и расчёт, земляные работы, подушка с уплотнением,
           геотекстиль и гидроизоляция, опалубка, арматура А500С, заводской бетон М300 W6 F150 с паспортом, заливка,
